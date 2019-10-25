@@ -49,8 +49,7 @@ namespace BBT.StructureTools.Convert.Strategy
 
             // ToDo BBTL-5178: IF sollte nicht mehr nötig sein, wenn die entsprechenden
             // Registrierungen und Implementation die korrekte Basis aufrufen!
-            var lTargetValue = target as TTargetValue;
-            if (source is TSourceValue lSourceValue && lTargetValue != null)
+            if (source is TSourceValue lSourceValue && target is TTargetValue lTargetValue)
             {
                 this.mConvert.Convert(lSourceValue, lTargetValue, additionalProcessings);
             }

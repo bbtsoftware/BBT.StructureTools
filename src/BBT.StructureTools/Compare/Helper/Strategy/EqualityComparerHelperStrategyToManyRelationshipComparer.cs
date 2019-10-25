@@ -7,6 +7,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
+    using FluentAssertions;
 
     /// <summary>
     /// See <see cref="IEqualityComparerHelperStrategy{TModel}"/>.
@@ -41,9 +42,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             IComparer<TTargetModel, TComparerIntention> aComparer)
         {
             aExpression.Should().NotBeNull();
-
             aComparer.Should().NotBeNull();
-
 
             this.mFunc = aExpression.Compile();
             this.mPropertyName = EqualityComparerHelperStrategyUtils.GetMethodName(aExpression);

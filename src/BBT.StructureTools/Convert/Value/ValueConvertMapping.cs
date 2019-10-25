@@ -55,7 +55,7 @@ namespace BBT.StructureTools.Convert.Value
             {
                 if (this.mNullCaseFunc == null)
                 {
-                    targetValue = default(TTarget);
+                    targetValue = default;
                     return false;
                 }
 

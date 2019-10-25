@@ -6,11 +6,13 @@ namespace BBT.StructureTools.Compare.Helper
     using System.Linq;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Helper.Strategy;
+    using BBT.StructureTools.Extension;
     using FluentAssertions;
 
     /// <summary>
     /// See <see cref="IEqualityComparerHelperOperations{TModel}"/>.
     /// </summary>
+    /// <typeparam name="TModel">Model type.</typeparam>
     public class EqualityComparerHelperOperations<TModel> : IEqualityComparerHelperOperations<TModel>
         where TModel : class
     {
@@ -35,7 +37,7 @@ namespace BBT.StructureTools.Compare.Helper
         public bool AreRegistrationsEquals(TModel aCandidate1, TModel aCandidate2)
         {
             return this.AreRegistrationsEquals(
-                aCandidate1, aCandidate2, new IBaseAdditionalProcessing[0], new List<IComparerExclusion>());
+                aCandidate1, aCandidate2, System.Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
         }
 
         /// <summary>

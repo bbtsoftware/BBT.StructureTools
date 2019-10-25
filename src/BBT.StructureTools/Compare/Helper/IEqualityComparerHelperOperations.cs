@@ -8,6 +8,7 @@ namespace BBT.StructureTools.Compare.Helper
     /// <summary>
     /// Helper for the equals and get hash code calculation.
     /// </summary>
+    /// <typeparam name="TModel">Model type.</typeparam>
     public interface IEqualityComparerHelperOperations<TModel>
         where TModel : class
     {

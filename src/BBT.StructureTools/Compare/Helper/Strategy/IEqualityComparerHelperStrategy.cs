@@ -8,7 +8,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     /// <summary>
     /// Strategy to compare the different attribute types.
     /// </summary>
-    /// <typeparam name="TModel">Subtype of <see cref="IBaseModel"/>.</typeparam>
+    /// <typeparam name="TModel">Inheriting type.</typeparam>
     internal interface IEqualityComparerHelperStrategy<in TModel>
     {
         /// <summary>

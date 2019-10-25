@@ -61,7 +61,6 @@ namespace BBT.StructureTools.Convert.Strategy
             source.Should().NotBeNull();
             target.Should().NotBeNull();
 
-
             var lSourceValue = this.mSourceFunc.Invoke(source);
             var lTargetValue = this.mConvertValue.ConvertValue(lSourceValue);
             target.SetPropertyValue(this.mTargetExpression, lTargetValue);

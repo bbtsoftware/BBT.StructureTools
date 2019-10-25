@@ -248,7 +248,6 @@ namespace BBT.StructureTools.Convert
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention;
 
-
         /// <summary>
         /// Registers a <c>from many</c> relationship on source and corresponding target.
         /// </summary>
@@ -293,7 +292,7 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
         /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// must be of type <see cref="ICollection<TChildType>"/>.</typeparam>
+        /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
@@ -314,7 +313,7 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
         /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// must be of type <see cref="ICollection<TChildType>"/>.</typeparam>
+        /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
@@ -354,13 +353,13 @@ namespace BBT.StructureTools.Convert
         /// Note, that the source (a collection type) cannot be null. The collection must
         /// be an instance but can be an empty collection.
         /// Note, that the target type <typeparamref name="TTarget"/> cannot be of type
-        /// <see cref="ICollection<TChildType>"/>.
+        /// <see cref="ICollection{TChildType}"/>.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
         /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
         /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// cannot cannot be of type <see cref="ICollection<TChildType>"/>.</typeparam>
+        /// cannot cannot be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(

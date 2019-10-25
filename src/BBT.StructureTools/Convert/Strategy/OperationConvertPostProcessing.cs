@@ -15,7 +15,7 @@ namespace BBT.StructureTools.Convert.Strategy
             where TSource : class
             where TTarget : class
     {
-        private ICollection<IBaseAdditionalProcessing> mAdditionalProcessings;
+        private readonly ICollection<IBaseAdditionalProcessing> mAdditionalProcessings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertPostProcessing{TSource, TTarget}" /> class.

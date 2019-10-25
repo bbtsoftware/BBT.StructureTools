@@ -48,7 +48,7 @@ namespace BBT.StructureTools.Convert.Strategy
         }
 
         /// <summary>
-        /// See <see cref="ICopyOperation{T}.Copy(T, T, Interfaces.Tools.Copy.ICopyCallContext)"/>.
+        /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}"/>.
         /// </summary>
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
@@ -70,7 +70,7 @@ namespace BBT.StructureTools.Convert.Strategy
         }
 
         /// <summary>
-        /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}.Initialize(Func{TSource, IEnumerable{TBaseSource}}, Expression{Func{TTarget, ICollection<TChildType>}}, Expression{Func{TBaseTarget, TTarget}})"/>.
+        /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}.Initialize(Func{TSource, IEnumerable{TBaseSource}}, Expression{Func{TTarget, ICollection{TBaseTarget}}}, Expression{Func{TBaseTarget, TTarget}})"/>.
         /// </summary>
         public void Initialize(
             Func<TSource, IEnumerable<TBaseSource>> source,

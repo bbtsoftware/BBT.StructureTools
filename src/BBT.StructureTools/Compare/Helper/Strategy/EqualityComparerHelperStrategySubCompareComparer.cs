@@ -6,11 +6,12 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     using System.Collections.Generic;
     using System.Linq;
     using BBT.StructureTools.Compare;
+    using FluentAssertions;
 
     /// <summary>
     /// See <see cref="IEqualityComparerHelperStrategy{T}"/>.
     /// </summary>
-    /// <typeparam name="T">Subtype of <see cref="IBaseModel"/>.</typeparam>
+    /// <typeparam name="T">Inheriting type.</typeparam>
     /// <typeparam name="TIntention">Comparer intention.</typeparam>
     internal class EqualityComparerHelperStrategySubCompareComparer<T, TIntention> : IEqualityComparerHelperStrategy<T>
         where T : class

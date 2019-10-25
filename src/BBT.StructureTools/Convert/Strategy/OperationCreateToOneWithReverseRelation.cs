@@ -69,7 +69,6 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-
             var lSourceValue = this.mSourceFunc.Invoke(source);
 
             if (lSourceValue == null)

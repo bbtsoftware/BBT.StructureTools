@@ -20,6 +20,6 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// A sub interface is excluded
         /// </summary>
-        SubInterface = 2
+        SubInterface = 2,
     }
 }

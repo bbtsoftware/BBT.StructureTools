@@ -41,7 +41,7 @@ namespace BBT.StructureTools.Copy.Helper
             Expression<Func<TValue>> aAttrValueExpression);
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection<TChildType>
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -58,7 +58,7 @@ namespace BBT.StructureTools.Copy.Helper
             where TChildType : class;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection<TChildType>
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -91,7 +91,7 @@ namespace BBT.StructureTools.Copy.Helper
             where TChild : class;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection<TChildType>
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -116,7 +116,7 @@ namespace BBT.StructureTools.Copy.Helper
             where TSubCopyOfT : class, ICopy<T>;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection<TChildType>
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TChild">

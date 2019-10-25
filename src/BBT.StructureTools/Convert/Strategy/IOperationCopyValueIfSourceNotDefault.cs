@@ -6,7 +6,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using System.Linq.Expressions;
 
     /// <summary>
-    /// Strategy to copy <see cref="BbtDate"/>.
+    /// Operation to copy an attribute value when converting a source object to a target object.
     /// </summary>
     /// <typeparam name="TSource">The source to copy from.</typeparam>
     /// <typeparam name="TTarget">The target to copy to.</typeparam>

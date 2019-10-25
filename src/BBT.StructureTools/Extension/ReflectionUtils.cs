@@ -3,8 +3,11 @@
 namespace BBT.StructureTools.Extension
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Linq.Expressions;
+    using BBT.StructureTools.Compare;
     using FluentAssertions;
 
     /// <summary>
@@ -23,13 +26,13 @@ namespace BBT.StructureTools.Extension
         /// </exception>
         /// <exception cref="CopyConvertCompareException">If the type of aValue is not
         /// is compatible with T.</exception>
+        /// <typeparam name="T">Expected type.</typeparam>
         public static T CastIfTypeOrSubtypeOrThrow<T>(object aValue)
             where T : class
         {
             aValue.Should().NotBeNull();
 
-            var lTValue = aValue as T;
-            if (lTValue == null)
+            if (!(aValue is T lTValue))
             {
                 throw new CopyConvertCompareException(string.Format($"An object of type '{typeof(T).Name}' was expected, but the object was of type '{aValue.GetType().Name}'."));
             }
@@ -44,11 +47,11 @@ namespace BBT.StructureTools.Extension
         /// <para/>
         /// Example calls in VB.NET: <br/>
         /// <c>Dim lPropertyName1 = ReflectionUtils.GetPropertyName(Function(aX As SampleClass) aX.Foo)</c><br/>
-        /// <c>Dim lPropertyName2 = ReflectionUtils.GetPropertyName(Function(aX As SampleClass) aX.Foo1.Foo2)</c><br/>
+        /// <c>Dim lPropertyName2 = ReflectionUtils.GetPropertyName(Function(aX As SampleClass) aX.Foo1.Foo2)</c>.<br/>
         /// <para/>
         /// Example calls in C#: <br/>
-        /// <c>var lPropertyName1 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo);</c><br/>
-        /// <c>var lPropertyName2 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo1.Foo2);</c><br/>
+        /// <c>var lPropertyName1 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo);</c>.<br/>
+        /// <c>var lPropertyName2 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo1.Foo2);</c>.<br/>
         /// </summary>
         /// <typeparam name="T">The type that serves as the starting point for the property. Must be used with
         /// Use according to the examples given are not specified.</typeparam>
@@ -64,6 +67,39 @@ namespace BBT.StructureTools.Extension
             var lMemberExpression = (MemberExpression)aExpression.Body;
             var lMemberName = lMemberExpression.Member.Name;
             return lMemberName;
+        }
+
+        /// <summary>
+        /// Gets all inherited types, including interfaces, the specified type itself, and <see cref="object"/>
+        /// if it's a class.
+        /// </summary>
+        public static IEnumerable<Type> GetAllInheritedTypes(this Type aType)
+        {
+            aType.Should().NotBeNull();
+
+            IList<Type> lAllInheritedTypes = new List<Type>();
+            var lCurrent = aType;
+
+            while (lCurrent != null)
+            {
+                lAllInheritedTypes.Add(lCurrent);
+                lCurrent = lCurrent.BaseType;
+            }
+
+            var lInterfaces = aType.GetInterfaces();
+            lAllInheritedTypes.AddRangeToMe(lInterfaces);
+            return lAllInheritedTypes;
+        }
+
+        /// <summary>
+        /// Gets all inherited types, ordered (more basic/inherited types first).
+        /// </summary>
+        public static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type aType)
+        {
+            aType.Should().NotBeNull();
+
+            var lAllInheritedTypesOrdered = aType.GetAllInheritedTypes().OrderBy(aX => aX, new TypeComparer()).ToList();
+            return lAllInheritedTypesOrdered;
         }
     }
 }

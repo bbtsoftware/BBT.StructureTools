@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Extension
     using FluentAssertions;
 
     /// <summary>
-    /// Utility for <see cref="System.Linq.Expressions.Expression"/>  />
+    /// Utility for <see cref="System.Linq.Expressions.Expression"/>.
     /// </summary>
     internal class ExpressionUtils
     {
@@ -26,8 +26,7 @@ namespace BBT.StructureTools.Extension
             aExpression.Should().NotBeNull();
 
             MemberExpression lMemberExpression;
-            var lUnaryExpression = aExpression.Body as UnaryExpression;
-            if (lUnaryExpression != null)
+            if (aExpression.Body is UnaryExpression lUnaryExpression)
             {
                 lMemberExpression = lUnaryExpression.Operand as MemberExpression;
             }

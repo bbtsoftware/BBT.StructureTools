@@ -78,7 +78,6 @@ namespace BBT.StructureTools.Compare
         {
             aExclusions.Should().NotBeNull();
 
-
             var lIsEqual = this.mEqualityComparerHelper.AreRegistrationsEquals(
                 aCandidate1,
                 aCandidate2,

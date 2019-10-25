@@ -7,6 +7,8 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Extension;
+    using FluentAssertions;
 
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
@@ -22,7 +24,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         {
             aExpression.Should().NotBeNull();
 
-
             return ReflectionUtils.GetPropertyName(aExpression);
         }
 
@@ -35,7 +36,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         {
             aExpression.Should().NotBeNull();
 
-
             var lMethodCallExpression = (MethodCallExpression)aExpression.Body;
 
             return lMethodCallExpression.Method.Name;
@@ -47,10 +47,8 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> aExclusions, Type aTypeOfModel, string aName)
         {
             aExclusions.Should().NotBeNull();
-
             aTypeOfModel.Should().NotBeNull();
-
-            Checks.AssertNotEmpty(aName, nameof(aName));
+            aName.Should().NotBeNullOrEmpty();
 
             // The exclusion can made for a model which inherits the property from an interface or
             // base class. We want to make sure the exclusion applies in any case.
@@ -80,7 +78,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             where TModel : class
         {
             aCompareFunc.Should().NotBeNull();
-
 
             // ReSharper disable once PossibleUnintendedReferenceComparison
             // BER says this is OK since either both are null, or have the same reference which is
@@ -134,7 +131,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         public static Type GetCompareType<T>(IEqualityComparer<T> aComparer)
         {
             aComparer.Should().NotBeNull();
-
 
             // evaluate type of a comparer
             // due to covariant restriction typeof(T) is not valid

@@ -13,7 +13,6 @@ namespace BBT.StructureTools.Extension
     /// </summary>
     internal static class ReferenceTypeExtension
     {
-
         /// <summary>
         /// An extension enabling addition of many elements to a Collection.
         /// </summary>
