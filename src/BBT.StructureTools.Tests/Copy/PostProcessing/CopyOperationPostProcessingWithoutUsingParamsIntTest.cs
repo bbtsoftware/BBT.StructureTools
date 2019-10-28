@@ -9,13 +9,13 @@ using Xunit;
 
 namespace BBT.StructureTools.Tests.Copy.PostProcessing
 {
-    public sealed class CopyOperationPostProcessingUsingParamsIntTests
+    public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
         #region setup and members
 
         private readonly ICopy<ITestClass> testcandidate;
 
-        public CopyOperationPostProcessingUsingParamsIntTests()
+        public CopyOperationPostProcessingWithoutUsingParamsIntTest()
         {
             var kernel = Setup.SetUpIocResolve();
 
@@ -33,7 +33,7 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
         /// Copy Registrations.
         /// </summary>
         [Fact]
-        public void MustExecuteRegisteredPostProcessingsWhenParamsAreUsed()
+        public void MustExecuteRegisteredSinglePostProcessings()
         {
             // Arrange
             var lTestClassOriginal = new TestClass();
@@ -44,7 +44,7 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
 
             // Assert
             lTestClassCopy.TestValue.Should().Be(234);
-            lTestClassCopy.TestValue2.Should().Be(4321);
+            lTestClassCopy.TestValue2.Should().Be(0);
         }
 
         #endregion
@@ -87,10 +87,8 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
             public void DoRegistrations(ICopyHelperRegistration<ITestClass> aRegistrations)
             {
                 aRegistrations.Should().NotBeNull();
-
                 aRegistrations.RegisterPostProcessings(
-                    new GenericCopyPostProcessing<ITestClass>((aSource, aTarget) => aTarget.TestValue = 234),
-                    new GenericCopyPostProcessing<ITestClass>((aSource, aTarget) => aTarget.TestValue2 = 4321));
+                    new GenericCopyPostProcessing<ITestClass>((aSource, aTarget) => aTarget.TestValue = 234));
             }
         }
         #endregion

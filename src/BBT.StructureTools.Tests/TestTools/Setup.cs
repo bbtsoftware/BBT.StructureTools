@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BBT.StrategyPattern;
 using BBT.StructureTools.Compare;
 using BBT.StructureTools.Compare.Helper;
 using BBT.StructureTools.Convert;
@@ -12,7 +10,7 @@ using BBT.StructureTools.Copy.Operation;
 using BBT.StructureTools.Copy.Strategy;
 using BBT.StructureTools.Initialization;
 using BBT.StructureTools.Tests.TestTools.IoC;
-using Unity;
+using Ninject;
 
 namespace BBT.StructureTools.Tests.TestTools
 {
@@ -31,107 +29,111 @@ namespace BBT.StructureTools.Tests.TestTools
         /// which is used within the <see cref="IocHandler.IocResolver"/> is being
         /// returned for further manipulation from within the calling test or test setup method.
         /// </summary>
-        public static IUnityContainer SetUpIocResolve()
+        public static IKernel SetUpIocResolve()
         {
-            var container = new UnityContainer();
+            var kernel = new StandardKernel();
 
-            RegisterConvertTypes(container);
-            RegisterCompareTypes(container);
-            RegisterCopyTypes(container);
+            // Dependencies from BBT.StrategyPattern
+            kernel.Bind(typeof(IStrategyLocator<>)).To(typeof(UnityStrategyLocator<>));
+            kernel.Bind(typeof(IInstanceCreator<,>)).To(typeof(GenericInstanceCreator<,>));
 
-            var resolver = new UnityResolver(container);
+            RegisterConvertTypes(kernel);
+            RegisterCompareTypes(kernel);
+            RegisterCopyTypes(kernel);
+
+            var resolver = new NinjectResolver(kernel);
             IocHandler.Instance.IocResolver = resolver;
 
-            return container;
+            return kernel;
         }
 
         /// <summary>
         /// Registers types needed for compare within Unity.
         /// </summary>
-        public static void RegisterCompareTypes(IUnityContainer container)
+        public static void RegisterCompareTypes(IKernel container)
         {
             // Tools
-            container.RegisterType(typeof(IComparer<,>), typeof(Comparer<,>));
-            container.RegisterType<IEqualityComparerHelperRegistrationFactory, EqualityComparerHelperRegistrationFactory>();
+            container.Bind(typeof(IComparer<,>)).To(typeof(Comparer<,>));
+            container.Bind<IEqualityComparerHelperRegistrationFactory>().To<EqualityComparerHelperRegistrationFactory>();
 
             // Helper
-            container.RegisterType<ICompareHelper, CompareHelper>();
+            container.Bind<ICompareHelper>().To<CompareHelper>();
         }
 
         /// <summary>
         /// Registers types needed for convert within Unity.
         /// </summary>
-        public static void RegisterConvertTypes(IUnityContainer container)
+        public static void RegisterConvertTypes(IKernel container)
         {
             // Tools
-            container.RegisterType(typeof(IConvert<,,>), typeof(Converter<,,>));
-            container.RegisterType(typeof(IConvertEngine<,>), typeof(ConvertEngine<,>));
-            container.RegisterType(typeof(IConvertHelperFactory<,,,>), typeof(ConvertHelperFactory<,,,>));
-            container.RegisterType(typeof(ICreateConvertHelper<,,,,>), typeof(CreateConvertHelper<,,,,>));
-            container.RegisterType(typeof(ICreateConvertHelper<,,,>), typeof(CreateConvertHelper<,,,>));
-            container.RegisterType(typeof(IConvertStrategyProvider<,,>), typeof(ConvertStrategyProvider<,,>));
+            container.Bind(typeof(IConvert<,,>)).To(typeof(Converter<,,>));
+            container.Bind(typeof(IConvertEngine<,>)).To(typeof(ConvertEngine<,>));
+            container.Bind(typeof(IConvertHelperFactory<,,,>)).To(typeof(ConvertHelperFactory<,,,>));
+            container.Bind(typeof(ICreateConvertHelper<,,,,>)).To(typeof(CreateConvertHelper<,,,,>));
+            container.Bind(typeof(ICreateConvertHelper<,,,>)).To(typeof(CreateConvertHelper<,,,>));
+            container.Bind(typeof(IConvertStrategyProvider<,,>)).To(typeof(ConvertStrategyProvider<,,>));
 
             // Helper
-            container.RegisterType<IConvertHelper, ConvertHelper>();
+            container.Bind<IConvertHelper>().To<ConvertHelper>();
 
             // Value conversion
-            container.RegisterType(typeof(IConvertValue<,>), typeof(ValueConverter<,>));
+            container.Bind(typeof(IConvertValue<,>)).To(typeof(ValueConverter<,>));
 
             // Operations
-            container.RegisterType(typeof(IOperationCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationCreateFromSourceWithReverseRelation<,,,,>));
-            container.RegisterType(typeof(IOperationCreateToManyWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithReverseRelation<,,,,,,>));
-            container.RegisterType(typeof(IOperationCreateToManyGenericWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyGenericWithReverseRelation<,,,,,,>));
-            container.RegisterType(typeof(IOperationCreateToManyGeneric<,,,,,>), typeof(OperationCreateToManyGeneric<,,,,,>));
-            container.RegisterType(typeof(IOperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>));
-            container.RegisterType(typeof(IOperationMergeLevel<,,,,,,>), typeof(OperationMergeLevel<,,,,,,>));
-            container.RegisterType(typeof(IOperationConvertFromSourceOnDifferentLevels<,,,,>), typeof(OperationConvertFromSourceOnDifferentLevels<,,,,>));
-            container.RegisterType(typeof(IOperationConvertFromTargetOnDifferentLevels<,,,>), typeof(OperationConvertFromTargetOnDifferentLevels<,,,>));
-            container.RegisterType(typeof(IOperationConvertToMany<,,,,>), typeof(OperationConvertToMany<,,,,>));
-            container.RegisterType(typeof(IOperationSourceSubConvert<,,,>), typeof(OperationSourceSubConvert<,,,>));
-            container.RegisterType(typeof(IOperationTargetSubConvert<,,,>), typeof(OperationTargetSubConvert<,,,>));
-            container.RegisterType(typeof(IOperationCopySource<,>), typeof(OperationCopySource<,>));
-            container.RegisterType(typeof(IOperationCreateToOneWithReverseRelation<,,,,,>), typeof(OperationCreateToOneWithReverseRelation<,,,,,>));
-            container.RegisterType(typeof(IOperationCreateToOne<,,,,,>), typeof(OperationCreateToOne<,,,,,>));
-            container.RegisterType(typeof(IOperationCopyFromMany<,,,>), typeof(OperationCopyFromMany<,,,>));
-            container.RegisterType(typeof(IOperationCopyValue<,,>), typeof(OperationCopyValue<,,>));
-            container.RegisterType(typeof(IOperationCopyValueWithLookUp<,,>), typeof(OperationCopyValueWithLookUp<,,>));
-            container.RegisterType(typeof(IOperationCopyValueWithUpperLimit<,,>), typeof(OperationCopyValueWithUpperLimit<,,>));
-            container.RegisterType(typeof(IOperationCopyValueIfSourceNotDefault<,,>), typeof(OperationCopyValueIfSourceNotDefault<,,>));
-            container.RegisterType(typeof(IOperationCopyValueIfTargetIsDefault<,,>), typeof(OperationCopyValueIfTargetIsDefault<,,>));
-            container.RegisterType(typeof(IOperationCopyValueWithSourceFilter<,,>), typeof(OperationCopyValueWithSourceFilter<,,>));
-            container.RegisterType(typeof(IOperationSubCopy<,,>), typeof(OperationSubCopy<,,>));
-            container.RegisterType(typeof(IOperationSubConvert<,,,,>), typeof(OperationSubConvert<,,,,>));
-            container.RegisterType(typeof(IOperationConditionalCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationConditionalCreateFromSourceWithReverseRelation<,,,,>));
-            container.RegisterType(typeof(IOperationConditionalCreateToManyWithReverseRelation<,,,,>), typeof(OperationConditionalCreateToManyWithReverseRelation<,,,,>));
-            container.RegisterType(typeof(IOperationCopyOneToManyWithReverseRelation<,,,,,,>), typeof(OperationCopyOneToManyWithReverseRelation<,,,,,,>));
-            container.RegisterType(typeof(IOperationCopyValueWithMapping<,,,>), typeof(OperationCopyValueWithMapping<,,,>));
+            container.Bind(typeof(IOperationCreateFromSourceWithReverseRelation<,,,,>)).To(typeof(OperationCreateFromSourceWithReverseRelation<,,,,>));
+            container.Bind(typeof(IOperationCreateToManyWithReverseRelation<,,,,,,>)).To(typeof(OperationCreateToManyWithReverseRelation<,,,,,,>));
+            container.Bind(typeof(IOperationCreateToManyGenericWithReverseRelation<,,,,,,>)).To(typeof(OperationCreateToManyGenericWithReverseRelation<,,,,,,>));
+            container.Bind(typeof(IOperationCreateToManyGeneric<,,,,,>)).To(typeof(OperationCreateToManyGeneric<,,,,,>));
+            container.Bind(typeof(IOperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>)).To(typeof(OperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>));
+            container.Bind(typeof(IOperationMergeLevel<,,,,,,>)).To(typeof(OperationMergeLevel<,,,,,,>));
+            container.Bind(typeof(IOperationConvertFromSourceOnDifferentLevels<,,,,>)).To(typeof(OperationConvertFromSourceOnDifferentLevels<,,,,>));
+            container.Bind(typeof(IOperationConvertFromTargetOnDifferentLevels<,,,>)).To(typeof(OperationConvertFromTargetOnDifferentLevels<,,,>));
+            container.Bind(typeof(IOperationConvertToMany<,,,,>)).To(typeof(OperationConvertToMany<,,,,>));
+            container.Bind(typeof(IOperationSourceSubConvert<,,,>)).To(typeof(OperationSourceSubConvert<,,,>));
+            container.Bind(typeof(IOperationTargetSubConvert<,,,>)).To(typeof(OperationTargetSubConvert<,,,>));
+            container.Bind(typeof(IOperationCopySource<,>)).To(typeof(OperationCopySource<,>));
+            container.Bind(typeof(IOperationCreateToOneWithReverseRelation<,,,,,>)).To(typeof(OperationCreateToOneWithReverseRelation<,,,,,>));
+            container.Bind(typeof(IOperationCreateToOne<,,,,,>)).To(typeof(OperationCreateToOne<,,,,,>));
+            container.Bind(typeof(IOperationCopyFromMany<,,,>)).To(typeof(OperationCopyFromMany<,,,>));
+            container.Bind(typeof(IOperationCopyValue<,,>)).To(typeof(OperationCopyValue<,,>));
+            container.Bind(typeof(IOperationCopyValueWithLookUp<,,>)).To(typeof(OperationCopyValueWithLookUp<,,>));
+            container.Bind(typeof(IOperationCopyValueWithUpperLimit<,,>)).To(typeof(OperationCopyValueWithUpperLimit<,,>));
+            container.Bind(typeof(IOperationCopyValueIfSourceNotDefault<,,>)).To(typeof(OperationCopyValueIfSourceNotDefault<,,>));
+            container.Bind(typeof(IOperationCopyValueIfTargetIsDefault<,,>)).To(typeof(OperationCopyValueIfTargetIsDefault<,,>));
+            container.Bind(typeof(IOperationCopyValueWithSourceFilter<,,>)).To(typeof(OperationCopyValueWithSourceFilter<,,>));
+            container.Bind(typeof(IOperationSubCopy<,,>)).To(typeof(OperationSubCopy<,,>));
+            container.Bind(typeof(IOperationSubConvert<,,,,>)).To(typeof(OperationSubConvert<,,,,>));
+            container.Bind(typeof(IOperationConditionalCreateFromSourceWithReverseRelation<,,,,>)).To(typeof(OperationConditionalCreateFromSourceWithReverseRelation<,,,,>));
+            container.Bind(typeof(IOperationConditionalCreateToManyWithReverseRelation<,,,,>)).To(typeof(OperationConditionalCreateToManyWithReverseRelation<,,,,>));
+            container.Bind(typeof(IOperationCopyOneToManyWithReverseRelation<,,,,,,>)).To(typeof(OperationCopyOneToManyWithReverseRelation<,,,,,,>));
+            container.Bind(typeof(IOperationCopyValueWithMapping<,,,>)).To(typeof(OperationCopyValueWithMapping<,,,>));
         }
 
         /// <summary>
         /// Registers types needed for copy within Unity.
         /// </summary>
-        public static void RegisterCopyTypes(IUnityContainer container)
+        public static void RegisterCopyTypes(IKernel container)
         {
             // Tools
-            container.RegisterType(typeof(ICreateCopyHelper<,>), typeof(CreateCopyHelper<,>));
-            container.RegisterType(typeof(ICreateCopyHelper<,,>), typeof(CreateCopyHelper<,,>));
-            container.RegisterType(typeof(ICopyHelperFactory<,>), typeof(CopyHelperFactory<,>));
-            container.RegisterType(typeof(ICopy<>), typeof(Copier<>));
-            container.RegisterType<ICopyHelperRegistrationFactory, CopyHelperRegistrationFactory>();
+            container.Bind(typeof(ICreateCopyHelper<,>)).To(typeof(CreateCopyHelper<,>));
+            container.Bind(typeof(ICreateCopyHelper<,,>)).To(typeof(CreateCopyHelper<,,>));
+            container.Bind(typeof(ICopyHelperFactory<,>)).To(typeof(CopyHelperFactory<,>));
+            container.Bind(typeof(ICopy<>)).To(typeof(Copier<>));
+            container.Bind<ICopyHelperRegistrationFactory>().To<CopyHelperRegistrationFactory>();
 
             // Helper
-            container.RegisterType<ICopyHelper, CopyHelper>();
+            container.Bind<ICopyHelper>().To<CopyHelper>();
 
             // Operations
-            container.RegisterType(typeof(ICopyOperationCreateToManyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithReverseRelation<,,>));
-            container.RegisterType(typeof(ICopyOperationCreateToOneWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithReverseRelation<,,>));
-            container.RegisterType(typeof(ICopyOperationCreateToManyWithGenericStrategy<,,>), typeof(CopyOperationCreateToManyWithGenericStrategy<,,>));
-            container.RegisterType(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
-            container.RegisterType(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
-            container.RegisterType(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
+            container.Bind(typeof(ICopyOperationCreateToManyWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToManyWithReverseRelation<,,>));
+            container.Bind(typeof(ICopyOperationCreateToOneWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToOneWithReverseRelation<,,>));
+            container.Bind(typeof(ICopyOperationCreateToManyWithGenericStrategy<,,>)).To(typeof(CopyOperationCreateToManyWithGenericStrategy<,,>));
+            container.Bind(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
+            container.Bind(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>)).To(typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
+            container.Bind(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
 
 
-            container.RegisterType(typeof(ICopyStrategyProvider<,>), typeof(GenericCopyStrategyProvider<,>));
+            container.Bind(typeof(ICopyStrategyProvider<,>)).To(typeof(GenericCopyStrategyProvider<,>));
         }
     }
 }

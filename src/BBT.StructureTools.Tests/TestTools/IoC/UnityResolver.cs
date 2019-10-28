@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BBT.StructureTools.Initialization;
 using FluentAssertions;
-using Unity;
+using Ninject;
 
 namespace BBT.StructureTools.Tests.TestTools.IoC
 {
@@ -11,32 +11,32 @@ namespace BBT.StructureTools.Tests.TestTools.IoC
     /// used within automated tests.
     /// </summary>
 
-    public class UnityResolver : IIocResolver
+    public class NinjectResolver : IIocResolver
     {
-        private readonly IUnityContainer container;
+        private readonly IKernel kernel;
 
-        public UnityResolver(IUnityContainer container)
+        public NinjectResolver(IKernel kernel)
         {
-            container.Should().NotBeNull();
+            kernel.Should().NotBeNull();
 
-            this.container = container;
+            this.kernel = kernel;
         }
 
         public IEnumerable<TService> GetAllInstances<TService>()
         {
-            var resolved = this.container.ResolveAll<TService>();
+            var resolved = this.kernel.GetAll<TService>();
             return resolved;
         }
 
         public TService GetInstance<TService>()
         {
-            var resolved = this.container.Resolve<TService>();
+            var resolved = this.kernel.Get<TService>();
             return resolved;
         }
 
         public object GetInstance(Type serviceType)
         {
-            var resolved = this.container.Resolve(serviceType);
+            var resolved = this.kernel.Get(serviceType);
             return resolved;
         }
     }

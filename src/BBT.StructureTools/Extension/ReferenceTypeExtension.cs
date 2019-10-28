@@ -32,14 +32,13 @@ namespace BBT.StructureTools.Extension
             var lTargetExpression = (MemberExpression)aTargetExpression.Body;
             var lValueProperty = (PropertyInfo)lTargetExpression.Member;
 
-            var lAddMethodInfo = lValueProperty.PropertyType.GetMethod("Add", new[] { typeof(TValue) });
-            var lValuePropertyValue = lValueProperty.GetValue(aTarget);
+            var lAddMethod = aTargetExpression.Compile().Invoke(aTarget);
 
             foreach (var lValue in aValues)
             {
                 if (lValue != null)
                 {
-                    lAddMethodInfo.Invoke(lValuePropertyValue, new[] { lValue });
+                    lAddMethod.Add(lValue);
                 }
             }
         }

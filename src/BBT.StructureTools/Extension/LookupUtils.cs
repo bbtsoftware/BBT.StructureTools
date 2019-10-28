@@ -60,7 +60,8 @@ namespace BBT.StructureTools.Extension
         /// <typeparam name="T">The type of the values to compare.</typeparam>
         /// <param name="aSpecificValue">The specific value.</param>
         /// <param name="aUpperLimitValue">The upper limit value.</param>
-        public static T ApplyUpperLimit<T>(T aSpecificValue, T aUpperLimitValue) where T : IComparable<T>
+        public static T ApplyUpperLimit<T>(T aSpecificValue, T aUpperLimitValue)
+            where T : IComparable<T>
         {
             if (IsDefaultValue(aUpperLimitValue))
             {
