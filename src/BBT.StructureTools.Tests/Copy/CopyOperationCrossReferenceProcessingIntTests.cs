@@ -41,10 +41,10 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
             lCrossReferenceSource.Parent = lSource;
             lSource.TestClassCrossReferencedChild = lCrossReferenceSource;
             lSource.TestClassChild = new TestClassChild
-                                         {
-                                             Parent = lSource,
-                                             CrossReference = lCrossReferenceSource
-                                         };
+            {
+                Parent = lSource,
+                CrossReference = lCrossReferenceSource
+            };
             var lTarget = new TestClass();
 
             // Act

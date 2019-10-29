@@ -44,9 +44,9 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
             // Arrange
             var lTestClassParentOriginal = new ParentTestClass();
             lTestClassParentOriginal.Child = new ChildTestClass()
-                                                 {
-                                                     ParentReference = lTestClassParentOriginal
-                                                 };
+            {
+                ParentReference = lTestClassParentOriginal
+            };
 
             var lTestClassParentCopy = new ParentTestClass();
 
@@ -73,9 +73,9 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         {
             // Arrange
             var lTestClassParentOriginal = new ParentTestClass
-                                               {
-                                                   Child = null
-                                               };
+            {
+                Child = null
+            };
 
             var lTestClassParentCopy = new ParentTestClass();
 

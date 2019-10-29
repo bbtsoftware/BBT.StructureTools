@@ -45,17 +45,17 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
             // Arrange
             var lTestClassParentOriginal = new ParentTestClass();
             lTestClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = lTestClassParentOriginal
-                                                  });
+            {
+                ParentReference = lTestClassParentOriginal
+            });
             lTestClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = lTestClassParentOriginal
-                                                  });
+            {
+                ParentReference = lTestClassParentOriginal
+            });
             lTestClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = lTestClassParentOriginal
-                                                  });
+            {
+                ParentReference = lTestClassParentOriginal
+            });
 
             var lTestClassParentCopy = new ParentTestClass();
 

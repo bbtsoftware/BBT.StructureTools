@@ -40,17 +40,17 @@ namespace BBT.StructureTools.Tests.Copy
             // Arrange
             var testClassParentOriginal = new ParentTestClass();
             testClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = testClassParentOriginal
-                                                  });
+            {
+                ParentReference = testClassParentOriginal
+            });
             testClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = testClassParentOriginal
-                                                  });
+            {
+                ParentReference = testClassParentOriginal
+            });
             testClassParentOriginal.AddChild(new ChildTestClass()
-                                                  {
-                                                      ParentReference = testClassParentOriginal
-                                                  });
+            {
+                ParentReference = testClassParentOriginal
+            });
 
             var testClassParentCopy = new ParentTestClass();
 

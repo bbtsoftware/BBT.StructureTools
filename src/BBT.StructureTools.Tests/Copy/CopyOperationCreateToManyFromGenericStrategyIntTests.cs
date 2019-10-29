@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using BBT.StrategyPattern;
-using BBT.StructureTools;
 using BBT.StructureTools.Copy;
 using BBT.StructureTools.Copy.Helper;
 using BBT.StructureTools.Copy.Strategy;
@@ -13,7 +12,6 @@ using BBT.StructureTools.Tests.TestTools;
 using FluentAssertions;
 using Ninject;
 using Xunit;
-using Xunit.Sdk;
 
 namespace BBT.StructureTools.Tests.Copy
 {
