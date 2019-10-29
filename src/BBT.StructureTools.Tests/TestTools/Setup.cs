@@ -24,8 +24,8 @@ namespace BBT.StructureTools.Tests.TestTools
     {
         /// <summary>
         /// Register types for copy, convert, and compare with
-        /// Unity and create a resolver which is assigned to the
-        /// <see cref="IocHandler.IocResolver"/>. The <see cref="IUnityContainer"/>
+        /// Ninject and create a resolver which is assigned to the
+        /// <see cref="IocHandler.IocResolver"/>. The <see cref="INinjectContainer"/>
         /// which is used within the <see cref="IocHandler.IocResolver"/> is being
         /// returned for further manipulation from within the calling test or test setup method.
         /// </summary>
@@ -34,7 +34,7 @@ namespace BBT.StructureTools.Tests.TestTools
             var kernel = new StandardKernel();
 
             // Dependencies from BBT.StrategyPattern
-            kernel.Bind(typeof(IStrategyLocator<>)).To(typeof(UnityStrategyLocator<>));
+            kernel.Bind(typeof(IStrategyLocator<>)).To(typeof(NinjectStrategyLocator<>));
             kernel.Bind(typeof(IInstanceCreator<,>)).To(typeof(GenericInstanceCreator<,>));
 
             RegisterConvertTypes(kernel);
@@ -48,7 +48,7 @@ namespace BBT.StructureTools.Tests.TestTools
         }
 
         /// <summary>
-        /// Registers types needed for compare within Unity.
+        /// Registers types needed for compare within Ninject.
         /// </summary>
         public static void RegisterCompareTypes(IKernel container)
         {
@@ -61,7 +61,7 @@ namespace BBT.StructureTools.Tests.TestTools
         }
 
         /// <summary>
-        /// Registers types needed for convert within Unity.
+        /// Registers types needed for convert within Ninject.
         /// </summary>
         public static void RegisterConvertTypes(IKernel container)
         {
@@ -110,7 +110,7 @@ namespace BBT.StructureTools.Tests.TestTools
         }
 
         /// <summary>
-        /// Registers types needed for copy within Unity.
+        /// Registers types needed for copy within Ninject.
         /// </summary>
         public static void RegisterCopyTypes(IKernel container)
         {

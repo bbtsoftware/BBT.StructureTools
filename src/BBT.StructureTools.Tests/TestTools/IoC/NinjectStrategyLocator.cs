@@ -4,7 +4,7 @@ using BBT.StructureTools.Initialization;
 
 namespace BBT.StructureTools.Tests.TestTools.IoC
 {
-    public class UnityStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
+    public class NinjectStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
     {
         public IEnumerable<TStrategy> GetAllStrategies()
         {

@@ -7,7 +7,7 @@ using Ninject;
 namespace BBT.StructureTools.Tests.TestTools.IoC
 {
     /// <summary>
-    /// A <see cref="IIocResolver"/> using Unity to be
+    /// A <see cref="IIocResolver"/> using Ninject to be
     /// used within automated tests.
     /// </summary>
 
