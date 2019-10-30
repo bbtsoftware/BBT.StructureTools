@@ -34,8 +34,6 @@ namespace BBT.StructureTools.Tests.Copy
 
         #endregion
 
-        #region test cases
-
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
         /// </summary>
@@ -128,8 +126,6 @@ namespace BBT.StructureTools.Tests.Copy
             lTestClassParentCopy.Children.Should().NotBeSameAs(lTestClassParentOriginal.Children);
             lTestClassParentCopy.Should().NotBeNull();
         }
-
-        #endregion
 
         #region test data
 

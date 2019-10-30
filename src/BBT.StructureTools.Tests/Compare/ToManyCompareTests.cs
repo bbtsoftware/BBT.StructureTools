@@ -15,8 +15,8 @@ namespace BBT.StructureTools.Tests.Compare
 {
     public class ToManyComparerTests
     {
-        #region Members, Setup, Teardown
-        private IComparer<TestClass, ITestCompareIntention> mComparer;
+        #region Members, Setup
+        private readonly IComparer<TestClass, ITestCompareIntention> mComparer;
 
         public ToManyComparerTests()
         {
@@ -29,8 +29,6 @@ namespace BBT.StructureTools.Tests.Compare
         }
 
         #endregion
-
-        #region Tests
 
         /// <summary>
         /// Tests the compare infrastructure.
@@ -243,7 +241,6 @@ namespace BBT.StructureTools.Tests.Compare
             // Assert
             lResult.Should().BeFalse();
         }
-        #endregion
 
         #region private test classes and test class helpers
 

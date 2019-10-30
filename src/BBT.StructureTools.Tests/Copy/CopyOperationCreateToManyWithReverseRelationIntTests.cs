@@ -16,7 +16,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
     public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
-        #region members and setup / teardown of the tests
+        #region members and setup
         private readonly ICopy<IParentTestClass> testcandidate;
 
         /// <summary>
@@ -33,8 +33,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         }
 
         #endregion
-
-        #region test cases
 
         /// <summary>
         /// Tests ICopy.Copy.
@@ -128,8 +126,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
             lTestClassParentCopy.Children.Should().NotBeSameAs(lTestClassParentOriginal.Children);
             lTestClassParentCopy.Children.Should().NotBeNull();
         }
-
-        #endregion
 
         #region test data
 

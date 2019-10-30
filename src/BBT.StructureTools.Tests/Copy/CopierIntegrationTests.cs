@@ -15,7 +15,7 @@ namespace BBT.StructureTools.Tests.Copy
 {
     public class CopierIntegrationTests
     {
-        #region members and setup / teardown of the tests
+        #region members and setup
         private readonly ICopy<ParentTestClass> testcandidate;
 
         public CopierIntegrationTests()

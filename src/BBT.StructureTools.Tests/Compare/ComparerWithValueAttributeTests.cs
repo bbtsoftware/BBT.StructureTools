@@ -14,7 +14,7 @@ namespace BBT.StructureTools.Tests.Compare
 {
     public class ComparerWithValueAttributeTests
     {
-        private IComparer<TestClass, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithValueAttributeTests()
         {
@@ -22,7 +22,7 @@ namespace BBT.StructureTools.Tests.Compare
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
 
-            testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         [Fact]

@@ -15,8 +15,8 @@ namespace BBT.StructureTools.Tests.Compare
     /// </summary>
     public class ComparerWithObjectAttributeTests
     {
-        #region Members, Setup, Teardown
-        private IComparer<TestClass, ITestCompareIntention> testcandidate;
+        #region Members, Setup
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithObjectAttributeTests()
         {
@@ -24,7 +24,7 @@ namespace BBT.StructureTools.Tests.Compare
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
 
-            testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion

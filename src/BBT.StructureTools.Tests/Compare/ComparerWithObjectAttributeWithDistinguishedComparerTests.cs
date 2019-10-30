@@ -14,9 +14,9 @@ namespace BBT.StructureTools.Tests.Compare
 {
     public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
-        #region Members, Setup, Teardown
+        #region Members, Setup
 
-        private IComparer<TestClass, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
         private static IComparer<TestAttribute, ITestCompareIntention> DistinguishedComparer;
 
         public ComparerWithObjectAttributeWithDistinguishedComparerIntTests()
@@ -27,12 +27,10 @@ namespace BBT.StructureTools.Tests.Compare
             kernel.Bind<ICompareRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeCompareRegistrations>();
 
             DistinguishedComparer = kernel.Get<IComparer<TestAttribute, ITestCompareIntention>>();
-            testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
-
-        #region Test implementations
 
         /// <summary>
         /// Tests IComparer.Equals.
@@ -172,8 +170,6 @@ namespace BBT.StructureTools.Tests.Compare
             // Assert
             lResult.Should().BeTrue();
         }
-
-        #endregion
 
         #region private test classes and test class helpers
 

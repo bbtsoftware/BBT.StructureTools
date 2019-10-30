@@ -15,8 +15,8 @@ namespace BBT.StructureTools.Tests.Compare
 {
     public class SubComparerUsingComparerTests
     {
-        #region Members, Setup, Teardown
-        private IComparer<TestClassChild, ITestCompareIntention> testcandidate;
+        #region Members, Setup
+        private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
         private static IComparer<TestClassParent, ITestCompareIntention> ParentCompare;
 
 
@@ -32,8 +32,6 @@ namespace BBT.StructureTools.Tests.Compare
         }
 
         #endregion
-
-        #region Tests
 
         /// <summary>
         /// Tests equals.
@@ -175,7 +173,6 @@ namespace BBT.StructureTools.Tests.Compare
             // Assert
             lResult.Should().BeTrue();
         }
-        #endregion
 
         #region private test classes and test class helpers
 
