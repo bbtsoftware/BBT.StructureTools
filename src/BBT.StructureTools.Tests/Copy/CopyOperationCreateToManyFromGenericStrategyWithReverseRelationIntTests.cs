@@ -22,7 +22,7 @@ namespace BBT.StructureTools.Tests.Copy
 
         public CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
             kernel.Bind<ITestStrategy>().To<TestStrategy>();

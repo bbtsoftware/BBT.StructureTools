@@ -21,7 +21,7 @@ namespace BBT.StructureTools.Tests.Convert
 
         public ConvertRootTreeLeafWithMasterDataTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind(typeof(ITemporalDataDescriptor<>)).To<TemporalDataDescriptor>();
 

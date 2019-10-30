@@ -17,7 +17,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 
         public CopyOperationRegisterCreateFromFactoryTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ITestFactory>().To<TestFactory>();

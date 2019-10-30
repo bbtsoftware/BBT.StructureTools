@@ -20,7 +20,7 @@ namespace BBT.StructureTools.Tests.Compare
 
         public ToManyComparerTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
             kernel.Bind<ICompareRegistrations<TestClassListOfChildrenItem, ITestCompareIntention>>().To<TestClassListOfChildrenItemCompareRegistrations>();

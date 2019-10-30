@@ -21,7 +21,7 @@ namespace BBT.StructureTools.Tests.Compare
 
         public ComparerWithObjectAttributeWithDistinguishedComparerIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
             kernel.Bind<ICompareRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeCompareRegistrations>();

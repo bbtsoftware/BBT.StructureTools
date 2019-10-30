@@ -20,7 +20,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         /// </summary>
         public CopyOperationCrossReferenceProcessingIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();

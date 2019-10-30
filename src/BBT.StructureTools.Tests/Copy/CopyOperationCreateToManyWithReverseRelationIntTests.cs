@@ -24,7 +24,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         /// </summary>
         public CopyOperationCreateToManyWithReverseRelationIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();

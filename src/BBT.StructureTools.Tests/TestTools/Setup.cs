@@ -20,7 +20,7 @@ namespace BBT.StructureTools.Tests.TestTools
     /// <remarks>
     /// Keep this code testframework-agnostic!
     /// </remarks>
-    public static class Setup
+    public static class TestIoContainer
     {
         /// <summary>
         /// Register types for copy, convert, and compare with
@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Tests.TestTools
         /// which is used within the <see cref="IocHandler.IocResolver"/> is being
         /// returned for further manipulation from within the calling test or test setup method.
         /// </summary>
-        public static IKernel SetUpIocResolve()
+        public static IKernel Initialize()
         {
             var kernel = new StandardKernel();
 

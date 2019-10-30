@@ -18,7 +18,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 
         public CopyOperationIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
 

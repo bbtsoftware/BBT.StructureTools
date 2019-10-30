@@ -17,7 +17,7 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
 
         public CopyOperationPostProcessingUsingParamsIntTests()
         {
-            var kernel = Setup.SetUpIocResolve();
+            var kernel = TestIoContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
 
