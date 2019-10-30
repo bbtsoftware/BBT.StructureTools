@@ -34,8 +34,4 @@
     <ProjectReference Include="..\BBT.StructureTools\BBT.StructureTools.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Compare\" />
-  </ItemGroup>
-
 </Project>
