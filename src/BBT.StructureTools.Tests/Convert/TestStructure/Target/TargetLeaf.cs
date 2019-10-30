@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using BBT.StructureTools.Tests.Convert.TestStructure.Source;
 
 namespace BBT.StructureTools.Tests.Convert.TestStructure.Target
@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Target
 
         public Leaf OriginLeaf { get; set; }
 
-        public ICollection<TargetTemporalLeafData> TargetTemporalLeafData { get; set; }
+        public Guid TemporalDataOriginId { get; set; }
 
         public string LeafMasterDataName { get; set; }
 

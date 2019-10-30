@@ -414,5 +414,16 @@ namespace BBT.StructureTools.Convert
             where TBaseSource : class
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention;
+
+        /// <summary>
+        /// Registers a <c>from temporal data</c> relationship on source and corresponding target.
+        /// </summary>
+        /// <typeparam name="TSourceValue">The type of the temporal collection entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
+        IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
+            Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
+            Func<TSource, TTarget, DateTime> aReferenceDateFunc)
+            where TSourceValue : class
+            where TConvertIntention : IBaseConvertIntention;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BBT.StructureTools.Convert;
 using BBT.StructureTools.Copy;
@@ -22,6 +23,8 @@ namespace BBT.StructureTools.Tests.Convert
         {
             var kernel = Setup.SetUpIocResolve();
 
+            kernel.Bind(typeof(ITemporalDataDescriptor<>)).To<TemporalDataDescriptor>();
+
             kernel.Bind<IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>>().To<RootTargetRootConvertRegistrations>();
 
             kernel.Bind<IConvertRegistrations<Tree, TargetTree, ITestConvertIntention>>().To<TreeTargetTreeConvertRegistrations>();
@@ -29,7 +32,7 @@ namespace BBT.StructureTools.Tests.Convert
 
             kernel.Bind<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>>().To<LeafTargetLeafConvertRegistrations>();
             kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDataTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetTemporalLeafData, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDataConvertRegistrations>();
+            kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDataConvertRegistrations>();
 
             kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDataCopyRegistrations>();
 
@@ -44,7 +47,10 @@ namespace BBT.StructureTools.Tests.Convert
             var root = new Root();
             var tree = new Tree();
             var treemasterdata = new TreeMasterData();
-            var leaf = new Leaf();
+            var leaf = new Leaf()
+            {
+                TemporalDataRefDate = new DateTime(1993, 10, 5)
+            };
             var leafmasterdata = new LeafMasterData
             {
                 IsDefault = true
@@ -52,13 +58,13 @@ namespace BBT.StructureTools.Tests.Convert
             var leafmasterdata2 = new LeafMasterData();
             var temporalleafmasterdata = new TemporalLeafMasterData
             {
-                Begin = new System.DateTime(1993, 10, 4),
-                End = new System.DateTime(2019, 10, 29)
+                Begin = new DateTime(1993, 10, 4),
+                End = new DateTime(2019, 10, 29)
             };
             var temporalleafmasterdata2 = new TemporalLeafMasterData
             {
-                Begin = new System.DateTime(1994, 10, 7),
-                End = new System.DateTime(2019, 10, 3)
+                Begin = new DateTime(1994, 10, 7),
+                End = new DateTime(2019, 10, 3)
             };
 
             // Build object tree
@@ -89,9 +95,6 @@ namespace BBT.StructureTools.Tests.Convert
             var targetTree = target.TargetTree;
             var targetLeafs = targetTree.TargetLeafs;
             var targetLeaf = targetLeafs.Single();
-            var targetLeafTemporalDatas = targetLeafs.SelectMany(aX => aX.TargetTemporalLeafData);
-            var targetLeafTemporalData1 = targetLeafTemporalDatas.Single(aX => aX.Begin.Year == 1993);
-            var targetLeafTemporalData2 = targetLeafTemporalDatas.Single(aX => aX.Begin.Year == 1994);
 
             // Assert structure
             targetTree.OriginRoot.Should().BeSameAs(root);
@@ -101,11 +104,6 @@ namespace BBT.StructureTools.Tests.Convert
             targetLeaf.TargetTree.Should().BeSameAs(targetTree);
             targetLeaf.OriginLeaf.Should().BeSameAs(leaf);
 
-            targetLeafTemporalDatas.Count().Should().Be(2);
-
-            targetLeafTemporalData1.TargetLeaf.Should().BeSameAs(targetLeaf);
-            targetLeafTemporalData2.TargetLeaf.Should().BeSameAs(targetLeaf);
-
             // Assert property content
             target.TargetRootName.Should().BeEquivalentTo(root.RootName);
 
@@ -114,14 +112,7 @@ namespace BBT.StructureTools.Tests.Convert
 
             targetLeaf.LeafMasterDataName.Should().BeEquivalentTo(leafmasterdata.LeafMasterDataName);
             targetLeaf.LeafName.Should().BeEquivalentTo(leaf.LeafName);
-
-            targetLeafTemporalData1.Begin.Should().BeSameDateAs(temporalleafmasterdata.Begin);
-            targetLeafTemporalData1.End.Should().BeSameDateAs(temporalleafmasterdata.End);
-            targetLeafTemporalData1.OriginId.Should().Be(temporalleafmasterdata.Id);
-
-            targetLeafTemporalData2.Begin.Should().BeSameDateAs(temporalleafmasterdata2.Begin);
-            targetLeafTemporalData2.End.Should().BeSameDateAs(temporalleafmasterdata2.End);
-            targetLeafTemporalData2.OriginId.Should().Be(temporalleafmasterdata2.Id);
+            targetLeaf.TemporalDataOriginId.Should().Be(temporalleafmasterdata.Id);
         }
     }
 }

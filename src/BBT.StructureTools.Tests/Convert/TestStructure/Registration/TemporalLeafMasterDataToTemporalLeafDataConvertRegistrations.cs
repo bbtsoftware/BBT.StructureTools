@@ -6,13 +6,12 @@ using BBT.StructureTools.Tests.Convert.TestStructure.Target;
 
 namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
-    public class TemporalLeafMasterDataTemporalLeafDataConvertRegistrations : IConvertRegistrations<TemporalLeafMasterData, TargetTemporalLeafData, ITestConvertIntention>
+    public class TemporalLeafMasterDataTemporalLeafDataConvertRegistrations : IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>
     {
-        public void DoRegistrations(IConvertRegistration<TemporalLeafMasterData, TargetTemporalLeafData> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<TemporalLeafMasterData, TargetLeaf> aRegistrations)
         {
             aRegistrations
-                .RegisterCopyAttribute(aX => aX.Id, aX => aX.OriginId)
-                .RegisterSubCopy<ICopy<ITemporalData>>();
+                .RegisterCopyAttribute(aX => aX.Id, aX => aX.TemporalDataOriginId);
         }
     }
 }

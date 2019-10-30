@@ -666,5 +666,23 @@ namespace BBT.StructureTools.Convert
             this.mConvertHelperOperationWorkUnits.Add(lOperation);
             return this;
         }
+
+        /// <summary>
+        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyFromTemporalData{TSourceValue, TConvertIntention}(Func{TSource, IEnumerable{TSourceValue}}, Func{TSource, TTarget, DateTime})"/>.
+        /// </summary>
+        /// <typeparam name="TSourceValue">see link above.</typeparam>
+        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        public IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
+            Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
+            Func<TSource, TTarget, DateTime> aReferenceDateFunc)
+            where TSourceValue : class
+            where TConvertIntention : IBaseConvertIntention
+        {
+            var lOperation = this.mServiceLocator
+                   .GetInstance<IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>>();
+            lOperation.Initialize(sourceFunc, aReferenceDateFunc);
+            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            return this;
+        }
     }
 }

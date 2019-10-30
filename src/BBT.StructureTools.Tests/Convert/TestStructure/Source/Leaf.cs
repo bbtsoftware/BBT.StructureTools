@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BBT.StructureTools.Tests.Convert.TestStructure.Source
 {
@@ -11,5 +12,7 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Source
         public ICollection<LeafMasterData> LeafMasterData { get; set; } = new List<LeafMasterData>();
 
         public string LeafName { get; set; }
+
+        public DateTime TemporalDataRefDate { get; set; }
     }
 }

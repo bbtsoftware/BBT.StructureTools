@@ -107,6 +107,7 @@ namespace BBT.StructureTools.Tests.TestTools
             container.Bind(typeof(IOperationConditionalCreateToManyWithReverseRelation<,,,,>)).To(typeof(OperationConditionalCreateToManyWithReverseRelation<,,,,>));
             container.Bind(typeof(IOperationCopyOneToManyWithReverseRelation<,,,,,,>)).To(typeof(OperationCopyOneToManyWithReverseRelation<,,,,,,>));
             container.Bind(typeof(IOperationCopyValueWithMapping<,,,>)).To(typeof(OperationCopyValueWithMapping<,,,>));
+            container.Bind(typeof(IOperationCopyFromTemporalData<,,,>)).To(typeof(OperationCopyFromTemporalData<,,,>));
         }
 
         /// <summary>

@@ -9,9 +9,9 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
     public class LeafTargetLeafConvertRegistrations : IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>
     {
-        private readonly IConvertHelperFactory<TemporalLeafMasterData, TargetTemporalLeafData, TargetTemporalLeafData, ITestConvertIntention> convertHelperFactory;
+        private readonly IConvertHelperFactory<TemporalLeafMasterData, TargetLeaf, TargetLeaf, ITestConvertIntention> convertHelperFactory;
 
-        public LeafTargetLeafConvertRegistrations(IConvertHelperFactory<TemporalLeafMasterData, TargetTemporalLeafData, TargetTemporalLeafData, ITestConvertIntention> convertHelperFactory)
+        public LeafTargetLeafConvertRegistrations(IConvertHelperFactory<TemporalLeafMasterData, TargetLeaf, TargetLeaf, ITestConvertIntention> convertHelperFactory)
         {
             this.convertHelperFactory = convertHelperFactory;
         }
@@ -24,10 +24,7 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
                 .RegisterCopyAttribute(aX => aX, aX => aX.OriginLeaf)
                 .RegisterCopyAttribute(aX => aX.LeafName, aX => aX.LeafName)
                 .RegisterConvertFromSourceOnDifferentLevels<LeafMasterData, TargetLeaf, ITestConvertIntention>(aX => aX.LeafMasterData.Single(aLeafMasterData => aLeafMasterData.IsDefault))
-                .RegisterCreateToManyGenericWithReverseRelation(
-                    aX => aX.TemporalLeafMasterData,
-                    aX => aX.TargetTemporalLeafData,
-                    this.convertHelperFactory.GetConvertHelper(aX => aX.TargetLeaf));
+                .RegisterCopyFromTemporalData<TemporalLeafMasterData, ITestConvertIntention>(aX => aX.TemporalLeafMasterData, (aSource, aTarget) => aSource.TemporalDataRefDate);
 
 
         }
