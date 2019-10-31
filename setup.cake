@@ -16,16 +16,18 @@ BuildParameters.SetParameters(
     appVeyorAccountName: "BBTSoftwareAG",
     shouldPublishMyGet: false,
     shouldRunCodecov: true,
-    shouldDeployGraphDocumentation: false);
+    shouldDeployGraphDocumentation: false,
+    shouldRunDupFinder: false);
 
 BuildParameters.PrintParameters(Context);
 
-ToolSettings.SetToolSettings(
-    context: Context,
-    dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/BBT.StructureTools.Tests/*.cs" },
-    testCoverageFilter: "+[*]* -[xunit.*]* -[*.Tests]* -[Shouldly]*",
-    testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
-    testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
+// ToDo https://github.com/bbtsoftware/BBT.StructureTools/issues/4
+// ToolSettings.SetToolSettings(
+    // context: Context,
+    // dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/BBT.StructureTools.Tests/*.cs" },
+    // testCoverageFilter: "+[*]* -[xunit.*]* -[*.Tests]* -[Shouldly]*",
+    // testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
+    // testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
