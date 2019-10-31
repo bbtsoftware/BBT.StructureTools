@@ -1,9 +1,9 @@
-﻿using System;
-using BBT.StructureTools.Convert;
-using FluentAssertions;
-
-namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
+﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
+    using System;
+    using BBT.StructureTools.Convert;
+    using FluentAssertions;
+
     public class TemporalDataDescriptor : ITemporalDataDescriptor<ITemporalData>
     {
         public DateTime GetBegin(ITemporalData aData)

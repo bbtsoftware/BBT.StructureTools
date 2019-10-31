@@ -15,9 +15,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
     {
         private readonly ICopy<TestClass> testcandidate;
 
-        /// <summary>
-        /// The test fixture set up.
-        /// </summary>
         public CopyOperationCrossReferenceProcessingIntTests()
         {
             var kernel = TestIoContainer.Initialize();
@@ -36,23 +33,23 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void MustExecuteAndSetCrossReferenceRegistrations()
         {
             // Arrange
-            var lCrossReferenceSource = new TestClassCrossReferencedChild();
-            var lSource = new TestClass();
-            lCrossReferenceSource.Parent = lSource;
-            lSource.TestClassCrossReferencedChild = lCrossReferenceSource;
-            lSource.TestClassChild = new TestClassChild
+            var crossReferenceSource = new TestClassCrossReferencedChild();
+            var source = new TestClass();
+            crossReferenceSource.Parent = source;
+            source.TestClassCrossReferencedChild = crossReferenceSource;
+            source.TestClassChild = new TestClassChild
             {
-                Parent = lSource,
-                CrossReference = lCrossReferenceSource
+                Parent = source,
+                CrossReference = crossReferenceSource,
             };
-            var lTarget = new TestClass();
+            var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lCrossReferenceSource.Should().NotBeSameAs(lTarget.TestClassCrossReferencedChild);
-            lTarget.TestClassCrossReferencedChild.Should().BeSameAs(lTarget.TestClassChild.CrossReference);
+            crossReferenceSource.Should().NotBeSameAs(target.TestClassCrossReferencedChild);
+            target.TestClassCrossReferencedChild.Should().BeSameAs(target.TestClassChild.CrossReference);
         }
 
         private class TestClass
@@ -77,37 +74,37 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
+                registrations
                     .RegisterCrossReferenceProcessing<TestClassCrossReferencedChild, TestClassChild>(
-                        aX => aX.CrossReference)
+                        x => x.CrossReference)
                     .RegisterCreateToOneWithReverseRelation<TestClassCrossReferencedChild, TestClassCrossReferencedChild>(
-                        aX => aX.TestClassCrossReferencedChild,
-                        aX => aX.Parent)
+                        x => x.TestClassCrossReferencedChild,
+                        x => x.Parent)
                     .RegisterCreateToOneWithReverseRelation<TestClassChild, TestClassChild>(
-                        aX => aX.TestClassChild,
-                        aX => aX.Parent);
+                        x => x.TestClassChild,
+                        x => x.Parent);
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCrossReferencedChildCopyRegistrations : ICopyRegistrations<TestClassCrossReferencedChild>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClassCrossReferencedChild> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClassCrossReferencedChild> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassChildCopyRegistrations : ICopyRegistrations<TestClassChild>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClassChild> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
             }
         }
     }

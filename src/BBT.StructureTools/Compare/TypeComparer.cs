@@ -17,24 +17,24 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// See <see cref="IComparer{T}.Compare(T, T)"/>.
         /// </summary>
-        public int Compare(Type aX, Type aY)
+        public int Compare(Type x, Type y)
         {
-            aX.Should().NotBeNull();
-            aY.Should().NotBeNull();
+            x.Should().NotBeNull();
+            y.Should().NotBeNull();
 
             // ' X and Y are the same type.
-            if (aX == aY)
+            if (x == y)
             {
                 return 0;
             }
 
-            if (aX.IsAssignableFrom(aY))
+            if (x.IsAssignableFrom(y))
             {
                 // ' Means x is less.
                 return -1;
             }
 
-            if (aY.IsAssignableFrom(aX))
+            if (y.IsAssignableFrom(x))
             {
                 // ' Means x is greater.
                 return 1;

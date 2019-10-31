@@ -1,17 +1,17 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
-using System.Collections.Generic;
-using BBT.StructureTools;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Processing;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
 namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Processing;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class CopyOperationIntTests
     {
         private readonly ICopy<TestClass> testcandidate;
@@ -32,14 +32,14 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void Copy_WhenAttributeRegistered_MustCopyAttribute()
         {
             // Arrange
-            var lSource = new TestClass { Value1 = 42 };
-            var lTarget = new TestClass();
+            var source = new TestClass { Value1 = 42 };
+            var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lTarget.Value1.Should().Be(42);
+            target.Value1.Should().Be(42);
         }
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void Copy_WhenAttributeNotRegistered_MustNotCopyAttribute()
         {
             // Arrange
-            var lSource = new TestClass { Value2 = 45 };
-            var lTarget = new TestClass { Value2 = 35 };
+            var source = new TestClass { Value2 = 45 };
+            var target = new TestClass { Value2 = 35 };
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lTarget.Value2.Should().Be(35);
+            target.Value2.Should().Be(35);
         }
 
         /// <summary>
@@ -66,20 +66,20 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void Copy_MustExecuteAdditionalProcessings()
         {
             // Arrange
-            var lSource = new TestClass();
-            var lTarget = new TestClass();
-            var lAdditionalProcessings = new List<IBaseAdditionalProcessing>
+            var source = new TestClass();
+            var target = new TestClass();
+            var additionalProcessings = new List<IBaseAdditionalProcessing>
             {
-                new GenericCopyPostProcessing<TestClass>((aSource, aTarget) => { aTarget.Value1 = 27; }),
-                new GenericCopyPostProcessing<TestClass>((aSource, aTarget) => { aTarget.Value2 = 39; })
+                new GenericCopyPostProcessing<TestClass>((sourceX, targetX) => { target.Value1 = 27; }),
+                new GenericCopyPostProcessing<TestClass>((sourceX, targetX) => { target.Value2 = 39; }),
             };
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, lAdditionalProcessings);
+            this.testcandidate.Copy(source, target, additionalProcessings);
 
             // Assert
-            lTarget.Value1.Should().Be(27);
-            lTarget.Value2.Should().Be(39);
+            target.Value1.Should().Be(27);
+            target.Value2.Should().Be(39);
         }
 
         private class TestClass
@@ -91,12 +91,12 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 
         private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
-                    .RegisterAttribute(aX => aX.Value1);
+                registrations
+                    .RegisterAttribute(x => x.Value1);
             }
         }
     }

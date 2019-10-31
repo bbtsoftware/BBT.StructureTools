@@ -17,7 +17,7 @@ namespace BBT.StructureTools.Compare.Helper
         /// Register a compare attribute of type <typeparamref name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type of the attribute to compare.</typeparam>
-        IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> aExpression);
+        IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression);
 
         /// <summary>
         /// See <see cref="RegisterAttributeWithDistinguishedComparer{TTargetModel,TIntention}"/>.
@@ -25,8 +25,8 @@ namespace BBT.StructureTools.Compare.Helper
         /// <typeparam name="TComparer">Type of model-comparer"/>.</typeparam>
         /// <typeparam name="TIntention">The compare intention.</typeparam>
         IEqualityComparerHelperRegistration<T> RegisterAttributeWithDistinguishedComparer<TComparer, TIntention>(
-            Expression<Func<T, TComparer>> aExpression,
-            IComparer<TComparer, TIntention> aComparer)
+            Expression<Func<T, TComparer>> expression,
+            IComparer<TComparer, TIntention> comparer)
             where TComparer : class
             where TIntention : IBaseComparerIntention;
 
@@ -36,8 +36,8 @@ namespace BBT.StructureTools.Compare.Helper
         /// <typeparam name="TComparer">Type of combined-comparer"/>.</typeparam>
         /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
         IEqualityComparerHelperRegistration<T> RegisterToManyRelationship<TComparer, TComparerIntention>(
-            Expression<Func<T, IEnumerable<TComparer>>> aExpression,
-            IComparer<TComparer, TComparerIntention> aComparer)
+            Expression<Func<T, IEnumerable<TComparer>>> expression,
+            IComparer<TComparer, TComparerIntention> comparer)
             where TComparer : class
             where TComparerIntention : IBaseComparerIntention;
 
@@ -46,7 +46,7 @@ namespace BBT.StructureTools.Compare.Helper
         /// </summary>
         /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
         IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(
-            IComparer<T, TComparerIntention> aComparer)
+            IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention;
 
         /// <summary>

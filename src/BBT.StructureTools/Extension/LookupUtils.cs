@@ -16,103 +16,103 @@ namespace BBT.StructureTools.Extension
         /// <typeparam name="T">
         /// The data type.
         /// </typeparam>
-        public static bool IsDefaultValue<T>(T aValue)
+        public static bool IsDefaultValue<T>(T value)
         {
-            if (aValue == null)
+            if (value == null)
             {
                 return true;
             }
 
-            var lDefault = default(T);
+            var defaultValue = default(T);
 
-            var lIsDefault = aValue?.Equals(lDefault) == true;
+            var isDefault = value?.Equals(defaultValue) == true;
 
-            return lIsDefault;
+            return isDefault;
         }
 
         /// <summary>
-        /// Returns <paramref name="aSpecificValue"/> if not null or empty
-        /// and <paramref name="aDefaultValue"/> otherwise.
+        /// Returns <paramref name="specificValue"/> if not null or empty
+        /// and <paramref name="defaultValue"/> otherwise.
         /// </summary>
         /// <typeparam name="T">Type of the value to look up.</typeparam>
-        /// <param name="aSpecificValue">The specific value, will be returned if it is not empty.</param>
-        /// <param name="aDefaultValue">The default value, will only be returned if <paramref name="aSpecificValue"/> is not empty.</param>
-        public static T LookUpValue<T>(T aSpecificValue, T aDefaultValue)
+        /// <param name="specificValue">The specific value, will be returned if it is not empty.</param>
+        /// <param name="defaultValue">The default value, will only be returned if <paramref name="specificValue"/> is not empty.</param>
+        public static T LookUpValue<T>(T specificValue, T defaultValue)
         {
-            if (IsDefaultValue(aSpecificValue))
+            if (IsDefaultValue(specificValue))
             {
-                return aDefaultValue;
+                return defaultValue;
             }
 
-            return aSpecificValue;
+            return specificValue;
         }
 
         /// <summary>
-        /// Returns <paramref name="aSpecificValue"/> if
-        ///  - <paramref name="aUpperLimitValue"/> is the <typeparamref name="T"/>'s default value
+        /// Returns <paramref name="specificValue"/> if
+        ///  - <paramref name="upperLimitValue"/> is the <typeparamref name="T"/>'s default value
         ///    (the default value has the meaning 'not set')
-        ///  - <paramref name="aSpecificValue"/> is less than or equals <paramref name="aUpperLimitValue"/>.
-        /// Returns <paramref name="aUpperLimitValue"/> if
-        /// - <paramref name="aSpecificValue"/> is greater than <paramref name="aUpperLimitValue"/>
-        /// - <paramref name="aSpecificValue"/> is the <typeparamref name="T"/>'s default value
+        ///  - <paramref name="specificValue"/> is less than or equals <paramref name="upperLimitValue"/>.
+        /// Returns <paramref name="upperLimitValue"/> if
+        /// - <paramref name="specificValue"/> is greater than <paramref name="upperLimitValue"/>
+        /// - <paramref name="specificValue"/> is the <typeparamref name="T"/>'s default value
         /// (the default value has the meaning 'not set').
         /// </summary>
         /// <typeparam name="T">The type of the values to compare.</typeparam>
-        /// <param name="aSpecificValue">The specific value.</param>
-        /// <param name="aUpperLimitValue">The upper limit value.</param>
-        public static T ApplyUpperLimit<T>(T aSpecificValue, T aUpperLimitValue)
+        /// <param name="specificValue">The specific value.</param>
+        /// <param name="upperLimitValue">The upper limit value.</param>
+        public static T ApplyUpperLimit<T>(T specificValue, T upperLimitValue)
             where T : IComparable<T>
         {
-            if (IsDefaultValue(aUpperLimitValue))
+            if (IsDefaultValue(upperLimitValue))
             {
-                return aSpecificValue;
+                return specificValue;
             }
 
-            if (IsDefaultValue(aSpecificValue))
+            if (IsDefaultValue(specificValue))
             {
-                return aUpperLimitValue;
+                return upperLimitValue;
             }
 
-            if (aSpecificValue.CompareTo(aUpperLimitValue) <= 0)
+            if (specificValue.CompareTo(upperLimitValue) <= 0)
             {
-                return aSpecificValue;
+                return specificValue;
             }
 
-            return aUpperLimitValue;
+            return upperLimitValue;
         }
 
         /// <summary>
-        /// Returns <paramref name="aSpecificValue"/> if
-        ///  - <paramref name="aLowerLimitValue"/> is the <typeparamref name="T"/>'s default value
+        /// Returns <paramref name="specificValue"/> if
+        ///  - <paramref name="lowerLimitValue"/> is the <typeparamref name="T"/>'s default value
         ///    (the default value has the meaning 'not set')
-        ///  - <paramref name="aSpecificValue"/> is greater than or equals <paramref name="aLowerLimitValue"/>.
-        /// Returns <paramref name="aLowerLimitValue"/> if
-        /// - <paramref name="aSpecificValue"/> is greater than <paramref name="aLowerLimitValue"/>
-        /// - <paramref name="aSpecificValue"/> is the <typeparamref name="T"/>'s default value
+        ///  - <paramref name="specificValue"/> is greater than or equals <paramref name="lowerLimitValue"/>.
+        /// Returns <paramref name="lowerLimitValue"/> if
+        /// - <paramref name="specificValue"/> is greater than <paramref name="lowerLimitValue"/>
+        /// - <paramref name="specificValue"/> is the <typeparamref name="T"/>'s default value
         ///   (the default value has the meaning 'not set').
         /// </summary>
         /// <typeparam name="T">The type of the values to compare.</typeparam>
-        /// <param name="aSpecificValue">The specific value.</param>
-        /// <param name="aLowerLimitValue">The upper limit value.</param>
-        public static T ApplyLowerLimit<T>(T aSpecificValue, T aLowerLimitValue)
+        /// <param name="specificValue">The specific value.</param>
+        /// <param name="lowerLimitValue">The upper limit value.</param>
+        public static T ApplyLowerLimit<T>(T specificValue, T lowerLimitValue)
             where T : IComparable<T>
         {
-            if (IsDefaultValue(aLowerLimitValue))
+            if (IsDefaultValue(lowerLimitValue))
             {
-                return aSpecificValue;
+                return specificValue;
             }
 
-            if (IsDefaultValue(aSpecificValue))
+            if (IsDefaultValue(specificValue))
             {
-                return aLowerLimitValue;
+                return lowerLimitValue;
             }
 
-            if (aSpecificValue.CompareTo(aLowerLimitValue) >= 0)
+            if (specificValue.CompareTo(lowerLimitValue) >= 0)
             {
-                return aSpecificValue;
+                return specificValue;
             }
 
-            return aLowerLimitValue;
+            return lowerLimitValue;
         }
     }
 }

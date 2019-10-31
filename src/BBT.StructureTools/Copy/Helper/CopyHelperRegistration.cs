@@ -21,24 +21,24 @@ namespace BBT.StructureTools.Copy.Helper
     public class CopyHelperRegistration<T> : ICopyHelperRegistration<T>
         where T : class
     {
-        private readonly List<ICopyOperation<T>> mRegisteredStrategies;
-        private readonly IIocResolver mServiceLocator = IocHandler.Instance.IocResolver;
+        private readonly List<ICopyOperation<T>> registeredStrategies;
+        private readonly IIocResolver serviceLocator = IocHandler.Instance.IocResolver;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyHelperRegistration{T}"/> class.
         /// </summary>
         public CopyHelperRegistration()
         {
-            this.mRegisteredStrategies = new List<ICopyOperation<T>>();
+            this.registeredStrategies = new List<ICopyOperation<T>>();
         }
 
         /// <summary>
         /// Register a copy attribute of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="TValue">The type of the attribute to compare. Must be a reference type.</typeparam>
-        public ICopyHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> aExpression)
+        public ICopyHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
-            this.mRegisteredStrategies.Add(new CopyOperation<T, TValue>(aExpression));
+            this.registeredStrategies.Add(new CopyOperation<T, TValue>(expression));
             return this;
         }
 
@@ -50,7 +50,7 @@ namespace BBT.StructureTools.Copy.Helper
             Expression<Func<T, TValue>> targetExpression,
             Expression<Func<TValue>> aAttrValueExpression)
         {
-            this.mRegisteredStrategies.Add(new CopyOperationInlineProcessValue<T, TValue>(targetExpression, aAttrValueExpression));
+            this.registeredStrategies.Add(new CopyOperationInlineProcessValue<T, TValue>(targetExpression, aAttrValueExpression));
             return this;
         }
 
@@ -66,9 +66,9 @@ namespace BBT.StructureTools.Copy.Helper
             where TStrategy : class, ICopyStrategy<TChildType>
             where TChildType : class
         {
-            var lCopyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>>();
-            lCopyStrategy.Initialize(sourceFunc, targetExpression, aCreateTargetChildExpression);
-            this.mRegisteredStrategies.Add(lCopyStrategy);
+            var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>>();
+            copyStrategy.Initialize(sourceFunc, targetExpression, aCreateTargetChildExpression);
+            this.registeredStrategies.Add(copyStrategy);
             return this;
         }
 
@@ -81,8 +81,8 @@ namespace BBT.StructureTools.Copy.Helper
         public ICopyHelperRegistration<T> RegisterSubCopy<TSubCopyOfT>()
             where TSubCopyOfT : class, ICopy<T>
         {
-            var lCopy = IocHandler.Instance.IocResolver.GetInstance<TSubCopyOfT>();
-            this.mRegisteredStrategies.Add(new CopyOperationSubCopy<T>(lCopy));
+            var copy = IocHandler.Instance.IocResolver.GetInstance<TSubCopyOfT>();
+            this.registeredStrategies.Add(new CopyOperationSubCopy<T>(copy));
             return this;
         }
 
@@ -94,22 +94,22 @@ namespace BBT.StructureTools.Copy.Helper
         public ICopyHelperRegistration<T> RegisterCreateToManyWithReverseRelation<TChild, TConcreteChild>(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<T, ICollection<TChild>>> targetExpression,
-            Expression<Func<TChild, T>> aReverseRelationFunc)
+            Expression<Func<TChild, T>> reverseRelationFunc)
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
-            var lCopyHelperFactory = this.mServiceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
+            var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
+            var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
 
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 Maybe.Some(targetExpression),
-                lCopyHelperFactory.GetCopyHelper(aReverseRelationFunc));
+                copyHelperFactory.GetCopyHelper(reverseRelationFunc));
 
-            this.mRegisteredStrategies.Add(lOperation);
+            this.registeredStrategies.Add(operation);
             return this;
         }
 
@@ -120,22 +120,22 @@ namespace BBT.StructureTools.Copy.Helper
         /// <typeparam name="TConcreteChild">See link above.</typeparam>
         public ICopyHelperRegistration<T> RegisterCreateToManyWithReverseRelationOnly<TChild, TConcreteChild>(
             Func<T, IEnumerable<TChild>> sourceFunc,
-            Expression<Func<TChild, T>> aReverseRelationFunc)
+            Expression<Func<TChild, T>> reverseRelationFunc)
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
             sourceFunc.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.serviceLocator
                 .GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
-            var lCopyHelperFactory = this.mServiceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
+            var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
 
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 Maybe.None<Expression<Func<T, ICollection<TChild>>>>(),
-                lCopyHelperFactory.GetCopyHelper(aReverseRelationFunc));
+                copyHelperFactory.GetCopyHelper(reverseRelationFunc));
 
-            this.mRegisteredStrategies.Add(lOperation);
+            this.registeredStrategies.Add(operation);
             return this;
         }
 
@@ -147,41 +147,41 @@ namespace BBT.StructureTools.Copy.Helper
         public ICopyHelperRegistration<T>
             RegisterCreateToOneWithReverseRelation<TChild, TConcreteChild>(
             Expression<Func<T, TChild>> targetFuncExpr,
-            Expression<Func<TChild, T>> aReverseRelationFunc)
+            Expression<Func<TChild, T>> reverseRelationFunc)
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
             targetFuncExpr.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
-            var lCopyHelperFactory = this.mServiceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
+            var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
+            var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
 
-            lOperation.Initialize(
+            operation.Initialize(
                 targetFuncExpr.Compile(),
                 targetFuncExpr,
-                lCopyHelperFactory.GetCopyHelper(aReverseRelationFunc));
+                copyHelperFactory.GetCopyHelper(reverseRelationFunc));
 
-            this.mRegisteredStrategies.Add(lOperation);
+            this.registeredStrategies.Add(operation);
             return this;
         }
 
         /// <summary>
         /// See <see cref="ICopyHelperRegistration{T}.RegisterPostProcessings"/>.
         /// </summary>
-        public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing aAdditionalProcessing, params IBaseAdditionalProcessing[] aFurtherAdditionalProcessings)
+        public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] aFurtherAdditionalProcessings)
         {
-            aAdditionalProcessing.Should().NotBeNull();
+            additionalProcessing.Should().NotBeNull();
 
-            var lList = new Collection<IBaseAdditionalProcessing>() { aAdditionalProcessing };
+            var list = new Collection<IBaseAdditionalProcessing>() { additionalProcessing };
 
             if (aFurtherAdditionalProcessings != null)
             {
-                lList.AddRangeToMe(aFurtherAdditionalProcessings);
+                list.AddRangeToMe(aFurtherAdditionalProcessings);
             }
 
-            var lCopyOperationPostProcessings = new CopyOperationPostProcessing<T>();
-            lCopyOperationPostProcessings.Initialize(lList);
-            this.mRegisteredStrategies.Add(lCopyOperationPostProcessings);
+            var copyOperationPostProcessings = new CopyOperationPostProcessing<T>();
+            copyOperationPostProcessings.Initialize(list);
+            this.registeredStrategies.Add(copyOperationPostProcessings);
             return this;
         }
 
@@ -192,13 +192,13 @@ namespace BBT.StructureTools.Copy.Helper
         public ICopyHelperRegistration<T> RegisterPostProcessing<TPostProcessing>()
             where TPostProcessing : IBaseAdditionalProcessing
         {
-            var lPostProcessing = IocHandler.Instance.IocResolver.GetInstance<TPostProcessing>();
+            var postProcessing = IocHandler.Instance.IocResolver.GetInstance<TPostProcessing>();
 
-            var lList = new Collection<IBaseAdditionalProcessing>() { lPostProcessing };
+            var list = new Collection<IBaseAdditionalProcessing>() { postProcessing };
 
-            var lCopyOperationPostProcessings = new CopyOperationPostProcessing<T>();
-            lCopyOperationPostProcessings.Initialize(lList);
-            this.mRegisteredStrategies.Add(lCopyOperationPostProcessings);
+            var copyOperationPostProcessings = new CopyOperationPostProcessing<T>();
+            copyOperationPostProcessings.Initialize(list);
+            this.registeredStrategies.Add(copyOperationPostProcessings);
 
             return this;
         }
@@ -209,15 +209,15 @@ namespace BBT.StructureTools.Copy.Helper
         /// <typeparam name="TCrossReferencedModel">See link above.</typeparam>
         /// <typeparam name="TReferencingModel">See link above.</typeparam>
         public ICopyHelperRegistration<T> RegisterCrossReferenceProcessing<TCrossReferencedModel, TReferencingModel>(
-            Expression<Func<TReferencingModel, TCrossReferencedModel>> aReferencingProperty)
+            Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
             where TCrossReferencedModel : class
             where TReferencingModel : class
         {
-            aReferencingProperty.Should().NotBeNull();
+            referencingProperty.Should().NotBeNull();
 
-            var lCopyOperationCrossReferenceProcessing = new CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>();
-            lCopyOperationCrossReferenceProcessing.Initialize(aReferencingProperty);
-            this.mRegisteredStrategies.Add(lCopyOperationCrossReferenceProcessing);
+            var copyOperationCrossReferenceProcessing = new CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>();
+            copyOperationCrossReferenceProcessing.Initialize(referencingProperty);
+            this.registeredStrategies.Add(copyOperationCrossReferenceProcessing);
             return this;
         }
 
@@ -226,7 +226,7 @@ namespace BBT.StructureTools.Copy.Helper
         /// </summary>
         public ICopyOperation<T> EndRegistrations()
         {
-            return new CopyHelperOperations<T>(this.mRegisteredStrategies);
+            return new CopyHelperOperations<T>(this.registeredStrategies);
         }
 
         /// <summary>
@@ -244,9 +244,9 @@ namespace BBT.StructureTools.Copy.Helper
 
             aAttrValueExpression.Should().NotBeNull();
 
-            var lOperation = new CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>();
-            lOperation.Initialize(targetExpression, aAttrValueExpression);
-            this.mRegisteredStrategies.Add(lOperation);
+            var operation = new CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>();
+            operation.Initialize(targetExpression, aAttrValueExpression);
+            this.registeredStrategies.Add(operation);
             return this;
         }
 
@@ -260,13 +260,13 @@ namespace BBT.StructureTools.Copy.Helper
         /// Definition of the type defined in the strategy.
         /// </typeparam>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TStrategy, TChild>(
-            Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> aReverseRelationExpression)
+            Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
-            var lCopyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
-            lCopyStrategy.Initialize(sourceFunc, targetExpression, aReverseRelationExpression);
-            this.mRegisteredStrategies.Add(lCopyStrategy);
+            var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
+            copyStrategy.Initialize(sourceFunc, targetExpression, reverseRelationExpression);
+            this.registeredStrategies.Add(copyStrategy);
             return this;
         }
 
@@ -280,13 +280,13 @@ namespace BBT.StructureTools.Copy.Helper
         /// Definition of the type defined in the strategy.
         /// </typeparam>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategyReverseRelationOnly<TStrategy, TChild>(
-            Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<TChild, T>> aReverseRelationExpression)
+            Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
-            var lCopyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>>();
-            lCopyStrategy.Initialize(sourceFunc, aReverseRelationExpression);
-            this.mRegisteredStrategies.Add(lCopyStrategy);
+            var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>>();
+            copyStrategy.Initialize(sourceFunc, reverseRelationExpression);
+            this.registeredStrategies.Add(copyStrategy);
             return this;
         }
 
@@ -300,15 +300,15 @@ namespace BBT.StructureTools.Copy.Helper
         /// Definition of the type defined in the strategy.
         /// </typeparam>
         public ICopyHelperRegistration<T> RegisterCreateToOneFromGenericStrategyWithReverseRelation<TStrategy, TChild>(
-            Expression<Func<T, TChild>> targetExpression, Expression<Func<TChild, T>> aReverseRelationExpression)
+            Expression<Func<T, TChild>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
             targetExpression.Should().NotBeNull();
 
-            var lCopyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
-            lCopyStrategy.Initialize(targetExpression.Compile(), targetExpression, aReverseRelationExpression);
-            this.mRegisteredStrategies.Add(lCopyStrategy);
+            var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
+            copyStrategy.Initialize(targetExpression.Compile(), targetExpression, reverseRelationExpression);
+            this.registeredStrategies.Add(copyStrategy);
             return this;
         }
     }

@@ -30,32 +30,32 @@ namespace BBT.StructureTools.Copy.Operation
         where TChild : class
         where TConcreteChild : class, TChild, new()
     {
-        private ICreateCopyHelper<TChild, TConcreteChild, TParent> mCreateCopyHelper;
+        private ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TParent, IEnumerable<TChild>> mSourceFunc;
+        private Func<TParent, IEnumerable<TChild>> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Maybe<Expression<Func<TParent, ICollection<TChild>>>> mMaybeTargetExpression;
+        private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
 
         /// <summary>
         /// See <see cref="ICopyOperationCreateToManyWithReverseRelation{TParent, TChild, TConcreteChild}.Initialize(Func{TParent, IEnumerable{TChild}}, Maybe{Expression{Func{TParent, ICollection{TChild}}}}, ICreateCopyHelper{TChild, TConcreteChild, TParent})"/>.
         /// </summary>
         public void Initialize(
             Func<TParent, IEnumerable<TChild>> sourceFunc,
-            Maybe<Expression<Func<TParent, ICollection<TChild>>>> aMaybeTargetExpression,
-            ICreateCopyHelper<TChild, TConcreteChild, TParent> aCreateCopyHelper)
+            Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression,
+            ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper)
         {
             sourceFunc.Should().NotBeNull();
-            aCreateCopyHelper.Should().NotBeNull();
+            createCopyHelper.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mMaybeTargetExpression = aMaybeTargetExpression;
-            this.mCreateCopyHelper = aCreateCopyHelper;
+            this.sourceFunc = sourceFunc;
+            this.maybeTargetExpression = maybeTargetExpression;
+            this.createCopyHelper = createCopyHelper;
         }
 
         /// <inheritdoc/>
@@ -65,20 +65,19 @@ namespace BBT.StructureTools.Copy.Operation
             target.Should().NotBeNull();
             copyCallContext.Should().NotBeNull();
 
-            var lSourceValues = this.mSourceFunc.Invoke(source)?.ToList();
-            lSourceValues.Should().NotBeNull();
+            var sourceValues = this.sourceFunc.Invoke(source)?.ToList();
+            sourceValues.Should().NotBeNull();
 
-            // ReSharper disable once AssignNullToNotNullAttribute -> Checks.AssertNotNothing is called before!
-            var lCopies = lSourceValues.Select(sourceValue => this.mCreateCopyHelper.CreateTarget(
+            var copies = sourceValues.Select(sourceValue => this.createCopyHelper.CreateTarget(
                 sourceValue as TConcreteChild,
                 target,
                 copyCallContext)).ToList();
 
-            this.mMaybeTargetExpression.Do(targetExpression =>
+            this.maybeTargetExpression.Do(targetExpression =>
             {
-                target.AddRangeToCollectionFilterNullValues(
+                target.AddRangeToCollectionFilterNulvalues(
                     targetExpression,
-                    lCopies);
+                    copies);
             });
         }
     }

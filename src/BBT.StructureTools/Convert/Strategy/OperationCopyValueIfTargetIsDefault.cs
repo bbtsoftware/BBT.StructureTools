@@ -22,12 +22,12 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, TValue> mSourceFunc;
+        private Func<TSource, TValue> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TValue>> mTargetExpression;
+        private Expression<Func<TTarget, TValue>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCopyValue{TSource,TTarget,TValue}"/>.
@@ -39,8 +39,8 @@ namespace BBT.StructureTools.Convert.Strategy
             aSourceFunc.Should().NotBeNull();
             aTargetExpression.Should().NotBeNull();
 
-            this.mSourceFunc = aSourceFunc;
-            this.mTargetExpression = aTargetExpression;
+            this.sourceFunc = aSourceFunc;
+            this.targetexpression = aTargetExpression;
         }
 
         /// <summary>
@@ -49,21 +49,21 @@ namespace BBT.StructureTools.Convert.Strategy
         public void Execute(
             TSource aSource,
             TTarget aTarget,
-            ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
+            ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             aSource.Should().NotBeNull();
             aTarget.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(aSource);
-            var lTargetValue = aTarget.GetPropertyValue(this.mTargetExpression);
-            if (!LookupUtils.IsDefaultValue(lTargetValue))
+            var sourceValue = this.sourceFunc.Invoke(aSource);
+            var targetValue = aTarget.GetPropertyValue(this.targetexpression);
+            if (!LookupUtils.IsDefaultValue(targetValue))
             {
                 return;
             }
 
             aTarget.SetPropertyValue(
-                this.mTargetExpression,
-                lSourceValue);
+                this.targetexpression,
+                sourceValue);
         }
     }
 }

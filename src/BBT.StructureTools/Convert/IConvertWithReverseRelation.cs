@@ -23,7 +23,7 @@ namespace BBT.StructureTools.Convert
         void Convert(
             TSourceClass source,
             TTargetClass target,
-            TReverseRelation aReverseRelation,
+            TReverseRelation reverseRelation,
             ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 }

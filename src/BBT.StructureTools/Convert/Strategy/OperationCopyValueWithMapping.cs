@@ -22,18 +22,18 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSource : class
         where TTarget : class
     {
-        private readonly IConvertValue<TSourceValue, TTargetValue> mConvertValue;
-        private Func<TSource, TSourceValue> mSourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> mTargetExpression;
+        private readonly IConvertValue<TSourceValue, TTargetValue> convertValue;
+        private Func<TSource, TSourceValue> sourceFunc;
+        private Expression<Func<TTarget, TTargetValue>> targetexpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCopyValueWithMapping{TSource, TTarget, TSourceValue, TTargetValue}" /> class.
         /// </summary>
-        public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> aConvertValue)
+        public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> convertValue)
         {
-            aConvertValue.Should().NotBeNull();
+            convertValue.Should().NotBeNull();
 
-            this.mConvertValue = aConvertValue;
+            this.convertValue = convertValue;
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace BBT.StructureTools.Convert.Strategy
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace BBT.StructureTools.Convert.Strategy
             source.Should().NotBeNull();
             target.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(source);
-            var lTargetValue = this.mConvertValue.ConvertValue(lSourceValue);
-            target.SetPropertyValue(this.mTargetExpression, lTargetValue);
+            var sourceValue = this.sourceFunc.Invoke(source);
+            var targetValue = this.convertValue.ConvertValue(sourceValue);
+            target.SetPropertyValue(this.targetexpression, targetValue);
         }
     }
 }

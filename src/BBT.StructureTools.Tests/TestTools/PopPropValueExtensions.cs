@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Tests.TestTools
+﻿namespace BBT.StructureTools.Tests.TestTools
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Extensions to generate property values
     /// for test classes.
@@ -15,10 +15,10 @@ namespace BBT.StructureTools.Tests.TestTools
             where T : class
         {
             var propname = ReflectionUtils.GetPropertyName(propex);
-            var lTargetType = typeof(T);
-            var type = lTargetType.Name;
+            var targetType = typeof(T);
+            var type = targetType.Name;
 
-            var targetProperty = lTargetType.GetProperty(propname, BindingFlags.Public | BindingFlags.Instance);
+            var targetProperty = targetType.GetProperty(propname, BindingFlags.Public | BindingFlags.Instance);
 
             var value = $"{type}.{propname}_{DateTime.Now.ToLongTimeString()}";
 

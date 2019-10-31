@@ -17,7 +17,7 @@ namespace BBT.StructureTools.Strategy
         where TConcreteTypeIntf : class, TBaseTypeIntf
         where TConcreteTypeImpl : TConcreteTypeIntf, new()
     {
-        private readonly IInstanceCreator<TConcreteTypeIntf, TConcreteTypeImpl> mInstanceCreator;
+        private readonly IInstanceCreator<TConcreteTypeIntf, TConcreteTypeImpl> instanceCreator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInstanceOfTypeStrategy{TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl}"/> class.
@@ -26,7 +26,7 @@ namespace BBT.StructureTools.Strategy
         {
             instanceCreator.Should().NotBeNull();
 
-            this.mInstanceCreator = instanceCreator;
+            this.instanceCreator = instanceCreator;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BBT.StructureTools.Strategy
         /// <summary>
         /// See <see cref="ICreateInstanceOfTypeStrategy{TBaseTypeIntf}.CreateInstance"/>.
         /// </summary>
-        public TBaseTypeIntf CreateInstance() => this.mInstanceCreator.Create();
+        public TBaseTypeIntf CreateInstance() => this.instanceCreator.Create();
 
         /// <summary>
         /// See <see cref="IGenericStrategy{TBaseTypeIntf}.IsResponsible"/>.

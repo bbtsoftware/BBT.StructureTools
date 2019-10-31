@@ -16,25 +16,25 @@ namespace BBT.StructureTools.Convert
         where TTarget : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvertOperations<TSource, TTarget> mConvertOperations;
-        private readonly IConvertHelper mConvertHelper;
+        private readonly IConvertOperations<TSource, TTarget> convertOperations;
+        private readonly IConvertHelper convertHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
         public Converter(
-            IConvertRegistrations<TSource, TTarget, TConvertIntention> aConvertRegistrations,
-            IConvertEngine<TSource, TTarget> aConvertEngine,
-            IConvertHelper aConvertHelper)
+            IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
+            IConvertEngine<TSource, TTarget> convertEngine,
+            IConvertHelper convertHelper)
         {
-            aConvertEngine.Should().NotBeNull();
-            aConvertRegistrations.Should().NotBeNull();
-            aConvertHelper.Should().NotBeNull();
+            convertEngine.Should().NotBeNull();
+            convertRegistrations.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvertHelper = aConvertHelper;
-            var lRegistrations = aConvertEngine.StartRegistrations();
-            aConvertRegistrations.DoRegistrations(lRegistrations);
-            this.mConvertOperations = lRegistrations.EndRegistrations();
+            this.convertHelper = convertHelper;
+            var registrations = convertEngine.StartRegistrations();
+            convertRegistrations.DoRegistrations(registrations);
+            this.convertOperations = registrations.EndRegistrations();
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace BBT.StructureTools.Convert
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            this.mConvertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
-            this.mConvertOperations.Convert(source, target, additionalProcessings);
-            this.mConvertHelper.DoConvertPostProcessing(source, target, additionalProcessings);
+            this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
+            this.convertOperations.Convert(source, target, additionalProcessings);
+            this.convertHelper.DoConvertPostProcessing(source, target, additionalProcessings);
         }
     }
 }

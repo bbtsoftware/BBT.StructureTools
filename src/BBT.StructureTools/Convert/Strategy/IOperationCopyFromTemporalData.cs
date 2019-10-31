@@ -24,11 +24,11 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Initializes the <see cref="IConvertOperation{TSource,TTarget}"/>.
         /// </summary>
-        /// <param name="aSourceFunc">Declares the source history entries.</param>
-        /// <param name="aReferenceDateFunc">Declares the reference date
+        /// <param name="sourceFunc">Declares the source history entries.</param>
+        /// <param name="referenceDateFunc">Declares the reference date
         /// for selection of the specific history entry.</param>
         void Initialize(
-            Func<TSource, IEnumerable<TSourceValue>> aSourceFunc,
-            Func<TSource, TTarget, DateTime> aReferenceDateFunc);
+            Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
+            Func<TSource, TTarget, DateTime> referenceDateFunc);
     }
 }

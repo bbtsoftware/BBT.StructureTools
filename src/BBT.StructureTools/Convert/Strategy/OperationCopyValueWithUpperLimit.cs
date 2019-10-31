@@ -21,17 +21,17 @@
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, TValue> mSourceFunc;
+        private Func<TSource, TValue> sourceFunc;
 
         /// <summary>
         /// Function to get the look-up value.
         /// </summary>
-        private Func<TSource, TValue> mSourceUpperLimitFunc;
+        private Func<TSource, TValue> sourceUpperLimitFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TValue>> mTargetExpression;
+        private Expression<Func<TTarget, TValue>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCopyValueWithUpperLimit{TSource,TTarget,TValue}.Initialize"/>.
@@ -45,9 +45,9 @@
             aSourceUpperLimitFunc.Should().NotBeNull();
             aTargetExpression.Should().NotBeNull();
 
-            this.mSourceFunc = aSourceFunc;
-            this.mSourceUpperLimitFunc = aSourceUpperLimitFunc;
-            this.mTargetExpression = aTargetExpression;
+            this.sourceFunc = aSourceFunc;
+            this.sourceUpperLimitFunc = aSourceUpperLimitFunc;
+            this.targetexpression = aTargetExpression;
         }
 
         /// <summary>
@@ -56,18 +56,18 @@
         public void Execute(
             TSource aSource,
             TTarget aTarget,
-            ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
+            ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             aSource.Should().NotBeNull();
             aTarget.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(aSource);
-            var lUpperLimitValue = this.mSourceUpperLimitFunc(aSource);
+            var sourceValue = this.sourceFunc.Invoke(aSource);
+            var upperLimitValue = this.sourceUpperLimitFunc(aSource);
 
-            var lValue = LookupUtils.ApplyUpperLimit(lSourceValue, lUpperLimitValue);
+            var value = LookupUtils.ApplyUpperLimit(sourceValue, upperLimitValue);
             aTarget.SetPropertyValue(
-                this.mTargetExpression,
-                lValue);
+                this.targetexpression,
+                value);
         }
     }
 }

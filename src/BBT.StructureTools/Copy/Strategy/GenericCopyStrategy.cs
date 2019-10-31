@@ -16,21 +16,21 @@ namespace BBT.StructureTools.Copy.Strategy
         where TDerived : class, TBase
         where TConcrete : class, TDerived, new()
     {
-        private readonly IInstanceCreator<TDerived, TConcrete> mCreator;
-        private readonly ICopy<TDerived> mCopier;
+        private readonly IInstanceCreator<TDerived, TConcrete> creator;
+        private readonly ICopy<TDerived> copier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericCopyStrategy{TBase, TDerived, TConcrete}"/> class.
         /// </summary>
         public GenericCopyStrategy(
-            IInstanceCreator<TDerived, TConcrete> aCreator,
-            ICopy<TDerived> aCopier)
+            IInstanceCreator<TDerived, TConcrete> creator,
+            ICopy<TDerived> copier)
         {
-            aCreator.Should().NotBeNull();
-            aCopier.Should().NotBeNull();
+            creator.Should().NotBeNull();
+            copier.Should().NotBeNull();
 
-            this.mCreator = aCreator;
-            this.mCopier = aCopier;
+            this.creator = creator;
+            this.copier = copier;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace BBT.StructureTools.Copy.Strategy
             target.Should().BeAssignableTo<TDerived>();
             copyCallContext.Should().NotBeNull();
 
-            this.mCopier.Copy(source as TDerived, target as TDerived, copyCallContext);
+            this.copier.Copy(source as TDerived, target as TDerived, copyCallContext);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace BBT.StructureTools.Copy.Strategy
         /// </summary>
         public TBase Create()
         {
-            var lInstance = this.mCreator.Create();
-            return lInstance;
+            var instance = this.creator.Create();
+            return instance;
         }
 
         /// <summary>

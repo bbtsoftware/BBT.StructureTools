@@ -26,25 +26,25 @@ namespace BBT.StructureTools.Convert.Strategy
         where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        private ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> mCreateConvertHelper;
+        private ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TTargetValue>> mTargetExpression;
+        private Expression<Func<TTarget, TTargetValue>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCreateFromSourceWithReverseRelation{TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention}.Initialize"/>.
         /// </summary>
         public void Initialize(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
             targetExpression.Should().NotBeNull();
-            aCreateConvertHelper.Should().NotBeNull();
+            createConvertHelper.Should().NotBeNull();
 
-            this.mTargetExpression = targetExpression;
-            this.mCreateConvertHelper = aCreateConvertHelper;
+            this.targetexpression = targetExpression;
+            this.createConvertHelper = createConvertHelper;
         }
 
         /// <summary>
@@ -63,12 +63,12 @@ namespace BBT.StructureTools.Convert.Strategy
                 return;
             }
 
-            var lTargetValue = this.mCreateConvertHelper.CreateTarget(
+            var targetValue = this.createConvertHelper.CreateTarget(
                     source,
                     target,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.mTargetExpression, lTargetValue);
+            target.SetPropertyValue(this.targetexpression, targetValue);
         }
     }
 }

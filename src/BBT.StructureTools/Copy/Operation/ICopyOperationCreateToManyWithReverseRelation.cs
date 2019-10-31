@@ -25,7 +25,7 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         void Initialize(
             Func<TParent, IEnumerable<TChild>> sourceFunc,
-            Maybe<Expression<Func<TParent, ICollection<TChild>>>> aMaybeTargetExpression,
-            ICreateCopyHelper<TChild, TConcreteChild, TParent> aCreateCopyHelper);
+            Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression,
+            ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper);
     }
 }

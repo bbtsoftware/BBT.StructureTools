@@ -21,12 +21,12 @@ namespace BBT.StructureTools.Copy
         /// <summary>
         /// Setups the given reverse relation with the expression.
         /// </summary>
-        void SetupReverseRelation(Expression<Func<TChild, TParent>> aReverseRelationExpr);
+        void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr);
 
         /// <summary>
         /// Creates a new <typeparamref name="TConcreteChild"/> converted from <paramref name="source"/>.
         /// </summary>
-        TChild CreateTarget(TConcreteChild source, TParent aReverseRelation, ICopyCallContext copyCallContext);
+        TChild CreateTarget(TConcreteChild source, TParent reverseRelation, ICopyCallContext copyCallContext);
     }
 
     /// <summary>

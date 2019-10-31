@@ -24,17 +24,17 @@ namespace BBT.StructureTools.Compare
         /// Extend the equality comparer interface with additional action.
         /// </summary>
         bool Equals(
-            TModelToCompare aCandidate1,
-            TModelToCompare aCandidate2,
+            TModelToCompare candidate1,
+            TModelToCompare candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings);
 
         /// <summary>
         /// Extend the equality comparer interface with the possibility to set compare exclusions.
         /// </summary>
         bool Equals(
-            TModelToCompare aCandidate1,
-            TModelToCompare aCandidate2,
+            TModelToCompare candidate1,
+            TModelToCompare candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions);
+            IEnumerable<IComparerExclusion> exclusions);
     }
 }

@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Compare.Exclusions;
-using BBT.StructureTools.Compare.Helper;
-using BBT.StructureTools.Tests.Compare.Intention;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Ninject.Activation;
-using Xunit;
-
-namespace BBT.StructureTools.Tests.Compare
+﻿namespace BBT.StructureTools.Tests.Compare
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Compare.Exclusions;
+    using BBT.StructureTools.Compare.Helper;
+    using BBT.StructureTools.Tests.Compare.Intention;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class SubComparerUsingComparerTests
     {
         #region Members, Setup
+        private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
         private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
-        private static IComparer<TestClassParent, ITestCompareIntention> ParentCompare;
-
 
         public SubComparerUsingComparerTests()
         {
@@ -27,7 +25,7 @@ namespace BBT.StructureTools.Tests.Compare
             kernel.Bind<ICompareRegistrations<TestClassChild, ITestCompareIntention>>().To<TestClassChildCompareRegistrations>();
             kernel.Bind<ICompareRegistrations<TestClassParent, ITestCompareIntention>>().To<TestClassParentCompareRegistrations>();
 
-            ParentCompare = kernel.Get<IComparer<TestClassParent, ITestCompareIntention>>();
+            parentCompare = kernel.Get<IComparer<TestClassParent, ITestCompareIntention>>();
             this.testcandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
@@ -40,13 +38,13 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_SameInstance_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClassChild();
+            var testClass = new TestClassChild();
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         /// <summary>
@@ -56,20 +54,20 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_DifferentInstancesSameAttributes_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClassChild
+            var testClass = new TestClassChild
             {
-                TestValue1 = 1
+                TestValue1 = 1,
             };
-            var lTestClass2 = new TestClassChild
+            var testClass2 = new TestClassChild
             {
-                TestValue1 = 1
+                TestValue1 = 1,
             };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         /// <summary>
@@ -79,20 +77,20 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_DifferentInstancesNotSameAttributes_MustReturnFalse()
         {
             // Arrange
-            var lTestClass = new TestClassChild
+            var testClass = new TestClassChild
             {
-                TestValue1 = 1
+                TestValue1 = 1,
             };
-            var lTestClass2 = new TestClassChild
+            var testClass2 = new TestClassChild
             {
-                TestValue1 = 11
+                TestValue1 = 11,
             };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
-            lResult.Should().BeFalse();
+            result.Should().BeFalse();
         }
 
         /// <summary>
@@ -102,20 +100,20 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_DifferentInstancesNotSameAttributesNotRegistered_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClassChild
+            var testClass = new TestClassChild
             {
-                TestValue2 = 1
+                TestValue2 = 1,
             };
-            var lTestClass2 = new TestClassChild
+            var testClass2 = new TestClassChild
             {
-                TestValue2 = 11
+                TestValue2 = 11,
             };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         /// <summary>
@@ -125,25 +123,25 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_DifferentInstancesNotSameAttributesButExcludedByParent_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClassChild
+            var testClass = new TestClassChild
             {
-                TestValue1 = 1
+                TestValue1 = 1,
             };
-            var lTestClass2 = new TestClassChild
+            var testClass2 = new TestClassChild
             {
-                TestValue1 = 11
+                TestValue1 = 11,
             };
 
-            var lComparerExclusions = new List<IComparerExclusion>
+            var comparerExclusions = new List<IComparerExclusion>
                                           {
-                                              new PropertyComparerExclusion<TestClassParent>(aX => aX.TestValue1)
+                                              new PropertyComparerExclusion<TestClassParent>(x => x.TestValue1),
                                           };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass2, new IBaseAdditionalProcessing[0], lComparerExclusions);
+            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         /// <summary>
@@ -153,25 +151,25 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_DifferentInstancesNotSameAttributesButExcludedBySubCompareExclusion_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClassChild
+            var testClass = new TestClassChild
             {
-                TestValue1 = 1
+                TestValue1 = 1,
             };
-            var lTestClass2 = new TestClassChild
+            var testClass2 = new TestClassChild
             {
-                TestValue1 = 11
+                TestValue1 = 11,
             };
 
-            var lComparerExclusions = new List<IComparerExclusion>
+            var comparerExclusions = new List<IComparerExclusion>
                                           {
-                                              new SubInterfaceComparerExclusion<TestClassParent>()
+                                              new SubInterfaceComparerExclusion<TestClassParent>(),
                                           };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass2, new IBaseAdditionalProcessing[0], lComparerExclusions);
+            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         #region private test classes and test class helpers
@@ -189,22 +187,22 @@ namespace BBT.StructureTools.Tests.Compare
 
         private class TestClassParentCompareRegistrations : ICompareRegistrations<TestClassParent, ITestCompareIntention>
         {
-            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassParent> aRegistrations)
+            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassParent> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations.RegisterAttribute(aX => aX.TestValue1);
+                registrations.RegisterAttribute(x => x.TestValue1);
             }
         }
 
         private class TestClassChildCompareRegistrations : ICompareRegistrations<TestClassChild, ITestCompareIntention>
         {
-            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassChild> aRegistrations)
+            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassChild> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
-                    .RegisterSubCompare(ParentCompare);
+                registrations
+                    .RegisterSubCompare(parentCompare);
             }
         }
         #endregion

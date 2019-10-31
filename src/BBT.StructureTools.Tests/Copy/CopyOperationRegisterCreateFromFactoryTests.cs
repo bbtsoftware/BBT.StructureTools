@@ -32,15 +32,15 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void MustExecuteInlineCopyProcessing()
         {
             // Arrange
-            var lSource = new TestClass { Value1 = 45 };
-            var lTarget = new TestClass();
+            var source = new TestClass { Value1 = 45 };
+            var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lTarget.Value1.Should().Be(888);
-            lTarget.Value2.Should().Be(999);
+            target.Value1.Should().Be(888);
+            target.Value2.Should().Be(999);
         }
 
         /// <summary>
@@ -79,13 +79,13 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 
         private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
-                    .RegisterCreateFromFactory<ITestFactory, int>(aX => aX.Value1, aX => aX.GetValue1())
-                    .RegisterCreateFromFactory<ITestFactory, int>(aX => aX.Value2, aX => aX.Value2);
+                registrations
+                    .RegisterCreateFromFactory<ITestFactory, int>(x => x.Value1, x => x.GetValue1())
+                    .RegisterCreateFromFactory<ITestFactory, int>(x => x.Value2, x => x.Value2);
             }
         }
     }

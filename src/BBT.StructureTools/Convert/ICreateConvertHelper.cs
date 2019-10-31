@@ -24,14 +24,14 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.SetupReverseRelation"/>.
         /// </summary>
-        void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> aReverseRelationExpr);
+        void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr);
 
         /// <summary>
         /// Creates a new <typeparamref name="TTarget"/> converted from <paramref name="source"/>.
         /// </summary>
         TTarget CreateTarget(
             TSource source,
-            TReverseRelation aReverseRelation,
+            TReverseRelation reverseRelation,
             ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 

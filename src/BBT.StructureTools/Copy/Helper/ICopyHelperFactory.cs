@@ -21,7 +21,7 @@ namespace BBT.StructureTools.Copy.Helper
         /// </summary>
         /// <typeparam name="TReverseRelation">The <typeparamref name="TTarget"/>'s reverse relation.</typeparam>
         ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation> GetCopyHelper<TReverseRelation>(
-            Expression<Func<TTarget, TReverseRelation>> aReverseRelationExpr)
+            Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
             where TReverseRelation : class;
 
         /// <summary>

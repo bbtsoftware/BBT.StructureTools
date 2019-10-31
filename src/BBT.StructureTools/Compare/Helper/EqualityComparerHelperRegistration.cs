@@ -16,23 +16,23 @@ namespace BBT.StructureTools.Compare.Helper
     public class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
         where T : class
     {
-        private readonly ICollection<IEqualityComparerHelperStrategy<T>> mRegisteredStrategies;
+        private readonly ICollection<IEqualityComparerHelperStrategy<T>> registeredStrategies;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperRegistration{T}"/> class.
         /// </summary>
         public EqualityComparerHelperRegistration()
         {
-            this.mRegisteredStrategies = new List<IEqualityComparerHelperStrategy<T>>();
+            this.registeredStrategies = new List<IEqualityComparerHelperStrategy<T>>();
         }
 
         /// <summary>
         /// Register a compare attribute of type <typeparamref name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type of the attribute to compare.</typeparam>
-        public IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> aExpression)
+        public IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
-            this.mRegisteredStrategies.Add(new EqualityComparerHelperStrategyCompareAttribute<T, TValue>(aExpression));
+            this.registeredStrategies.Add(new EqualityComparerHelperStrategyCompareAttribute<T, TValue>(expression));
             return this;
         }
 
@@ -42,12 +42,12 @@ namespace BBT.StructureTools.Compare.Helper
         /// <typeparam name="TComparer">Type of model-comparer"/>.</typeparam>
         /// <typeparam name="TIntention">The compare intention.</typeparam>
         public IEqualityComparerHelperRegistration<T> RegisterAttributeWithDistinguishedComparer<TComparer, TIntention>(
-            Expression<Func<T, TComparer>> aExpression,
-            IComparer<TComparer, TIntention> aComparer)
+            Expression<Func<T, TComparer>> expression,
+            IComparer<TComparer, TIntention> comparer)
             where TComparer : class
             where TIntention : IBaseComparerIntention
         {
-            this.mRegisteredStrategies.Add(new EqualityComparerHelperStrategyCompareModel<T, TComparer, TIntention>(aExpression, aComparer));
+            this.registeredStrategies.Add(new EqualityComparerHelperStrategyCompareModel<T, TComparer, TIntention>(expression, comparer));
             return this;
         }
 
@@ -57,15 +57,15 @@ namespace BBT.StructureTools.Compare.Helper
         /// <typeparam name="TComparer">Type of combined-comparer"/>.</typeparam>
         /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
         public IEqualityComparerHelperRegistration<T> RegisterToManyRelationship<TComparer, TComparerIntention>(
-            Expression<Func<T, IEnumerable<TComparer>>> aExpression, IComparer<TComparer, TComparerIntention> aComparer)
+            Expression<Func<T, IEnumerable<TComparer>>> expression, IComparer<TComparer, TComparerIntention> comparer)
             where TComparer : class
             where TComparerIntention : IBaseComparerIntention
         {
-            aComparer.Should().NotBeNull();
+            comparer.Should().NotBeNull();
 
-            this.mRegisteredStrategies.Add(
+            this.registeredStrategies.Add(
                 new EqualityComparerHelperStrategyToManyRelationshipComparer<T, TComparer, TComparerIntention>(
-                    aExpression, aComparer));
+                    expression, comparer));
 
             return this;
         }
@@ -74,12 +74,12 @@ namespace BBT.StructureTools.Compare.Helper
         /// Register a sub compare for a base class or a implemented interface.
         /// </summary>
         /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
-        public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> aComparer)
+        public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention
         {
-            aComparer.Should().NotBeNull();
+            comparer.Should().NotBeNull();
 
-            this.mRegisteredStrategies.Add(new EqualityComparerHelperStrategySubCompareComparer<T, TComparerIntention>(aComparer));
+            this.registeredStrategies.Add(new EqualityComparerHelperStrategySubCompareComparer<T, TComparerIntention>(comparer));
 
             return this;
         }
@@ -89,7 +89,7 @@ namespace BBT.StructureTools.Compare.Helper
         /// </summary>
         public IEqualityComparerHelperOperations<T> EndRegistrations()
         {
-            return new EqualityComparerHelperOperations<T>(this.mRegisteredStrategies);
+            return new EqualityComparerHelperOperations<T>(this.registeredStrategies);
         }
     }
 }

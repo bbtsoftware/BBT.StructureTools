@@ -16,19 +16,19 @@ namespace BBT.StructureTools.Convert
         where TTarget : class
     {
         /// <summary>
-        /// The list of work units to be processed.
+        /// The ist of work units to be processed.
         /// </summary>
-        private readonly IEnumerable<IConvertOperation<TSource, TTarget>> mConvertHelperOperationWorkUnits;
+        private readonly IEnumerable<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertOperations{TSource,TTarget}" /> class.
         /// </summary>
         public ConvertOperations(
-            IEnumerable<IConvertOperation<TSource, TTarget>> aConvertHelperOperationWorkUnits)
+            IEnumerable<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits)
         {
-            aConvertHelperOperationWorkUnits.Should().NotBeNull();
+            convertHelperOperationWorkUnits.Should().NotBeNull();
 
-            this.mConvertHelperOperationWorkUnits = aConvertHelperOperationWorkUnits;
+            this.convertHelperOperationWorkUnits = convertHelperOperationWorkUnits;
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace BBT.StructureTools.Convert
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            foreach (var lConvertHelperOperationWorkUnit in this.mConvertHelperOperationWorkUnits)
+            foreach (var convertHelperOperationWorkUnit in this.convertHelperOperationWorkUnits)
             {
-                lConvertHelperOperationWorkUnit.Execute(source, target, additionalProcessings);
+                convertHelperOperationWorkUnit.Execute(source, target, additionalProcessings);
             }
         }
     }

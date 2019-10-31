@@ -13,20 +13,20 @@ namespace BBT.StructureTools.Copy
     public class ModelCollectingCopyPostProcessing<TClassToCopy> : ICopyPostProcessing<TClassToCopy>
         where TClassToCopy : class
     {
-        private readonly List<TClassToCopy> mCollectedTargetInstances;
+        private readonly List<TClassToCopy> collectedTargetInstances;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelCollectingCopyPostProcessing{TClassToCopy}"/> class.
         /// </summary>
         public ModelCollectingCopyPostProcessing()
         {
-            this.mCollectedTargetInstances = new List<TClassToCopy>();
+            this.collectedTargetInstances = new List<TClassToCopy>();
         }
 
         /// <summary>
-        /// Gets a list of the collected objects.
+        /// Gets a ist of the collected objects.
         /// </summary>
-        public IEnumerable<TClassToCopy> CollectedObjects => this.mCollectedTargetInstances;
+        public IEnumerable<TClassToCopy> CollectedObjects => this.collectedTargetInstances;
 
         /// <summary>
         /// <see cref="ICopyPostProcessing{TClassToCopy}"/>.
@@ -35,7 +35,7 @@ namespace BBT.StructureTools.Copy
         {
             target.Should().NotBeNull();
 
-            this.mCollectedTargetInstances.Add(target);
+            this.collectedTargetInstances.Add(target);
         }
     }
 }

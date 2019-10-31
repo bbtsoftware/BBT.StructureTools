@@ -30,10 +30,10 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         /// <param name="sourceFunc">Declares the source value.</param>
         /// <param name="targetExpression">Declares the target property.</param>
-        /// <param name="aCreateConvertHelper">Used to create the target value.</param>
+        /// <param name="createConvertHelper">Used to create the target value.</param>
         void Initialize(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper);
     }
 }

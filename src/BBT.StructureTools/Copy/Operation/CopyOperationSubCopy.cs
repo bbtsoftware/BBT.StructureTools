@@ -12,16 +12,16 @@ namespace BBT.StructureTools.Copy.Operation
     public class CopyOperationSubCopy<T> : ICopyOperation<T>
         where T : class
     {
-        private readonly ICopy<T> mCopier;
+        private readonly ICopy<T> copier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationSubCopy{T}"/> class.
         /// </summary>
-        public CopyOperationSubCopy(ICopy<T> aCopier)
+        public CopyOperationSubCopy(ICopy<T> copier)
         {
-            aCopier.Should().NotBeNull();
+            copier.Should().NotBeNull();
 
-            this.mCopier = aCopier;
+            this.copier = copier;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            this.mCopier.Copy(source, target, copyCallContext);
+            this.copier.Copy(source, target, copyCallContext);
         }
     }
 }

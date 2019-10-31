@@ -1,11 +1,11 @@
-﻿using BBT.StructureTools.Convert;
-using BBT.StructureTools.Tests.Convert.Intention;
-using BBT.StructureTools.Tests.Convert.TestStructure.Source;
-using BBT.StructureTools.Tests.Convert.TestStructure.Target;
-using FluentAssertions;
-
-namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
+﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Tests.Convert.Intention;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Source;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Target;
+    using FluentAssertions;
+
     public class TreeTargetTreeConvertRegistrations : IConvertRegistrations<Tree, TargetTree, ITestConvertIntention>
     {
         private readonly IConvertHelperFactory<Leaf, TargetLeaf, TargetLeaf, ITestConvertIntention> convertHelperFactory;
@@ -15,21 +15,19 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
             this.convertHelperFactory = convertHelperFactory;
         }
 
-        public void DoRegistrations(IConvertRegistration<Tree, TargetTree> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<Tree, TargetTree> registrations)
         {
-            aRegistrations.Should().NotBeNull();
+            registrations.Should().NotBeNull();
 
-            aRegistrations
-                .RegisterCopyAttribute(aX => aX.Root, aX => aX.OriginRoot)
-                .RegisterCopyAttribute(aX => aX, aX => aX.OriginTree)
-                .RegisterCopyAttribute(aX => aX.TreeName, aX => aX.TreeName)
-                .RegisterConvertFromSourceOnDifferentLevels<TreeMasterData, TargetTree, ITestConvertIntention>(aX => aX.TreeMasterData)
+            registrations
+                .RegisterCopyAttribute(x => x.Root, x => x.OriginRoot)
+                .RegisterCopyAttribute(x => x, x => x.OriginTree)
+                .RegisterCopyAttribute(x => x.TreeName, x => x.TreeName)
+                .RegisterConvertFromSourceOnDifferentLevels<TreeMasterData, TargetTree, ITestConvertIntention>(x => x.TreeMasterData)
                 .RegisterCreateToManyGenericWithReverseRelation(
-                    aX => aX.Leafs,
-                    aX => aX.TargetLeafs,
-                    this.convertHelperFactory.GetConvertHelper(aX => aX.TargetTree));
-
-
+                    x => x.Leafs,
+                    x => x.TargetLeafs,
+                    this.convertHelperFactory.GetConvertHelper(x => x.TargetTree));
         }
     }
 }

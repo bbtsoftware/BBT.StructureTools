@@ -14,7 +14,7 @@ namespace BBT.StructureTools.Copy.Operation
     public class CopyOperationPostProcessing<T> : ICopyOperationPostProcessing<T>
         where T : class
     {
-        private Collection<IBaseAdditionalProcessing> mAdditionalProcessings;
+        private Collection<IBaseAdditionalProcessing> additionalProcessings;
 
         /// <summary>
         /// <see cref="ICopyOperation{T}.Copy"/>.
@@ -22,9 +22,9 @@ namespace BBT.StructureTools.Copy.Operation
         public void Copy(T source, T aTarget, ICopyCallContext copyCallContext)
         {
             copyCallContext.Should().NotBeNull();
-            this.mAdditionalProcessings.Should().NotBeNull();
+            this.additionalProcessings.Should().NotBeNull();
 
-            copyCallContext.AdditionalProcessings.AddRangeToMe(this.mAdditionalProcessings);
+            copyCallContext.AdditionalProcessings.AddRangeToMe(this.additionalProcessings);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace BBT.StructureTools.Copy.Operation
         {
             additionalProcessings.Should().NotBeNull();
 
-            this.mAdditionalProcessings = additionalProcessings;
+            this.additionalProcessings = additionalProcessings;
         }
     }
 }

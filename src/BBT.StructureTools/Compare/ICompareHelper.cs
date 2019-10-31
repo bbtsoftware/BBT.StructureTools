@@ -15,8 +15,8 @@ namespace BBT.StructureTools.Compare
         /// <typeparam name="T">Type of class to compare.</typeparam>
         /// <typeparam name="TIntention">Type of comparer intention.</typeparam>
         void DoComparePostProcessing<T, TIntention>(
-            T aCandidate1Nullable,
-            T aCandidate2Nullable,
+            T candidate1Nullable,
+            T candidate2Nullable,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
             where T : class
             where TIntention : IBaseComparerIntention;

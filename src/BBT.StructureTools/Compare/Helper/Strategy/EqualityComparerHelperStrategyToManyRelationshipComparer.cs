@@ -22,76 +22,76 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// <summary>
         /// Function to get the attribute value.
         /// </summary>
-        private readonly Func<TModel, IEnumerable<TTargetModel>> mFunc;
+        private readonly Func<TModel, IEnumerable<TTargetModel>> func;
 
         /// <summary>
         /// The comparer.
         /// </summary>
-        private readonly IComparer<TTargetModel, TComparerIntention> mComparer;
+        private readonly IComparer<TTargetModel, TComparerIntention> comparer;
 
         /// <summary>
         /// Name of compared property.
         /// </summary>
-        private readonly string mPropertyName;
+        private readonly string propertyName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperStrategyToManyRelationshipComparer{TModel,TTargetModel,TComparerIntention}"/> class.
         /// </summary>
         public EqualityComparerHelperStrategyToManyRelationshipComparer(
-            Expression<Func<TModel, IEnumerable<TTargetModel>>> aExpression,
-            IComparer<TTargetModel, TComparerIntention> aComparer)
+            Expression<Func<TModel, IEnumerable<TTargetModel>>> expression,
+            IComparer<TTargetModel, TComparerIntention> comparer)
         {
-            aExpression.Should().NotBeNull();
-            aComparer.Should().NotBeNull();
+            expression.Should().NotBeNull();
+            comparer.Should().NotBeNull();
 
-            this.mFunc = aExpression.Compile();
-            this.mPropertyName = EqualityComparerHelperStrategyUtils.GetMethodName(aExpression);
-            this.mComparer = aComparer;
+            this.func = expression.Compile();
+            this.propertyName = EqualityComparerHelperStrategyUtils.GetMethodName(expression);
+            this.comparer = comparer;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.IsElementEqualsOrExcluded"/>.
         /// </summary>
         public bool IsElementEqualsOrExcluded(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions)
+            IEnumerable<IComparerExclusion> exclusions)
         {
-            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(aExclusions, typeof(TModel), this.mPropertyName))
+            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(exclusions, typeof(TModel), this.propertyName))
             {
                 return true;
             }
 
-            var lValuesCandidate1 = this.mFunc.Invoke(aCandidate1);
-            var lValuesCandidate2 = this.mFunc.Invoke(aCandidate2);
+            var valuesCandidate1 = this.func.Invoke(candidate1);
+            var valuesCandidate2 = this.func.Invoke(candidate2);
 
-            var lResult = EqualityComparerHelperStrategyUtils.AreListEquivalent(
-                lValuesCandidate1,
-                lValuesCandidate2,
-                (aX, aY) => this.mComparer.Equals(aX, aY, additionalProcessings, aExclusions));
+            var result = EqualityComparerHelperStrategyUtils.AreistEquivalent(
+                valuesCandidate1,
+                valuesCandidate2,
+                (x, y) => this.comparer.Equals(x, y, additionalProcessings, exclusions));
 
-            return lResult;
+            return result;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.GetElementHashCode"/>.
         /// </summary>
-        public int? GetElementHashCode(TModel aModel)
+        public int? GetElementHashCode(TModel model)
         {
-            var lModels = this.mFunc.Invoke(aModel);
-            if (!lModels.Any())
+            var models = this.func.Invoke(model);
+            if (!models.Any())
             {
                 return null;
             }
 
-            var lHash = lModels.Count().GetHashCode();
-            foreach (var lModel in lModels)
+            var hash = models.Count().GetHashCode();
+            foreach (var childModel in models)
             {
-                lHash ^= this.mComparer.GetHashCode(lModel);
+                hash ^= this.comparer.GetHashCode(childModel);
             }
 
-            return lHash;
+            return hash;
         }
     }
 }

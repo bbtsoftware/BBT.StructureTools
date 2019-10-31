@@ -22,7 +22,7 @@ namespace BBT.StructureTools.Initialization
 
         /// <summary>
         /// Returns all instances of TService.If no instances are registered
-        /// an empty list is returned.Derivatives are not returned.
+        /// an empty ist is returned.Derivatives are not returned.
         /// ResolutionFailedException: If a problem occurs during resolving from service
         /// (e.g.missing dependency or exception when instantiating service or dependency).
         /// </summary>

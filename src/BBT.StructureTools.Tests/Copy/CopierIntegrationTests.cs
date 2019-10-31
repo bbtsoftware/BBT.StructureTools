@@ -1,18 +1,18 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Processing;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
 namespace BBT.StructureTools.Tests.Copy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Processing;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class CopierIntegrationTests
     {
         #region members and setup
@@ -41,15 +41,15 @@ namespace BBT.StructureTools.Tests.Copy
             var testClassParentOriginal = new ParentTestClass();
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
 
             var testClassParentCopy = new ParentTestClass();
@@ -60,7 +60,7 @@ namespace BBT.StructureTools.Tests.Copy
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
                 {
-                    new GenericContinueCopyInterception<IChildTestClass>(aClass => false)
+                    new GenericContinueCopyInterception<IChildTestClass>(obj => false),
                 });
 
             var testClassParentCopyChildren = testClassParentCopy.Children.Cast<ChildTestClass>().ToList();
@@ -82,15 +82,15 @@ namespace BBT.StructureTools.Tests.Copy
             var testClassParentOriginal = new ParentTestClass();
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass2()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
 
             var testClassParentCopy = new ParentTestClass();
@@ -101,7 +101,7 @@ namespace BBT.StructureTools.Tests.Copy
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
                 {
-                    new GenericContinueCopyInterception<IChildTestClass2>(aClass => false)
+                    new GenericContinueCopyInterception<IChildTestClass2>(obj => false),
                 });
 
             var testClassParentCopyChildren = testClassParentCopy.Children.Cast<ChildTestClass>().ToList();
@@ -128,15 +128,15 @@ namespace BBT.StructureTools.Tests.Copy
             var testClassParentOriginal = new ParentTestClass();
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass2()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
             testClassParentOriginal.AddChild(new ChildTestClass()
             {
-                ParentReference = testClassParentOriginal
+                ParentReference = testClassParentOriginal,
             });
 
             var testClassParentCopy = new ParentTestClass();
@@ -147,7 +147,7 @@ namespace BBT.StructureTools.Tests.Copy
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
                 {
-                    new GenericContinueCopyInterception<IChildTestClass>(aClass => false)
+                    new GenericContinueCopyInterception<IChildTestClass>(obj => false),
                 });
 
             var testClassParentCopyChildren = testClassParentCopy.Children.ToList();
@@ -202,8 +202,8 @@ namespace BBT.StructureTools.Tests.Copy
             /// <summary>
             /// Adds a child.
             /// </summary>
-            /// <param name="aChild">child item.</param>
-            void AddChild(ChildTestClass aChild);
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
 
             /// <summary>
             /// return the children.
@@ -225,9 +225,9 @@ namespace BBT.StructureTools.Tests.Copy
             // debugging the unit tests.
             public Guid Identifier { get; } = Guid.NewGuid();
 
-            public void AddChild(ChildTestClass aChild)
+            public void AddChild(ChildTestClass child)
             {
-                this.Children.Add(aChild);
+                this.Children.Add(child);
             }
 
             public IList<IChildTestClass> GetChildren()
@@ -254,32 +254,32 @@ namespace BBT.StructureTools.Tests.Copy
         {
             // Further notice: This class is needed and it's registration via IoC container
             // is mandatory. Otherwise copying the child elements wouldn't work!
-            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
             }
         }
 
         private class ChildTestClass2CopyRegistrations : ICopyRegistrations<IChildTestClass2>
         {
-            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass2> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass2> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations.RegisterSubCopy<ICopy<IChildTestClass>>();
+                registrations.RegisterSubCopy<ICopy<IChildTestClass>>();
             }
         }
 
         private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations.RegisterCreateToManyWithReverseRelation<IChildTestClass, ChildTestClass>(
-                    aX => aX.Children?.Cast<IChildTestClass>(),
-                    aX => aX.Children,
-                    aX => aX.ParentReference);
+                registrations.RegisterCreateToManyWithReverseRelation<IChildTestClass, ChildTestClass>(
+                    x => x.Children?.Cast<IChildTestClass>(),
+                    x => x.Children,
+                    x => x.ParentReference);
             }
         }
         #endregion

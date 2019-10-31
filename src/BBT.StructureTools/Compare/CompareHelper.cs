@@ -24,8 +24,8 @@ namespace BBT.StructureTools.Compare
         /// <typeparam name="T">See link above.</typeparam>
         /// <typeparam name="TIntention">See link above.</typeparam>
         public void DoComparePostProcessing<T, TIntention>(
-            T aCandidate1Nullable,
-            T aCandidate2Nullable,
+            T candidate1Nullable,
+            T candidate2Nullable,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
             where T : class
             where TIntention : IBaseComparerIntention
@@ -35,7 +35,7 @@ namespace BBT.StructureTools.Compare
             additionalProcessings
                 .OfType<IComparePostProcessing<T, TIntention>>()
                 .ToList()
-                .ForEach(aX => aX.DoPostProcessing(aCandidate1Nullable, aCandidate2Nullable));
+                .ForEach(x => x.DoPostProcessing(candidate1Nullable, candidate2Nullable));
         }
     }
 }

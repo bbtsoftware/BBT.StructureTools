@@ -9,14 +9,14 @@ namespace BBT.StructureTools.Convert.Value
     /// <typeparam name="TTarget">Type of the target.</typeparam>
     public class ConvertValueRegistration<TSource, TTarget> : IConvertValueRegistration<TSource, TTarget>
     {
-        private readonly IValueConvertMapping<TSource, TTarget> mValueConvertMapping = new ValueConvertMapping<TSource, TTarget>();
+        private readonly IValueConvertMapping<TSource, TTarget> valueConvertMapping = new ValueConvertMapping<TSource, TTarget>();
 
         /// <summary>
         /// See <see cref="IConvertValueRegistration{TSource, TTarget}.Register"/>.
         /// </summary>
         public IConvertValueRegistration<TSource, TTarget> Register(TSource sourceValue, TTarget targetValue)
         {
-            this.mValueConvertMapping.AddMapping(sourceValue, targetValue);
+            this.valueConvertMapping.AddMapping(sourceValue, targetValue);
             return this;
         }
 
@@ -25,13 +25,13 @@ namespace BBT.StructureTools.Convert.Value
         /// </summary>
         public IConvertValueRegistration<TSource, TTarget> RegisterException(TSource sourceValue)
         {
-            this.mValueConvertMapping.AddException(sourceValue);
+            this.valueConvertMapping.AddException(sourceValue);
             return this;
         }
 
         /// <summary>
         /// See <see cref="IConvertValueRegistration{TSource, TTarget}.EndRegistrations"/>.
         /// </summary>
-        public IValueConvertMapping<TSource, TTarget> EndRegistrations() => this.mValueConvertMapping;
+        public IValueConvertMapping<TSource, TTarget> EndRegistrations() => this.valueConvertMapping;
     }
 }

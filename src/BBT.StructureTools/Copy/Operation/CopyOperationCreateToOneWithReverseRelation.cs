@@ -19,11 +19,11 @@ namespace BBT.StructureTools.Copy.Operation
         where TChild : class
         where TConcreteChild : class, TChild, new()
     {
-        private Func<T, TChild> mSourceFunc;
+        private Func<T, TChild> sourceFunc;
 
-        private Expression<Func<T, TChild>> mTargetExpression;
+        private Expression<Func<T, TChild>> targetexpression;
 
-        private ICreateCopyHelper<TChild, TConcreteChild, T> mCreateCopyHelper;
+        private ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -35,9 +35,9 @@ namespace BBT.StructureTools.Copy.Operation
             sourceFunc.Should().NotBeNull();
             targetFuncExpr.Should().NotBeNull();
 
-            this.mTargetExpression = targetFuncExpr;
-            this.mSourceFunc = sourceFunc;
-            this.mCreateCopyHelper = aCreateCopyHelper;
+            this.targetexpression = targetFuncExpr;
+            this.sourceFunc = sourceFunc;
+            this.createCopyHelper = aCreateCopyHelper;
         }
 
         /// <inheritdoc/>
@@ -50,24 +50,24 @@ namespace BBT.StructureTools.Copy.Operation
             target.Should().NotBeNull();
             copyCallContext.Should().NotBeNull();
 
-            var lSource = this.mSourceFunc.Invoke(source);
+            var sourceChild = this.sourceFunc.Invoke(source);
 
             // if the source is null, set the target also to null and exit copy process step.
-            if (lSource == null)
+            if (sourceChild == null)
             {
-                target.SetPropertyValue(this.mTargetExpression, null);
+                target.SetPropertyValue(this.targetexpression, null);
                 return;
             }
 
-            var lSourceConcrete = lSource as TConcreteChild;
-            lSourceConcrete.Should().NotBeNull();
+            var sourceConcrete = sourceChild as TConcreteChild;
+            sourceConcrete.Should().NotBeNull();
 
-            var lCopy = this.mCreateCopyHelper.CreateTarget(
-                lSourceConcrete,
+            var copy = this.createCopyHelper.CreateTarget(
+                sourceConcrete,
                 target,
                 copyCallContext);
 
-            target.SetPropertyValue(this.mTargetExpression, lCopy);
+            target.SetPropertyValue(this.targetexpression, copy);
         }
     }
 }

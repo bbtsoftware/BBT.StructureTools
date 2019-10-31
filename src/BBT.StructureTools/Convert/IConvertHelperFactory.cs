@@ -23,7 +23,7 @@ namespace BBT.StructureTools.Convert
         /// </summary>
         /// <typeparam name="TReverseRelation">The <typeparamref name="TTarget"/>'s reverse relation.</typeparam>
         ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention> GetConvertHelper<TReverseRelation>(
-            Expression<Func<TTarget, TReverseRelation>> aReverseRelationExpr)
+            Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
             where TReverseRelation : class;
 
         /// <summary>

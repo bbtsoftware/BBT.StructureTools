@@ -16,14 +16,14 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// The action.
         /// </summary>
-        private readonly Action<TSoureClass, TTargetClass> mAction;
+        private readonly Action<TSoureClass, TTargetClass> action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericConvertPostProcessing{TSoureClass, TTargetClass}"/> class.
         /// </summary>
-        public GenericConvertPostProcessing(Action<TSoureClass, TTargetClass> aAction)
+        public GenericConvertPostProcessing(Action<TSoureClass, TTargetClass> action)
         {
-            this.mAction = aAction;
+            this.action = action;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BBT.StructureTools.Convert
         /// </summary>
         public void DoPostProcessing(TSoureClass source, TTargetClass target)
         {
-            this.mAction.Invoke(source, target);
+            this.action.Invoke(source, target);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace BBT.StructureTools.Convert.Strategy
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TBaseSource">Contains the base type of the source which shall be converted (e.g. LiBaseCover).</typeparam>
-    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaimCover).</typeparam>
+    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaicover).</typeparam>
     /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
     public class OperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
@@ -26,25 +26,25 @@ namespace BBT.StructureTools.Convert.Strategy
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
     {
-        private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> mConvertStrategyProvider;
-        private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> mCreateInstanceStrategyProvider;
+        private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider;
+        private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider;
 
-        private Func<TSource, IEnumerable<TBaseSource>> mSource;
-        private Expression<Func<TTarget, ICollection<TBaseTarget>>> mTargetParent;
-        private Expression<Func<TBaseTarget, TTarget>> mReverseRelationOnTarget;
+        private Func<TSource, IEnumerable<TBaseSource>> source;
+        private Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent;
+        private Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}"/> class.
         /// </summary>
         public OperationConditionalCreateToManyWithReverseRelation(
-            IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> aConvertStrategyProvider,
-            IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> aCreateInstanceStrategyProvider)
+            IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
+            IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider)
         {
-            aConvertStrategyProvider.Should().NotBeNull();
-            aCreateInstanceStrategyProvider.Should().NotBeNull();
+            convertStrategyProvider.Should().NotBeNull();
+            createInstanceStrategyProvider.Should().NotBeNull();
 
-            this.mConvertStrategyProvider = aConvertStrategyProvider;
-            this.mCreateInstanceStrategyProvider = aCreateInstanceStrategyProvider;
+            this.convertStrategyProvider = convertStrategyProvider;
+            this.createInstanceStrategyProvider = createInstanceStrategyProvider;
         }
 
         /// <summary>
@@ -52,20 +52,20 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            var lSourceChildren = this.mSource.Invoke(source);
-            foreach (var lSourceChildElement in lSourceChildren)
+            var sourceChildren = this.source.Invoke(source);
+            foreach (var sourceChildElement in sourceChildren)
             {
-                var lInstanceCreationStrategy = this.mCreateInstanceStrategyProvider.GetStrategy(lSourceChildElement);
-                var lTarget = lInstanceCreationStrategy.CreateInstance();
+                var instanceCreationStrategy = this.createInstanceStrategyProvider.GetStrategy(sourceChildElement);
+                var childTarget = instanceCreationStrategy.CreateInstance();
 
-                var lStrategy = this.mConvertStrategyProvider.GetConvertStrategyFromSource(lSourceChildElement);
-                lStrategy.Convert(lSourceChildElement, lTarget, additionalProcessings);
+                var strategy = this.convertStrategyProvider.GetConvertStrategyFromSource(sourceChildElement);
+                strategy.Convert(sourceChildElement, childTarget, additionalProcessings);
 
                 // set reverse relation
-                this.mReverseRelationOnTarget.Compile().Invoke(lTarget);
+                this.reverseRelationOnTarget.Compile().Invoke(childTarget);
 
                 // Add to target collection
-                this.mTargetParent.Compile().Invoke(target).Add(lTarget);
+                this.targetParent.Compile().Invoke(target).Add(childTarget);
             }
         }
 
@@ -75,15 +75,15 @@ namespace BBT.StructureTools.Convert.Strategy
         public void Initialize(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
-            Expression<Func<TBaseTarget, TTarget>> aReverseRelationOnTarget)
+            Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
         {
             source.Should().NotBeNull();
             targetParent.Should().NotBeNull();
-            aReverseRelationOnTarget.Should().NotBeNull();
+            reverseRelationOnTarget.Should().NotBeNull();
 
-            this.mSource = source;
-            this.mTargetParent = targetParent;
-            this.mReverseRelationOnTarget = aReverseRelationOnTarget;
+            this.source = source;
+            this.targetParent = targetParent;
+            this.reverseRelationOnTarget = reverseRelationOnTarget;
         }
     }
 }

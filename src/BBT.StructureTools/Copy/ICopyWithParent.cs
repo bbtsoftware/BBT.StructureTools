@@ -22,7 +22,7 @@ namespace BBT.StructureTools.Copy
         void Copy(
             TClassToCopy source,
             TClassToCopy target,
-            TParent aParent,
+            TParent parent,
             ICopyCallContext copyCallContext);
     }
 }

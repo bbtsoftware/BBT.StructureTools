@@ -13,6 +13,6 @@ namespace BBT.StructureTools.Convert.Value
         /// <summary>
         /// Does the registrations.
         /// </summary>
-        void DoRegistrations(IConvertValueRegistration<TSource, TTarget> aRegistration);
+        void DoRegistrations(IConvertValueRegistration<TSource, TTarget> registration);
     }
 }

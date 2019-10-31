@@ -14,38 +14,38 @@ namespace BBT.StructureTools.Compare
     public class ModelIntComparer<TModel> : IComparer<TModel>
         where TModel : class
     {
-        private readonly Func<TModel, int> mSortOrderDelegate;
+        private readonly Func<TModel, int> sortOrderDelegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelIntComparer{TModel}"/> class.
         /// </summary>
-        public ModelIntComparer(Func<TModel, int> aSortOrderDelegate)
+        public ModelIntComparer(Func<TModel, int> sortOrderDelegate)
         {
-            aSortOrderDelegate.Should().NotBeNull();
+            sortOrderDelegate.Should().NotBeNull();
 
-            this.mSortOrderDelegate = aSortOrderDelegate;
+            this.sortOrderDelegate = sortOrderDelegate;
         }
 
         /// <summary>
         /// See <see cref="IComparer{T}.Compare"/>.
         /// </summary>
-        public int Compare(TModel aModelA, TModel aModelB)
+        public int Compare(TModel modelA, TModel modelB)
         {
-            if (aModelA == null)
+            if (modelA == null)
             {
                 return -1;
             }
 
-            if (aModelB == null)
+            if (modelB == null)
             {
                 return +1;
             }
 
-            var lFirstSortCriterion = this.mSortOrderDelegate.Invoke(aModelA);
-            var lSecondSortCriterion = this.mSortOrderDelegate.Invoke(aModelB);
-            var lCompare = lFirstSortCriterion.CompareTo(lSecondSortCriterion);
+            var firstSortCriterion = this.sortOrderDelegate.Invoke(modelA);
+            var secondSortCriterion = this.sortOrderDelegate.Invoke(modelB);
+            var compare = firstSortCriterion.CompareTo(secondSortCriterion);
 
-            return lCompare;
+            return compare;
         }
     }
 }

@@ -24,14 +24,14 @@ namespace BBT.StructureTools.Copy.Helper
         /// </summary>
         /// <typeparam name="TReverseRelation">See link above.</typeparam>
         public ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation> GetCopyHelper<TReverseRelation>(
-            Expression<Func<TTarget, TReverseRelation>> aReverseRelationFunc)
+            Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
         {
-            aReverseRelationFunc.Should().NotBeNull();
+            reverseRelationFunc.Should().NotBeNull();
 
-            var lCopyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();
-            lCopyHelper.SetupReverseRelation(aReverseRelationFunc);
-            return lCopyHelper;
+            var copyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();
+            copyHelper.SetupReverseRelation(reverseRelationFunc);
+            return copyHelper;
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace BBT.StructureTools.Copy.Helper
         /// </summary>
         public ICreateCopyHelper<TTarget, TConcreteTarget> GetCopyHelper()
         {
-            var lCopyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget>>();
-            return lCopyHelper;
+            var copyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget>>();
+            return copyHelper;
         }
     }
 }

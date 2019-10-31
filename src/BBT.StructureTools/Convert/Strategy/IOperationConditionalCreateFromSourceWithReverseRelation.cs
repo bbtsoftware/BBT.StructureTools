@@ -13,7 +13,7 @@ namespace BBT.StructureTools.Convert.Strategy
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TBaseSource">Contains the base type of the source which shall be converted (e.g. LiBaseCover).</typeparam>
-    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaimCover).</typeparam>
+    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaicover).</typeparam>
     /// <typeparam name="TIntention">Intention defining the conversion use case.</typeparam>
     public interface IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IConvertOperation<TSource, TTarget>
@@ -26,11 +26,11 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Initializes the <see cref="IConvertOperation{TSource,TTarget}"/>.
         /// </summary>
-        /// <param name="aBaseSourceFunc">Declares the source to convert from.</param>
+        /// <param name="baseSourceFunc">Declares the source to convert from.</param>
         /// <param name="targetValueExpression">Declares the target value.</param>
         /// <param name="targetParentExpression">Declares the partent of the target value.</param>
         void Initialize(
-            Func<TSource, TBaseSource> aBaseSourceFunc,
+            Func<TSource, TBaseSource> baseSourceFunc,
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
             Expression<Func<TBaseTarget, TTarget>> targetParentExpression);
     }

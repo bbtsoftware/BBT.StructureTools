@@ -23,6 +23,6 @@ namespace BBT.StructureTools.Copy.Operation
         void Initialize(
             Func<T, TChild> sourceFunc,
             Expression<Func<T, TChild>> targetExpression,
-            Expression<Func<TChild, T>> aReverseRelationExpression);
+            Expression<Func<TChild, T>> reverseRelationExpression);
     }
 }

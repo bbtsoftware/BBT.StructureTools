@@ -24,6 +24,6 @@ namespace BBT.StructureTools.Copy.Operation
         void Initialize(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<T, ICollection<TChild>>> targetExpression,
-            Expression<Func<TChild, T>> aReverseRelationExpression);
+            Expression<Func<TChild, T>> reverseRelationExpression);
     }
 }

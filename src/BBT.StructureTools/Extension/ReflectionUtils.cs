@@ -21,24 +21,24 @@ namespace BBT.StructureTools.Extension
         /// The object is returned in the required type or an exception is thrown, it is
         /// is never returned Nothing.
         /// </summary>
-        /// <param name="aValue">Object to check.</param>
-        /// <exception cref="ArgumentNullException">Falls aValue <see langword="Nothing" /> is.
+        /// <param name="value">Object to check.</param>
+        /// <exception cref="ArgumentNullException">Falls value <see langword="Nothing" /> is.
         /// </exception>
-        /// <exception cref="CopyConvertCompareException">If the type of aValue is not
+        /// <exception cref="CopyConvertCompareException">If the type of value is not
         /// is compatible with T.</exception>
         /// <typeparam name="T">Expected type.</typeparam>
-        public static T CastIfTypeOrSubtypeOrThrow<T>(object aValue)
+        public static T CastIfTypeOrSubtypeOrThrow<T>(object value)
             where T : class
         {
-            aValue.Should().NotBeNull();
+            value.Should().NotBeNull();
 
-            if (!(aValue is T lTValue))
+            if (!(value is T generictValue))
             {
-                throw new CopyConvertCompareException(string.Format($"An object of type '{typeof(T).Name}' was expected, but the object was of type '{aValue.GetType().Name}'."));
+                throw new CopyConvertCompareException(FormattableString.Invariant($"An object of type '{typeof(T).Name}' was expected, but the object was of type '{value.GetType().Name}'."));
             }
             else
             {
-                return lTValue;
+                return generictValue;
             }
         }
 
@@ -46,60 +46,60 @@ namespace BBT.StructureTools.Extension
         /// Returns the name of a property defined by an expression.
         /// <para/>
         /// Example calls in VB.NET: <br/>
-        /// <c>Dim lPropertyName1 = ReflectionUtils.GetPropertyName(Function(aX As SampleClass) aX.Foo)</c><br/>
-        /// <c>Dim lPropertyName2 = ReflectionUtils.GetPropertyName(Function(aX As SampleClass) aX.Foo1.Foo2)</c>.<br/>
+        /// <c>Dim lPropertyName1 = ReflectionUtils.GetPropertyName(Function(x As SampleClass) x.Foo)</c><br/>
+        /// <c>Dim lPropertyName2 = ReflectionUtils.GetPropertyName(Function(x As SampleClass) x.Foo1.Foo2)</c>.<br/>
         /// <para/>
         /// Example calls in C#: <br/>
-        /// <c>var lPropertyName1 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo);</c>.<br/>
-        /// <c>var lPropertyName2 = ReflectionUtils.GetPropertyName((SampleClass aX) => aX.Foo1.Foo2);</c>.<br/>
+        /// <c>var lPropertyName1 = ReflectionUtils.GetPropertyName((SampleClass x) => x.Foo);</c>.<br/>
+        /// <c>var lPropertyName2 = ReflectionUtils.GetPropertyName((SampleClass x) => x.Foo1.Foo2);</c>.<br/>
         /// </summary>
         /// <typeparam name="T">The type that serves as the starting point for the property. Must be used with
         /// Use according to the examples given are not specified.</typeparam>
         /// <typeparam name="TReturn">The return type of the property. Must be used according to the
         /// given examples are not given.</typeparam>
-        /// <param name="aExpression">The Property Expression.</param>
+        /// <param name="expression">The Property Expression.</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "So a simple call is possible as shown in the example.")]
-        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> aExpression)
+        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            aExpression.Should().NotBeNull();
-            aExpression.Body.Should().BeAssignableTo<MemberExpression>();
+            expression.Should().NotBeNull();
+            expression.Body.Should().BeAssignableTo<MemberExpression>();
 
-            var lMemberExpression = (MemberExpression)aExpression.Body;
-            var lMemberName = lMemberExpression.Member.Name;
-            return lMemberName;
+            var memberExpression = (MemberExpression)expression.Body;
+            var memberName = memberExpression.Member.Name;
+            return memberName;
         }
 
         /// <summary>
         /// Gets all inherited types, including interfaces, the specified type itself, and <see cref="object"/>
         /// if it's a class.
         /// </summary>
-        public static IEnumerable<Type> GetAllInheritedTypes(this Type aType)
+        public static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
         {
-            aType.Should().NotBeNull();
+            extendedType.Should().NotBeNull();
 
-            IList<Type> lAllInheritedTypes = new List<Type>();
-            var lCurrent = aType;
+            IList<Type> allInheritedTypes = new List<Type>();
+            var current = extendedType;
 
-            while (lCurrent != null)
+            while (current != null)
             {
-                lAllInheritedTypes.Add(lCurrent);
-                lCurrent = lCurrent.BaseType;
+                allInheritedTypes.Add(current);
+                current = current.BaseType;
             }
 
-            var lInterfaces = aType.GetInterfaces();
-            lAllInheritedTypes.AddRangeToMe(lInterfaces);
-            return lAllInheritedTypes;
+            var interfaces = extendedType.GetInterfaces();
+            allInheritedTypes.AddRangeToMe(interfaces);
+            return allInheritedTypes;
         }
 
         /// <summary>
         /// Gets all inherited types, ordered (more basic/inherited types first).
         /// </summary>
-        public static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type aType)
+        public static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
         {
-            aType.Should().NotBeNull();
+            extendedType.Should().NotBeNull();
 
-            var lAllInheritedTypesOrdered = aType.GetAllInheritedTypes().OrderBy(aX => aX, new TypeComparer()).ToList();
-            return lAllInheritedTypesOrdered;
+            var allInheritedTypesOrdered = extendedType.GetAllInheritedTypes().OrderBy(x => x, new TypeComparer()).ToList();
+            return allInheritedTypesOrdered;
         }
     }
 }

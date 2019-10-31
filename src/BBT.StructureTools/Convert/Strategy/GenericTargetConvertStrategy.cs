@@ -22,17 +22,17 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSourceInterface : class, TSource
         where TCriterion : class, TTarget
     {
-        private readonly IConvert<TSourceInterface, TCriterion, TIntention> mConverter;
+        private readonly IConvert<TSourceInterface, TCriterion, TIntention> converter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericTargetConvertStrategy{TSource, TTarget, TIntention, TSourceInterface, TCriterion}"/> class.
         /// </summary>
         public GenericTargetConvertStrategy(
-            IConvert<TSourceInterface, TCriterion, TIntention> aConverter)
+            IConvert<TSourceInterface, TCriterion, TIntention> converter)
         {
-            aConverter.Should().NotBeNull();
+            converter.Should().NotBeNull();
 
-            this.mConverter = aConverter;
+            this.converter = converter;
         }
 
         /// <summary>
@@ -44,13 +44,13 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lSourceCasted = source as TSourceInterface;
-            var lTargetCasted = target as TCriterion;
+            var sourceCasted = source as TSourceInterface;
+            var targetCasted = target as TCriterion;
 
-            lSourceCasted.Should().NotBeNull();
-            lTargetCasted.Should().NotBeNull();
+            sourceCasted.Should().NotBeNull();
+            targetCasted.Should().NotBeNull();
 
-            this.mConverter.Convert(lSourceCasted, lTargetCasted, additionalProcessings);
+            this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         public bool IsResponsible(TTarget aCriterion)
         {
-            var lIsResponsible = aCriterion is TCriterion;
-            return lIsResponsible;
+            var isResponsible = aCriterion is TCriterion;
+            return isResponsible;
         }
     }
 }

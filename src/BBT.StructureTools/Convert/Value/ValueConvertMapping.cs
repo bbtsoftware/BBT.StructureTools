@@ -12,9 +12,9 @@ namespace BBT.StructureTools.Convert.Value
     /// <typeparam name="TTarget">Target type.</typeparam>
     public class ValueConvertMapping<TSource, TTarget> : IValueConvertMapping<TSource, TTarget>
     {
-        private readonly Dictionary<TSource, TTarget> mMapping = new Dictionary<TSource, TTarget>();
-        private readonly HashSet<TSource> mMapToException = new HashSet<TSource>();
-        private Func<TTarget> mNullCaseFunc;
+        private readonly Dictionary<TSource, TTarget> mapping = new Dictionary<TSource, TTarget>();
+        private readonly HashSet<TSource> mapToException = new HashSet<TSource>();
+        private Func<TTarget> nullCaseFunc;
 
         /// <summary>
         /// See <see cref="IValueConvertMapping{TSource, TTarget}.AddException"/>.
@@ -22,7 +22,7 @@ namespace BBT.StructureTools.Convert.Value
         public void AddException(TSource sourceValue)
         {
             this.CheckNotAlreadyRegistered(sourceValue);
-            this.mMapToException.Add(sourceValue);
+            this.mapToException.Add(sourceValue);
         }
 
         /// <summary>
@@ -34,17 +34,17 @@ namespace BBT.StructureTools.Convert.Value
 
             if (sourceValue == null)
             {
-                this.mNullCaseFunc = () => targetValue;
+                this.nullCaseFunc = () => targetValue;
                 return;
             }
 
-            this.mMapping.Add(sourceValue, targetValue);
+            this.mapping.Add(sourceValue, targetValue);
         }
 
         /// <summary>
         /// See <see cref="IValueConvertMapping{TSource, TTarget}.IsRegisteredForException"/>.
         /// </summary>
-        public bool IsRegisteredForException(TSource sourceValue) => this.mMapToException.Contains(sourceValue);
+        public bool IsRegisteredForException(TSource sourceValue) => this.mapToException.Contains(sourceValue);
 
         /// <summary>
         /// See <see cref="IValueConvertMapping{TSource, TTarget}.TryGetValue"/>.
@@ -53,17 +53,17 @@ namespace BBT.StructureTools.Convert.Value
         {
             if (sourceValue == null)
             {
-                if (this.mNullCaseFunc == null)
+                if (this.nullCaseFunc == null)
                 {
                     targetValue = default;
                     return false;
                 }
 
-                targetValue = this.mNullCaseFunc();
+                targetValue = this.nullCaseFunc();
                 return true;
             }
 
-            return this.mMapping.TryGetValue(sourceValue, out targetValue);
+            return this.mapping.TryGetValue(sourceValue, out targetValue);
         }
 
         /// <summary>
@@ -73,21 +73,21 @@ namespace BBT.StructureTools.Convert.Value
         {
             if (sourceValue == null)
             {
-                if (this.mNullCaseFunc != null)
+                if (this.nullCaseFunc != null)
                 {
                     throw new CopyConvertCompareException(
-                        FormattableString.Invariant($"Null case is already registered for target value {this.mNullCaseFunc()}."));
+                        FormattableString.Invariant($"Null case is already registered for target value {this.nullCaseFunc()}."));
                 }
 
                 return;
             }
 
-            if (this.mMapping.TryGetValue(sourceValue, out var lTargetValue))
+            if (this.mapping.TryGetValue(sourceValue, out var targetValue))
             {
-                throw new CopyConvertCompareException(FormattableString.Invariant($"{sourceValue} is already registered for target value {lTargetValue}."));
+                throw new CopyConvertCompareException(FormattableString.Invariant($"{sourceValue} is already registered for target value {targetValue}."));
             }
 
-            if (this.mMapToException.Contains(sourceValue))
+            if (this.mapToException.Contains(sourceValue))
             {
                 throw new CopyConvertCompareException(FormattableString.Invariant($"{sourceValue} is already registered for an exception."));
             }

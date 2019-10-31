@@ -18,14 +18,14 @@ namespace BBT.StructureTools.Convert
     {
         /// <summary>
         /// Gets the <see cref="DateTime"/> which marks the begin
-        /// of the temporal period defined by <paramref name="aData"/>.
+        /// of the temporal period defined by <paramref name="data"/>.
         /// </summary>
-        DateTime GetBegin(T aData);
+        DateTime GetBegin(T data);
 
         /// <summary>
         /// Gets the <see cref="DateTime"/> which marks the end
-        /// of the temporal period defined by <paramref name="aData"/>.
+        /// of the temporal period defined by <paramref name="data"/>.
         /// </summary>
-        DateTime GetEnd(T aData);
+        DateTime GetEnd(T data);
     }
 }

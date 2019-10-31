@@ -10,16 +10,16 @@ namespace BBT.StructureTools.Extension
     internal static class CollectionExtension
     {
         /// <summary>
-        /// Add the <paramref name="aCollectionToBeAdded"/> items to <paramref name="aCollectionToAddTo"/>.
+        /// Add the <paramref name="collectionToBeAdded"/> items to <paramref name="collectionToAddTo"/>.
         /// </summary>
         /// <typeparam name="TBase">Type of the collection to which elements of <typeparamref name="TChild"/> added.</typeparam>
-        /// <typeparam name="TChild">Type of the collection elements which are added to the <paramref name="aCollectionToAddTo"/>.</typeparam>
-        public static void AddRangeToMe<TBase, TChild>(this ICollection<TBase> aCollectionToAddTo, IEnumerable<TChild> aCollectionToBeAdded)
+        /// <typeparam name="TChild">Type of the collection elements which are added to the <paramref name="collectionToAddTo"/>.</typeparam>
+        public static void AddRangeToMe<TBase, TChild>(this ICollection<TBase> collectionToAddTo, IEnumerable<TChild> collectionToBeAdded)
             where TChild : TBase
         {
-            foreach (var item in aCollectionToBeAdded)
+            foreach (var item in collectionToBeAdded)
             {
-                aCollectionToAddTo.Add(item);
+                collectionToAddTo.Add(item);
             }
         }
     }

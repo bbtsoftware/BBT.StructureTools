@@ -17,10 +17,10 @@ namespace BBT.StructureTools.Convert.Strategy
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">
-    /// The type of the list entries which shall be converted into
+    /// The type of the ist entries which shall be converted into
     /// the <typeparamref name="TTargetValue"/>s.</typeparam>
     /// <typeparam name="TTargetValue">
-    /// The list entries which shall be converted from
+    /// The ist entries which shall be converted from
     /// the <typeparamref name="TSourceValue"/>s.</typeparam>
     /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
     public class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
@@ -31,36 +31,36 @@ namespace BBT.StructureTools.Convert.Strategy
         where TTargetValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> mConvert;
-        private readonly IConvertHelper mConvertHelper;
+        private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> convert;
+        private readonly IConvertHelper convertHelper;
 
         /// <summary>
         /// The function to obtain the source values.
         /// </summary>
-        private Func<TSource, IEnumerable<TSourceValue>> mSourceFunc;
+        private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
         /// The function to obtain the target values.
         /// </summary>
-        private Func<TTarget, IEnumerable<TTargetValue>> mTargetFunc;
+        private Func<TTarget, IEnumerable<TTargetValue>> targetFunc;
 
         /// <summary>
         /// The function to filter the target value corresponding to the source value.
         /// </summary>
-        private Func<TSourceValue, TTargetValue, bool> mFilterFunc;
+        private Func<TSourceValue, TTargetValue, bool> filterFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertToMany{TSource,TTarget,TSourceValue,TTargetValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationConvertToMany(
-            IConvert<TSourceValue, TTargetValue, TConvertIntention> aConvert,
-            IConvertHelper aConvertHelper)
+            IConvert<TSourceValue, TTargetValue, TConvertIntention> convert,
+            IConvertHelper convertHelper)
         {
-            aConvert.Should().NotBeNull();
-            aConvertHelper.Should().NotBeNull();
+            convert.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvert = aConvert;
-            this.mConvertHelper = aConvertHelper;
+            this.convert = convert;
+            this.convertHelper = convertHelper;
         }
 
         /// <summary>
@@ -75,9 +75,9 @@ namespace BBT.StructureTools.Convert.Strategy
             targetFunc.Should().NotBeNull();
             aFilterFunc.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetFunc = targetFunc;
-            this.mFilterFunc = aFilterFunc;
+            this.sourceFunc = sourceFunc;
+            this.targetFunc = targetFunc;
+            this.filterFunc = aFilterFunc;
         }
 
         /// <summary>
@@ -92,20 +92,20 @@ namespace BBT.StructureTools.Convert.Strategy
             source.Should().NotBeNull();
             target.Should().NotBeNull();
 
-            var lSourceValues = this.mSourceFunc(source).ToList();
-            var lTargetValues = this.mTargetFunc(target).Where(aX => aX != null).ToList();
+            var sourceValues = this.sourceFunc(source).ToList();
+            var targetValues = this.targetFunc(target).Where(x => x != null).ToList();
 
-            foreach (var lSourceValue in lSourceValues)
+            foreach (var sourceValue in sourceValues)
             {
-                if (!this.mConvertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
-                    lSourceValue, additionalProcessings))
+                if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
+                    sourceValue, additionalProcessings))
                 {
                     continue;
                 }
 
-                var lErrorMsg = string.Format(CultureInfo.InvariantCulture, $"One result expected to convert from '{typeof(TSourceValue).Name}' to '{typeof(TTargetValue).Name}'");
-                var lTargetValue = lTargetValues.SingleWithExceptionMessage(aX => this.mFilterFunc(lSourceValue, aX), lErrorMsg);
-                this.mConvert.Convert(lSourceValue, lTargetValue, additionalProcessings);
+                var errorMsg = string.Format(CultureInfo.InvariantCulture, $"One result expected to convert from '{typeof(TSourceValue).Name}' to '{typeof(TTargetValue).Name}'");
+                var targetValue = targetValues.SingleWithExceptionMessage(x => this.filterFunc(sourceValue, x), errorMsg);
+                this.convert.Convert(sourceValue, targetValue, additionalProcessings);
             }
         }
     }

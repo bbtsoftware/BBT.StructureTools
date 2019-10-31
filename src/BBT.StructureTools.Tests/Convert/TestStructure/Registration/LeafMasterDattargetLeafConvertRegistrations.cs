@@ -6,14 +6,14 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
     using FluentAssertions;
 
-    public class TreeMasterDataToTreeConvertRegistrations : IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>
+    public class LeafMasterDattargetLeafConvertRegistrations : IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>
     {
-        public void DoRegistrations(IConvertRegistration<TreeMasterData, TargetTree> registrations)
+        public void DoRegistrations(IConvertRegistration<LeafMasterData, TargetLeaf> registrations)
         {
             registrations.Should().NotBeNull();
 
             registrations
-                .RegisterCopyAttribute(x => x.TreeMasterDataName, x => x.TreeMasterDataName);
+                .RegisterCopyAttribute(x => x.LeafMasterDataName, x => x.LeafMasterDataName);
         }
     }
 }

@@ -27,9 +27,9 @@ namespace BBT.StructureTools.Convert.Strategy
         /// Initializes the <see cref="IConvertOperation{TSource,TTarget}"/>.
         /// </summary>
         /// <param name="targetExpression">Declares the property on target.</param>
-        /// <param name="aCreateConvertHelper">Used to create the value on target.</param>
+        /// <param name="createConvertHelper">Used to create the value on target.</param>
         void Initialize(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper);
+            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper);
     }
 }

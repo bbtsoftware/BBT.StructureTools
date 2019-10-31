@@ -135,20 +135,20 @@ namespace BBT.StructureTools.Convert
             where TConvertIntention : IBaseConvertIntention;
 
         /// <summary>
-        /// Registers a conversion from a list of source values to specific target values filtered
-        /// by <paramref name="aFilterFunc"/>.
+        /// Registers a conversion from a ist of source values to specific target values filtered
+        /// by <paramref name="filterFunc"/>.
         /// </summary>
         /// <typeparam name="TSourceValue">
-        /// The type of the list entries which shall be converted into
+        /// The type of the ist entries which shall be converted into
         /// the <typeparamref name="TTargetValue"/>s.</typeparam>
         /// <typeparam name="TTargetValue">
-        /// The list entries which shall be converted from
+        /// The ist entries which shall be converted from
         /// the <typeparamref name="TSourceValue"/>s.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterConvertToMany<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
-            Func<TSourceValue, TTargetValue, bool> aFilterFunc)
+            Func<TSourceValue, TTargetValue, bool> filterFunc)
             where TSourceValue : class
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention;
@@ -195,7 +195,7 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateFromSourceWithReverseRelation<TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention;
@@ -206,10 +206,10 @@ namespace BBT.StructureTools.Convert
         /// E.g.: This can be used to convert annuity / capital covers.
         /// </summary>
         /// <typeparam name="TBaseSource">Source base type (e.g. LiBaseCover).</typeparam>
-        /// <typeparam name="TBaseTarget">Target base type (e.g. LiClaimCover).</typeparam>
+        /// <typeparam name="TBaseTarget">Target base type (e.g. LiClaicover).</typeparam>
         /// <typeparam name="TIntention">Intention defining the conversion use case.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToOneFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
-            Func<TSource, TBaseSource> aBaseSourceFunc,
+            Func<TSource, TBaseSource> baseSourceFunc,
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
             Expression<Func<TBaseTarget, TTarget>> targetParentExpression)
             where TBaseSource : class
@@ -226,7 +226,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -242,7 +242,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -251,7 +251,7 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// Registers a <c>from many</c> relationship on source and corresponding target.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCopyFromMany<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
@@ -275,10 +275,10 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TMergeValue">Once again see link above.</typeparam>
         /// <typeparam name="TConvertIntention">And yet see link above.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterMergeLevel<TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>(
-            Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
+            Func<TSource, IEnumerable<TMergeValue>> mergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -289,8 +289,8 @@ namespace BBT.StructureTools.Convert
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
         /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
@@ -300,7 +300,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -310,8 +310,8 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// Registers a <c>to many</c> relationships on a target corresponding target.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
         /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
@@ -321,7 +321,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -332,8 +332,8 @@ namespace BBT.StructureTools.Convert
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
@@ -341,7 +341,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyGenericWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -356,8 +356,8 @@ namespace BBT.StructureTools.Convert
         /// <see cref="ICollection{TChildType}"/>.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
         /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
         /// cannot cannot be of type <see cref="ICollection{TChildType}"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
@@ -365,7 +365,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -374,8 +374,8 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
@@ -383,7 +383,7 @@ namespace BBT.StructureTools.Convert
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithSourceFilterAndReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -395,7 +395,7 @@ namespace BBT.StructureTools.Convert
         /// while converting an object and then executed at the end of the convert process.
         /// </summary>
         IConvertRegistration<TSource, TTarget> RegisterPostProcessings(
-            IConvertPostProcessing<TSource, TTarget> aAdditionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] aFurtherAdditionalProcessings);
+            IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] furtherAdditionalProcessings);
 
         /// <summary>
         /// Ends the registrations and start the operation phase.
@@ -410,7 +410,7 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TBaseTarget">Target base type.</typeparam>
         /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
-            Func<TSource, IEnumerable<TBaseSource>> source, Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent, Expression<Func<TBaseTarget, TTarget>> aReverseRelation)
+            Func<TSource, IEnumerable<TBaseSource>> source, Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent, Expression<Func<TBaseTarget, TTarget>> reverseRelation)
             where TBaseSource : class
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention;
@@ -422,7 +422,7 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Func<TSource, TTarget, DateTime> aReferenceDateFunc)
+            Func<TSource, TTarget, DateTime> referenceDateFunc)
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention;
     }

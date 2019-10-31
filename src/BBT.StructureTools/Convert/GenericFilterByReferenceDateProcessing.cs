@@ -18,10 +18,10 @@ namespace BBT.StructureTools.Convert
         /// Initializes a new instance of the <see cref="GenericFilterByReferenceDateProcessing{TSourceClass, TTargetClass}" /> class.
         /// </summary>
         public GenericFilterByReferenceDateProcessing(
-            DateTime aReferenceDate,
-            ITemporalDataDescriptor<TSourceClass> aTemporalSourceDataDescriptor)
+            DateTime referenceDate,
+            ITemporalDataDescriptor<TSourceClass> temporalSourceDataDescriptor)
             : base(
-            aX => aTemporalSourceDataDescriptor.GetBegin(aX) <= aReferenceDate && aTemporalSourceDataDescriptor.GetEnd(aX) >= aReferenceDate)
+            x => temporalSourceDataDescriptor.GetBegin(x) <= referenceDate && temporalSourceDataDescriptor.GetEnd(x) >= referenceDate)
         {
         }
     }

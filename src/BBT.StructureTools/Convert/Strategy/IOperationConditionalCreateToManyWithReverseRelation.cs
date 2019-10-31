@@ -13,7 +13,7 @@ namespace BBT.StructureTools.Convert.Strategy
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TBaseSource">Contains the base type of the source which shall be converted (e.g. LiBaseCover).</typeparam>
-    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaimCover).</typeparam>
+    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaicover).</typeparam>
     /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
     public interface IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IConvertOperation<TSource, TTarget>
@@ -28,10 +28,10 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         /// <param name="source">Declares the source to convert from.</param>
         /// <param name="targetParent">Declares the target value.</param>
-        /// <param name="aReverseRelationOnTarget">Declares the partent of the target value.</param>
+        /// <param name="reverseRelationOnTarget">Declares the partent of the target value.</param>
         void Initialize(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
-            Expression<Func<TBaseTarget, TTarget>> aReverseRelationOnTarget);
+            Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget);
     }
 }

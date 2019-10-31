@@ -15,7 +15,7 @@ namespace BBT.StructureTools.Convert.Strategy
             where TSource : class
             where TTarget : class
     {
-        private readonly ICollection<IBaseAdditionalProcessing> mAdditionalProcessings;
+        private readonly ICollection<IBaseAdditionalProcessing> additionalProcessings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertPostProcessing{TSource, TTarget}" /> class.
@@ -24,7 +24,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             additionalProcessings.Should().NotBeNull();
 
-            this.mAdditionalProcessings = additionalProcessings;
+            this.additionalProcessings = additionalProcessings;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             additionalProcessings.Should().NotBeNull();
 
-            additionalProcessings.AddRangeToMe(this.mAdditionalProcessings);
+            additionalProcessings.AddRangeToMe(this.additionalProcessings);
         }
     }
 }

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Tests.Convert.Intention;
-using BBT.StructureTools.Tests.Convert.TestStructure;
-using BBT.StructureTools.Tests.Convert.TestStructure.Registration;
-using BBT.StructureTools.Tests.Convert.TestStructure.Source;
-using BBT.StructureTools.Tests.Convert.TestStructure.Target;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
-namespace BBT.StructureTools.Tests.Convert
+﻿namespace BBT.StructureTools.Tests.Convert
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Tests.Convert.Intention;
+    using BBT.StructureTools.Tests.Convert.TestStructure;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Registration;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Source;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Target;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class ConvertRootTreeLeafWithMasterDataTests
     {
         private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testcandidate;
@@ -31,10 +31,10 @@ namespace BBT.StructureTools.Tests.Convert
             kernel.Bind<IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>>().To<TreeMasterDataToTreeConvertRegistrations>();
 
             kernel.Bind<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>>().To<LeafTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDataTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDataConvertRegistrations>();
+            kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDattargetLeafConvertRegistrations>();
+            kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDatconvertRegistrations>();
 
-            kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDataCopyRegistrations>();
+            kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDatcopyRegistrations>();
 
             this.testcandidate = kernel.Get<IConvert<Root, TargetRoot, ITestConvertIntention>>();
         }
@@ -49,22 +49,22 @@ namespace BBT.StructureTools.Tests.Convert
             var treemasterdata = new TreeMasterData();
             var leaf = new Leaf()
             {
-                TemporalDataRefDate = new DateTime(1993, 10, 5)
+                TemporalDataRefDate = new DateTime(1993, 10, 5),
             };
             var leafmasterdata = new LeafMasterData
             {
-                IsDefault = true
+                IsDefault = true,
             };
             var leafmasterdata2 = new LeafMasterData();
             var temporalleafmasterdata = new TemporalLeafMasterData
             {
                 Begin = new DateTime(1993, 10, 4),
-                End = new DateTime(2019, 10, 29)
+                End = new DateTime(2019, 10, 29),
             };
             var temporalleafmasterdata2 = new TemporalLeafMasterData
             {
                 Begin = new DateTime(1994, 10, 7),
-                End = new DateTime(2019, 10, 3)
+                End = new DateTime(2019, 10, 3),
             };
 
             // Build object tree
@@ -79,12 +79,12 @@ namespace BBT.StructureTools.Tests.Convert
             leaf.TemporalLeafMasterData.Add(temporalleafmasterdata2);
 
             // Add values to properties
-            root.CreateValueForProperty(aX => aX.RootName);
-            tree.CreateValueForProperty(aX => aX.TreeName);
-            treemasterdata.CreateValueForProperty(aX => aX.TreeMasterDataName);
-            leaf.CreateValueForProperty(aX => aX.LeafName);
-            leafmasterdata.CreateValueForProperty(aX => aX.LeafMasterDataName);
-            leafmasterdata2.CreateValueForProperty(aX => aX.LeafMasterDataName);
+            root.CreateValueForProperty(x => x.RootName);
+            tree.CreateValueForProperty(x => x.TreeName);
+            treemasterdata.CreateValueForProperty(x => x.TreeMasterDataName);
+            leaf.CreateValueForProperty(x => x.LeafName);
+            leafmasterdata.CreateValueForProperty(x => x.LeafMasterDataName);
+            leafmasterdata2.CreateValueForProperty(x => x.LeafMasterDataName);
 
             // Act
             var target = new TargetRoot();

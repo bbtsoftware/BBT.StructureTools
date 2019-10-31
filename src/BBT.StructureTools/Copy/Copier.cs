@@ -29,9 +29,9 @@ namespace BBT.StructureTools.Copy
             copyHelper.Should().NotBeNull();
             factory.Should().NotBeNull();
 
-            var lRegistrations = factory.Create<T>();
-            copyRegistrations.DoRegistrations(lRegistrations);
-            this.operations = lRegistrations.EndRegistrations();
+            var registrations = factory.Create<T>();
+            copyRegistrations.DoRegistrations(registrations);
+            this.operations = registrations.EndRegistrations();
 
             this.copyHelper = copyHelper;
         }

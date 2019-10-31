@@ -13,10 +13,10 @@ namespace BBT.StructureTools.Convert.Strategy
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">
-    /// The type of the list entries which shall be converted into
+    /// The type of the ist entries which shall be converted into
     /// the <typeparamref name="TTargetValue"/>s.</typeparam>
     /// <typeparam name="TTargetValue">
-    /// The list entries which shall be converted from
+    /// The ist entries which shall be converted from
     /// the <typeparamref name="TSourceValue"/>s.</typeparam>
     /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
     public interface IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
@@ -32,10 +32,10 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         /// <param name="sourceFunc">Declares the source entries.</param>
         /// <param name="targetFunc">Declares the target entries.</param>
-        /// <param name="aFilterFunc">Declares the filter function for target value.</param>
+        /// <param name="filterFunc">Declares the filter function for target value.</param>
         void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
-            Func<TSourceValue, TTargetValue, bool> aFilterFunc);
+            Func<TSourceValue, TTargetValue, bool> filterFunc);
     }
 }

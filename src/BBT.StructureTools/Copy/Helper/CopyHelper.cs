@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Copy.Helper
 
             additionalProcessings.OfType<ICopyPostProcessing<TClassToCopy>>()
                                  .ToList()
-                                 .ForEach(aX => aX.DoPostProcessing(source, target));
+                                 .ForEach(x => x.DoPostProcessing(source, target));
         }
     }
 }

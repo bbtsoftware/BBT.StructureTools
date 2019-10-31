@@ -16,22 +16,22 @@ namespace BBT.StructureTools.Copy.Operation
     public class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
         where T : class
     {
-        private readonly Expression<Func<T, TValue>> mTargetExpression;
+        private readonly Expression<Func<T, TValue>> targetexpression;
 
-        private readonly Func<TValue> mValueFunc;
+        private readonly Func<TValue> valueFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationInlineProcessValue{T,TValue}"/> class.
         /// </summary>
         public CopyOperationInlineProcessValue(
             Expression<Func<T, TValue>> targetExpression,
-            Expression<Func<TValue>> aAttrValueExpression)
+            Expression<Func<TValue>> attrValueExpression)
         {
             targetExpression.Should().NotBeNull();
-            aAttrValueExpression.Should().NotBeNull();
+            attrValueExpression.Should().NotBeNull();
 
-            this.mTargetExpression = targetExpression;
-            this.mValueFunc = aAttrValueExpression.Compile();
+            this.targetexpression = targetExpression;
+            this.valueFunc = attrValueExpression.Compile();
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            target.SetPropertyValue(this.mTargetExpression, this.mValueFunc.Invoke());
+            target.SetPropertyValue(this.targetexpression, this.valueFunc.Invoke());
         }
     }
 }

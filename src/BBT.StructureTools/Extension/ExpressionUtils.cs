@@ -16,59 +16,59 @@ namespace BBT.StructureTools.Extension
         /// <summary>
         /// Extract the <see cref="PropertyInfo"/> out of a <see cref="System.Linq.Expressions.Expression"/>.
         /// </summary>
-        /// <param name="aExpression">The expression.</param>
+        /// <param name="expression">The expression.</param>
         /// <typeparam name="TOwner">Type of the property owner.</typeparam>
         /// <typeparam name="TValueOfExpression">Type of the property value.</typeparam>
         /// <returns>The <see cref="PropertyInfo"/>.</returns>
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
-        public static PropertyInfo GetProperty<TOwner, TValueOfExpression>(Expression<Func<TOwner, TValueOfExpression>> aExpression)
+        public static PropertyInfo GetProperty<TOwner, TValueOfExpression>(Expression<Func<TOwner, TValueOfExpression>> expression)
         {
-            aExpression.Should().NotBeNull();
+            expression.Should().NotBeNull();
 
-            MemberExpression lMemberExpression;
-            if (aExpression.Body is UnaryExpression lUnaryExpression)
+            MemberExpression memberExpression;
+            if (expression.Body is UnaryExpression unaryExpression)
             {
-                lMemberExpression = lUnaryExpression.Operand as MemberExpression;
+                memberExpression = unaryExpression.Operand as MemberExpression;
             }
             else
             {
-                lMemberExpression = (MemberExpression)aExpression.Body;
+                memberExpression = (MemberExpression)expression.Body;
             }
 
-            var lProperty = lMemberExpression.Member as PropertyInfo;
+            var property = memberExpression.Member as PropertyInfo;
 
-            if (lProperty == null)
+            if (property == null)
             {
-                var lMessage = string.Format(CultureInfo.InvariantCulture, "Property {0} not found in Type {1}.", lMemberExpression.Member.Name, typeof(TOwner));
-                throw new ArgumentException(lMessage);
+                var message = string.Format(CultureInfo.InvariantCulture, "Property {0} not found in Type {1}.", memberExpression.Member.Name, typeof(TOwner));
+                throw new ArgumentException(message);
             }
 
-            if (lProperty.DeclaringType != null && (typeof(TOwner) != lProperty.DeclaringType) && !lProperty.DeclaringType.IsAssignableFrom(typeof(TOwner)))
+            if (property.DeclaringType != null && (typeof(TOwner) != property.DeclaringType) && !property.DeclaringType.IsAssignableFrom(typeof(TOwner)))
             {
-                var lMessage = string.Format(CultureInfo.InvariantCulture, "Property {0} not a member of Type {1}.", lMemberExpression.Member.Name, typeof(TOwner));
-                throw new ArgumentException(lMessage);
+                var message = string.Format(CultureInfo.InvariantCulture, "Property {0} not a member of Type {1}.", memberExpression.Member.Name, typeof(TOwner));
+                throw new ArgumentException(message);
             }
 
-            return lProperty;
+            return property;
         }
 
         /// <summary>
         /// Extract the <see cref="PropertyInfo"/> out of a <see cref="System.Linq.Expressions.Expression"/>.
         /// </summary>
-        /// <param name="aExpression">The expression.</param>
+        /// <param name="expression">The expression.</param>
         /// <returns>The <see cref="PropertyInfo"/>.</returns>
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
-        public static PropertyInfo GetProperty(LambdaExpression aExpression)
+        public static PropertyInfo GetProperty(LambdaExpression expression)
         {
-            aExpression.Should().NotBeNull();
+            expression.Should().NotBeNull();
 
-            (aExpression.Body is MemberExpression).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Body of {0} is not a MemberExpression.", aExpression));
-            var lMemberExpression = (MemberExpression)aExpression.Body;
+            (expression.Body is MemberExpression).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Body of {0} is not a MemberExpression.", expression));
+            var memberExpression = (MemberExpression)expression.Body;
 
-            (lMemberExpression.Member is PropertyInfo).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Member of {0} is not a PropertyInfo.", lMemberExpression));
-            var lProperty = (PropertyInfo)lMemberExpression.Member;
+            (memberExpression.Member is PropertyInfo).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Member of {0} is not a PropertyInfo.", memberExpression));
+            var property = (PropertyInfo)memberExpression.Member;
 
-            return lProperty;
+            return property;
         }
     }
 }

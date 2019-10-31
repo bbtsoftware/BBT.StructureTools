@@ -18,9 +18,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         #region members and setup
         private readonly ICopy<IParentTestClass> testcandidate;
 
-        /// <summary>
-        /// The test fixture set up.
-        /// </summary>
         public CopyOperationCreateToOneWithReverseRelationIntTests()
         {
             var kernel = TestIoContainer.Initialize();
@@ -40,26 +37,26 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void Copy_MustCopyParentReference()
         {
             // Arrange
-            var lTestClassParentOriginal = new ParentTestClass();
-            lTestClassParentOriginal.Child = new ChildTestClass()
+            var testClassParentOriginal = new ParentTestClass();
+            testClassParentOriginal.Child = new ChildTestClass()
             {
-                ParentReference = lTestClassParentOriginal
+                ParentReference = testClassParentOriginal,
             };
 
-            var lTestClassParentCopy = new ParentTestClass();
+            var testClassParentCopy = new ParentTestClass();
 
             // Act
             this.testcandidate.Copy(
-                lTestClassParentOriginal,
-                lTestClassParentCopy,
+                testClassParentOriginal,
+                testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            lTestClassParentCopy.Should().NotBeSameAs(lTestClassParentOriginal);
+            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
 
             // Check if the Child's new reference is correctly set to the copied parent's reference.
-            lTestClassParentCopy.Should().BeSameAs(lTestClassParentCopy.Child.ParentReference);
+            testClassParentCopy.Should().BeSameAs(testClassParentCopy.Child.ParentReference);
         }
 
         /// <summary>
@@ -70,25 +67,25 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void Copy_MustNotFailWhenChildIsNull()
         {
             // Arrange
-            var lTestClassParentOriginal = new ParentTestClass
+            var testClassParentOriginal = new ParentTestClass
             {
-                Child = null
+                Child = null,
             };
 
-            var lTestClassParentCopy = new ParentTestClass();
+            var testClassParentCopy = new ParentTestClass();
 
             // Act
             this.testcandidate.Copy(
-                lTestClassParentOriginal,
-                lTestClassParentCopy,
+                testClassParentOriginal,
+                testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            lTestClassParentCopy.Should().NotBeSameAs(lTestClassParentOriginal);
+            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
 
             // Check if the Child of the copied class is null
-            lTestClassParentCopy.Child.Should().BeNull();
+            testClassParentCopy.Child.Should().BeNull();
         }
 
         #region test data
@@ -136,22 +133,22 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         {
             // Further notice: This class is needed and it's registration via IoC container
             // is mandatory. Otherwise copying the child elements wouldn't work!
-            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
             }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations.RegisterCreateToOneWithReverseRelation<IChildTestClass, ChildTestClass>(
-                    aX => aX.Child,
-                    aX => aX.ParentReference);
+                registrations.RegisterCreateToOneWithReverseRelation<IChildTestClass, ChildTestClass>(
+                    x => x.Child,
+                    x => x.ParentReference);
             }
         }
         #endregion

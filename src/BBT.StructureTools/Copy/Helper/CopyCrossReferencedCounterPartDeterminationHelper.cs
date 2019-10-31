@@ -26,39 +26,39 @@ namespace BBT.StructureTools.Copy.Helper
         /// <summary>
         /// Represents the property on the "referencing model" that refers to the "referenced model".
         /// </summary>
-        private readonly PropertyInfo mReferencingProperty;
+        private readonly PropertyInfo referencingProperty;
 
         /// <summary>
         /// Stores the post processing for the "cross-referenced model".
         /// </summary>
-        private readonly GenericCopyPostProcessing<TCrossReferencedModel> mCrossReferencedModelPostProcessings;
+        private readonly GenericCopyPostProcessing<TCrossReferencedModel> crossReferencedModelPostProcessings;
 
         /// <summary>
         /// Stores the post processing for the "referencing model".
         /// </summary>
-        private readonly GenericCopyPostProcessing<TReferencingModel> mReferencingModelPostProcessings;
+        private readonly GenericCopyPostProcessing<TReferencingModel> referencingModelPostProcessings;
 
         /// <summary>
         /// A repository of source target pairs of the copied "cross-referenced models".
         /// </summary>
-        private readonly Dictionary<TCrossReferencedModel, TCrossReferencedModel> mReferencedModelSourceTargetRepository;
+        private readonly Dictionary<TCrossReferencedModel, TCrossReferencedModel> referencedModelSourceTargetRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyCrossReferencedCounterPartDeterminationHelper{TCrossReferencedModel,TReferencingModel}"/> class.
         /// </summary>
         /// <remarks>It is essential that the "cross-referenced models" are copied before the "referencing models".</remarks>
-        /// <param name="aReferencingProperty">An expression representing the property on the "referencing model" that refers to the "cross-referenced model".</param>
+        /// <param name="referencingProperty">An expression representing the property on the "referencing model" that refers to the "cross-referenced model".</param>
         public CopyCrossReferencedCounterPartDeterminationHelper(
-            Expression<Func<TReferencingModel, TCrossReferencedModel>> aReferencingProperty)
+            Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            aReferencingProperty.Should().NotBeNull();
+            referencingProperty.Should().NotBeNull();
 
-            this.mReferencingProperty = ExpressionUtils.GetProperty(aReferencingProperty);
+            this.referencingProperty = ExpressionUtils.GetProperty(referencingProperty);
 
-            this.mCrossReferencedModelPostProcessings = new GenericCopyPostProcessing<TCrossReferencedModel>(this.CrossReferencedModelAction);
-            this.mReferencingModelPostProcessings = new GenericCopyPostProcessing<TReferencingModel>(this.ReferencingModelAction);
+            this.crossReferencedModelPostProcessings = new GenericCopyPostProcessing<TCrossReferencedModel>(this.CrossReferencedModelAction);
+            this.referencingModelPostProcessings = new GenericCopyPostProcessing<TReferencingModel>(this.ReferencingModelAction);
 
-            this.mReferencedModelSourceTargetRepository = new Dictionary<TCrossReferencedModel, TCrossReferencedModel>();
+            this.referencedModelSourceTargetRepository = new Dictionary<TCrossReferencedModel, TCrossReferencedModel>();
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace BBT.StructureTools.Copy.Helper
         {
             additionalProcessings.Should().NotBeNull();
 
-            additionalProcessings.Add(this.mCrossReferencedModelPostProcessings);
-            additionalProcessings.Add(this.mReferencingModelPostProcessings);
+            additionalProcessings.Add(this.crossReferencedModelPostProcessings);
+            additionalProcessings.Add(this.referencingModelPostProcessings);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace BBT.StructureTools.Copy.Helper
             target.Should().NotBeNull();
 
             // Register source target pair.
-            this.mReferencedModelSourceTargetRepository.Add(source, target);
+            this.referencedModelSourceTargetRepository.Add(source, target);
         }
 
         /// <summary>
@@ -98,26 +98,26 @@ namespace BBT.StructureTools.Copy.Helper
             target.Should().NotBeNull();
 
             // Determine correct counter part.
-            var lCrossReferencedSourceModel = (TCrossReferencedModel)this.mReferencingProperty.GetValue(source);
+            var crossReferencedSourceModel = (TCrossReferencedModel)this.referencingProperty.GetValue(source);
 
-            if (lCrossReferencedSourceModel == null)
+            if (crossReferencedSourceModel == null)
             {
                 // abort, referencing property is null
                 return;
             }
 
-            if (!this.mReferencedModelSourceTargetRepository.TryGetValue(
-                lCrossReferencedSourceModel,
-                out var lCrossReferencedCounterPart))
+            if (!this.referencedModelSourceTargetRepository.TryGetValue(
+                crossReferencedSourceModel,
+                out var crossReferencedCounterPart))
             {
-                var lReferencingType = typeof(TReferencingModel);
-                var lCrossReferencedType = typeof(TCrossReferencedModel);
+                var referencingType = typeof(TReferencingModel);
+                var crossReferencedType = typeof(TCrossReferencedModel);
 
-                throw new CopyConvertCompareException($"The correct cross-referenced counter part could not be determined. The referenced models ('{lCrossReferencedType}') must be processed before the referencing models ('{lReferencingType}')");
+                throw new CopyConvertCompareException($"The correct cross-referenced counter part could not be determined. The referenced models ('{crossReferencedType}') must be processed before the referencing models ('{referencingType}')");
             }
 
             // Set correct counter part.
-            this.mReferencingProperty.SetValue(target, lCrossReferencedCounterPart);
+            this.referencingProperty.SetValue(target, crossReferencedCounterPart);
         }
     }
 }

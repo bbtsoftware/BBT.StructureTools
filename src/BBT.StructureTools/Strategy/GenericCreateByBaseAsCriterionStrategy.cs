@@ -17,16 +17,16 @@ namespace BBT.StructureTools.Strategy
         where TImpl : TInterface, new()
         where TInterface : class, TBaseTargetInterface
     {
-        private readonly IInstanceCreator<TInterface, TImpl> mInstanceCreator;
+        private readonly IInstanceCreator<TInterface, TImpl> instanceCreator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericCreateByBaseAsCriterionStrategy{TBaseInterface, TCriterion, TConcreteInterface, TInterface, TImpl}"/> class.
         /// </summary>
-        public GenericCreateByBaseAsCriterionStrategy(IInstanceCreator<TInterface, TImpl> aInstanceCreator)
+        public GenericCreateByBaseAsCriterionStrategy(IInstanceCreator<TInterface, TImpl> instanceCreator)
         {
-            aInstanceCreator.Should().NotBeNull();
+            instanceCreator.Should().NotBeNull();
 
-            this.mInstanceCreator = aInstanceCreator;
+            this.instanceCreator = instanceCreator;
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace BBT.StructureTools.Strategy
         /// </summary>
         public TBaseTargetInterface CreateInstance()
         {
-            var lInstance = this.mInstanceCreator.Create();
-            return lInstance;
+            var instance = this.instanceCreator.Create();
+            return instance;
         }
 
         /// <summary>

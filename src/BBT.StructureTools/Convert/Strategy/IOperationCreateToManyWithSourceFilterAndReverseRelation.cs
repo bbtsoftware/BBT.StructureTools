@@ -33,10 +33,10 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         /// <param name="sourceFunc">Declares the filtered source values.</param>
         /// <param name="targetExpression">Declares the collection property on target.</param>
-        /// <param name="aCreateConvertHelper">Used to create the collection entries on target.</param>
+        /// <param name="createConvertHelper">Used to create the collection entries on target.</param>
         void Initialize(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper);
     }
 }

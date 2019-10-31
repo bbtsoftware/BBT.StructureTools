@@ -18,9 +18,9 @@ namespace BBT.StructureTools.Copy.Operation
         where TReferencingModel : class
     {
         /// <summary>
-        /// Initializes the operation with a list of <see cref="IBaseAdditionalProcessing"/>.
-        /// List can be empty, but must not be null.
+        /// Initializes the operation with a ist of <see cref="IBaseAdditionalProcessing"/>.
+        /// ist can be empty, but must not be null.
         /// </summary>
-        void Initialize(Expression<Func<TReferencingModel, TCrossReferencedModel>> aReferencingProperty);
+        void Initialize(Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty);
     }
 }

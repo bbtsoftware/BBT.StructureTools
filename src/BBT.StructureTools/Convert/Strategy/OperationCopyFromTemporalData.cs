@@ -20,34 +20,34 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> mConvert;
-        private readonly IConvertHelper mConvertHelper;
-        private readonly ITemporalDataDescriptor<TSourceValue> mSourceTemporalCollectionDataDescriptor;
+        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+        private readonly IConvertHelper convertHelper;
+        private readonly ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, IEnumerable<TSourceValue>> mSourceFunc;
+        private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
         /// Function to get the reference date vale.
         /// </summary>
-        private Func<TSource, TTarget, DateTime> mReferenceDateFunc;
+        private Func<TSource, TTarget, DateTime> referenceDateFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCopyFromTemporalData{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationCopyFromTemporalData(
-            IConvert<TSourceValue, TTarget, TConvertIntention> aConvert,
-            ITemporalDataDescriptor<TSourceValue> aSourceTemporalCollectionDataDescriptor,
-            IConvertHelper aConvertHelper)
+            IConvert<TSourceValue, TTarget, TConvertIntention> convert,
+            ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor,
+            IConvertHelper convertHelper)
         {
-            aConvert.Should().NotBeNull();
-            aConvertHelper.Should().NotBeNull();
+            convert.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvert = aConvert;
-            this.mSourceTemporalCollectionDataDescriptor = aSourceTemporalCollectionDataDescriptor;
-            this.mConvertHelper = aConvertHelper;
+            this.convert = convert;
+            this.sourceTemporalCollectionDataDescriptor = sourceTemporalCollectionDataDescriptor;
+            this.convertHelper = convertHelper;
         }
 
         /// <summary>
@@ -55,13 +55,13 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> aSourceFunc,
-            Func<TSource, TTarget, DateTime> aReferenceDateFunc)
+            Func<TSource, TTarget, DateTime> referenceDateFunc)
         {
             aSourceFunc.Should().NotBeNull();
-            aReferenceDateFunc.Should().NotBeNull();
+            referenceDateFunc.Should().NotBeNull();
 
-            this.mSourceFunc = aSourceFunc;
-            this.mReferenceDateFunc = aReferenceDateFunc;
+            this.sourceFunc = aSourceFunc;
+            this.referenceDateFunc = referenceDateFunc;
         }
 
         /// <summary>
@@ -70,34 +70,34 @@ namespace BBT.StructureTools.Convert.Strategy
         public void Execute(
             TSource aSource,
             TTarget aTarget,
-            ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
+            ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             aSource.Should().NotBeNull();
             aTarget.Should().NotBeNull();
-            aAdditionalProcessings.Should().NotBeNull();
+            additionalProcessings.Should().NotBeNull();
 
-            var lSourceValues = this.mSourceFunc.Invoke(aSource);
-            var lReferenceDate = this.mReferenceDateFunc.Invoke(aSource, aTarget);
+            var sourceValues = this.sourceFunc.Invoke(aSource);
+            var referenceDate = this.referenceDateFunc.Invoke(aSource, aTarget);
 
-            var lReferenceDateFilterProcessing = new GenericFilterByReferenceDateProcessing<TSourceValue, TTarget>(lReferenceDate, this.mSourceTemporalCollectionDataDescriptor);
-            aAdditionalProcessings.Add(lReferenceDateFilterProcessing);
+            var referenceDateFilterProcessing = new GenericFilterByReferenceDateProcessing<TSourceValue, TTarget>(referenceDate, this.sourceTemporalCollectionDataDescriptor);
+            additionalProcessings.Add(referenceDateFilterProcessing);
 
             // Ensure that only one of the source values is converted into target. This is achieved
             // by declaring additional processings of type IConvertInterception.
-            var lIsAlreadyProcessed = false;
-            foreach (var lSourceValue in lSourceValues)
+            var isAlreadyProcessed = false;
+            foreach (var sourceValue in sourceValues)
             {
-                if (this.mConvertHelper.ContinueConvertProcess<TSourceValue, TTarget>(
-                    lSourceValue, aAdditionalProcessings))
+                if (this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(
+                    sourceValue, additionalProcessings))
                 {
-                    if (lIsAlreadyProcessed)
+                    if (isAlreadyProcessed)
                     {
-                        var lMsg = FormattableString.Invariant($"Attempted to convert from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' multiple times. Make sure the temporal data filter is unique.");
-                        throw new InvalidOperationException(lMsg);
+                        var message = FormattableString.Invariant($"Attempted to convert from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' multiple times. Make sure the temporal data filter is unique.");
+                        throw new InvalidOperationException(message);
                     }
 
-                    this.mConvert.Convert(lSourceValue, aTarget, aAdditionalProcessings);
-                    lIsAlreadyProcessed = true;
+                    this.convert.Convert(sourceValue, aTarget, additionalProcessings);
+                    isAlreadyProcessed = true;
                 }
             }
         }

@@ -31,14 +31,14 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Initializes the <see cref="IConvertOperation{TSource,TTarget}"/>.
         /// </summary>
-        /// <param name="aMergeFunc">Declares the collection property to merge on source.</param>
+        /// <param name="mergeFunc">Declares the collection property to merge on source.</param>
         /// <param name="sourceFunc">Declares the collection property on <typeparamref name="TMergeValue"/>.</param>
         /// <param name="targetExpression">Declares the collection property on target.</param>
-        /// <param name="aCreateConvertHelper">Used to create the values on target.</param>
+        /// <param name="createConvertHelper">Used to create the values on target.</param>
         void Initialize(
-            Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
+            Func<TSource, IEnumerable<TMergeValue>> mergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper);
     }
 }

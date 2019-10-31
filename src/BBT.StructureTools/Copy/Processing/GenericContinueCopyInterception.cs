@@ -12,26 +12,26 @@ namespace BBT.StructureTools.Copy.Processing
     public class GenericContinueCopyInterception<TType> : IGenericContinueCopyInterception<TType>
         where TType : class
     {
-        private readonly Func<TType, bool> mShallCopyFunc;
+        private readonly Func<TType, bool> shallCopyFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericContinueCopyInterception{TType}"/> class.
         /// </summary>
-        public GenericContinueCopyInterception(Func<TType, bool> aShallCopyFunc)
+        public GenericContinueCopyInterception(Func<TType, bool> shallCopyFunc)
         {
-            aShallCopyFunc.Should().NotBeNull();
+            shallCopyFunc.Should().NotBeNull();
 
-            this.mShallCopyFunc = aShallCopyFunc;
+            this.shallCopyFunc = shallCopyFunc;
         }
 
         /// <summary>
-        /// <see cref="IGenericContinueCopyInterception{TType}.ShallCopy"/>.
+        /// <see cref="IGenericContinueCopyInterception{TType}.Shalcopy"/>.
         /// </summary>
-        public bool ShallCopy(TType aObject)
+        public bool Shalcopy(TType aObject)
         {
             aObject.Should().NotBeNull();
 
-            return this.mShallCopyFunc.Invoke(aObject);
+            return this.shallCopyFunc.Invoke(aObject);
         }
     }
 }

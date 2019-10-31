@@ -32,14 +32,14 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
         public void MustExecuteInlineCopyProcessing()
         {
             // Arrange
-            var lSource = new TestClass();
-            var lTarget = new TestClass();
+            var source = new TestClass();
+            var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(lSource, lTarget, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lTarget.TestGuid.Should().NotBe(Guid.Empty);
+            target.TestGuid.Should().NotBe(Guid.Empty);
         }
 
         private class TestClass
@@ -49,12 +49,12 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 
         private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<TestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
-                    .RegisterInlineValueProcessing(aX => aX.TestGuid, () => Guid.NewGuid());
+                registrations
+                    .RegisterInlineValueProcessing(x => x.TestGuid, () => Guid.NewGuid());
             }
         }
     }

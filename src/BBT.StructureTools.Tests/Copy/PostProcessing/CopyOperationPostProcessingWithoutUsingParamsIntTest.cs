@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Processing;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
-namespace BBT.StructureTools.Tests.Copy.PostProcessing
+﻿namespace BBT.StructureTools.Tests.Copy.PostProcessing
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Processing;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
         #region setup and members
@@ -36,15 +36,15 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
         public void MustExecuteRegisteredSinglePostProcessings()
         {
             // Arrange
-            var lTestClassOriginal = new TestClass();
-            var lTestClassCopy = new TestClass();
+            var testClassOriginal = new TestClass();
+            var testClassCopy = new TestClass();
 
             // Act
-            this.testcandidate.Copy(lTestClassOriginal, lTestClassCopy, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            lTestClassCopy.TestValue.Should().Be(234);
-            lTestClassCopy.TestValue2.Should().Be(0);
+            testClassCopy.TestValue.Should().Be(234);
+            testClassCopy.TestValue2.Should().Be(0);
         }
 
         #endregion
@@ -84,11 +84,11 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
 
         private class TestClassCopyRegistrations : ICopyRegistrations<ITestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<ITestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<ITestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
-                aRegistrations.RegisterPostProcessings(
-                    new GenericCopyPostProcessing<ITestClass>((aSource, aTarget) => aTarget.TestValue = 234));
+                registrations.Should().NotBeNull();
+                registrations.RegisterPostProcessings(
+                    new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234));
             }
         }
         #endregion

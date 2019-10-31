@@ -12,6 +12,6 @@ namespace BBT.StructureTools.Copy.Processing
         /// <summary>
         /// Returns true if the object shall be copied.
         /// </summary>
-        bool ShallCopy(TType aObject);
+        bool Shalcopy(TType obj);
     }
 }

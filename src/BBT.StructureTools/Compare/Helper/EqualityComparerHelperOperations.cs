@@ -17,51 +17,51 @@ namespace BBT.StructureTools.Compare.Helper
         where TModel : class
     {
         /// <summary>
-        /// List of registered compare strategies.
+        /// ist of registered compare strategies.
         /// </summary>
-        private readonly IEnumerable<IEqualityComparerHelperStrategy<TModel>> mRegisteredStrategies;
+        private readonly IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperOperations{TModel}"/> class.
         /// </summary>
-        internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> aRegisteredStrategies)
+        internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
         {
-            aRegisteredStrategies.Should().NotBeNull();
+            registeredStrategies.Should().NotBeNull();
 
-            this.mRegisteredStrategies = aRegisteredStrategies;
+            this.registeredStrategies = registeredStrategies;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperOperations{TModel}.AreRegistrationsEquals(TModel, TModel)"/>.
         /// </summary>
-        public bool AreRegistrationsEquals(TModel aCandidate1, TModel aCandidate2)
+        public bool AreRegistrationsEquals(TModel candidate1, TModel candidate2)
         {
             return this.AreRegistrationsEquals(
-                aCandidate1, aCandidate2, System.Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
+                candidate1, candidate2, System.Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperOperations{TModel}.AreRegistrationsEquals(TModel,TModel,ICollection{IBaseAdditionalProcessing},IEnumerable{IComparerExclusion})"/>.
         /// </summary>
         public bool AreRegistrationsEquals(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions)
+            IEnumerable<IComparerExclusion> exclusions)
         {
-            if (aCandidate1 == null && aCandidate2 == null)
+            if (candidate1 == null && candidate2 == null)
             {
                 return true;
             }
 
-            if (aCandidate1 == null || aCandidate2 == null)
+            if (candidate1 == null || candidate2 == null)
             {
                 return false;
             }
 
-            foreach (var lRegisteredStrategy in this.mRegisteredStrategies)
+            foreach (var registeredStrategy in this.registeredStrategies)
             {
-                if (!lRegisteredStrategy.IsElementEqualsOrExcluded(aCandidate1, aCandidate2, additionalProcessings, aExclusions))
+                if (!registeredStrategy.IsElementEqualsOrExcluded(candidate1, candidate2, additionalProcessings, exclusions))
                 {
                     return false;
                 }
@@ -73,23 +73,23 @@ namespace BBT.StructureTools.Compare.Helper
         /// <summary>
         /// See <see cref="IEqualityComparerHelperOperations{TModel}.GetHashCodeOfRegistrations(TModel)"/>.
         /// </summary>
-        public int GetHashCodeOfRegistrations(TModel aModel)
+        public int GetHashCodeOfRegistrations(TModel model)
         {
-            var lHashCodes = this.mRegisteredStrategies
-                .Select(aX => aX.GetElementHashCode(aModel))
-                .Where(aX => aX.HasValue)
-                .Select(aX => aX.Value)
+            var hashCodes = this.registeredStrategies
+                .Select(x => x.GetElementHashCode(model))
+                .Where(x => x.HasValue)
+                .Select(x => x.Value)
                 .ToList();
 
             // Hash in case of no attributes
-            var lHash = aModel.GetType().GetHashCode();
+            var hash = model.GetType().GetHashCode();
 
-            for (int lIndex = 0; lIndex < lHashCodes.Count; lIndex++)
+            for (var index = 0; index < hashCodes.Count; index++)
             {
-                lHash ^= BitOperations.RotateL(lHashCodes.ElementAt(lIndex), lIndex % 32);
+                hash ^= BitOperations.RotateL(hashCodes.ElementAt(index), index % 32);
             }
 
-            return lHash;
+            return hash;
         }
     }
 }

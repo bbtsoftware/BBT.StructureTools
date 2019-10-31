@@ -21,19 +21,19 @@ namespace BBT.StructureTools.Copy.Operation
         where TStrategy : class, ICopyStrategy<TChild>
         where TChild : class
     {
-        private readonly ICopyStrategyProvider<TStrategy, TChild> mStrategyProvider;
-        private Func<T, IEnumerable<TChild>> mSourceFunc;
-        private Expression<Func<TChild, T>> mReverseRelationExpression;
+        private readonly ICopyStrategyProvider<TStrategy, TChild> strategyProvider;
+        private Func<T, IEnumerable<TChild>> sourceFunc;
+        private Expression<Func<TChild, T>> reverseRelationExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly{T, TStrategy, TChild}"/> class.
         /// </summary>
         public CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly(
-            ICopyStrategyProvider<TStrategy, TChild> aGenericStrategyProvider)
+            ICopyStrategyProvider<TStrategy, TChild> genericStrategyProvider)
         {
-            aGenericStrategyProvider.Should().NotBeNull();
+            genericStrategyProvider.Should().NotBeNull();
 
-            this.mStrategyProvider = aGenericStrategyProvider;
+            this.strategyProvider = genericStrategyProvider;
         }
 
         /// <summary>
@@ -44,15 +44,15 @@ namespace BBT.StructureTools.Copy.Operation
             T target,
             ICopyCallContext copyCallContext)
         {
-            var lNewKidsList = new List<TChild>();
+            var newKids = new List<TChild>();
 
-            foreach (var lChild in this.mSourceFunc.Invoke(source))
+            foreach (var child in this.sourceFunc.Invoke(source))
             {
-                var lStrategy = this.mStrategyProvider.GetStrategy(lChild);
-                var lChildCopy = lStrategy.Create();
-                lStrategy.Copy(lChild, lChildCopy, copyCallContext);
-                lChildCopy.SetPropertyValue(this.mReverseRelationExpression, target);
-                lNewKidsList.Add(lChildCopy);
+                var strategy = this.strategyProvider.GetStrategy(child);
+                var childCopy = strategy.Create();
+                strategy.Copy(child, childCopy, copyCallContext);
+                childCopy.SetPropertyValue(this.reverseRelationExpression, target);
+                newKids.Add(childCopy);
             }
         }
 
@@ -61,14 +61,14 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         public void Initialize(
             Func<T, IEnumerable<TChild>> sourceFunc,
-            Expression<Func<TChild, T>> aReverseRelationExpression)
+            Expression<Func<TChild, T>> reverseRelationExpression)
         {
             sourceFunc.Should().NotBeNull();
 
-            aReverseRelationExpression.Should().NotBeNull();
+            reverseRelationExpression.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mReverseRelationExpression = aReverseRelationExpression;
+            this.sourceFunc = sourceFunc;
+            this.reverseRelationExpression = reverseRelationExpression;
         }
     }
 }

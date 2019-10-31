@@ -17,55 +17,55 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// <summary>
         /// Function to get the property value.
         /// </summary>
-        private readonly Func<TModel, TValue> mFunc;
+        private readonly Func<TModel, TValue> func;
 
         /// <summary>
         /// Name of compared property.
         /// </summary>
-        private readonly string mPropertyName;
+        private readonly string propertyName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperStrategyCompareAttribute{TModel,TValue}"/> class.
         /// </summary>
-        public EqualityComparerHelperStrategyCompareAttribute(Expression<Func<TModel, TValue>> aExpression)
+        public EqualityComparerHelperStrategyCompareAttribute(Expression<Func<TModel, TValue>> expression)
         {
-            this.mFunc = aExpression.Compile();
-            this.mPropertyName = EqualityComparerHelperStrategyUtils.GetPropertyName(aExpression);
+            this.func = expression.Compile();
+            this.propertyName = EqualityComparerHelperStrategyUtils.GetPropertyName(expression);
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.IsElementEqualsOrExcluded"/>.
         /// </summary>
         public bool IsElementEqualsOrExcluded(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions)
+            IEnumerable<IComparerExclusion> exclusions)
         {
-            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(aExclusions, typeof(TModel), this.mPropertyName))
+            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(exclusions, typeof(TModel), this.propertyName))
             {
                 return true;
             }
 
-            var lValue1 = this.mFunc.Invoke(aCandidate1);
-            var lValue2 = this.mFunc.Invoke(aCandidate2);
+            var value1 = this.func.Invoke(candidate1);
+            var value2 = this.func.Invoke(candidate2);
 
-            var lIsEqual = EqualityComparer<TValue>.Default.Equals(lValue1, lValue2);
-            return lIsEqual;
+            var isEqual = EqualityComparer<TValue>.Default.Equals(value1, value2);
+            return isEqual;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.GetElementHashCode"/>.
         /// </summary>
-        public int? GetElementHashCode(TModel aModel)
+        public int? GetElementHashCode(TModel model)
         {
-            var lValue = this.mFunc.Invoke(aModel);
-            if (lValue == null)
+            var value = this.func.Invoke(model);
+            if (value == null)
             {
                 return null;
             }
 
-            return EqualityComparer<TValue>.Default.GetHashCode(lValue);
+            return EqualityComparer<TValue>.Default.GetHashCode(value);
         }
     }
 }

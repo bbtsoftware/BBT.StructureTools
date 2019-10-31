@@ -21,17 +21,17 @@
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, TValue> mSourceFunc;
+        private Func<TSource, TValue> sourceFunc;
 
         /// <summary>
         /// Function to get the look-up value.
         /// </summary>
-        private Func<TSource, TValue> mSourceLookUpFunc;
+        private Func<TSource, TValue> sourceLookupFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TValue>> mTargetExpression;
+        private Expression<Func<TTarget, TValue>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCopyValueWithLookUp{TSource,TTarget,TValue}.Initialize"/>.
@@ -45,9 +45,9 @@
             aSourceLookUpFunc.Should().NotBeNull();
             aTargetExpression.Should().NotBeNull();
 
-            this.mSourceFunc = aSourceFunc;
-            this.mSourceLookUpFunc = aSourceLookUpFunc;
-            this.mTargetExpression = aTargetExpression;
+            this.sourceFunc = aSourceFunc;
+            this.sourceLookupFunc = aSourceLookUpFunc;
+            this.targetexpression = aTargetExpression;
         }
 
         /// <summary>
@@ -56,21 +56,21 @@
         public void Execute(
             TSource aSource,
             TTarget aTarget,
-            ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
+            ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             aSource.Should().NotBeNull();
             aTarget.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(aSource);
+            var sourceValue = this.sourceFunc.Invoke(aSource);
 
-            if (LookupUtils.IsDefaultValue(lSourceValue))
+            if (LookupUtils.IsDefaultValue(sourceValue))
             {
-                lSourceValue = this.mSourceLookUpFunc.Invoke(aSource);
+                sourceValue = this.sourceLookupFunc.Invoke(aSource);
             }
 
             aTarget.SetPropertyValue(
-                this.mTargetExpression,
-                lSourceValue);
+                this.targetexpression,
+                sourceValue);
         }
     }
 }

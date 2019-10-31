@@ -28,13 +28,13 @@ namespace BBT.StructureTools.Copy.Operation
         /// <param name="targetFuncExpr">
         ///     The a Target Function Expression.
         /// </param>
-        /// <param name="aCreateCopyHelper">
+        /// <param name="createCopyHelper">
         ///     <see cref="ICreateCopyHelper{TConcreteChild,TParent}"/> which can be used to create the
         ///     copied child instance.
         /// </param>
         void Initialize(
             Func<TParent, TChild> sourceFunc,
             Expression<Func<TParent, TChild>> targetFuncExpr,
-            ICreateCopyHelper<TChild, TConcreteChild, TParent> aCreateCopyHelper);
+            ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper);
     }
 }

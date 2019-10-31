@@ -1,11 +1,11 @@
-﻿using BBT.StructureTools.Convert;
-using BBT.StructureTools.Tests.Convert.Intention;
-using BBT.StructureTools.Tests.Convert.TestStructure.Source;
-using BBT.StructureTools.Tests.Convert.TestStructure.Target;
-using FluentAssertions;
-
-namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
+﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Tests.Convert.Intention;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Source;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Target;
+    using FluentAssertions;
+
     public class RootTargetRootConvertRegistrations : IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>
     {
         private readonly IConvertHelperFactory<Tree, TargetTree, TargetTree, ITestConvertIntention> convertHelperFactory;
@@ -15,13 +15,13 @@ namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
             this.convertHelperFactory = convertHelperFactory;
         }
 
-        public void DoRegistrations(IConvertRegistration<Root, TargetRoot> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<Root, TargetRoot> registrations)
         {
-            aRegistrations.Should().NotBeNull();
+            registrations.Should().NotBeNull();
 
-            aRegistrations
-                .RegisterCopyAttribute(aX => aX.RootName, aX => aX.TargetRootName)
-                .RegisterCreateToOneWithReverseRelation(aX => aX.Tree, aX => aX.TargetTree, this.convertHelperFactory.GetConvertHelper(aX => aX.TargetRoot));
+            registrations
+                .RegisterCopyAttribute(x => x.RootName, x => x.TargetRootName)
+                .RegisterCreateToOneWithReverseRelation(x => x.Tree, x => x.TargetTree, this.convertHelperFactory.GetConvertHelper(x => x.TargetRoot));
         }
     }
 }

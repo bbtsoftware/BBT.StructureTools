@@ -22,27 +22,27 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> mConvert;
+        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
 
-        private readonly IConvertHelper mConvertHelper;
+        private readonly IConvertHelper convertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, IEnumerable<TSourceValue>> mSourceFunc;
+        private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCopyFromMany{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationCopyFromMany(
-            IConvert<TSourceValue, TTarget, TConvertIntention> aConvert,
-            IConvertHelper aConvertHelper)
+            IConvert<TSourceValue, TTarget, TConvertIntention> convert,
+            IConvertHelper convertHelper)
         {
-            aConvert.Should().NotBeNull();
-            aConvertHelper.Should().NotBeNull();
+            convert.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvert = aConvert;
-            this.mConvertHelper = aConvertHelper;
+            this.convert = convert;
+            this.convertHelper = convertHelper;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             sourceFunc.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
+            this.sourceFunc = sourceFunc;
         }
 
         /// <summary>
@@ -67,23 +67,23 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lSourceValues = this.mSourceFunc.Invoke(source);
+            var sourceValues = this.sourceFunc.Invoke(source);
 
             // Ensure that only one of the source values is converted into target. This is achieved
             // by declaring additional processings of type IConvertInterception.
-            var lIsAlreadyProcessed = false;
-            foreach (var lSourceValue in lSourceValues)
+            var isAlreadyProcessed = false;
+            foreach (var sourceValue in sourceValues)
             {
-                if (this.mConvertHelper.ContinueConvertProcess<TSourceValue, TTarget>(lSourceValue, additionalProcessings))
+                if (this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(sourceValue, additionalProcessings))
                 {
-                    if (lIsAlreadyProcessed)
+                    if (isAlreadyProcessed)
                     {
-                        var lMsg = FormattableString.Invariant($"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at maximum.");
-                        throw new CopyConvertCompareException(lMsg);
+                        var message = FormattableString.Invariant($"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at mximum.");
+                        throw new CopyConvertCompareException(message);
                     }
 
-                    this.mConvert.Convert(lSourceValue, target, additionalProcessings);
-                    lIsAlreadyProcessed = true;
+                    this.convert.Convert(sourceValue, target, additionalProcessings);
+                    isAlreadyProcessed = true;
                 }
             }
         }

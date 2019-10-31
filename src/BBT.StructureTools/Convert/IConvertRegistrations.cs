@@ -17,6 +17,6 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// Does the registrations.
         /// </summary>
-        void DoRegistrations(IConvertRegistration<TSource, TTarget> aRegistrations);
+        void DoRegistrations(IConvertRegistration<TSource, TTarget> registrations);
     }
 }

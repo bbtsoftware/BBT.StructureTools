@@ -30,29 +30,29 @@ namespace BBT.StructureTools.Convert.Strategy
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvertHelper mConvertHelper;
+        private readonly IConvertHelper convertHelper;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> mCreateConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, IEnumerable<TSourceValue>> mSourceFunc;
+        private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, ICollection<TTargetValue>>> mTargetExpression;
+        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetexpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCreateToManyWithReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}" /> class.
         /// </summary>
         public OperationCreateToManyWithReverseRelation(
-            IConvertHelper aConvertHelper)
+            IConvertHelper convertHelper)
         {
-            aConvertHelper.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvertHelper = aConvertHelper;
+            this.convertHelper = convertHelper;
         }
 
         /// <summary>
@@ -61,15 +61,15 @@ namespace BBT.StructureTools.Convert.Strategy
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
-            aCreateConvertHelper.Should().NotBeNull();
+            createConvertHelper.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
-            this.mCreateConvertHelper = aCreateConvertHelper;
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
+            this.createConvertHelper = createConvertHelper;
         }
 
         /// <summary>
@@ -84,26 +84,26 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lSourceValues = this.mSourceFunc.Invoke(source);
+            var sourceValues = this.sourceFunc.Invoke(source);
 
-            var lCopies = new List<TTargetValue>();
+            var copies = new List<TTargetValue>();
 
-            foreach (var lSourceValue in lSourceValues)
+            foreach (var sourceValue in sourceValues)
             {
-                if (!this.mConvertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
-                    lSourceValue, additionalProcessings))
+                if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
+                    sourceValue, additionalProcessings))
                 {
                     continue;
                 }
 
-                var lCopy = this.mCreateConvertHelper.CreateTarget(
-                    lSourceValue,
+                var copy = this.createConvertHelper.CreateTarget(
+                    sourceValue,
                     target,
                     additionalProcessings);
-                lCopies.Add(lCopy);
+                copies.Add(copy);
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.mTargetExpression, lCopies);
+            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, copies);
         }
     }
 }

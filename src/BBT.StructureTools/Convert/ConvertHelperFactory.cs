@@ -26,14 +26,14 @@ namespace BBT.StructureTools.Convert
         /// </summary>
         /// <typeparam name="TReverseRelation">See link above.</typeparam>
         public ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention> GetConvertHelper<TReverseRelation>(
-            Expression<Func<TTarget, TReverseRelation>> aReverseRelationFunc)
+            Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
         {
-            aReverseRelationFunc.Should().NotBeNull();
+            reverseRelationFunc.Should().NotBeNull();
 
-            var lConvertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>>();
-            lConvertHelper.SetupReverseRelation(aReverseRelationFunc);
-            return lConvertHelper;
+            var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>>();
+            convertHelper.SetupReverseRelation(reverseRelationFunc);
+            return convertHelper;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace BBT.StructureTools.Convert
         /// </summary>
         public ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention> GetConvertHelper()
         {
-            var lConvertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>>();
-            return lConvertHelper;
+            var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>>();
+            return convertHelper;
         }
     }
 }

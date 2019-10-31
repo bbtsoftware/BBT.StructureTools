@@ -21,7 +21,7 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TSource>> mTargetExpression;
+        private Expression<Func<TTarget, TSource>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCopySource{TSource,TTarget}.Initialize"/>.
@@ -30,7 +30,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             targetExpression.Should().NotBeNull();
 
-            this.mTargetExpression = targetExpression;
+            this.targetexpression = targetExpression;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace BBT.StructureTools.Convert.Strategy
             source.Should().NotBeNull();
             target.Should().NotBeNull();
 
-            target.SetPropertyValue(this.mTargetExpression, source);
+            target.SetPropertyValue(this.targetexpression, source);
         }
     }
 }

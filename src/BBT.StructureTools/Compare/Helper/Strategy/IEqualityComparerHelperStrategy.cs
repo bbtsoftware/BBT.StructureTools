@@ -15,15 +15,15 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// Compares a single element.
         /// </summary>
         bool IsElementEqualsOrExcluded(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions);
+            IEnumerable<IComparerExclusion> exclusions);
 
         /// <summary>
         /// Get the hash code of an element. If the return value is null, the element
         /// is zero and no hash code could calculated.
         /// </summary>
-        int? GetElementHashCode(TModel aModel);
+        int? GetElementHashCode(TModel model);
     }
 }

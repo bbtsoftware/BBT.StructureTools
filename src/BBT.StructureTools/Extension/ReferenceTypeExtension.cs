@@ -18,27 +18,27 @@ namespace BBT.StructureTools.Extension
         /// </summary>
         /// <typeparam name="TTarget">The type of the owner of the collection property.</typeparam>
         /// <typeparam name="TValue">The type of the collection entry.</typeparam>
-        public static void AddRangeToCollectionFilterNullValues<TTarget, TValue>(
-            this TTarget aTarget,
-            Expression<Func<TTarget, ICollection<TValue>>> aTargetExpression,
-            IEnumerable<TValue> aValues)
+        public static void AddRangeToCollectionFilterNulvalues<TTarget, TValue>(
+            this TTarget target,
+            Expression<Func<TTarget, ICollection<TValue>>> targetExpression,
+            IEnumerable<TValue> values)
             where TTarget : class
             where TValue : class
         {
-            aTarget.Should().NotBeNull();
-            aTargetExpression.Should().NotBeNull();
-            aValues.Should().NotBeNull();
+            target.Should().NotBeNull();
+            targetExpression.Should().NotBeNull();
+            values.Should().NotBeNull();
 
-            var lTargetExpression = (MemberExpression)aTargetExpression.Body;
-            var lValueProperty = (PropertyInfo)lTargetExpression.Member;
+            var targetExpressionMemberExpression = (MemberExpression)targetExpression.Body;
+            var valueProperty = (PropertyInfo)targetExpressionMemberExpression.Member;
 
-            var lAddMethod = aTargetExpression.Compile().Invoke(aTarget);
+            var addMethod = targetExpression.Compile().Invoke(target);
 
-            foreach (var lValue in aValues)
+            foreach (var value in values)
             {
-                if (lValue != null)
+                if (value != null)
                 {
-                    lAddMethod.Add(lValue);
+                    addMethod.Add(value);
                 }
             }
         }
@@ -54,11 +54,11 @@ namespace BBT.StructureTools.Extension
             target.Should().NotBeNull();
             memberLamda.Should().NotBeNull();
 
-            var lInfo = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
+            var info = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
 
-            if (lInfo != null)
+            if (info != null)
             {
-                lInfo.SetValue(target, valueToSet, null);
+                info.SetValue(target, valueToSet, null);
             }
             else
             {
@@ -77,11 +77,11 @@ namespace BBT.StructureTools.Extension
             target.Should().NotBeNull();
             memberLamda.Should().NotBeNull();
 
-            var lInfo = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
+            var info = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
 
-            if (lInfo != null)
+            if (info != null)
             {
-                return (TValue)lInfo.GetValue(target);
+                return (TValue)info.GetValue(target);
             }
             else
             {
@@ -98,13 +98,13 @@ namespace BBT.StructureTools.Extension
         {
             expression.Should().NotBeNull();
 
-            if (expression.Body is MemberExpression lMemberExpression)
+            if (expression.Body is MemberExpression memberExpression)
             {
-                return lMemberExpression.Member.Name;
+                return memberExpression.Member.Name;
             }
 
-            var lOperand = ((UnaryExpression)expression.Body).Operand;
-            return ((MemberExpression)lOperand).Member.Name;
+            var operand = ((UnaryExpression)expression.Body).Operand;
+            return ((MemberExpression)operand).Member.Name;
         }
 
         /// <summary>
@@ -116,13 +116,13 @@ namespace BBT.StructureTools.Extension
         {
             expression.Should().NotBeNull();
 
-            if (expression.Body is MemberExpression lMemberExpression)
+            if (expression.Body is MemberExpression memberExpression)
             {
-                return lMemberExpression.Member;
+                return memberExpression.Member;
             }
 
-            var lOperand = ((UnaryExpression)expression.Body).Operand;
-            return ((MemberExpression)lOperand).Member;
+            var operand = ((UnaryExpression)expression.Body).Operand;
+            return ((MemberExpression)operand).Member;
         }
     }
 }

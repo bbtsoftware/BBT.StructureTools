@@ -14,74 +14,41 @@ namespace BBT.StructureTools.Compare.Exclusions
     public sealed class PropertyComparerExclusion<TModelInterface> : IComparerExclusion
     {
         /// <summary>
-        /// Gets the type of exclusion.
-        /// </summary>
-        private readonly TypeOfComparerExclusion mTypeOfComparerExclusion;
-
-        /// <summary>
-        /// Gets the excluded model type.
-        /// </summary>
-        private readonly Type mExcludedModelType;
-
-        /// <summary>
-        /// Gets the excluded property.
-        /// </summary>
-        private readonly string mExcludedPropertyName;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PropertyComparerExclusion{TModelInterface}"/> class.
         /// </summary>
-        public PropertyComparerExclusion(Expression<Func<TModelInterface, object>> aExclusion)
+        public PropertyComparerExclusion(Expression<Func<TModelInterface, object>> exclusion)
         {
-            aExclusion.Should().NotBeNull();
+            exclusion.Should().NotBeNull();
 
-            this.mExcludedModelType = typeof(TModelInterface);
+            this.ExcludedModelType = typeof(TModelInterface);
 
-            if (aExclusion.Body is MemberExpression lMemberExpression)
+            if (exclusion.Body is MemberExpression memberExpression)
             {
-                this.mExcludedPropertyName = lMemberExpression.Member.Name;
+                this.ExcludedPropertyName = memberExpression.Member.Name;
             }
             else
             {
-                var lUnaryExpression = aExclusion.Body as UnaryExpression;
-                lMemberExpression = (MemberExpression)lUnaryExpression.Operand;
-                this.mExcludedPropertyName = lMemberExpression.Member.Name;
+                var unaryExpression = exclusion.Body as UnaryExpression;
+                memberExpression = (MemberExpression)unaryExpression.Operand;
+                this.ExcludedPropertyName = memberExpression.Member.Name;
             }
 
-            this.mTypeOfComparerExclusion = TypeOfComparerExclusion.Property;
+            this.TypeOfComparerExclusion = TypeOfComparerExclusion.Property;
         }
 
         /// <summary>
         /// Gets the type of exclusion.
         /// </summary>
-        public TypeOfComparerExclusion TypeOfComparerExclusion
-        {
-            get
-            {
-                return this.mTypeOfComparerExclusion;
-            }
-        }
+        public TypeOfComparerExclusion TypeOfComparerExclusion { get; }
 
         /// <summary>
         /// Gets the excluded model type.
         /// </summary>
-        public Type ExcludedModelType
-        {
-            get
-            {
-                return this.mExcludedModelType;
-            }
-        }
+        public Type ExcludedModelType { get; }
 
         /// <summary>
         /// Gets the excluded property.
         /// </summary>
-        public string ExcludedPropertyName
-        {
-            get
-            {
-                return this.mExcludedPropertyName;
-            }
-        }
+        public string ExcludedPropertyName { get; }
     }
 }

@@ -12,18 +12,18 @@ namespace BBT.StructureTools.Convert.Value
     /// <typeparam name="TTarget">Target type.</typeparam>
     public class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
     {
-        private readonly IValueConvertMapping<TSource, TTarget> mValueConvertMap;
+        private readonly IValueConvertMapping<TSource, TTarget> valueConvertMap;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueConverter{TSource, TTarget}" /> class.
         /// </summary>
-        public ValueConverter(IConvertValueRegistrations<TSource, TTarget> aConvertValueRegistrations)
+        public ValueConverter(IConvertValueRegistrations<TSource, TTarget> convertValueRegistrations)
         {
-            aConvertValueRegistrations.Should().NotBeNull();
+            convertValueRegistrations.Should().NotBeNull();
 
-            var lRegistrations = new ConvertValueRegistration<TSource, TTarget>();
-            aConvertValueRegistrations.DoRegistrations(lRegistrations);
-            this.mValueConvertMap = lRegistrations.EndRegistrations();
+            var registrations = new ConvertValueRegistration<TSource, TTarget>();
+            convertValueRegistrations.DoRegistrations(registrations);
+            this.valueConvertMap = registrations.EndRegistrations();
         }
 
         /// <summary>
@@ -31,11 +31,11 @@ namespace BBT.StructureTools.Convert.Value
         /// </summary>
         public TTarget ConvertValue(TSource source)
         {
-            if (this.mValueConvertMap.TryGetValue(source, out var target))
+            if (this.valueConvertMap.TryGetValue(source, out var target))
             {
                 return target;
             }
-            else if (this.mValueConvertMap.IsRegisteredForException(source))
+            else if (this.valueConvertMap.IsRegisteredForException(source))
             {
                 throw new CopyConvertCompareException(FormattableString.Invariant($"Conversion of source value {source} of type {typeof(TSource)} to type {typeof(TTarget)} is not supported (by design)."));
             }

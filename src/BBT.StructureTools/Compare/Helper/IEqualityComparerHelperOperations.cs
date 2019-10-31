@@ -15,20 +15,20 @@ namespace BBT.StructureTools.Compare.Helper
         /// <summary>
         /// Compares the registered attributes.
         /// </summary>
-        bool AreRegistrationsEquals(TModel aCandidate1, TModel aCandidate2);
+        bool AreRegistrationsEquals(TModel candidate1, TModel candidate2);
 
         /// <summary>
         /// Compares the registered attributes.
         /// </summary>
         bool AreRegistrationsEquals(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions);
+            IEnumerable<IComparerExclusion> exclusions);
 
         /// <summary>
         /// Get the hash code of the registered attributes.
         /// </summary>
-        int GetHashCodeOfRegistrations(TModel aModel);
+        int GetHashCodeOfRegistrations(TModel model);
     }
 }

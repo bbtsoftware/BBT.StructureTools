@@ -16,14 +16,14 @@ namespace BBT.StructureTools.Convert
         /// <summary>
         /// The action.
         /// </summary>
-        private readonly Func<TSoureClass, bool> mFunc;
+        private readonly Func<TSoureClass, bool> func;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericContinueConvertInterception{TSoureClass, TTargetClass}"/> class.
         /// </summary>
-        public GenericContinueConvertInterception(Func<TSoureClass, bool> aFunc)
+        public GenericContinueConvertInterception(Func<TSoureClass, bool> func)
         {
-            this.mFunc = aFunc;
+            this.func = func;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace BBT.StructureTools.Convert
         /// <returns><code>True</code> if the model must not convert, otherwise. <code>False</code></returns>
         public bool CallConverter(TSoureClass source)
         {
-            return this.mFunc.Invoke(source);
+            return this.func.Invoke(source);
         }
     }
 }

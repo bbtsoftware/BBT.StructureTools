@@ -30,34 +30,34 @@ namespace BBT.StructureTools.Convert.Strategy
         where TMergeValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvertHelper mConvertHelper;
+        private readonly IConvertHelper convertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, IEnumerable<TMergeValue>> mMergeFunc;
+        private Func<TSource, IEnumerable<TMergeValue>> mergeFunc;
 
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TMergeValue, IEnumerable<TSourceValue>> mSourceFunc;
+        private Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, ICollection<TTargetValue>>> mTargetExpression;
+        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetexpression;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> mCreateConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationMergeLevel{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TMergeValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationMergeLevel(
-            IConvertHelper aConvertHelper)
+            IConvertHelper convertHelper)
         {
-            aConvertHelper.Should().NotBeNull();
+            convertHelper.Should().NotBeNull();
 
-            this.mConvertHelper = aConvertHelper;
+            this.convertHelper = convertHelper;
         }
 
         /// <summary>
@@ -67,17 +67,17 @@ namespace BBT.StructureTools.Convert.Strategy
             Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
             aMergeFunc.Should().NotBeNull();
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
-            aCreateConvertHelper.Should().NotBeNull();
+            createConvertHelper.Should().NotBeNull();
 
-            this.mMergeFunc = aMergeFunc;
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
-            this.mCreateConvertHelper = aCreateConvertHelper;
+            this.mergeFunc = aMergeFunc;
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
+            this.createConvertHelper = createConvertHelper;
         }
 
         /// <summary>
@@ -92,37 +92,37 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lMergeValues = this.mMergeFunc.Invoke(source);
+            var mergeValues = this.mergeFunc.Invoke(source);
 
-            var lCopies = new List<TTargetValue>();
+            var copies = new List<TTargetValue>();
 
-            foreach (var lMergeValue in lMergeValues)
+            foreach (var mergeValue in mergeValues)
             {
-                if (!this.mConvertHelper.ContinueConvertProcess<TMergeValue, TTargetValue>(
-                    lMergeValue, additionalProcessings))
+                if (!this.convertHelper.ContinueConvertProcess<TMergeValue, TTargetValue>(
+                    mergeValue, additionalProcessings))
                 {
                     continue;
                 }
 
-                var lSourceValues = this.mSourceFunc.Invoke(lMergeValue);
+                var sourceValues = this.sourceFunc.Invoke(mergeValue);
 
-                foreach (var lSourceValue in lSourceValues)
+                foreach (var sourceValue in sourceValues)
                 {
-                    if (!this.mConvertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
-                    lSourceValue, additionalProcessings))
+                    if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
+                    sourceValue, additionalProcessings))
                     {
                         continue;
                     }
 
-                    var lCopy = this.mCreateConvertHelper.CreateTarget(
-                        lSourceValue,
+                    var copy = this.createConvertHelper.CreateTarget(
+                        sourceValue,
                         target,
                         additionalProcessings);
-                    lCopies.Add(lCopy);
+                    copies.Add(copy);
                 }
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.mTargetExpression, lCopies);
+            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, copies);
         }
     }
 }

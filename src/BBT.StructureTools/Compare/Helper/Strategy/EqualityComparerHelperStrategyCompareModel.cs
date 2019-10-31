@@ -22,58 +22,58 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// <summary>
         /// Function to get the property value.
         /// </summary>
-        private readonly Func<TModel, TTargetModel> mFunc;
+        private readonly Func<TModel, TTargetModel> func;
 
         /// <summary>
         /// Name of compared property.
         /// </summary>
-        private readonly string mPropertyName;
+        private readonly string propertyName;
 
-        private readonly IComparer<TTargetModel, TIntention> mComparer;
+        private readonly IComparer<TTargetModel, TIntention> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperStrategyCompareModel{TModel,TTargetModel,TIntention}"/> class.
         /// </summary>
         public EqualityComparerHelperStrategyCompareModel(
-            Expression<Func<TModel, TTargetModel>> aExpression,
-            IComparer<TTargetModel, TIntention> aComparer)
+            Expression<Func<TModel, TTargetModel>> expression,
+            IComparer<TTargetModel, TIntention> comparer)
         {
-            aExpression.Should().NotBeNull();
-            aComparer.Should().NotBeNull();
+            expression.Should().NotBeNull();
+            comparer.Should().NotBeNull();
 
-            this.mFunc = aExpression.Compile();
-            this.mPropertyName = EqualityComparerHelperStrategyUtils.GetPropertyName(aExpression);
-            this.mComparer = aComparer;
+            this.func = expression.Compile();
+            this.propertyName = EqualityComparerHelperStrategyUtils.GetPropertyName(expression);
+            this.comparer = comparer;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.IsElementEqualsOrExcluded"/>.
         /// </summary>
         public bool IsElementEqualsOrExcluded(
-            TModel aCandidate1,
-            TModel aCandidate2,
+            TModel candidate1,
+            TModel candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions)
+            IEnumerable<IComparerExclusion> exclusions)
         {
-            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(aExclusions, typeof(TModel), this.mPropertyName))
+            if (EqualityComparerHelperStrategyUtils.IsPropertyExcluded(exclusions, typeof(TModel), this.propertyName))
             {
                 return true;
             }
 
-            var lValu1 = this.mFunc.Invoke(aCandidate1) as TTargetModel;
-            var lValu2 = this.mFunc.Invoke(aCandidate2) as TTargetModel;
+            var value1 = this.func.Invoke(candidate1) as TTargetModel;
+            var value2 = this.func.Invoke(candidate2) as TTargetModel;
 
-            return this.mComparer.Equals(lValu1, lValu2, additionalProcessings, aExclusions);
+            return this.comparer.Equals(value1, value2, additionalProcessings, exclusions);
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparerHelperStrategy{TModel}.GetElementHashCode"/>.
         /// </summary>
-        public int? GetElementHashCode(TModel aModel)
+        public int? GetElementHashCode(TModel model)
         {
-            if (this.mFunc.Invoke(aModel) is TTargetModel lValue)
+            if (this.func.Invoke(model) is TTargetModel value)
             {
-                return this.mComparer.GetHashCode(lValue);
+                return this.comparer.GetHashCode(value);
             }
 
             return null;

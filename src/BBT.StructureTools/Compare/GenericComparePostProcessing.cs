@@ -16,14 +16,14 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// The action.
         /// </summary>
-        private readonly Action<T, T> mAction;
+        private readonly Action<T, T> action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericComparePostProcessing{T, TIntention}"/> class.
         /// </summary>
-        public GenericComparePostProcessing(Action<T, T> aAction)
+        public GenericComparePostProcessing(Action<T, T> action)
         {
-            this.mAction = aAction;
+            this.action = action;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BBT.StructureTools.Compare
         /// </summary>
         public void DoPostProcessing(T source, T target)
         {
-            this.mAction.Invoke(source, target);
+            this.action.Invoke(source, target);
         }
     }
 }

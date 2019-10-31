@@ -20,9 +20,9 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         public ISourceConvertStrategy<TSource, TTarget, TIntention> GetConvertStrategyFromSource(TSource source)
         {
-            var lStrategies = IocHandler.Instance.IocResolver.GetAllInstances<ISourceConvertStrategy<TSource, TTarget, TIntention>>();
+            var strategies = IocHandler.Instance.IocResolver.GetAllInstances<ISourceConvertStrategy<TSource, TTarget, TIntention>>();
 
-            return lStrategies.SingleWithExceptionMessage(aX => aX.IsResponsible(source), "No convert strategy for these parameters found.");
+            return strategies.SingleWithExceptionMessage(x => x.IsResponsible(source), "No convert strategy for these parameters found.");
         }
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace BBT.StructureTools.Convert.Strategy
         /// </summary>
         public ITargetConvertStrategy<TSource, TTarget, TIntention> GetConvertStrategyFromTarget(TTarget target)
         {
-            var lStrategies = IocHandler.Instance.IocResolver.GetAllInstances<ITargetConvertStrategy<TSource, TTarget, TIntention>>();
+            var strategies = IocHandler.Instance.IocResolver.GetAllInstances<ITargetConvertStrategy<TSource, TTarget, TIntention>>();
 
-            return lStrategies.SingleWithExceptionMessage(aX => aX.IsResponsible(target), "No convert strategy for these parameters found.");
+            return strategies.SingleWithExceptionMessage(x => x.IsResponsible(target), "No convert strategy for these parameters found.");
         }
     }
 }

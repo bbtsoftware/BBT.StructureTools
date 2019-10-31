@@ -30,7 +30,7 @@ namespace BBT.StructureTools.Convert
             additionalProcessings
                 .OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>()
                 .ToList()
-                .ForEach(aX => aX.DoPreProcessing(source, target));
+                .ForEach(x => x.DoPreProcessing(source, target));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BBT.StructureTools.Convert
             additionalProcessings
                 .OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>()
                 .ToList()
-                .ForEach(aX => aX.DoPostProcessing(source, target));
+                .ForEach(x => x.DoPostProcessing(source, target));
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace BBT.StructureTools.Convert
             source.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lInterceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
-            return !lInterceptors.Any() || lInterceptors.Any(aX => aX.CallConverter(source));
+            var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
+            return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));
         }
     }
 }

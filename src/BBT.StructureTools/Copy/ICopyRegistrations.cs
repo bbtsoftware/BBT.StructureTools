@@ -15,6 +15,6 @@ namespace BBT.StructureTools.Copy
         /// <summary>
         /// Used to declare properties to copy.
         /// </summary>
-        void DoRegistrations(ICopyHelperRegistration<T> aRegistrations);
+        void DoRegistrations(ICopyHelperRegistration<T> registrations);
     }
 }

@@ -14,20 +14,20 @@ namespace BBT.StructureTools.Convert
         where TSource : class
         where TTarget : class
     {
-        private readonly List<TTarget> mCollectedTargetInstances;
+        private readonly List<TTarget> collectedTargetInstances;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelCollectingConvertPostProcessing{TSource, TTarget}"/> class.
         /// </summary>
         public ModelCollectingConvertPostProcessing()
         {
-            this.mCollectedTargetInstances = new List<TTarget>();
+            this.collectedTargetInstances = new List<TTarget>();
         }
 
         /// <summary>
-        /// Gets a list of the collected objects.
+        /// Gets a ist of the collected objects.
         /// </summary>
-        public IEnumerable<TTarget> CollectedObjects => this.mCollectedTargetInstances;
+        public IEnumerable<TTarget> CollectedObjects => this.collectedTargetInstances;
 
         /// <summary>
         /// <see cref="IConvertPostProcessing{TSoureClass, TTargetClass}"/>.
@@ -36,7 +36,7 @@ namespace BBT.StructureTools.Convert
         {
             target.Should().NotBeNull();
 
-            this.mCollectedTargetInstances.Add(target);
+            this.collectedTargetInstances.Add(target);
         }
     }
 }

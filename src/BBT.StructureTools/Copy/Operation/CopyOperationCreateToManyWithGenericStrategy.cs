@@ -21,21 +21,21 @@ namespace BBT.StructureTools.Copy.Operation
         where TStrategy : class, ICopyStrategy<TChildType>
         where TChildType : class
     {
-        private readonly ICopyStrategyProvider<TStrategy, TChildType> mStrategyProvider;
+        private readonly ICopyStrategyProvider<TStrategy, TChildType> strategyProvider;
 
-        private Func<T, IEnumerable<TChildType>> mSourceFunc;
-        private Expression<Func<T, ICollection<TChildType>>> mTargetExpression;
-        private Func<TStrategy, TChildType> mCreateTargetChildFunc;
+        private Func<T, IEnumerable<TChildType>> sourceFunc;
+        private Expression<Func<T, ICollection<TChildType>>> targetexpression;
+        private Func<TStrategy, TChildType> createTargetChildFunc;
 
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="CopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/> class.
         /// </summary>
-        public CopyOperationCreateToManyWithGenericStrategy(ICopyStrategyProvider<TStrategy, TChildType> aGenericStrategyProvider)
+        public CopyOperationCreateToManyWithGenericStrategy(ICopyStrategyProvider<TStrategy, TChildType> genericStrategyProvider)
         {
-            aGenericStrategyProvider.Should().NotBeNull();
+            genericStrategyProvider.Should().NotBeNull();
 
-            this.mStrategyProvider = aGenericStrategyProvider;
+            this.strategyProvider = genericStrategyProvider;
         }
 
         /// <summary>
@@ -46,17 +46,17 @@ namespace BBT.StructureTools.Copy.Operation
             T target,
             ICopyCallContext copyCallContext)
         {
-            var lNewKidsList = new List<TChildType>();
+            var newKids = new List<TChildType>();
 
-            foreach (var lChild in this.mSourceFunc.Invoke(source))
+            foreach (var child in this.sourceFunc.Invoke(source))
             {
-                var lStrategy = this.mStrategyProvider.GetStrategy(lChild);
-                var lChildCopy = this.mCreateTargetChildFunc.Invoke(lStrategy);
-                lStrategy.Copy(lChild, lChildCopy, copyCallContext);
-                lNewKidsList.Add(lChildCopy);
+                var strategy = this.strategyProvider.GetStrategy(child);
+                var childCopy = this.createTargetChildFunc.Invoke(strategy);
+                strategy.Copy(child, childCopy, copyCallContext);
+                newKids.Add(childCopy);
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.mTargetExpression, lNewKidsList);
+            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, newKids);
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace BBT.StructureTools.Copy.Operation
             targetExpression.Should().NotBeNull();
             aCreateTargetChildExpression.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
-            this.mCreateTargetChildFunc = aCreateTargetChildExpression.Compile();
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
+            this.createTargetChildFunc = aCreateTargetChildExpression.Compile();
         }
     }
 }

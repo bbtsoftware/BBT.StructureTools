@@ -20,12 +20,12 @@ namespace BBT.StructureTools.Copy.Operation
         /// <summary>
         /// Initializes the copy helper.
         /// </summary>
-        /// <param name="sourceFunc">function to retrieve the children list.</param>
-        /// <param name="targetExpression">function to set the target list.</param>
-        /// <param name="aCreateTargetChildExpression">function used to get new child instance from factory.</param>
+        /// <param name="sourceFunc">function to retrieve the children ist.</param>
+        /// <param name="targetExpression">function to set the target ist.</param>
+        /// <param name="createTargetChildExpression">function used to get new child instance from factory.</param>
         void Initialize(
             Func<T, IEnumerable<TChildType>> sourceFunc,
             Expression<Func<T, ICollection<TChildType>>> targetExpression,
-            Expression<Func<TStrategy, TChildType>> aCreateTargetChildExpression);
+            Expression<Func<TStrategy, TChildType>> createTargetChildExpression);
     }
 }

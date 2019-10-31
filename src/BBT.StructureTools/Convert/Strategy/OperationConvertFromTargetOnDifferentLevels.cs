@@ -22,22 +22,22 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> mConvert;
+        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
 
         /// <summary>
         /// Declares the source value to convert from.
         /// </summary>
-        private Func<TTarget, TSourceValue> mSourceFunc;
+        private Func<TTarget, TSourceValue> sourceFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertFromTargetOnDifferentLevels{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationConvertFromTargetOnDifferentLevels(
-            IConvert<TSourceValue, TTarget, TConvertIntention> aConvert)
+            IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
-            aConvert.Should().NotBeNull();
+            convert.Should().NotBeNull();
 
-            this.mConvert = aConvert;
+            this.convert = convert;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             sourceFunc.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
+            this.sourceFunc = sourceFunc;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace BBT.StructureTools.Convert.Strategy
 
             additionalProcessings.Add(
                 new GenericConvertPostProcessing<TSource, TTarget>(
-                    (aX, aY) => this.mConvert.Convert(this.mSourceFunc(aY), aY, additionalProcessings)));
+                    (x, y) => this.convert.Convert(this.sourceFunc(y), y, additionalProcessings)));
         }
     }
 }

@@ -19,19 +19,19 @@ namespace BBT.StructureTools.Copy.Operation
         where T : class
         where TAttributeValueFactory : class
     {
-        private Expression<Func<T, TValue>> mTargetExpression;
+        private Expression<Func<T, TValue>> targetexpression;
 
-        private Func<TAttributeValueFactory, TValue> mAttrValueFunc;
+        private Func<TAttributeValueFactory, TValue> attrValueFunc;
 
-        private TAttributeValueFactory mAttributeValueFactory;
+        private TAttributeValueFactory attributeValueFactory;
 
         /// <summary>
         /// <see cref="ICopyOperation{T}.Copy"/>.
         /// </summary>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            var lValue = this.mAttrValueFunc.Invoke(this.mAttributeValueFactory);
-            target.SetPropertyValue(this.mTargetExpression, lValue);
+            var value = this.attrValueFunc.Invoke(this.attributeValueFactory);
+            target.SetPropertyValue(this.targetexpression, value);
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace BBT.StructureTools.Copy.Operation
             targetExpression.Should().NotBeNull();
             aAttrValueExpression.Should().NotBeNull();
 
-            var lAttributeValueFactory = IocHandler.Instance.IocResolver.GetInstance<TAttributeValueFactory>();
-            lAttributeValueFactory.Should().NotBeNull();
+            var attributeValueFactory = IocHandler.Instance.IocResolver.GetInstance<TAttributeValueFactory>();
+            attributeValueFactory.Should().NotBeNull();
 
-            this.mAttributeValueFactory = lAttributeValueFactory;
-            this.mAttrValueFunc = aAttrValueExpression.Compile();
-            this.mTargetExpression = targetExpression;
+            this.attributeValueFactory = attributeValueFactory;
+            this.attrValueFunc = aAttrValueExpression.Compile();
+            this.targetexpression = targetExpression;
         }
     }
 }

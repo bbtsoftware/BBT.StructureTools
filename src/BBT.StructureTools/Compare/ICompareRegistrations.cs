@@ -16,6 +16,6 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// Used to declare attributes used for comparison.
         /// </summary>
-        void DoRegistrations(IEqualityComparerHelperRegistration<TModelToCompare> aRegistrations);
+        void DoRegistrations(IEqualityComparerHelperRegistration<TModelToCompare> registrations);
     }
 }

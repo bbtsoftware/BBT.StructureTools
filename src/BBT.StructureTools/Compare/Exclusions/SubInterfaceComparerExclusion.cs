@@ -13,26 +13,26 @@
         /// <summary>
         /// Gets the type of exclusion.
         /// </summary>
-        private readonly TypeOfComparerExclusion mTypeOfComparerExclusion;
+        private readonly TypeOfComparerExclusion typeOfComparerExclusion;
 
         /// <summary>
         /// Gets the excluded model type.
         /// </summary>
-        private readonly Type mExcludedModelType;
+        private readonly Type excludedModelType;
 
         /// <summary>
         /// Gets the excluded property.
         /// </summary>
-        private readonly string mExcludedPropertyName;
+        private readonly string excludedPropertyName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubInterfaceComparerExclusion{TSubInterface}"/> class.
         /// </summary>
         public SubInterfaceComparerExclusion()
         {
-            this.mExcludedModelType = typeof(TSubInterface);
-            this.mExcludedPropertyName = string.Empty;
-            this.mTypeOfComparerExclusion = TypeOfComparerExclusion.SubInterface;
+            this.excludedModelType = typeof(TSubInterface);
+            this.excludedPropertyName = string.Empty;
+            this.typeOfComparerExclusion = TypeOfComparerExclusion.SubInterface;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@
         {
             get
             {
-                return this.mTypeOfComparerExclusion;
+                return this.typeOfComparerExclusion;
             }
         }
 
@@ -53,7 +53,7 @@
         {
             get
             {
-                return this.mExcludedModelType;
+                return this.excludedModelType;
             }
         }
 
@@ -64,7 +64,7 @@
         {
             get
             {
-                return this.mExcludedPropertyName;
+                return this.excludedPropertyName;
             }
         }
     }

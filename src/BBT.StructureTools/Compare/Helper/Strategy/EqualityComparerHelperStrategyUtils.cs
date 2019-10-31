@@ -20,11 +20,11 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// </summary>
         /// <typeparam name="T">Base type of expression.</typeparam>
         /// <typeparam name="TReturn">Return type.</typeparam>
-        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> aExpression)
+        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            aExpression.Should().NotBeNull();
+            expression.Should().NotBeNull();
 
-            return ReflectionUtils.GetPropertyName(aExpression);
+            return ReflectionUtils.GetPropertyName(expression);
         }
 
         /// <summary>
@@ -32,88 +32,88 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         /// </summary>
         /// <typeparam name="T">Base type of expression.</typeparam>
         /// <typeparam name="TReturn">Return type.</typeparam>
-        public static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> aExpression)
+        public static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            aExpression.Should().NotBeNull();
+            expression.Should().NotBeNull();
 
-            var lMethodCallExpression = (MethodCallExpression)aExpression.Body;
+            var methodCallExpression = (MethodCallExpression)expression.Body;
 
-            return lMethodCallExpression.Method.Name;
+            return methodCallExpression.Method.Name;
         }
 
         /// <summary>
-        /// Check if the property exists in the exclusion list.
+        /// Check if the property exists in the exclusion ist.
         /// </summary>
-        public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> aExclusions, Type aTypeOfModel, string aName)
+        public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
-            aExclusions.Should().NotBeNull();
-            aTypeOfModel.Should().NotBeNull();
-            aName.Should().NotBeNullOrEmpty();
+            exclusions.Should().NotBeNull();
+            typeOfModel.Should().NotBeNull();
+            name.Should().NotBeNullOrEmpty();
 
             // The exclusion can made for a model which inherits the property from an interface or
             // base class. We want to make sure the exclusion applies in any case.
-            var lMostBasicDeclaringType = aTypeOfModel
+            var mostBasicDeclaringType = typeOfModel
                 .GetAllInheritedTypesOrdered() // Ordered, so that the most basic/least specific type is first.
-                .FirstOrDefault(aX => aX.GetProperty(aName) != null);
+                .FirstOrDefault(x => x.GetProperty(name) != null);
 
-            if (lMostBasicDeclaringType == null)
+            if (mostBasicDeclaringType == null)
             {
                 return false;
             }
 
-            return aExclusions.Any(aX =>
-                aX.TypeOfComparerExclusion == TypeOfComparerExclusion.Property &&
-                lMostBasicDeclaringType.IsAssignableFrom(aX.ExcludedModelType) &&
-                aX.ExcludedPropertyName == aName);
+            return exclusions.Any(x =>
+                x.TypeOfComparerExclusion == TypeOfComparerExclusion.Property &&
+                mostBasicDeclaringType.IsAssignableFrom(x.ExcludedModelType) &&
+                x.ExcludedPropertyName == name);
         }
 
         /// <summary>
-        /// Checks whether the two list are equivalent or not.
+        /// Checks whether the two ist are equivalent or not.
         /// </summary>
         /// <typeparam name="TModel">Type of model.</typeparam>
-        public static bool AreListEquivalent<TModel>(
-            IEnumerable<TModel> aList1,
-            IEnumerable<TModel> aList2,
-            Func<TModel, TModel, bool> aCompareFunc)
+        public static bool AreistEquivalent<TModel>(
+            IEnumerable<TModel> aist1,
+            IEnumerable<TModel> aist2,
+            Func<TModel, TModel, bool> compareFunc)
             where TModel : class
         {
-            aCompareFunc.Should().NotBeNull();
+            compareFunc.Should().NotBeNull();
 
             // ReSharper disable once PossibleUnintendedReferenceComparison
-            // BER says this is OK since either both are null, or have the same reference which is
+            // BER sys this is OK since either both are null, or have the same reference which is
             // in case of our compare infra the correct definition of equal.
-            if (aList1 == aList2)
+            if (aist1 == aist2)
             {
                 return true;
             }
 
-            var lList1List = aList1 as IList<TModel> ?? aList1.ToList();
-            var lList2List = aList2 as IList<TModel> ?? aList2.ToList();
+            var list1ist = aist1 as IList<TModel> ?? aist1.ToList();
+            var list2ist = aist2 as IList<TModel> ?? aist2.ToList();
 
-            if (lList1List.Count != lList2List.Count)
+            if (list1ist.Count != list2ist.Count)
             {
                 return false;
             }
 
-            var lComparer = new DictionaryComparer<TModel>(aCompareFunc);
-            var lCounterDictionary = new Dictionary<TModel, int>(lComparer);
-            foreach (var lItem1 in lList1List)
+            var comparer = new DictionaryComparer<TModel>(compareFunc);
+            var counterDictionary = new Dictionary<TModel, int>(comparer);
+            foreach (var item1 in list1ist)
             {
-                if (lCounterDictionary.ContainsKey(lItem1))
+                if (counterDictionary.ContainsKey(item1))
                 {
-                    lCounterDictionary[lItem1]++;
+                    counterDictionary[item1]++;
                 }
                 else
                 {
-                    lCounterDictionary.Add(lItem1, 1);
+                    counterDictionary.Add(item1, 1);
                 }
             }
 
-            foreach (var lItem2 in lList2List)
+            foreach (var item2 in list2ist)
             {
-                if (lCounterDictionary.ContainsKey(lItem2))
+                if (counterDictionary.ContainsKey(item2))
                 {
-                    lCounterDictionary[lItem2]--;
+                    counterDictionary[item2]--;
                 }
                 else
                 {
@@ -121,23 +121,23 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
                 }
             }
 
-            return lCounterDictionary.Values.All(aX => aX == 0);
+            return counterDictionary.Values.All(x => x == 0);
         }
 
         /// <summary>
         /// Evaluates type that is compared.
         /// </summary>
         /// <typeparam name="T">type of comparer.</typeparam>
-        public static Type GetCompareType<T>(IEqualityComparer<T> aComparer)
+        public static Type GetCompareType<T>(IEqualityComparer<T> comparer)
         {
-            aComparer.Should().NotBeNull();
+            comparer.Should().NotBeNull();
 
             // evaluate type of a comparer
             // due to covariant restriction typeof(T) is not valid
-            return aComparer
+            return comparer
                 .GetType()
                 .GetMethods()
-                .First(aX => aX.Name == nameof(aComparer.GetHashCode))
+                .First(x => x.Name == nameof(comparer.GetHashCode))
                 .GetParameters()
                 .First()
                 .ParameterType;
@@ -153,31 +153,31 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             /// <summary>
             /// Returns true if the 2 models are equal.
             /// </summary>
-            private readonly Func<TModel, TModel, bool> mCompareFunc;
+            private readonly Func<TModel, TModel, bool> compareFunc;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="DictionaryComparer{TModel}"/> class.
             /// </summary>
-            public DictionaryComparer(Func<TModel, TModel, bool> aCompareFunc)
+            public DictionaryComparer(Func<TModel, TModel, bool> compareFunc)
             {
-                this.mCompareFunc = aCompareFunc;
+                this.compareFunc = compareFunc;
             }
 
             /// <summary>
             /// See <see cref="IEqualityComparer{T}.Equals(T, T)"/>.
             /// </summary>
-            public bool Equals(TModel aModel1, TModel aModel2)
+            public bool Equals(TModel model1, TModel model2)
             {
-                return this.mCompareFunc(aModel1, aModel2);
+                return this.compareFunc(model1, model2);
             }
 
             /// <summary>
             /// See <see cref="IEqualityComparer{T}.GetHashCode(T)"/>.
             /// </summary>
-            public int GetHashCode(TModel aModel)
+            public int GetHashCode(TModel model)
             {
                 // The Hash code must not include any excluded properties!
-                return aModel.GetType().GetHashCode();
+                return model.GetType().GetHashCode();
             }
         }
     }

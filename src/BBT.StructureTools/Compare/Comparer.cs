@@ -18,90 +18,90 @@ namespace BBT.StructureTools.Compare
         where T : class
         where TIntention : IBaseComparerIntention
     {
-        private readonly IEqualityComparerHelperOperations<T> mEqualityComparerHelper;
-        private readonly ICompareHelper mCompareHelper;
+        private readonly IEqualityComparerHelperOperations<T> equalityComparerHelper;
+        private readonly ICompareHelper compareHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
         public Comparer(
-            ICompareRegistrations<T, TIntention> aCompareRegistrations,
+            ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
-            ICompareHelper aCompareHelper)
+            ICompareHelper compareHelper)
         {
-            aCompareRegistrations.Should().NotBeNull();
+            compareRegistrations.Should().NotBeNull();
             factory.Should().NotBeNull();
-            aCompareHelper.Should().NotBeNull();
+            compareHelper.Should().NotBeNull();
 
-            this.mCompareHelper = aCompareHelper;
-            var lRegistrations = factory.Create<T>();
-            aCompareRegistrations.DoRegistrations(lRegistrations);
-            this.mEqualityComparerHelper = lRegistrations.EndRegistrations();
+            this.compareHelper = compareHelper;
+            var registrations = factory.Create<T>();
+            compareRegistrations.DoRegistrations(registrations);
+            this.equalityComparerHelper = registrations.EndRegistrations();
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparer{T}.Equals(T,T)"/>.
         /// </summary>
-        public bool Equals(T aCandidate1, T aCandidate2)
+        public bool Equals(T candidate1, T candidate2)
         {
-            return this.mEqualityComparerHelper.AreRegistrationsEquals(aCandidate1, aCandidate2);
+            return this.equalityComparerHelper.AreRegistrationsEquals(candidate1, candidate2);
         }
 
         /// <summary>
         /// See <see cref="IComparer{T, TComparerIntention}.Equals(T, T, ICollection{IBaseAdditionalProcessing})"/>.
         /// </summary>
         public bool Equals(
-            T aCandidate1,
-            T aCandidate2,
+            T candidate1,
+            T candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            var lIsEqual = this.mEqualityComparerHelper.AreRegistrationsEquals(
-                aCandidate1,
-                aCandidate2,
+            var isEqual = this.equalityComparerHelper.AreRegistrationsEquals(
+                candidate1,
+                candidate2,
                 additionalProcessings,
                 Enumerable.Empty<IComparerExclusion>());
-            this.mCompareHelper.DoComparePostProcessing<T, TIntention>(
-                aCandidate1,
-                aCandidate2,
+            this.compareHelper.DoComparePostProcessing<T, TIntention>(
+                candidate1,
+                candidate2,
                 additionalProcessings);
-            return lIsEqual;
+            return isEqual;
         }
 
         /// <summary>
         /// See <see cref="IComparer{T, TComparerIntention}.Equals(T, T, ICollection{IBaseAdditionalProcessing}, IEnumerable{IComparerExclusion})"/>.
         /// </summary>
         public bool Equals(
-            T aCandidate1,
-            T aCandidate2,
+            T candidate1,
+            T candidate2,
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
-            IEnumerable<IComparerExclusion> aExclusions)
+            IEnumerable<IComparerExclusion> exclusions)
         {
-            aExclusions.Should().NotBeNull();
+            exclusions.Should().NotBeNull();
 
-            var lIsEqual = this.mEqualityComparerHelper.AreRegistrationsEquals(
-                aCandidate1,
-                aCandidate2,
+            var isEqual = this.equalityComparerHelper.AreRegistrationsEquals(
+                candidate1,
+                candidate2,
                 additionalProcessings,
-                aExclusions);
-            this.mCompareHelper.DoComparePostProcessing<T, TIntention>(
-                aCandidate1,
-                aCandidate2,
+                exclusions);
+            this.compareHelper.DoComparePostProcessing<T, TIntention>(
+                candidate1,
+                candidate2,
                 additionalProcessings);
 
-            return lIsEqual;
+            return isEqual;
         }
 
         /// <summary>
         /// See <see cref="IEqualityComparer{T}.GetHashCode(T)"/>.
         /// </summary>
-        public int GetHashCode(T aCandidate)
+        public int GetHashCode(T candidate)
         {
-            if (aCandidate == null)
+            if (candidate == null)
             {
                 return typeof(T).GetHashCode();
             }
 
-            return this.mEqualityComparerHelper.GetHashCodeOfRegistrations(aCandidate);
+            return this.equalityComparerHelper.GetHashCodeOfRegistrations(candidate);
         }
     }
 }

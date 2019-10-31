@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using BBT.StructureTools.Initialization;
-using FluentAssertions;
-using Ninject;
-
-namespace BBT.StructureTools.Tests.TestTools.IoC
+﻿namespace BBT.StructureTools.Tests.TestTools.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using BBT.StructureTools.Initialization;
+    using FluentAssertions;
+    using Ninject;
+
     /// <summary>
     /// A <see cref="IIocResolver"/> using Ninject to be
     /// used within automated tests.
     /// </summary>
-
     public class NinjectResolver : IIocResolver
     {
         private readonly IKernel kernel;

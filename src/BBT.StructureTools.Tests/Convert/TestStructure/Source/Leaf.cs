@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BBT.StructureTools.Tests.Convert.TestStructure.Source
+﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Source
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Leaf
     {
         public Tree Tree { get; set; }

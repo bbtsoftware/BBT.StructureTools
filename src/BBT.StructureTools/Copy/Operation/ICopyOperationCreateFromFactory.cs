@@ -21,6 +21,6 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         void Initialize(
             Expression<Func<T, TValue>> targetExpression,
-            Expression<Func<TAttributeValueFactory, TValue>> aAttrValueExpression);
+            Expression<Func<TAttributeValueFactory, TValue>> attrValueExpression);
     }
 }

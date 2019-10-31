@@ -22,12 +22,12 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, TTarget, TValue> mSourceFunc;
+        private Func<TSource, TTarget, TValue> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TValue>> mTargetExpression;
+        private Expression<Func<TTarget, TValue>> targetexpression;
 
         /// <summary>
         /// See <see cref="IOperationCopyValue{TSource,TTarget,TValue}.Initialize"/>.
@@ -39,8 +39,8 @@ namespace BBT.StructureTools.Convert.Strategy
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace BBT.StructureTools.Convert.Strategy
             source.Should().NotBeNull();
             target.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(source, target);
-            target.SetPropertyValue(this.mTargetExpression, lSourceValue);
+            var sourceValue = this.sourceFunc.Invoke(source, target);
+            target.SetPropertyValue(this.targetexpression, sourceValue);
         }
     }
 }

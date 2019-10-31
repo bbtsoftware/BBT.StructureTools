@@ -14,6 +14,6 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// This method will be called at the end of a compare process.
         /// </summary>
-        void DoPostProcessing(T aCandidate1, T aCandidate2);
+        void DoPostProcessing(T candidate1, T candidate2);
     }
 }

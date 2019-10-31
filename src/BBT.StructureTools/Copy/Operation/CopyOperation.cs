@@ -15,16 +15,16 @@ namespace BBT.StructureTools.Copy.Operation
     /// <typeparam name="TValue">The value type to copy.</typeparam>
     internal class CopyOperation<T, TValue> : ICopyOperation<T>
     {
-        private readonly Func<T, TValue> mFunc;
-        private readonly string mPropertyName;
+        private readonly Func<T, TValue> func;
+        private readonly string propertyName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperation{T,TValue}"/> class.
         /// </summary>
-        public CopyOperation(Expression<Func<T, TValue>> aExpression)
+        public CopyOperation(Expression<Func<T, TValue>> expression)
         {
-            this.mFunc = aExpression.Compile();
-            this.mPropertyName = ReflectionUtils.GetPropertyName(aExpression);
+            this.func = expression.Compile();
+            this.propertyName = ReflectionUtils.GetPropertyName(expression);
         }
 
         /// <summary>
@@ -32,13 +32,13 @@ namespace BBT.StructureTools.Copy.Operation
         /// </summary>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            var lValue = this.mFunc.Invoke(source);
+            var value = this.func.Invoke(source);
 
-            var lTargetProperty = target.GetType().GetProperty(this.mPropertyName, BindingFlags.Public | BindingFlags.Instance);
+            var targetProperty = target.GetType().GetProperty(this.propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-            if (lTargetProperty != null)
+            if (targetProperty != null)
             {
-                lTargetProperty.SetValue(target, lValue, null);
+                targetProperty.SetValue(target, value, null);
             }
         }
     }

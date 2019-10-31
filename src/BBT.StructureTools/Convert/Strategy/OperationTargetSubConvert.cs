@@ -22,16 +22,16 @@ namespace BBT.StructureTools.Convert.Strategy
         where TTargetValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSource, TTargetValue, TConvertIntention> mConvert;
+        private readonly IConvert<TSource, TTargetValue, TConvertIntention> convert;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationTargetSubConvert{TSource,TTarget,TTargetValue,TConvertIntention}" /> class.
         /// </summary>
-        public OperationTargetSubConvert(IConvert<TSource, TTargetValue, TConvertIntention> aConvert)
+        public OperationTargetSubConvert(IConvert<TSource, TTargetValue, TConvertIntention> convert)
         {
-            aConvert.Should().NotBeNull();
+            convert.Should().NotBeNull();
 
-            this.mConvert = aConvert;
+            this.convert = convert;
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lTargetValue = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetValue>(target);
-            this.mConvert.Convert(source, lTargetValue, additionalProcessings);
+            var targetValue = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetValue>(target);
+            this.convert.Convert(source, targetValue, additionalProcessings);
         }
     }
 }

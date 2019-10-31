@@ -17,18 +17,18 @@ namespace BBT.StructureTools.Extension
         /// Determines whether a sequence contains only one element.
         /// </summary>
         /// <typeparam name="TEntity">The type of the elements of source.</typeparam>
-        /// <param name="aList">The IEnumerable{TEntity} to check for a uniqueness.</param>
+        /// <param name="aist">The IEnumerable{TEntity} to check for a uniqueness.</param>
         /// <returns>true if the source sequence contains exactly one element; otherwise, false.</returns>
-        public static bool Only<TEntity>(this IEnumerable<TEntity> aList)
+        public static bool Only<TEntity>(this IEnumerable<TEntity> aist)
         {
-            aList.Should().NotBeNull();
+            aist.Should().NotBeNull();
 
-            if (!aList.Any())
+            if (!aist.Any())
             {
                 return false;
             }
 
-            if (aList.Skip(1).Any())
+            if (aist.Skip(1).Any())
             {
                 return false;
             }
@@ -38,43 +38,43 @@ namespace BBT.StructureTools.Extension
 
         /// <summary>
         /// Throws an exception if there is not exactly one element in the sequence. Otherwise the method returns the single item.
-        /// The information in <paramref name="aExceptionMessageFormat"/> and <paramref name="aExceptionMessageArguments"/> will formatted with <see cref="CultureInfo.InvariantCulture"/> and added to
+        /// The information in <paramref name="exceptionMessageFormat"/> and <paramref name="exceptionMessageFormat"/> will formatted with <see cref="CultureInfo.InvariantCulture"/> and added to
         /// the exception message.
         /// </summary>
         /// <typeparam name="TEntity">
-        /// The type of list elements.
+        /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aList, Func<TEntity, bool> aPredicate, string aExceptionMessageFormat, params object[] aExceptionMessageArguments)
+        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aist, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-            var lFilteredList = aList.Where(aPredicate);
-            return lFilteredList.SingleWithExceptionMessage(aExceptionMessageFormat, aExceptionMessageArguments);
+            var filteredist = aist.Where(predicate);
+            return filteredist.SingleWithExceptionMessage(exceptionMessageFormat, furtherExceptionMessageFormat);
         }
 
         /// <summary>
         /// Throws an exception if there is not exactly one element in the sequence. Otherwise the method returns the single item.
-        /// The information in <paramref name="aExceptionMessageFormat"/> and <paramref name="aExceptionMessageArguments"/> will formatted with <see cref="CultureInfo.InvariantCulture"/> and added to
+        /// The information in <paramref name="exceptionMessageFormat"/> and <paramref name="exceptionMessageFormat"/> will formatted with <see cref="CultureInfo.InvariantCulture"/> and added to
         /// the exception message.
         /// </summary>
         /// <typeparam name="TEntity">
-        /// The type of list elements.
+        /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aList, string aExceptionMessageFormat, params object[] aExceptionMessageArguments)
+        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aist, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-            aList.Should().NotBeNull();
+            aist.Should().NotBeNull();
 
-            if (aList.Only())
+            if (aist.Only())
             {
-                return aList.Single();
+                return aist.Single();
             }
 
-            var lMessage = string.Format(CultureInfo.InvariantCulture, aExceptionMessageFormat, aExceptionMessageArguments);
+            var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
 
-            if (!aList.Any())
+            if (!aist.Any())
             {
-                throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + lMessage);
+                throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + message);
             }
 
-            throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + lMessage);
+            throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
         }
     }
 }

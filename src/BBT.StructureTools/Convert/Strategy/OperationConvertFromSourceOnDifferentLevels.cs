@@ -24,19 +24,19 @@ namespace BBT.StructureTools.Convert.Strategy
         where TTargetValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> mConvert;
+        private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> convert;
 
-        private Func<TSource, TSourceValue> mSourceFunc;
+        private Func<TSource, TSourceValue> sourceFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertFromSourceOnDifferentLevels{TSource,TTarget,TSourceValue, TTargetValue, TConvertIntention}" /> class.
         /// </summary>
         public OperationConvertFromSourceOnDifferentLevels(
-            IConvert<TSourceValue, TTargetValue, TConvertIntention> aConvert)
+            IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            aConvert.Should().NotBeNull();
+            convert.Should().NotBeNull();
 
-            this.mConvert = aConvert;
+            this.convert = convert;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace BBT.StructureTools.Convert.Strategy
         {
             sourceFunc.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
+            this.sourceFunc = sourceFunc;
         }
 
         /// <summary>
@@ -63,17 +63,17 @@ namespace BBT.StructureTools.Convert.Strategy
             additionalProcessings.Should().NotBeNull();
             target.Should().BeAssignableTo<TTargetValue>();
 
-            // Need to use another collection, since the given collection may change and the enumeration fails.
-            var lNewAdditionalProcessings = new List<IBaseAdditionalProcessing>(additionalProcessings);
+            // Need to use another collection, since the given collection my change and the enumeration fails.
+            var newAdditionalProcessings = new List<IBaseAdditionalProcessing>(additionalProcessings);
 
-            if (this.mSourceFunc(source) == null)
+            if (this.sourceFunc(source) == null)
             {
                 return;
             }
 
             additionalProcessings.Add(
                 new GenericConvertPostProcessing<TSource, TTarget>(
-                    (aX, aY) => this.mConvert.Convert(this.mSourceFunc(aX), aY as TTargetValue, lNewAdditionalProcessings)));
+                    (x, y) => this.convert.Convert(this.sourceFunc(x), y as TTargetValue, newAdditionalProcessings)));
         }
     }
 }

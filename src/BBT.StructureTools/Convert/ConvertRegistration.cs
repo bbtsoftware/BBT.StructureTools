@@ -22,12 +22,12 @@ namespace BBT.StructureTools.Convert
         where TTarget : class
     {
         /// <summary>
-        ///  The list of registered operations.
+        ///  The ist of registered operations.
         /// </summary>
-        private readonly ICollection<IConvertOperation<TSource, TTarget>> mConvertHelperOperationWorkUnits =
+        private readonly ICollection<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits =
             new Collection<IConvertOperation<TSource, TTarget>>();
 
-        private readonly IIocResolver mServiceLocator = IocHandler.Instance.IocResolver;
+        private readonly IIocResolver servicelocator = IocHandler.Instance.IocResolver;
 
         /// <summary>
         /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopySource"/>.
@@ -37,9 +37,9 @@ namespace BBT.StructureTools.Convert
         {
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopySource<TSource, TTarget>>();
-            lOperation.Initialize(targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopySource<TSource, TTarget>>();
+            operation.Initialize(targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -54,9 +54,9 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -72,9 +72,9 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
-            lOperation.Initialize(sourceFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -91,9 +91,9 @@ namespace BBT.StructureTools.Convert
             sourceLookUpFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, sourceLookUpFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, sourceLookUpFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -111,9 +111,9 @@ namespace BBT.StructureTools.Convert
             sourceUpperLimitFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -128,9 +128,9 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -145,10 +145,10 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation =
-                this.mServiceLocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation =
+                this.servicelocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -163,10 +163,10 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation =
-                this.mServiceLocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
-            lOperation.Initialize(sourceFunc, targetExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation =
+                this.servicelocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -179,9 +179,9 @@ namespace BBT.StructureTools.Convert
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationSourceSubConvert<TSource, TTarget, TSourceValue, TConvertIntention>>();
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -196,9 +196,9 @@ namespace BBT.StructureTools.Convert
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -211,9 +211,9 @@ namespace BBT.StructureTools.Convert
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>>();
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -231,13 +231,13 @@ namespace BBT.StructureTools.Convert
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 targetFunc,
                 aFilterFunc);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -251,10 +251,10 @@ namespace BBT.StructureTools.Convert
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>>();
-            lOperation.Initialize(sourceExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(sourceExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -268,10 +268,10 @@ namespace BBT.StructureTools.Convert
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTarget, TConvertIntention>>();
-            lOperation.Initialize(sourceFunc);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(sourceFunc);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -287,10 +287,10 @@ namespace BBT.StructureTools.Convert
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
-            lOperation.Initialize(sourceFunc);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(sourceFunc);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -302,17 +302,17 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TConvertIntention">see link above.</typeparam>
         public IConvertRegistration<TSource, TTarget> RegisterCreateFromSourceWithReverseRelation<TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
-            lOperation.Initialize(targetExpression, aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(targetExpression, createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -332,10 +332,10 @@ namespace BBT.StructureTools.Convert
         {
             aBaseSourceFunc.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
-            lOperation.Initialize(aBaseSourceFunc, targetValueExpression, targetParentExpression);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(aBaseSourceFunc, targetValueExpression, targetParentExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -349,7 +349,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -358,13 +358,13 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -378,7 +378,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -387,12 +387,12 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
-            lOperation.Initialize(
+            var operation = this.servicelocator.GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -403,12 +403,12 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterSubCopy<TSubCopy>()
             where TSubCopy : class, ICopy<TSource>, ICopy<TTarget>
         {
-            var lCopyType = typeof(TSubCopy).GenericTypeArguments[0];
+            var copyType = typeof(TSubCopy).GenericTypeArguments[0];
 
-            var lCopyOperationType = typeof(IOperationSubCopy<,,>).MakeGenericType(typeof(TSource), typeof(TTarget), lCopyType);
+            var copyOperationType = typeof(IOperationSubCopy<,,>).MakeGenericType(typeof(TSource), typeof(TTarget), copyType);
 
-            var lOperation = (IConvertOperation<TSource, TTarget>)this.mServiceLocator.GetInstance(lCopyOperationType);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = (IConvertOperation<TSource, TTarget>)this.servicelocator.GetInstance(copyOperationType);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -424,7 +424,7 @@ namespace BBT.StructureTools.Convert
             Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -434,15 +434,15 @@ namespace BBT.StructureTools.Convert
             aMergeFunc.Should().NotBeNull();
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
-            aCreateConvertHelper.Should().NotBeNull();
+            createConvertHelper.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
-            lOperation.Initialize(
+            var operation = this.servicelocator.GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
+            operation.Initialize(
                 aMergeFunc,
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -458,9 +458,9 @@ namespace BBT.StructureTools.Convert
         {
             sourceFunc.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
-            lOperation.Initialize(sourceFunc);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            var operation = this.servicelocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
+            operation.Initialize(sourceFunc);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -475,7 +475,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -485,12 +485,12 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
-            lOperation.Initialize(
+            var operation = this.servicelocator.GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -505,7 +505,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -515,12 +515,12 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator.GetInstance<IOperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
-            lOperation.Initialize(
+            var operation = this.servicelocator.GetInstance<IOperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -535,7 +535,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyGenericWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -545,13 +545,13 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyGenericWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -565,7 +565,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -574,13 +574,13 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -595,7 +595,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithSourceFilterAndReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
@@ -605,13 +605,13 @@ namespace BBT.StructureTools.Convert
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
 
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
-            lOperation.Initialize(
+            operation.Initialize(
                 sourceFunc,
                 targetExpression,
-                aCreateConvertHelper);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -621,25 +621,25 @@ namespace BBT.StructureTools.Convert
         public IConvertOperations<TSource, TTarget> EndRegistrations()
         {
             return new ConvertOperations<TSource, TTarget>(
-                this.mConvertHelperOperationWorkUnits);
+                this.convertHelperOperationWorkUnits);
         }
 
         /// <summary>
         /// See <see cref="IConvertRegistration{TSource, TTarget}.RegisterPostProcessings(IConvertPostProcessing{TSource, TTarget}, IConvertPostProcessing{TSource, TTarget}[])"/>.
         /// </summary>
-        public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> aAdditionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] aFurtherAdditionalProcessings)
+        public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] aFurtherAdditionalProcessings)
         {
-            aAdditionalProcessing.Should().NotBeNull();
+            additionalProcessing.Should().NotBeNull();
 
-            var lList = new Collection<IBaseAdditionalProcessing>() { aAdditionalProcessing };
+            var list = new Collection<IBaseAdditionalProcessing>() { additionalProcessing };
 
             if (aFurtherAdditionalProcessings != null)
             {
-                lList.AddRangeToMe(aFurtherAdditionalProcessings);
+                list.AddRangeToMe(aFurtherAdditionalProcessings);
             }
 
-            var lConvertOpsPostProcessing = new OperationConvertPostProcessing<TSource, TTarget>(lList);
-            this.mConvertHelperOperationWorkUnits.Add(lConvertOpsPostProcessing);
+            var convertOpsPostProcessing = new OperationConvertPostProcessing<TSource, TTarget>(list);
+            this.convertHelperOperationWorkUnits.Add(convertOpsPostProcessing);
             return this;
         }
 
@@ -652,18 +652,18 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
-            Expression<Func<TBaseTarget, TTarget>> aReverseRelationOnTarget)
+            Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
             where TBaseSource : class
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
         {
-            var lOperation = IocHandler.Instance.IocResolver.GetInstance<IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
-            lOperation.Initialize(
+            var operation = IocHandler.Instance.IocResolver.GetInstance<IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
+            operation.Initialize(
                 source,
                 targetParent,
-                aReverseRelationOnTarget);
+                reverseRelationOnTarget);
 
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
 
@@ -674,14 +674,14 @@ namespace BBT.StructureTools.Convert
         /// <typeparam name="TConvertIntention">see link above.</typeparam>
         public IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Func<TSource, TTarget, DateTime> aReferenceDateFunc)
+            Func<TSource, TTarget, DateTime> referenceDateFunc)
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var lOperation = this.mServiceLocator
+            var operation = this.servicelocator
                    .GetInstance<IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>>();
-            lOperation.Initialize(sourceFunc, aReferenceDateFunc);
-            this.mConvertHelperOperationWorkUnits.Add(lOperation);
+            operation.Initialize(sourceFunc, referenceDateFunc);
+            this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
     }

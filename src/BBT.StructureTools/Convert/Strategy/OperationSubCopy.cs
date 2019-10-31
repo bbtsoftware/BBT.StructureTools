@@ -17,17 +17,17 @@ namespace BBT.StructureTools.Convert.Strategy
         where TTarget : class, TValue
         where TValue : class
     {
-        private readonly ICopy<TValue> mCopy;
+        private readonly ICopy<TValue> copy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationSubCopy{TSource,TTarget, TSubCopy}" /> class.
         /// </summary>
         public OperationSubCopy(
-            ICopy<TValue> aCopy)
+            ICopy<TValue> copy)
         {
-            aCopy.Should().NotBeNull();
+            copy.Should().NotBeNull();
 
-            this.mCopy = aCopy;
+            this.copy = copy;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BBT.StructureTools.Convert.Strategy
             aTarget.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            this.mCopy.Copy(source, aTarget, additionalProcessings);
+            this.copy.Copy(source, aTarget, additionalProcessings);
         }
     }
 }

@@ -31,14 +31,14 @@ namespace BBT.StructureTools.Convert.Strategy
         /// <summary>
         /// Function to get the source's property value.
         /// </summary>
-        private Func<TSource, TSourceValue> mSourceFunc;
+        private Func<TSource, TSourceValue> sourceFunc;
 
         /// <summary>
         ///  Expression which declares the target value.
         /// </summary>
-        private Expression<Func<TTarget, TTargetValue>> mTargetExpression;
+        private Expression<Func<TTarget, TTargetValue>> targetexpression;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> mCreateConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// See <see cref="IOperationCreateToOne{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}.Initialize"/>.
@@ -46,15 +46,15 @@ namespace BBT.StructureTools.Convert.Strategy
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> aCreateConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
         {
             sourceFunc.Should().NotBeNull();
             targetExpression.Should().NotBeNull();
-            aCreateConvertHelper.Should().NotBeNull();
+            createConvertHelper.Should().NotBeNull();
 
-            this.mSourceFunc = sourceFunc;
-            this.mTargetExpression = targetExpression;
-            this.mCreateConvertHelper = aCreateConvertHelper;
+            this.sourceFunc = sourceFunc;
+            this.targetexpression = targetExpression;
+            this.createConvertHelper = createConvertHelper;
         }
 
         /// <summary>
@@ -69,18 +69,18 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            var lSourceValue = this.mSourceFunc.Invoke(source);
+            var sourceValue = this.sourceFunc.Invoke(source);
 
-            if (lSourceValue == null)
+            if (sourceValue == null)
             {
                 return;
             }
 
-            var lTargetValue = this.mCreateConvertHelper.CreateTarget(
-                    lSourceValue,
+            var targetValue = this.createConvertHelper.CreateTarget(
+                    sourceValue,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.mTargetExpression, lTargetValue);
+            target.SetPropertyValue(this.targetexpression, targetValue);
         }
     }
 }

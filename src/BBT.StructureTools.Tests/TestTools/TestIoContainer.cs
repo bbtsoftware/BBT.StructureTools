@@ -1,19 +1,19 @@
-﻿using BBT.StrategyPattern;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Compare.Helper;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Convert.Strategy;
-using BBT.StructureTools.Convert.Value;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Operation;
-using BBT.StructureTools.Copy.Strategy;
-using BBT.StructureTools.Initialization;
-using BBT.StructureTools.Tests.TestTools.IoC;
-using Ninject;
-
-namespace BBT.StructureTools.Tests.TestTools
+﻿namespace BBT.StructureTools.Tests.TestTools
 {
+    using BBT.StrategyPattern;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Compare.Helper;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Convert.Strategy;
+    using BBT.StructureTools.Convert.Value;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Operation;
+    using BBT.StructureTools.Copy.Strategy;
+    using BBT.StructureTools.Initialization;
+    using BBT.StructureTools.Tests.TestTools.IoC;
+    using Ninject;
+
     /// <summary>
     /// Utilities to set up and configure for test runs.
     /// </summary>
@@ -132,7 +132,6 @@ namespace BBT.StructureTools.Tests.TestTools
             container.Bind(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
             container.Bind(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>)).To(typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
             container.Bind(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>)).To(typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
-
 
             container.Bind(typeof(ICopyStrategyProvider<,>)).To(typeof(GenericCopyStrategyProvider<,>));
         }

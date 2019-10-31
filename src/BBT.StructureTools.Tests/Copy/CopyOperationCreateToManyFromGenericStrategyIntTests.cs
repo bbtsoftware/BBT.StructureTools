@@ -1,26 +1,25 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using BBT.StrategyPattern;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Strategy;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
 namespace BBT.StructureTools.Tests.Copy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using BBT.StrategyPattern;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Strategy;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class CopyOperationCreateToManyFromGenericStrategyIntTests
     {
         #region setup
 
         private readonly ICopy<ParentTestClass> testcandidate;
-
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
         {
@@ -57,7 +56,7 @@ namespace BBT.StructureTools.Tests.Copy
                 new List<IBaseAdditionalProcessing>());
 
             var testClassParentCopyChildren = testClassParentCopy.Children.Cast<ChildTestClass>().ToList();
-            var testClassParentOriginachildren = testClassParentOriginal.Children.Cast<ChildTestClass>().ToList();
+            var testClassParentOriginchildren = testClassParentOriginal.Children.Cast<ChildTestClass>().ToList();
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
@@ -65,15 +64,15 @@ namespace BBT.StructureTools.Tests.Copy
 
             testClassParentCopyChildren.Count.Should().Be(3);
 
-            testClassParentCopyChildren.ElementAt(0).TestValue.Should().Be(testClassParentOriginachildren.ElementAt(0).TestValue * 2);
-            testClassParentCopyChildren.ElementAt(1).TestValue.Should().Be(testClassParentOriginachildren.ElementAt(1).TestValue * 2);
-            testClassParentCopyChildren.ElementAt(2).TestValue.Should().Be(testClassParentOriginachildren.ElementAt(2).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(0).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(0).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(1).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(1).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(2).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(2).TestValue * 2);
 
             foreach (var copiedChild in testClassParentCopyChildren)
             {
-                foreach (var lOriginachild in testClassParentOriginal.Children)
+                foreach (var originchild in testClassParentOriginal.Children)
                 {
-                    lOriginachild.Should().NotBeSameAs(copiedChild);
+                    originchild.Should().NotBeSameAs(copiedChild);
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace BBT.StructureTools.Tests.Copy
         /// Tests ICopy.Copy.
         /// </summary>
         [Fact]
-        public void Copy_MustFailWhenChildrenListNull()
+        public void Copy_MustFailWhenChildrenistNull()
         {
             // Arrange
             var testClassParentOriginal = new ParentTestClass();
@@ -155,8 +154,8 @@ namespace BBT.StructureTools.Tests.Copy
             /// <summary>
             /// Adds a child.
             /// </summary>
-            /// <param name="aChild">child item.</param>
-            void AddChild(ChildTestClass aChild);
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
 
             /// <summary>
             /// return the children.
@@ -172,18 +171,16 @@ namespace BBT.StructureTools.Tests.Copy
 
         private class ParentTestClass : IParentTestClass
         {
-            private readonly Guid mIdentifier = Guid.NewGuid();
-
             public IList<IChildTestClass> Children { get; set; } = new List<IChildTestClass>();
 
             // ReSharper disable once ConvertToAutoProperty it's as intended here.
             // This identifier shall only be used to divide original and copied parent objects when
             // debugging the unit tests.
-            public Guid Identifier => this.mIdentifier;
+            public Guid Identifier { get; } = Guid.NewGuid();
 
-            public void AddChild(ChildTestClass aChild)
+            public void AddChild(ChildTestClass child)
             {
-                this.Children.Add(aChild);
+                this.Children.Add(child);
             }
 
             public IList<IChildTestClass> GetChildren()
@@ -207,9 +204,9 @@ namespace BBT.StructureTools.Tests.Copy
 
         private class ChildTestClassCopyRegistrations : ICopyRegistrations<IChildTestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
             }
         }
 
@@ -219,13 +216,13 @@ namespace BBT.StructureTools.Tests.Copy
             {
             }
 
-            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
-                aRegistrations.RegisterCreateToManyFromGenericStrategy<ITestStrategy, IChildTestClass>(
-                    aX => aX.Children.Cast<IChildTestClass>(),
-                    aX => aX.Children,
-                    aX => aX.CreateTestClass());
+                registrations.Should().NotBeNull();
+                registrations.RegisterCreateToManyFromGenericStrategy<ITestStrategy, IChildTestClass>(
+                    x => x.Children.Cast<IChildTestClass>(),
+                    x => x.Children,
+                    x => x.CreateTestClass());
             }
         }
 
@@ -255,13 +252,13 @@ namespace BBT.StructureTools.Tests.Copy
                 return new ChildTestClass();
             }
 
-            public void Copy(IChildTestClass aSource, IChildTestClass aTarget, ICopyCallContext aCopyCalcontext)
+            public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCalcontext)
             {
-                aSource.Should().NotBeNull();
-                aTarget.Should().NotBeNull();
-                aCopyCalcontext.Should().NotBeNull();
+                source.Should().NotBeNull();
+                target.Should().NotBeNull();
+                copyCalcontext.Should().NotBeNull();
 
-                aTarget.TestValue = aSource.TestValue * 2;
+                target.TestValue = source.TestValue * 2;
             }
         }
 

@@ -19,17 +19,17 @@ namespace BBT.StructureTools.Copy.Operation
         where TCrossReferencedModel : class
         where TReferencingModel : class
     {
-        private Expression<Func<TReferencingModel, TCrossReferencedModel>> mReferencingProperyExpression;
+        private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperyExpression;
 
         /// <summary>
         /// See <see cref="CopyOperationCrossReferenceProcessing{T, TCrossReferencedModel, TReferencingModel}.Initialize"/>.
         /// </summary>
         public void Initialize(
-            Expression<Func<TReferencingModel, TCrossReferencedModel>> aReferencingProperty)
+            Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            aReferencingProperty.Should().NotBeNull();
+            referencingProperty.Should().NotBeNull();
 
-            this.mReferencingProperyExpression = aReferencingProperty;
+            this.referencingProperyExpression = referencingProperty;
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace BBT.StructureTools.Copy.Operation
         {
             copyCallContext.Should().NotBeNull();
 
-            var lCrossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.mReferencingProperyExpression);
-            lCrossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);
+            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingProperyExpression);
+            crossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);
         }
     }
 }

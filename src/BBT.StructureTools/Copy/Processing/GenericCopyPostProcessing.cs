@@ -14,14 +14,14 @@ namespace BBT.StructureTools.Copy.Processing
         /// <summary>
         /// The action.
         /// </summary>
-        private readonly Action<TClassToCopy, TClassToCopy> mAction;
+        private readonly Action<TClassToCopy, TClassToCopy> action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericCopyPostProcessing{TClassToCopy}"/> class.
         /// </summary>
-        public GenericCopyPostProcessing(Action<TClassToCopy, TClassToCopy> aAction)
+        public GenericCopyPostProcessing(Action<TClassToCopy, TClassToCopy> action)
         {
-            this.mAction = aAction;
+            this.action = action;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Copy.Processing
         /// </summary>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
-            this.mAction.Invoke(source, target);
+            this.action.Invoke(source, target);
         }
     }
 }

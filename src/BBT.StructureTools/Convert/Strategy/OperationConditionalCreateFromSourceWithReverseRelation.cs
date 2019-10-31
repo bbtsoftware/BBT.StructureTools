@@ -27,36 +27,36 @@ namespace BBT.StructureTools.Convert.Strategy
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
     {
-        private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> mConvertStrategyProvider;
-        private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> mInstanceCreationStrategyProvider;
+        private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider;
+        private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider;
 
         /// <summary>
         /// Function which declares the base source value (e.g. LiBaseCover).
         /// </summary>
-        private Func<TSource, TBaseSource> mBaseSourceFunc;
+        private Func<TSource, TBaseSource> baseSourceFunc;
 
         /// <summary>
-        /// Expression which declares the target value (created target class, e.g. LiClaimCover).
+        /// Expression which declares the target value (created target class, e.g. LiClaicover).
         /// </summary>
-        private Expression<Func<TTarget, TBaseTarget>> mTargetValueExpression;
+        private Expression<Func<TTarget, TBaseTarget>> targetValueExpression;
 
         /// <summary>
-        /// Expression which declares the target parent (e.g. LiClaimCoverWrapper).
+        /// Expression which declares the target parent (e.g. LiClaicoverWrapper).
         /// </summary>
-        private Expression<Func<TBaseTarget, TTarget>> mTargetParentExpression;
+        private Expression<Func<TBaseTarget, TTarget>> targetParentExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConditionalCreateFromSourceWithReverseRelation{TSource, TTarget, TTargetValue, TBaseTarget, TIntention}" /> class.
         /// </summary>
         public OperationConditionalCreateFromSourceWithReverseRelation(
-            IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> aConvertStrategyProvider,
-            IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> aInstanceCreationStrategyProvider)
+            IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
+            IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider)
         {
-            aConvertStrategyProvider.Should().NotBeNull();
-            aInstanceCreationStrategyProvider.Should().NotBeNull();
+            convertStrategyProvider.Should().NotBeNull();
+            instanceCreationStrategyProvider.Should().NotBeNull();
 
-            this.mConvertStrategyProvider = aConvertStrategyProvider;
-            this.mInstanceCreationStrategyProvider = aInstanceCreationStrategyProvider;
+            this.convertStrategyProvider = convertStrategyProvider;
+            this.instanceCreationStrategyProvider = instanceCreationStrategyProvider;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace BBT.StructureTools.Convert.Strategy
             targetValueExpression.Should().NotBeNull();
             targetParentExpression.Should().NotBeNull();
 
-            this.mBaseSourceFunc = aBaseSourceFunc;
-            this.mTargetValueExpression = targetValueExpression;
-            this.mTargetParentExpression = targetParentExpression;
+            this.baseSourceFunc = aBaseSourceFunc;
+            this.targetValueExpression = targetValueExpression;
+            this.targetParentExpression = targetParentExpression;
         }
 
         /// <summary>
@@ -88,20 +88,20 @@ namespace BBT.StructureTools.Convert.Strategy
 
             targetParent.Should().NotBeNull();
 
-            var lBaseSource = this.mBaseSourceFunc(source);
+            var baseSource = this.baseSourceFunc(source);
 
-            var lInstanceCreationStrategy = this.mInstanceCreationStrategyProvider.GetStrategy(lBaseSource);
-            var lTarget = lInstanceCreationStrategy.CreateInstance();
+            var instanceCreationStrategy = this.instanceCreationStrategyProvider.GetStrategy(baseSource);
+            var target = instanceCreationStrategy.CreateInstance();
 
-            var lStrategy = this.mConvertStrategyProvider.GetConvertStrategyFromSource(lBaseSource);
+            var strategy = this.convertStrategyProvider.GetConvertStrategyFromSource(baseSource);
 
             // Sets reference to the child on the parent class
-            targetParent.SetPropertyValue(this.mTargetValueExpression, lTarget);
+            targetParent.SetPropertyValue(this.targetValueExpression, target);
 
             // Sets reference to the parent on the child class
-            lTarget.SetPropertyValue(this.mTargetParentExpression, targetParent);
+            target.SetPropertyValue(this.targetParentExpression, targetParent);
 
-            lStrategy.Convert(lBaseSource, lTarget, additionalProcessings);
+            strategy.Convert(baseSource, target, additionalProcessings);
         }
     }
 }

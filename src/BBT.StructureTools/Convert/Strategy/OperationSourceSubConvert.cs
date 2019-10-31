@@ -21,17 +21,17 @@ namespace BBT.StructureTools.Convert.Strategy
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> mConvert;
+        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationSourceSubConvert{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationSourceSubConvert(
-            IConvert<TSourceValue, TTarget, TConvertIntention> aConvert)
+            IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
-            aConvert.Should().NotBeNull();
+            convert.Should().NotBeNull();
 
-            this.mConvert = aConvert;
+            this.convert = convert;
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace BBT.StructureTools.Convert.Strategy
 
             // ToDo BBTL-5178: IF sollte nicht mehr nötig sein, wenn die entsprechenden
             // Registrierungen und Implementation die korrekte Basis aufrufen!
-            if (source is TSourceValue lSourceValue)
+            if (source is TSourceValue sourceValue)
             {
-                this.mConvert.Convert(lSourceValue, target, additionalProcessings);
+                this.convert.Convert(sourceValue, target, additionalProcessings);
             }
         }
     }

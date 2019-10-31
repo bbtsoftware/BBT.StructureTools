@@ -13,16 +13,16 @@ namespace BBT.StructureTools.Copy.Helper
     /// <typeparam name="T">class to copy.</typeparam>
     public class CopyHelperOperations<T> : ICopyOperation<T>
     {
-        private readonly IEnumerable<ICopyOperation<T>> mRegisteredStrategies;
+        private readonly IEnumerable<ICopyOperation<T>> registeredStrategies;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyHelperOperations{T}"/> class.
         /// </summary>
-        internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> aRegisteredStrategies)
+        internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
         {
-            aRegisteredStrategies.Should().NotBeNull();
+            registeredStrategies.Should().NotBeNull();
 
-            this.mRegisteredStrategies = aRegisteredStrategies;
+            this.registeredStrategies = registeredStrategies;
         }
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace BBT.StructureTools.Copy.Helper
         /// </summary>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            foreach (var lRegisteredStrategy in this.mRegisteredStrategies)
+            foreach (var registeredStrategy in this.registeredStrategies)
             {
-                lRegisteredStrategy.Copy(source, target, copyCallContext);
+                registeredStrategy.Copy(source, target, copyCallContext);
             }
         }
     }

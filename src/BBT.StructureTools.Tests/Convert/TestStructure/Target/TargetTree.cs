@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools.Tests.Convert.TestStructure.Source;
-
-namespace BBT.StructureTools.Tests.Convert.TestStructure.Target
+﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Target
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools.Tests.Convert.TestStructure.Source;
+
     public class TargetTree
     {
         public TargetRoot TargetRoot { get; set; }

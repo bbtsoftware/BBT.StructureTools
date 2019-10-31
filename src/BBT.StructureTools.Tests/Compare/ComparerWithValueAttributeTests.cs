@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Compare.Exclusions;
-using BBT.StructureTools.Compare.Helper;
-using BBT.StructureTools.Tests.Compare.Intention;
-using BBT.StructureTools.Tests.TestTools;
-using FluentAssertions;
-using Ninject;
-using Xunit;
-
-namespace BBT.StructureTools.Tests.Compare
+﻿namespace BBT.StructureTools.Tests.Compare
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Compare.Exclusions;
+    using BBT.StructureTools.Compare.Helper;
+    using BBT.StructureTools.Tests.Compare.Intention;
+    using BBT.StructureTools.Tests.TestTools;
+    using FluentAssertions;
+    using Ninject;
+    using Xunit;
+
     public class ComparerWithValueAttributeTests
     {
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
@@ -29,70 +29,70 @@ namespace BBT.StructureTools.Tests.Compare
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
-            var lTestClass = new TestClass { Value1 = 45 };
+            var testClass = new TestClass { Value1 = 45 };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClass, lTestClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         [Fact]
         public void Equals_WhenAttributeValuesEqual_MustReturnTrue()
         {
             // Arrange
-            var lTestClassA = new TestClass { Value1 = 45 };
-            var lTestClassB = new TestClass { Value1 = 45 };
+            var testClassA = new TestClass { Value1 = 45 };
+            var testClassB = new TestClass { Value1 = 45 };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClassA, lTestClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         [Fact]
         public void Equals_WhenAttributeValuesNotEqual_MustReturnFalse()
         {
             // Arrange
-            var lTestClassA = new TestClass { Value1 = 45 };
-            var lTestClassB = new TestClass { Value1 = 44 };
+            var testClassA = new TestClass { Value1 = 45 };
+            var testClassB = new TestClass { Value1 = 44 };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClassA, lTestClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
-            lResult.Should().BeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact]
         public void Equals_WhenAttributeValuesNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
-            var lTestClassA = new TestClass { Value2 = 45 };
-            var lTestClassB = new TestClass { Value2 = 44 };
+            var testClassA = new TestClass { Value2 = 45 };
+            var testClassB = new TestClass { Value2 = 44 };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClassA, lTestClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         [Fact]
         public void Equals_WhenAttributeValuesNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
-            var lTestClassA = new TestClass { Value1 = 45 };
-            var lTestClassB = new TestClass { Value1 = 44 };
-            var lComparerExclusions = new List<IComparerExclusion> { new PropertyComparerExclusion<TestClass>(aX => aX.Value1) };
+            var testClassA = new TestClass { Value1 = 45 };
+            var testClassB = new TestClass { Value1 = 44 };
+            var comparerExclusions = new List<IComparerExclusion> { new PropertyComparerExclusion<TestClass>(x => x.Value1) };
 
             // Act
-            var lResult = this.testcandidate.Equals(lTestClassA, lTestClassB, new IBaseAdditionalProcessing[0], lComparerExclusions);
+            var result = this.testcandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
-            lResult.Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         private class TestClass
@@ -104,12 +104,12 @@ namespace BBT.StructureTools.Tests.Compare
 
         private class TestClassCompareRegistrations : ICompareRegistrations<TestClass, ITestCompareIntention>
         {
-            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> aRegistrations)
+            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> registrations)
             {
-                aRegistrations.Should().NotBeNull();
+                registrations.Should().NotBeNull();
 
-                aRegistrations
-                    .RegisterAttribute(aX => aX.Value1);
+                registrations
+                    .RegisterAttribute(x => x.Value1);
             }
         }
     }
