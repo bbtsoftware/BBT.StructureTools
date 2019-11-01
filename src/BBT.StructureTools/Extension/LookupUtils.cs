@@ -5,7 +5,7 @@
     /// <summary>
     /// Utilities for value lookup.
     /// </summary>
-    public static class LookupUtils
+    internal static class LookupUtils
     {
         /// <summary>
         /// Determines whether the specified value is the default value for type <typeparamref name="T"/>.
@@ -14,7 +14,7 @@
         /// <typeparam name="T">
         /// The data type.
         /// </typeparam>
-        public static bool IsDefaultValue<T>(T value)
+        internal static bool IsDefaultValue<T>(T value)
         {
             if (value == null)
             {
@@ -35,7 +35,7 @@
         /// <typeparam name="T">Type of the value to look up.</typeparam>
         /// <param name="specificValue">The specific value, will be returned if it is not empty.</param>
         /// <param name="defaultValue">The default value, will only be returned if <paramref name="specificValue"/> is not empty.</param>
-        public static T LookUpValue<T>(T specificValue, T defaultValue)
+        internal static T LookUpValue<T>(T specificValue, T defaultValue)
         {
             if (IsDefaultValue(specificValue))
             {
@@ -58,7 +58,7 @@
         /// <typeparam name="T">The type of the values to compare.</typeparam>
         /// <param name="specificValue">The specific value.</param>
         /// <param name="upperLimitValue">The upper limit value.</param>
-        public static T ApplyUpperLimit<T>(T specificValue, T upperLimitValue)
+        internal static T ApplyUpperLimit<T>(T specificValue, T upperLimitValue)
             where T : IComparable<T>
         {
             if (IsDefaultValue(upperLimitValue))
@@ -92,7 +92,7 @@
         /// <typeparam name="T">The type of the values to compare.</typeparam>
         /// <param name="specificValue">The specific value.</param>
         /// <param name="lowerLimitValue">The upper limit value.</param>
-        public static T ApplyLowerLimit<T>(T specificValue, T lowerLimitValue)
+        internal static T ApplyLowerLimit<T>(T specificValue, T lowerLimitValue)
             where T : IComparable<T>
         {
             if (IsDefaultValue(lowerLimitValue))
