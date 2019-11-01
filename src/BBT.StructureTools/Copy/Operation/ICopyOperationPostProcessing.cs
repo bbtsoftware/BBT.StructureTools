@@ -3,7 +3,7 @@
     using System.Collections.ObjectModel;
 
     /// <summary>
-    /// A Copy operation which adds post processing operations which are executed at the end of the
+    /// A copy operation which adds post processing operations which are executed at the end of the
     /// copy process.
     /// </summary>
     /// <typeparam name="T">

@@ -58,7 +58,7 @@
             reverseRelation.Should().NotBeNull();
             copyCallContext.Should().NotBeNull();
 
-            if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.Shalcopy(source)))
+            if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.ShallCopy(source)))
             {
                 return null;
             }

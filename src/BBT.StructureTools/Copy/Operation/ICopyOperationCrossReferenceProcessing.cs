@@ -4,7 +4,7 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// A copy operation which adds cross referenceprocessing operations while performing the copy
+    /// A copy operation which adds cross-reference processing operations while performing the copy
     /// procedure.
     /// </summary>
     /// <typeparam name="T">Type of the object being copied.</typeparam>

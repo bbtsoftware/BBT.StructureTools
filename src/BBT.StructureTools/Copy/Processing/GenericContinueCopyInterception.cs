@@ -20,11 +20,11 @@
         }
 
         /// <inheritdoc/>
-        public bool Shalcopy(TType aObject)
+        public bool ShallCopy(TType obj)
         {
-            aObject.Should().NotBeNull();
+            obj.Should().NotBeNull();
 
-            return this.shallCopyFunc.Invoke(aObject);
+            return this.shallCopyFunc.Invoke(obj);
         }
     }
 }

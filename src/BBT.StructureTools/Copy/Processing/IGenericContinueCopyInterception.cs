@@ -10,6 +10,6 @@
         /// <summary>
         /// Returns true if the object shall be copied.
         /// </summary>
-        bool Shalcopy(TType obj);
+        bool ShallCopy(TType obj);
     }
 }
