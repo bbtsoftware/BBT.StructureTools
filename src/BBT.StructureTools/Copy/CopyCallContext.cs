@@ -1,13 +1,9 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICopyCallContext"/>.
-    /// </summary>
+    /// <inheritdoc/>
     public class CopyCallContext : ICopyCallContext
     {
         /// <summary>
@@ -29,9 +25,7 @@ namespace BBT.StructureTools.Copy
             this.AdditionalProcessings = additionalProcessings;
         }
 
-        /// <summary>
-        /// Gets... see <see cref="ICopyCallContext.AdditionalProcessings"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public ICollection<IBaseAdditionalProcessing> AdditionalProcessings { get; }
     }
 }

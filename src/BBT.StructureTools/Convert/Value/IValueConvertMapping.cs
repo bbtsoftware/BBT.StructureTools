@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Value
+﻿namespace BBT.StructureTools.Convert.Value
 {
     /// <summary>
     /// Mapping for values of type <typeparamref name="TSource"/> to values of type <typeparamref name="TTarget"/>.

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -9,17 +7,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToMany</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TSourceValue">See link above.</typeparam>
-    /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-    /// <typeparam name="TReverseRelation">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
         : IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
         where TSource : class
@@ -31,17 +19,8 @@ namespace BBT.StructureTools.Convert.Strategy
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
-
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
-
-        /// <summary>
-        /// Function to get the source's property value.
-        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-
-        /// <summary>
-        ///  Expression which declares the target value.
-        /// </summary>
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetexpression;
 
         /// <summary>
@@ -55,9 +34,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convertHelper = convertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationCreateToManyWithReverseRelation{TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
@@ -72,9 +49,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.createConvertHelper = createConvertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     /// <summary>
     /// Interface to add some additional functions on the beginning of the convert process.

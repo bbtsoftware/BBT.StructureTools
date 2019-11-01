@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Processing
+﻿namespace BBT.StructureTools.Copy.Processing
 {
     /// <summary>
     /// Interface to add some additional functions on the end of the convert process.

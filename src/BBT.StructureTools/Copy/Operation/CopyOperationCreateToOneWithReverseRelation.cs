@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     using System;
     using System.Linq.Expressions;
@@ -8,12 +6,7 @@ namespace BBT.StructureTools.Copy.Operation
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Implementation of <see cref="ICopyOperationCreateToOneWithReverseRelation{TParent,TChild,TConcreteChild}"/>.
-    /// </summary>
-    /// <typeparam name="T">See documentation on interface declaration.</typeparam>
-    /// <typeparam name="TChild">See documentation on interface declaration.</typeparam>
-    /// <typeparam name="TConcreteChild">See documentation on interface declaration.</typeparam>
+    /// <inheritdoc/>
     public class CopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild> : ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>
         where T : class
         where TChild : class

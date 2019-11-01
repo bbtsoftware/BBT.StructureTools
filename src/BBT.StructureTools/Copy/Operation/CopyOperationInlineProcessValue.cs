@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     using System;
     using System.Linq.Expressions;
@@ -8,16 +6,11 @@ namespace BBT.StructureTools.Copy.Operation
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Defines a strategy to handle inline processing of values on copy targets.
-    /// </summary>
-    /// <typeparam name="T">type as T.</typeparam>
-    /// <typeparam name="TValue">type of the value on type T.</typeparam>
+    /// <inheritdoc/>
     public class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
         where T : class
     {
         private readonly Expression<Func<T, TValue>> targetexpression;
-
         private readonly Func<TValue> valueFunc;
 
         /// <summary>
@@ -34,9 +27,7 @@ namespace BBT.StructureTools.Copy.Operation
             this.valueFunc = attrValueExpression.Compile();
         }
 
-        /// <summary>
-        /// See <see cref="ICopyOperation{T}.Copy"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
             target.SetPropertyValue(this.targetexpression, this.valueFunc.Invoke());

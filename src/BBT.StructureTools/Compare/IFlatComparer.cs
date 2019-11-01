@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     /// <summary>
     /// Marker interface for a model comparison which compares just the attributes of the current model

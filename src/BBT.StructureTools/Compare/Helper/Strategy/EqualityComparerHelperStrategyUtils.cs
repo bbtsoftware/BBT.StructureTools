@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper.Strategy
+﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -16,18 +14,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     public static class EqualityComparerHelperStrategyUtils
     {
         /// <summary>
-        /// See <see cref="ReflectionUtils.GetPropertyName{T, TReturn}"/>.
-        /// </summary>
-        /// <typeparam name="T">Base type of expression.</typeparam>
-        /// <typeparam name="TReturn">Return type.</typeparam>
-        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
-        {
-            expression.Should().NotBeNull();
-
-            return ReflectionUtils.GetPropertyName(expression);
-        }
-
-        /// <summary>
         /// Get the method name.
         /// </summary>
         /// <typeparam name="T">Base type of expression.</typeparam>
@@ -42,7 +28,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         }
 
         /// <summary>
-        /// Check if the property exists in the exclusion ist.
+        /// Check if the property exists in the exclusion list.
         /// </summary>
         public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
@@ -68,10 +54,10 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         }
 
         /// <summary>
-        /// Checks whether the two ist are equivalent or not.
+        /// Checks whether the two lists are equivalent or not.
         /// </summary>
         /// <typeparam name="TModel">Type of model.</typeparam>
-        public static bool AreistEquivalent<TModel>(
+        public static bool AreListEquivalent<TModel>(
             IEnumerable<TModel> aist1,
             IEnumerable<TModel> aist2,
             Func<TModel, TModel, bool> compareFunc)
@@ -79,8 +65,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         {
             compareFunc.Should().NotBeNull();
 
-            // ReSharper disable once PossibleUnintendedReferenceComparison
-            // BER sys this is OK since either both are null, or have the same reference which is
+            // This is OK since either both are null, or have the same reference which is
             // in case of our compare infra the correct definition of equal.
             if (aist1 == aist2)
             {
@@ -150,9 +135,6 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         private class DictionaryComparer<TModel> : IEqualityComparer<TModel>
             where TModel : class
         {
-            /// <summary>
-            /// Returns true if the 2 models are equal.
-            /// </summary>
             private readonly Func<TModel, TModel, bool> compareFunc;
 
             /// <summary>
@@ -163,17 +145,13 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
                 this.compareFunc = compareFunc;
             }
 
-            /// <summary>
-            /// See <see cref="IEqualityComparer{T}.Equals(T, T)"/>.
-            /// </summary>
+            /// <inheritdoc/>
             public bool Equals(TModel model1, TModel model2)
             {
                 return this.compareFunc(model1, model2);
             }
 
-            /// <summary>
-            /// See <see cref="IEqualityComparer{T}.GetHashCode(T)"/>.
-            /// </summary>
+            /// <inheritdoc/>
             public int GetHashCode(TModel model)
             {
                 // The Hash code must not include any excluded properties!

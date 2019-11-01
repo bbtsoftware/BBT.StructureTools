@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Strategy
+﻿namespace BBT.StructureTools.Copy.Strategy
 {
     using BBT.StrategyPattern;
 

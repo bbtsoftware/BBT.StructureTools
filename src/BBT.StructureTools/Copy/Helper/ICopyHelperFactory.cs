@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
     using System;
     using System.Linq.Expressions;

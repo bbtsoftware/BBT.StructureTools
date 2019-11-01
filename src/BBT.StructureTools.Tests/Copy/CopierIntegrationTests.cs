@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Tests.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools
+﻿namespace BBT.StructureTools
 {
     /// <summary>
     /// Marker interface for the additional processing for tasks like compare, copy or convert operations.

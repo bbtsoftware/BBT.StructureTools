@@ -1,20 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToMany</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TSourceValue">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
         : IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
         where TSource : class
@@ -23,12 +14,7 @@ namespace BBT.StructureTools.Convert.Strategy
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
-
         private readonly IConvertHelper convertHelper;
-
-        /// <summary>
-        /// Function to get the source's property value.
-        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
@@ -45,9 +31,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convertHelper = convertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationCopyFromMany{TSource, TTarget, TSourceValue, TConvertIntention}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
         {
             sourceFunc.Should().NotBeNull();
@@ -55,9 +39,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.sourceFunc = sourceFunc;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

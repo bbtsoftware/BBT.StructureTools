@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System;
 

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     /// <summary>
     /// Strategy to copy the different attribute types.

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     using System;
     using System.Linq.Expressions;
@@ -8,12 +6,7 @@ namespace BBT.StructureTools.Copy.Operation
     using BBT.StructureTools.Copy.Helper;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICopyOperationCrossReferenceProcessing{T,TCrossReferencedModel, TReferencingModel}"/> for documentation.
-    /// </summary>
-    /// <typeparam name="T">see link above.</typeparam>
-    /// <typeparam name="TCrossReferencedModel">see link above.</typeparam>
-    /// <typeparam name="TReferencingModel">see link above.</typeparam>
+    /// <inheritdoc/>
     public class CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel> : ICopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>
         where T : class
         where TCrossReferencedModel : class
@@ -21,9 +14,7 @@ namespace BBT.StructureTools.Copy.Operation
     {
         private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperyExpression;
 
-        /// <summary>
-        /// See <see cref="CopyOperationCrossReferenceProcessing{T, TCrossReferencedModel, TReferencingModel}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
@@ -32,9 +23,7 @@ namespace BBT.StructureTools.Copy.Operation
             this.referencingProperyExpression = referencingProperty;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyOperation{T}.Copy"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(
             T source,
             T target,

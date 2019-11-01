@@ -1,10 +1,6 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Defines a type which abstracts the retrieval of temporal data

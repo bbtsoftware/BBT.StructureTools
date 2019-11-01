@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Extension
+﻿namespace BBT.StructureTools.Extension
 {
     using System.Collections.Generic;
 

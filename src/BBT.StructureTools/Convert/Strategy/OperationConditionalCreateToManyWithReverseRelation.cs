@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -10,14 +8,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Strategy;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TBaseSource">Contains the base type of the source which shall be converted (e.g. LiBaseCover).</typeparam>
-    /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaicover).</typeparam>
-    /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
+    /// <inheritdoc/>
     public class OperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
             where TSource : class
@@ -47,9 +38,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.createInstanceStrategyProvider = createInstanceStrategyProvider;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             var sourceChildren = this.source.Invoke(source);
@@ -69,9 +58,7 @@ namespace BBT.StructureTools.Convert.Strategy
             }
         }
 
-        /// <summary>
-        /// See <see cref="IOperationConditionalCreateToManyWithReverseRelation{TSource, TTarget, TBaseSource, TBaseTarget, TIntention}.Initialize(Func{TSource, IEnumerable{TBaseSource}}, Expression{Func{TTarget, ICollection{TBaseTarget}}}, Expression{Func{TBaseTarget, TTarget}})"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,

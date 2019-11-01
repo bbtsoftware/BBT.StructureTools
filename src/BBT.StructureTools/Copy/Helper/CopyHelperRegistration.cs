@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
     using System;
     using System.Collections.Generic;
@@ -14,10 +12,7 @@ namespace BBT.StructureTools.Copy.Helper
     using BBT.StructureTools.Initialization;
     using FluentAssertions;
 
-    /// <summary>
-    /// Helper for the copy mechanism.
-    /// </summary>
-    /// <typeparam name="T">class to copy.</typeparam>
+    /// <inheritdoc/>
     public class CopyHelperRegistration<T> : ICopyHelperRegistration<T>
         where T : class
     {
@@ -32,20 +27,14 @@ namespace BBT.StructureTools.Copy.Helper
             this.registeredStrategies = new List<ICopyOperation<T>>();
         }
 
-        /// <summary>
-        /// Register a copy attribute of type <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="TValue">The type of the attribute to compare. Must be a reference type.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
             this.registeredStrategies.Add(new CopyOperation<T, TValue>(expression));
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyRegistrations{T}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">see above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterInlineValueProcessing<TValue>(
             Expression<Func<T, TValue>> targetExpression,
             Expression<Func<TValue>> aAttrValueExpression)
@@ -54,11 +43,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateToManyFromGenericStrategy{TStrategy, TChildType}"/>.
-        /// </summary>
-        /// <typeparam name="TStrategy">see above.</typeparam>
-        /// <typeparam name="TChildType">see above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategy<TStrategy, TChildType>(
             Func<T, IEnumerable<TChildType>> sourceFunc,
             Expression<Func<T, ICollection<TChildType>>> targetExpression,
@@ -72,12 +57,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterSubCopy{TTypeOfSubCopy}"/>.
-        /// </summary>
-        /// <typeparam name="TSubCopyOfT">
-        /// See link above.
-        /// </typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterSubCopy<TSubCopyOfT>()
             where TSubCopyOfT : class, ICopy<T>
         {
@@ -86,11 +66,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateToManyWithReverseRelation{TChild, TConcreteChild}"/>.
-        /// </summary>
-        /// <typeparam name="TChild">See link above.</typeparam>
-        /// <typeparam name="TConcreteChild">See link above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyWithReverseRelation<TChild, TConcreteChild>(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<T, ICollection<TChild>>> targetExpression,
@@ -113,11 +89,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateToManyWithReverseRelationOnly{TChild, TConcreteChild}"/>.
-        /// </summary>
-        /// <typeparam name="TChild">See link above.</typeparam>
-        /// <typeparam name="TConcreteChild">See link above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyWithReverseRelationOnly<TChild, TConcreteChild>(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<TChild, T>> reverseRelationFunc)
@@ -139,11 +111,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateToOneWithReverseRelation{TChild,TConcreteChild}"/>.
-        /// </summary>
-        /// <typeparam name="TChild">see above.</typeparam>
-        /// <typeparam name="TConcreteChild">see above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T>
             RegisterCreateToOneWithReverseRelation<TChild, TConcreteChild>(
             Expression<Func<T, TChild>> targetFuncExpr,
@@ -165,9 +133,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterPostProcessings"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] aFurtherAdditionalProcessings)
         {
             additionalProcessing.Should().NotBeNull();
@@ -185,10 +151,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// <see cref="ICopyHelperRegistration{T}.RegisterPostProcessing{TPostProcessing}"/>.
-        /// </summary>
-        /// <typeparam name="TPostProcessing">see above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterPostProcessing<TPostProcessing>()
             where TPostProcessing : IBaseAdditionalProcessing
         {
@@ -203,11 +166,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCrossReferenceProcessing{TCrossReferencedModel, TReferencingModel}"/>.
-        /// </summary>
-        /// <typeparam name="TCrossReferencedModel">See link above.</typeparam>
-        /// <typeparam name="TReferencingModel">See link above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCrossReferenceProcessing<TCrossReferencedModel, TReferencingModel>(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
             where TCrossReferencedModel : class
@@ -221,19 +180,13 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// Ends the registrations and start the operation phase.
-        /// </summary>
+        /// <inheritdoc/>
         public ICopyOperation<T> EndRegistrations()
         {
             return new CopyHelperOperations<T>(this.registeredStrategies);
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateFromFactory{TAttributeValueFactory,TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TAttributeValueFactory">see above.</typeparam>
-        /// <typeparam name="TValue">see above.</typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T>
             RegisterCreateFromFactory<TAttributeValueFactory, TValue>(
             Expression<Func<T, TValue>> targetExpression,
@@ -250,15 +203,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}"/>.
-        /// </summary>
-        /// <typeparam name="TStrategy">
-        /// Strategy defining type.
-        /// </typeparam>
-        /// <typeparam name="TChild">
-        /// Definition of the type defined in the strategy.
-        /// </typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TStrategy, TChild>(
             Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
@@ -270,15 +215,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}.RegisterCreateToManyFromGenericStrategyReverseRelationOnly{TStrategy, TChild}(Func{T, IEnumerable{TChild}}, Expression{Func{TChild, T}})"/>.
-        /// </summary>
-        /// <typeparam name="TStrategy">
-        /// Strategy defining type.
-        /// </typeparam>
-        /// <typeparam name="TChild">
-        /// Definition of the type defined in the strategy.
-        /// </typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategyReverseRelationOnly<TStrategy, TChild>(
             Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
@@ -290,15 +227,7 @@ namespace BBT.StructureTools.Copy.Helper
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyHelperRegistration{T}"/>.
-        /// </summary>
-        /// <typeparam name="TStrategy">
-        /// Strategy defining type.
-        /// </typeparam>
-        /// <typeparam name="TChild">
-        /// Definition of the type defined in the strategy.
-        /// </typeparam>
+        /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToOneFromGenericStrategyWithReverseRelation<TStrategy, TChild>(
             Expression<Func<T, TChild>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>

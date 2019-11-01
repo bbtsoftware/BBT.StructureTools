@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -10,15 +8,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Strategy;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToMany</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TBaseSource">See link above.</typeparam>
-    /// <typeparam name="TBaseTarget">See link above.</typeparam>
-    /// <typeparam name="TIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
             where TSource : class
@@ -29,20 +19,8 @@ namespace BBT.StructureTools.Convert.Strategy
     {
         private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider;
         private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider;
-
-        /// <summary>
-        /// Function which declares the base source value (e.g. LiBaseCover).
-        /// </summary>
         private Func<TSource, TBaseSource> baseSourceFunc;
-
-        /// <summary>
-        /// Expression which declares the target value (created target class, e.g. LiClaicover).
-        /// </summary>
         private Expression<Func<TTarget, TBaseTarget>> targetValueExpression;
-
-        /// <summary>
-        /// Expression which declares the target parent (e.g. LiClaicoverWrapper).
-        /// </summary>
         private Expression<Func<TBaseTarget, TTarget>> targetParentExpression;
 
         /// <summary>
@@ -59,9 +37,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.instanceCreationStrategyProvider = instanceCreationStrategyProvider;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationConditionalCreateFromSourceWithReverseRelation{TSource, TTarget, TTargetValue, TBaseTarget, TIntention}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TBaseSource> aBaseSourceFunc,
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
@@ -76,9 +52,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.targetParentExpression = targetParentExpression;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget targetParent,

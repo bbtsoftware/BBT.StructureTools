@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Tests.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
@@ -239,7 +237,7 @@ namespace BBT.StructureTools.Tests.Copy
 
         private class TestStrategy : ITestStrategy
         {
-            public bool IsResponsible(IChildTestClass aCriterion)
+            public bool IsResponsible(IChildTestClass criterion)
             {
                 // For Test purposes.
                 return true;
@@ -270,7 +268,7 @@ namespace BBT.StructureTools.Tests.Copy
                 throw new NotImplementedException();
             }
 
-            public TestStrategy GetStrategy(IChildTestClass aCriterion)
+            public TestStrategy GetStrategy(IChildTestClass criterion)
             {
                 return new TestStrategy();
             }

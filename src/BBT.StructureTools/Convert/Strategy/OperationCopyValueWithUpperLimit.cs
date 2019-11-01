@@ -6,36 +6,18 @@
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IOperationCopyValueWithUpperLimit{TSource,TTarget,TValue}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TValue">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
         : IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class
         where TValue : IComparable<TValue>
     {
-        /// <summary>
-        /// Function to get the source's property value.
-        /// </summary>
         private Func<TSource, TValue> sourceFunc;
-
-        /// <summary>
-        /// Function to get the look-up value.
-        /// </summary>
         private Func<TSource, TValue> sourceUpperLimitFunc;
-
-        /// <summary>
-        ///  Expression which declares the target value.
-        /// </summary>
         private Expression<Func<TTarget, TValue>> targetexpression;
 
-        /// <summary>
-        /// See <see cref="IOperationCopyValueWithUpperLimit{TSource,TTarget,TValue}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TValue> aSourceFunc,
             Func<TSource, TValue> aSourceUpperLimitFunc,
@@ -50,9 +32,7 @@
             this.targetexpression = aTargetExpression;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource aSource,
             TTarget aTarget,

@@ -1,21 +1,13 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
     using System.Linq;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IConvertHelper"/>.
-    /// </summary>
+    /// <inheritdoc/>
     public class ConvertHelper : IConvertHelper
     {
-        /// <summary>
-        /// See <see cref="IConvertHelper.DoConvertPreProcessing{TSoureClass, TTargetClass}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceClass">See link above.</typeparam>
-        /// <typeparam name="TTargetClass">See link above.</typeparam>
+        /// <inheritdoc/>
         public void DoConvertPreProcessing<TSourceClass, TTargetClass>(
             TSourceClass source,
             TTargetClass target,
@@ -33,11 +25,7 @@ namespace BBT.StructureTools.Convert
                 .ForEach(x => x.DoPreProcessing(source, target));
         }
 
-        /// <summary>
-        /// Start the convert post process it it's needed.
-        /// </summary>
-        /// <typeparam name="TSourceClass">Type of source class.</typeparam>
-        /// <typeparam name="TTargetClass">Type of target class.</typeparam>
+        /// <inheritdoc/>
         public void DoConvertPostProcessing<TSourceClass, TTargetClass>(
             TSourceClass source,
             TTargetClass target,
@@ -55,12 +43,7 @@ namespace BBT.StructureTools.Convert
                 .ForEach(x => x.DoPostProcessing(source, target));
         }
 
-        /// <summary>
-        /// Evaluate the implementation of <see cref="IConvertInterception{TSoureClass,TTargetClass}"/>
-        /// and return the result.
-        /// </summary>
-        /// <typeparam name="TSourceClass">Type of source class.</typeparam>
-        /// <typeparam name="TTargetClass">Type of target class.</typeparam>
+        /// <inheritdoc/>
         public bool ContinueConvertProcess<TSourceClass, TTargetClass>(
             TSourceClass source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)

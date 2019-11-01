@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper.Strategy
+﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +6,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
     using BBT.StructureTools.Compare;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IEqualityComparerHelperStrategy{T}"/>.
-    /// </summary>
-    /// <typeparam name="T">Inheriting type.</typeparam>
-    /// <typeparam name="TIntention">Comparer intention.</typeparam>
+    /// <inheritdoc/>
     internal class EqualityComparerHelperStrategySubCompareComparer<T, TIntention> : IEqualityComparerHelperStrategy<T>
         where T : class
         where TIntention : IBaseComparerIntention
@@ -31,9 +25,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             this.subComparerType = EqualityComparerHelperStrategyUtils.GetCompareType(comparer);
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperStrategy{T}.IsElementEqualsOrExcluded"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsElementEqualsOrExcluded(
             T candidate1,
             T candidate2,
@@ -49,9 +41,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             return this.comparer.Equals(candidate1, candidate2, additionalProcessings, exclusions);
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperStrategy{T}.GetElementHashCode"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int? GetElementHashCode(T model)
         {
             return this.comparer.GetHashCode(model);

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     /// <summary>
     /// Convert operation post processing interface.

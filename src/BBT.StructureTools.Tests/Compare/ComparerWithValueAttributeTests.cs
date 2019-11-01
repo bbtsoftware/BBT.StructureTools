@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;

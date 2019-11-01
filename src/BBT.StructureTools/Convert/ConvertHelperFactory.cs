@@ -1,19 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System;
     using System.Linq.Expressions;
     using BBT.StructureTools.Initialization;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IConvertHelperFactory{TSource, TTarget, TConcreteTarget, TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TConcreteTarget">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class ConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
         : IConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
         where TSource : class
@@ -21,10 +13,7 @@ namespace BBT.StructureTools.Convert
         where TConcreteTarget : TTarget, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        /// <summary>
-        /// See <see cref="IConvertHelperFactory{TSource, TTarget, TConcreteTarget, TConvertIntention}.GetConvertHelper{TReverseRelation}"/>.
-        /// </summary>
-        /// <typeparam name="TReverseRelation">See link above.</typeparam>
+        /// <inheritdoc/>
         public ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention> GetConvertHelper<TReverseRelation>(
             Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
@@ -36,9 +25,7 @@ namespace BBT.StructureTools.Convert
             return convertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertHelperFactory{TSource, TTarget, TConcreteTarget, TConvertIntention}.GetConvertHelper"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention> GetConvertHelper()
         {
             var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>>();

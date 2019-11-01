@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     using System;
     using System.Collections.Generic;
@@ -26,9 +24,7 @@ namespace BBT.StructureTools.Compare
             this.sortOrderDelegate = sortOrderDelegate;
         }
 
-        /// <summary>
-        /// See <see cref="IComparer{T}.Compare"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int Compare(TModel modelA, TModel modelB)
         {
             if (modelA == null)

@@ -1,14 +1,10 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     using System.Collections.Generic;
     using System.Linq;
     using FluentAssertions;
 
-    /// <summary>
-    /// Provides compare functionality.
-    /// </summary>
+    /// <inheritdoc/>
     public class CompareHelper : ICompareHelper
     {
         /// <summary>
@@ -18,11 +14,7 @@ namespace BBT.StructureTools.Compare
         {
         }
 
-        /// <summary>
-        /// See <see cref="ICompareHelper.DoComparePostProcessing{T, TIntention}"/>.
-        /// </summary>
-        /// <typeparam name="T">See link above.</typeparam>
-        /// <typeparam name="TIntention">See link above.</typeparam>
+        /// <inheritdoc/>
         public void DoComparePostProcessing<T, TIntention>(
             T candidate1Nullable,
             T candidate2Nullable,

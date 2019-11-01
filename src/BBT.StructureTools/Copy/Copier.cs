@@ -1,16 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Operation;
     using FluentAssertions;
 
-    /// <summary>
-    /// Generic copy class.
-    /// </summary>
-    /// <typeparam name="T">class to copy.</typeparam>
+    /// <inheritdoc/>
     public class Copier<T> : ICopy<T>
         where T : class
     {
@@ -36,10 +31,7 @@ namespace BBT.StructureTools.Copy
             this.copyHelper = copyHelper;
         }
 
-        /// <summary>
-        /// See <see cref="ICopy{TClassToCopy}.Copy(TClassToCopy, TClassToCopy, ICollection{IBaseAdditionalProcessing})"/>.
-        /// TODO: Remove this overload.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(
             T source,
             T target,
@@ -52,9 +44,7 @@ namespace BBT.StructureTools.Copy
             this.Copy(source, target, new CopyCallContext(additionalProcessings));
         }
 
-        /// <summary>
-        /// See <see cref="ICopy{TClassToCopy}.Copy(TClassToCopy, TClassToCopy, ICopyCallContext)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(
             T source,
             T target,

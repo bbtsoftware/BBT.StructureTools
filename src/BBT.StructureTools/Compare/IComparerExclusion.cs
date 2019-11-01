@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     using System;
 

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy.Processing;
@@ -28,9 +26,7 @@ namespace BBT.StructureTools.Copy
         /// </summary>
         public IEnumerable<TClassToCopy> CollectedObjects => this.collectedTargetInstances;
 
-        /// <summary>
-        /// <see cref="ICopyPostProcessing{TClassToCopy}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
             target.Should().NotBeNull();

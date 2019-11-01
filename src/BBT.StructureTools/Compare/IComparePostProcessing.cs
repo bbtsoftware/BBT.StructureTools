@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     /// <summary>
     /// Interface to add some additional functions on the end of the compare process.

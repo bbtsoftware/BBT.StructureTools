@@ -1,15 +1,9 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Value
+﻿namespace BBT.StructureTools.Convert.Value
 {
     using System;
     using FluentAssertions;
 
-    /// <summary>
-    /// Implementation for <see cref="IConvertValue{TSource, TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">Source type.</typeparam>
-    /// <typeparam name="TTarget">Target type.</typeparam>
+    /// <inheritdoc/>
     public class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
     {
         private readonly IValueConvertMapping<TSource, TTarget> valueConvertMap;
@@ -26,9 +20,7 @@ namespace BBT.StructureTools.Convert.Value
             this.valueConvertMap = registrations.EndRegistrations();
         }
 
-        /// <summary>
-        /// See <see cref="IConvertValue{TSource, TTarget}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TTarget ConvertValue(TSource source)
         {
             if (this.valueConvertMap.TryGetValue(source, out var target))

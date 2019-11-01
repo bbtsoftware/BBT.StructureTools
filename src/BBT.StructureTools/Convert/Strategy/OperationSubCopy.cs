@@ -1,17 +1,10 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IOperationSubCopy{TSource, TTarget, TSubCopy}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">see link above.</typeparam>
-    /// <typeparam name="TTarget">see link above.</typeparam>
-    /// <typeparam name="TValue">see link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationSubCopy<TSource, TTarget, TValue> : IOperationSubCopy<TSource, TTarget, TValue>
         where TSource : class, TValue
         where TTarget : class, TValue
@@ -30,9 +23,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.copy = copy;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget aTarget,

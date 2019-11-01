@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -9,16 +7,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToOne</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TSourceValue">See link above.</typeparam>
-    /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
         : IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
         where TSource : class
@@ -28,21 +17,11 @@ namespace BBT.StructureTools.Convert.Strategy
         where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        /// <summary>
-        /// Function to get the source's property value.
-        /// </summary>
         private Func<TSource, TSourceValue> sourceFunc;
-
-        /// <summary>
-        ///  Expression which declares the target value.
-        /// </summary>
         private Expression<Func<TTarget, TTargetValue>> targetexpression;
-
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
-        /// <summary>
-        /// See <see cref="IOperationCreateToOne{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
@@ -57,9 +36,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.createConvertHelper = createConvertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

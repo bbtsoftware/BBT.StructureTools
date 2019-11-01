@@ -1,19 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     using System.Collections.Generic;
     using System.Linq;
     using BBT.StructureTools.Compare.Helper;
     using FluentAssertions;
 
-    /// <summary>
-    /// Generic comparer"/>.
-    /// Declaration of attributes to compare is delegated to
-    /// <see cref="ICompareRegistrations{TModelToCompare,TCompareIntention}"/>.
-    /// </summary>
-    /// <typeparam name="T">The model type which shall be compared.</typeparam>
-    /// <typeparam name="TIntention">The intention of the comparison.</typeparam>
+    /// <inheritdoc/>
     public class Comparer<T, TIntention> : IComparer<T, TIntention>
         where T : class
         where TIntention : IBaseComparerIntention
@@ -39,17 +31,13 @@ namespace BBT.StructureTools.Compare
             this.equalityComparerHelper = registrations.EndRegistrations();
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparer{T}.Equals(T,T)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Equals(T candidate1, T candidate2)
         {
             return this.equalityComparerHelper.AreRegistrationsEquals(candidate1, candidate2);
         }
 
-        /// <summary>
-        /// See <see cref="IComparer{T, TComparerIntention}.Equals(T, T, ICollection{IBaseAdditionalProcessing})"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Equals(
             T candidate1,
             T candidate2,
@@ -67,9 +55,7 @@ namespace BBT.StructureTools.Compare
             return isEqual;
         }
 
-        /// <summary>
-        /// See <see cref="IComparer{T, TComparerIntention}.Equals(T, T, ICollection{IBaseAdditionalProcessing}, IEnumerable{IComparerExclusion})"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Equals(
             T candidate1,
             T candidate2,
@@ -91,9 +77,7 @@ namespace BBT.StructureTools.Compare
             return isEqual;
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparer{T}.GetHashCode(T)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int GetHashCode(T candidate)
         {
             if (candidate == null)

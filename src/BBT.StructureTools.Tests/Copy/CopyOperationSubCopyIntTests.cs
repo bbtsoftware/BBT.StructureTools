@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools;

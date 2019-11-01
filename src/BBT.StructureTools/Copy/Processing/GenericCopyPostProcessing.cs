@@ -1,19 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Processing
+﻿namespace BBT.StructureTools.Copy.Processing
 {
     using System;
 
-    /// <summary>
-    /// Generic implementation of <see cref="ICopyPostProcessing{TClassToCopy}"/>.
-    /// </summary>
-    /// <typeparam name="TClassToCopy">Type of to copied class.</typeparam>
+    /// <inheritdoc/>
     public class GenericCopyPostProcessing<TClassToCopy> : ICopyPostProcessing<TClassToCopy>
         where TClassToCopy : class
     {
-        /// <summary>
-        /// The action.
-        /// </summary>
         private readonly Action<TClassToCopy, TClassToCopy> action;
 
         /// <summary>
@@ -24,9 +16,7 @@ namespace BBT.StructureTools.Copy.Processing
             this.action = action;
         }
 
-        /// <summary>
-        /// This method will called at the end of a copy process.
-        /// </summary>
+        /// <inheritdoc/>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
             this.action.Invoke(source, target);

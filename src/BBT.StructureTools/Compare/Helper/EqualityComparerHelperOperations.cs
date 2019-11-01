@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper
+﻿namespace BBT.StructureTools.Compare.Helper
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,16 +7,10 @@ namespace BBT.StructureTools.Compare.Helper
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IEqualityComparerHelperOperations{TModel}"/>.
-    /// </summary>
-    /// <typeparam name="TModel">Model type.</typeparam>
+    /// <inheritdoc/>
     public class EqualityComparerHelperOperations<TModel> : IEqualityComparerHelperOperations<TModel>
         where TModel : class
     {
-        /// <summary>
-        /// ist of registered compare strategies.
-        /// </summary>
         private readonly IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies;
 
         /// <summary>
@@ -31,18 +23,14 @@ namespace BBT.StructureTools.Compare.Helper
             this.registeredStrategies = registeredStrategies;
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperOperations{TModel}.AreRegistrationsEquals(TModel, TModel)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool AreRegistrationsEquals(TModel candidate1, TModel candidate2)
         {
             return this.AreRegistrationsEquals(
                 candidate1, candidate2, System.Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperOperations{TModel}.AreRegistrationsEquals(TModel,TModel,ICollection{IBaseAdditionalProcessing},IEnumerable{IComparerExclusion})"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool AreRegistrationsEquals(
             TModel candidate1,
             TModel candidate2,
@@ -70,9 +58,7 @@ namespace BBT.StructureTools.Compare.Helper
             return true;
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperOperations{TModel}.GetHashCodeOfRegistrations(TModel)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int GetHashCodeOfRegistrations(TModel model)
         {
             var hashCodes = this.registeredStrategies

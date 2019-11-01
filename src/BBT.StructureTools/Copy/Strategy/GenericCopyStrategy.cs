@@ -1,16 +1,9 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Strategy
+﻿namespace BBT.StructureTools.Copy.Strategy
 {
     using BBT.StrategyPattern;
     using FluentAssertions;
 
-    /// <summary>
-    /// Implementation of the <see cref="ICopyStrategy{TBase}"/> class.
-    /// </summary>
-    /// <typeparam name="TBase">Base type of the instances to copy.</typeparam>
-    /// <typeparam name="TDerived">Type of the instances to copy, inherits from TBase.</typeparam>
-    /// <typeparam name="TConcrete">Concrete implementation of the instances to copy, inherits from TDerived.</typeparam>
+    /// <inheritdoc/>
     public class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
         where TBase : class
         where TDerived : class, TBase
@@ -33,9 +26,7 @@ namespace BBT.StructureTools.Copy.Strategy
             this.copier = copier;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyStrategy{T}.Copy"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public virtual void Copy(
             TBase source,
             TBase target,
@@ -48,21 +39,17 @@ namespace BBT.StructureTools.Copy.Strategy
             this.copier.Copy(source as TDerived, target as TDerived, copyCallContext);
         }
 
-        /// <summary>
-        /// See <see cref="ICopyStrategy{T}.Create"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TBase Create()
         {
             var instance = this.creator.Create();
             return instance;
         }
 
-        /// <summary>
-        /// See <see cref="IGenericStrategy{T}.IsResponsible"/>.
-        /// </summary>
-        public bool IsResponsible(TBase aCriterion)
+        /// <inheritdoc/>
+        public bool IsResponsible(TBase criterion)
         {
-            return aCriterion is TConcrete;
+            return criterion is TConcrete;
         }
     }
 }

@@ -1,34 +1,20 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper.Strategy
+﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IEqualityComparerHelperStrategy{TModel}"/>.
-    /// </summary>
-    /// <typeparam name="TModel">Owner of the attribute to compare.</typeparam>
-    /// <typeparam name="TTargetModel">The attribute to compare.</typeparam>
-    /// <typeparam name="TIntention">The compare intention.</typeparam>
+    /// <inheritdoc/>
     internal class EqualityComparerHelperStrategyCompareModel<TModel, TTargetModel, TIntention>
         : IEqualityComparerHelperStrategy<TModel>
         where TTargetModel : class
         where TIntention : IBaseComparerIntention
     {
-        /// <summary>
-        /// Function to get the property value.
-        /// </summary>
         private readonly Func<TModel, TTargetModel> func;
-
-        /// <summary>
-        /// Name of compared property.
-        /// </summary>
         private readonly string propertyName;
-
         private readonly IComparer<TTargetModel, TIntention> comparer;
 
         /// <summary>
@@ -42,13 +28,11 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             comparer.Should().NotBeNull();
 
             this.func = expression.Compile();
-            this.propertyName = EqualityComparerHelperStrategyUtils.GetPropertyName(expression);
+            this.propertyName = ReflectionUtils.GetPropertyName(expression);
             this.comparer = comparer;
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperStrategy{TModel}.IsElementEqualsOrExcluded"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsElementEqualsOrExcluded(
             TModel candidate1,
             TModel candidate2,
@@ -66,9 +50,7 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             return this.comparer.Equals(value1, value2, additionalProcessings, exclusions);
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperStrategy{TModel}.GetElementHashCode"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int? GetElementHashCode(TModel model)
         {
             if (this.func.Invoke(model) is TTargetModel value)

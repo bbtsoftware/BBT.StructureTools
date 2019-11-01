@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System;
     using System.Collections.Generic;
@@ -10,14 +8,7 @@ namespace BBT.StructureTools.Convert
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TConcreteTarget">See link above.</typeparam>
-    /// <typeparam name="TReverseRelation">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class CreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>
         : ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>
         where TSource : class
@@ -28,10 +19,6 @@ namespace BBT.StructureTools.Convert
     {
         private readonly IInstanceCreator<TTarget, TConcreteTarget> instancecreator;
         private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
-
-        /// <summary>
-        /// The <typeparamref name="TTarget"/>'s reverse relation.
-        /// </summary>
         private Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr;
 
         /// <summary>
@@ -48,9 +35,7 @@ namespace BBT.StructureTools.Convert
             this.convert = convert;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.SetupReverseRelation"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
         {
             reverseRelationExpr.Should().NotBeNull();
@@ -58,9 +43,7 @@ namespace BBT.StructureTools.Convert
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.CreateTarget"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TTarget CreateTarget(
             TSource source,
             TReverseRelation reverseRelation,
@@ -77,17 +60,8 @@ namespace BBT.StructureTools.Convert
         }
     }
 
-    /// <summary>
-    /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TConcreteTarget">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    [SuppressMessage(
-        "Microsoft.StyleCop.CSharp.MaintainabilityRules",
-        "SA1402:FileMyOnlyContainASingleClass",
-        Justification = "It is a variance of the same class with different number of generic parameters")]
+    /// <inheritdoc/>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMyOnlyContainASingleClass", Justification = "It is a variance of the same class with different number of generic parameters")]
     public class CreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>
         : ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>
         where TSource : class
@@ -112,9 +86,7 @@ namespace BBT.StructureTools.Convert
             this.convert = convert;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.CreateTarget"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TTarget CreateTarget(
             TSource source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)

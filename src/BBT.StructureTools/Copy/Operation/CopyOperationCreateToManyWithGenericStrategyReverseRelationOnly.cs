@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +8,7 @@ namespace BBT.StructureTools.Copy.Operation
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// <see cref="ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly{T,TStrategy,TChild}"/>.
-    /// </summary>
-    /// <typeparam name="T">c aboF.</typeparam>
-    /// <typeparam name="TStrategy">c aboF.</typeparam>
-    /// <typeparam name="TChild">c aboF.</typeparam>
+    /// <inheritdoc/>
     public class CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
@@ -36,9 +29,7 @@ namespace BBT.StructureTools.Copy.Operation
             this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <summary>
-        /// <see cref="ICopyOperation{T}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(
             T source,
             T target,
@@ -56,9 +47,7 @@ namespace BBT.StructureTools.Copy.Operation
             }
         }
 
-        /// <summary>
-        /// <see cref="ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly{T,TStrategy,TChild}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<TChild, T>> reverseRelationExpression)

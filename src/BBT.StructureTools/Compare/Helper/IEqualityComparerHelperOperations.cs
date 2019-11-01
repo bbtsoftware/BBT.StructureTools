@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper
+﻿namespace BBT.StructureTools.Compare.Helper
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Compare;

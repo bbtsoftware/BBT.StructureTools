@@ -1,13 +1,8 @@
 ﻿namespace BBT.StructureTools.Compare.Exclusions
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
-    /// <summary>
-    /// See <see cref="IComparerExclusion"/>.
-    /// </summary>
-    /// <typeparam name="TSubInterface">Type of sub interface.</typeparam>
+    /// <inheritdoc/>
     public sealed class SubInterfaceComparerExclusion<TSubInterface> : IComparerExclusion
     {
         /// <summary>

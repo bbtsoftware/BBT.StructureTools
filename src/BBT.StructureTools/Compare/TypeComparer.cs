@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
     using System;
     using System.Collections.Generic;
@@ -14,9 +12,7 @@ namespace BBT.StructureTools.Compare
     /// </summary>
     public sealed class TypeComparer : IComparer<Type>
     {
-        /// <summary>
-        /// See <see cref="IComparer{T}.Compare(T, T)"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public int Compare(Type x, Type y)
         {
             x.Should().NotBeNull();

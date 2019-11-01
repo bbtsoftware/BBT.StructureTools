@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -10,19 +8,7 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToMany</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TSourceValue">
-    /// The type of the ist entries which shall be converted into
-    /// the <typeparamref name="TTargetValue"/>s.</typeparam>
-    /// <typeparam name="TTargetValue">
-    /// The ist entries which shall be converted from
-    /// the <typeparamref name="TSourceValue"/>s.</typeparam>
-    /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
+    /// <inheritdoc/>
     public class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
@@ -33,20 +19,8 @@ namespace BBT.StructureTools.Convert.Strategy
     {
         private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> convert;
         private readonly IConvertHelper convertHelper;
-
-        /// <summary>
-        /// The function to obtain the source values.
-        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-
-        /// <summary>
-        /// The function to obtain the target values.
-        /// </summary>
         private Func<TTarget, IEnumerable<TTargetValue>> targetFunc;
-
-        /// <summary>
-        /// The function to filter the target value corresponding to the source value.
-        /// </summary>
         private Func<TSourceValue, TTargetValue, bool> filterFunc;
 
         /// <summary>
@@ -63,9 +37,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convertHelper = convertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationConvertToMany{TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
@@ -80,9 +52,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.filterFunc = aFilterFunc;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

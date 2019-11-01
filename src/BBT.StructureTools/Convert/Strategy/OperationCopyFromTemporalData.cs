@@ -1,18 +1,10 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
     using FluentAssertions;
 
-    /// <summary>
-    /// <see cref="IOperationCopyFromTemporalData{TSource, TTarget, TSourceValue, TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">see above.</typeparam>
-    /// <typeparam name="TTarget">see above.</typeparam>
-    /// <typeparam name="TSourceValue">see above.</typeparam>
-    /// <typeparam name="TConvertIntention">see above.</typeparam>
+    /// <inheritdoc/>
     public class OperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
         : IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
         where TSource : class
@@ -23,15 +15,7 @@ namespace BBT.StructureTools.Convert.Strategy
         private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
         private readonly IConvertHelper convertHelper;
         private readonly ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor;
-
-        /// <summary>
-        /// Function to get the source's property value.
-        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-
-        /// <summary>
-        /// Function to get the reference date vale.
-        /// </summary>
         private Func<TSource, TTarget, DateTime> referenceDateFunc;
 
         /// <summary>
@@ -50,9 +34,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convertHelper = convertHelper;
         }
 
-        /// <summary>
-        /// See <see cref="IOperationCopyFromTemporalData{TSource, TTarget, TSourceValue, TConvertIntention}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> aSourceFunc,
             Func<TSource, TTarget, DateTime> referenceDateFunc)
@@ -64,9 +46,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.referenceDateFunc = referenceDateFunc;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource aSource,
             TTarget aTarget,

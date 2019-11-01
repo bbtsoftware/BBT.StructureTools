@@ -1,20 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to convert entities with a <c>ToMany</c> relationship.
-    /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
         : IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
         where TSource : class
@@ -34,9 +25,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convert = convert;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

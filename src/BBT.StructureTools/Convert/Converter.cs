@@ -1,16 +1,9 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IConvert{TSourceClass,TTargetClass,TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
         where TSource : class
         where TTarget : class
@@ -37,9 +30,7 @@ namespace BBT.StructureTools.Convert
             this.convertOperations = registrations.EndRegistrations();
         }
 
-        /// <summary>
-        /// See <see cref="IConvert{TSourceClass, TTargetClass, TConvertIntention}.Convert"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Convert(
             TSource source,
             TTarget target,

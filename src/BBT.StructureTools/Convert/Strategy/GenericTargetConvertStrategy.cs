@@ -1,9 +1,6 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
-    using BBT.StrategyPattern;
     using FluentAssertions;
 
     /// <summary>
@@ -35,9 +32,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.converter = converter;
         }
 
-        /// <summary>
-        /// See <see cref="ISourceConvertStrategy{TBaseSource, TBaseTarget, TIntention}.Convert(TBaseSource, TBaseTarget, ICollection{IBaseAdditionalProcessing})"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             source.Should().NotBeNull();
@@ -53,12 +48,10 @@ namespace BBT.StructureTools.Convert.Strategy
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }
 
-        /// <summary>
-        /// See <see cref="IGenericStrategy{T}"/>.
-        /// </summary>
-        public bool IsResponsible(TTarget aCriterion)
+        /// <inheritdoc/>
+        public bool IsResponsible(TTarget criterion)
         {
-            var isResponsible = aCriterion is TCriterion;
+            var isResponsible = criterion is TCriterion;
             return isResponsible;
         }
     }

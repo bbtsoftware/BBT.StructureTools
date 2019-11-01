@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Value
+﻿namespace BBT.StructureTools.Convert.Value
 {
     /// <summary>
     /// Contains all registrations to convert a value of <typeparamref name="TSource"/>

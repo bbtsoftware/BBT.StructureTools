@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Marker
+﻿namespace BBT.StructureTools.Copy.Marker
 {
     /// <summary>
     /// Defines a marker interface which shall be used to mark implementations of

@@ -1,19 +1,10 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IOperationSubConvert{TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TSourceValue">See link above.</typeparam>
-    /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConvertIntention">See link above.</typeparam>
+    /// <inheritdoc/>
     public class OperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
@@ -35,9 +26,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.convert = convert;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,
@@ -47,8 +36,8 @@ namespace BBT.StructureTools.Convert.Strategy
             target.Should().NotBeNull();
             additionalProcessings.Should().NotBeNull();
 
-            // ToDo BBTL-5178: IF sollte nicht mehr nötig sein, wenn die entsprechenden
-            // Registrierungen und Implementation die korrekte Basis aufrufen!
+            // Safe guard if the conversion is the wrong way around, eg. base convert
+            // is calling the child's convert.
             if (source is TSourceValue sourceValue && target is TTargetValue targetValue)
             {
                 this.convert.Convert(sourceValue, targetValue, additionalProcessings);

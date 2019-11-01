@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools
+﻿namespace BBT.StructureTools
 {
     using System;
     using System.Runtime.Serialization;

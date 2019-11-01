@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -8,15 +6,10 @@ namespace BBT.StructureTools.Copy.Helper
     using BBT.StructureTools.Copy.Processing;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICopyHelper"/>.
-    /// </summary>
+    /// <inheritdoc/>
     public class CopyHelper : ICopyHelper
     {
-        /// <summary>
-        /// See <see cref="ICopyHelper.DoCopyPostProcessing{T}"/>.
-        /// </summary>
-        /// <typeparam name="TClassToCopy">Class to copy.</typeparam>
+        /// <inheritdoc/>
         public void DoCopyPostProcessing<TClassToCopy>(
             TClassToCopy source,
             TClassToCopy target,

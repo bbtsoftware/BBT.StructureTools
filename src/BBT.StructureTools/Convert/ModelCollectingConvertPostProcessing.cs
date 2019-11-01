@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
     using FluentAssertions;
@@ -29,9 +27,7 @@ namespace BBT.StructureTools.Convert
         /// </summary>
         public IEnumerable<TTarget> CollectedObjects => this.collectedTargetInstances;
 
-        /// <summary>
-        /// <see cref="IConvertPostProcessing{TSoureClass, TTargetClass}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void DoPostProcessing(TSource source, TTarget target)
         {
             target.Should().NotBeNull();

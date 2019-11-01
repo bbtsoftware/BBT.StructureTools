@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -8,24 +6,15 @@ namespace BBT.StructureTools.Convert.Strategy
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// Strategy to copy <typeparamref name="TSource"/> into corresponding property of <typeparamref name="TTarget"/>.
-    /// </summary>
-    /// <typeparam name="TSource">The source to copy.</typeparam>
-    /// <typeparam name="TTarget">The target to copy to.</typeparam>
+    /// <inheritdoc/>
     public class OperationCopySource<TSource, TTarget>
         : IOperationCopySource<TSource, TTarget>
         where TSource : class
         where TTarget : class
     {
-        /// <summary>
-        ///  Expression which declares the target value.
-        /// </summary>
         private Expression<Func<TTarget, TSource>> targetexpression;
 
-        /// <summary>
-        /// See <see cref="IOperationCopySource{TSource,TTarget}.Initialize"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(Expression<Func<TTarget, TSource>> targetExpression)
         {
             targetExpression.Should().NotBeNull();
@@ -33,9 +22,7 @@ namespace BBT.StructureTools.Convert.Strategy
             this.targetexpression = targetExpression;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertOperation{TSource,TTarget}.Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Execute(
             TSource source,
             TTarget target,

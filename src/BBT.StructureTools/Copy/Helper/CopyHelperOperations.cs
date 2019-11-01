@@ -1,16 +1,11 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Operation;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICopyOperation{T}"/>.
-    /// </summary>
-    /// <typeparam name="T">class to copy.</typeparam>
+    /// <inheritdoc/>
     public class CopyHelperOperations<T> : ICopyOperation<T>
     {
         private readonly IEnumerable<ICopyOperation<T>> registeredStrategies;
@@ -25,9 +20,7 @@ namespace BBT.StructureTools.Copy.Helper
             this.registeredStrategies = registeredStrategies;
         }
 
-        /// <summary>
-        /// See <see cref="ICopyOperation{T}.Copy"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
             foreach (var registeredStrategy in this.registeredStrategies)

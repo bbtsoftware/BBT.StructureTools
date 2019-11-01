@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Value
+﻿namespace BBT.StructureTools.Convert.Value
 {
     /// <summary>
     /// Fluent interface for value conversion registrations, e.g. enum value conversions.

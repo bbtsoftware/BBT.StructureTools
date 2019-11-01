@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Helper
+﻿namespace BBT.StructureTools.Compare.Helper
 {
     using System;
     using System.Collections.Generic;
@@ -9,10 +7,7 @@ namespace BBT.StructureTools.Compare.Helper
     using BBT.StructureTools.Compare.Helper.Strategy;
     using FluentAssertions;
 
-    /// <summary>
-    /// Helper for the equals and get hash code calculation.
-    /// </summary>
-    /// <typeparam name="T">Class to compare.</typeparam>
+    /// <inheritdoc/>
     public class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
         where T : class
     {
@@ -26,21 +21,14 @@ namespace BBT.StructureTools.Compare.Helper
             this.registeredStrategies = new List<IEqualityComparerHelperStrategy<T>>();
         }
 
-        /// <summary>
-        /// Register a compare attribute of type <typeparamref name="TValue"/>.
-        /// </summary>
-        /// <typeparam name="TValue">The type of the attribute to compare.</typeparam>
+        /// <inheritdoc/>
         public IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
             this.registeredStrategies.Add(new EqualityComparerHelperStrategyCompareAttribute<T, TValue>(expression));
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IEqualityComparerHelperRegistration{T}.RegisterAttributeWithDistinguishedComparer{TComparer,TIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TComparer">Type of model-comparer"/>.</typeparam>
-        /// <typeparam name="TIntention">The compare intention.</typeparam>
+        /// <inheritdoc/>
         public IEqualityComparerHelperRegistration<T> RegisterAttributeWithDistinguishedComparer<TComparer, TIntention>(
             Expression<Func<T, TComparer>> expression,
             IComparer<TComparer, TIntention> comparer)
@@ -70,10 +58,7 @@ namespace BBT.StructureTools.Compare.Helper
             return this;
         }
 
-        /// <summary>
-        /// Register a sub compare for a base class or a implemented interface.
-        /// </summary>
-        /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
+        /// <inheritdoc/>
         public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention
         {
@@ -84,9 +69,7 @@ namespace BBT.StructureTools.Compare.Helper
             return this;
         }
 
-        /// <summary>
-        /// Ends the registrations and start the operation phase.
-        /// </summary>
+        /// <inheritdoc/>
         public IEqualityComparerHelperOperations<T> EndRegistrations()
         {
             return new EqualityComparerHelperOperations<T>(this.registeredStrategies);

@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
     using System;
     using System.Collections.Generic;
@@ -14,12 +12,7 @@ namespace BBT.StructureTools.Copy.Helper
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="ICreateCopyHelper{TChild,TConcreteChild,TParent}"/>.
-    /// </summary>
-    /// <typeparam name="TChild">See link above.</typeparam>
-    /// <typeparam name="TConcreteChild">See link above.</typeparam>
-    /// <typeparam name="TParent">See link above.</typeparam>
+    /// <inheritdoc/>
     public class CreateCopyHelper<TChild, TConcreteChild, TParent> : ICreateCopyHelper<TChild, TConcreteChild, TParent>
         where TChild : class
         where TConcreteChild : class, TChild, new()
@@ -47,9 +40,7 @@ namespace BBT.StructureTools.Copy.Helper
             this.copy = copy;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.SetupReverseRelation"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr)
         {
             reverseRelationExpr.Should().NotBeNull();
@@ -57,9 +48,7 @@ namespace BBT.StructureTools.Copy.Helper
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateCopyHelper{TChild,TConcreteChild,TParent}.CreateTarget"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TChild CreateTarget(
             TConcreteChild source,
             TParent reverseRelation,
@@ -87,15 +76,8 @@ namespace BBT.StructureTools.Copy.Helper
         }
     }
 
-    /// <summary>
-    /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}"/>.
-    /// </summary>
-    /// <typeparam name="TTarget">See link above.</typeparam>
-    /// <typeparam name="TConcreteTarget">See link above.</typeparam>
-    [SuppressMessage(
-        "Microsoft.StyleCop.CSharp.MaintainabilityRules",
-        "SA1402:FileMyOnlyContainASingleClass",
-        Justification = "It is a variance of the same class with different number of generic parameters")]
+    /// <inheritdoc/>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMyOnlyContainASingleClass", Justification = "It is a variance of the same class with different number of generic parameters")]
     public class CreateCopyHelper<TTarget, TConcreteTarget>
         : ICreateCopyHelper<TTarget, TConcreteTarget>
         where TTarget : class
@@ -118,9 +100,7 @@ namespace BBT.StructureTools.Copy.Helper
             this.copy = copy;
         }
 
-        /// <summary>
-        /// See <see cref="ICreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}.CreateTarget"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public TTarget CreateTarget(
             TConcreteTarget source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)

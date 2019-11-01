@@ -1,10 +1,7 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Strategy to convert entities with a <c>ToMany</c> relationship.

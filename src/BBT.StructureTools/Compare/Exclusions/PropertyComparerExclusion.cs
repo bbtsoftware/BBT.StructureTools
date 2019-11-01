@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Compare.Exclusions
+﻿namespace BBT.StructureTools.Compare.Exclusions
 {
     using System;
     using System.Linq.Expressions;

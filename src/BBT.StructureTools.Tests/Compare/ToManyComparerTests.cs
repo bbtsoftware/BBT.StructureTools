@@ -1,11 +1,8 @@
 ﻿namespace BBT.StructureTools.Tests.Compare
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Helper;
-    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Initialization;
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;

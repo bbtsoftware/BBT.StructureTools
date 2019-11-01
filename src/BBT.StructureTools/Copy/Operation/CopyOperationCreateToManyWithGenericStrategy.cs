@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +8,7 @@ namespace BBT.StructureTools.Copy.Operation
     using BBT.StructureTools.Extension;
     using FluentAssertions;
 
-    /// <summary>
-    /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
-    /// </summary>
-    /// <typeparam name="T">see above.</typeparam>
-    /// <typeparam name="TStrategy">see above.</typeparam>
-    /// <typeparam name="TChildType">see above.</typeparam>
+    /// <inheritdoc/>
     public class CopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>
         where T : class
         where TStrategy : class, ICopyStrategy<TChildType>
@@ -38,9 +31,7 @@ namespace BBT.StructureTools.Copy.Operation
             this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <summary>
-        /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Copy(
             T source,
             T target,
@@ -59,9 +50,7 @@ namespace BBT.StructureTools.Copy.Operation
             target.AddRangeToCollectionFilterNulvalues(this.targetexpression, newKids);
         }
 
-        /// <summary>
-        /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Initialize(
             Func<T, IEnumerable<TChildType>> sourceFunc,
             Expression<Func<T, ICollection<TChildType>>> targetExpression,

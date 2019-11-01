@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
     using System;
     using System.Collections.Generic;
@@ -12,26 +10,15 @@ namespace BBT.StructureTools.Convert
     using BBT.StructureTools.Initialization;
     using FluentAssertions;
 
-    /// <summary>
-    /// See <see cref="IConvertRegistration{TSource,TTarget}"/>.
-    /// </summary>
-    /// <typeparam name="TSource">See link above.</typeparam>
-    /// <typeparam name="TTarget">See link above.</typeparam>
+    /// <inheritdoc/>
     public class ConvertRegistration<TSource, TTarget> : IConvertRegistration<TSource, TTarget>
         where TSource : class
         where TTarget : class
     {
-        /// <summary>
-        ///  The ist of registered operations.
-        /// </summary>
-        private readonly ICollection<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits =
-            new Collection<IConvertOperation<TSource, TTarget>>();
-
+        private readonly ICollection<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits = new Collection<IConvertOperation<TSource, TTarget>>();
         private readonly IIocResolver servicelocator = IocHandler.Instance.IocResolver;
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopySource"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopySource(
             Expression<Func<TTarget, TSource>> targetExpression)
         {
@@ -43,10 +30,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttribute{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttribute<TValue>(
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
@@ -60,11 +44,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource, TTarget}.RegisterCopyAttributeWithMapping{TSourceValue, TTargetValue}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TTargetValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeWithMapping<TSourceValue, TTargetValue>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression)
@@ -78,10 +58,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttributeWithLookUp{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeWithLookUp<TValue>(
             Func<TSource, TValue> sourceFunc,
             Func<TSource, TValue> sourceLookUpFunc,
@@ -97,10 +74,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttributeWithUpperLimit{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeWithUpperLimit<TValue>(
             Func<TSource, TValue> sourceFunc,
             Func<TSource, TValue> sourceUpperLimitFunc,
@@ -117,10 +91,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttributeWithSourceFilter{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeWithSourceFilter<TValue>(
             Func<TSource, TTarget, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
@@ -134,10 +105,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttributeIfSourceNotDefault{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeIfSourceNotDefault<TValue>(
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
@@ -152,10 +120,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyAttributeIfTargetIsDefault{TValue}"/>.
-        /// </summary>
-        /// <typeparam name="TValue">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeIfTargetIsDefault<TValue>(
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
@@ -170,11 +135,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterSubConvert{TSourceValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterSubConvert<TSourceValue, TConvertIntention>()
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
@@ -185,12 +146,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterSubConvert{TSourceValue, TTargetValue, TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterSubConvert<TSourceValue, TTargetValue, TConvertIntention>()
             where TSourceValue : class
             where TTargetValue : class
@@ -202,11 +158,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterTargetSubConvert{TTargetValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterTargetSubConvert<TTargetValue, TConvertIntention>()
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
@@ -217,12 +169,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterConvertToMany{TSourceValue,TTargetValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterConvertToMany<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
@@ -241,11 +188,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterConvertFromTargetOnDifferentLevels{TSourceValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterConvertFromTargetOnDifferentLevels<TSourceValue, TConvertIntention>(
             Func<TTarget, TSourceValue> sourceExpression)
             where TSourceValue : class
@@ -258,11 +201,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterConvertFromSourceOnDifferentLevels{TSourceValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterConvertFromSourceOnDifferentLevels<TSourceValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc)
             where TSourceValue : class
@@ -275,12 +214,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterConvertFromSourceOnDifferentLevels{TSourceValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">See link above.</typeparam>
-        /// <typeparam name="TTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterConvertFromSourceOnDifferentLevels<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc)
             where TSourceValue : class
@@ -294,12 +228,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateFromSourceWithReverseRelation{TTargetValue, TConcreteTargetValue, TConvertIntention}"/>"/>.
-        /// </summary>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateFromSourceWithReverseRelation<TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
@@ -316,12 +245,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToOneFromGenericStrategyWithReverseRelation"/>.
-        /// </summary>
-        /// <typeparam name="TBaseSource">See link above.</typeparam>
-        /// <typeparam name="TBaseTarget">See link above.</typeparam>
-        /// <typeparam name="TIntention">See link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOneFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
             Func<TSource, TBaseSource> aBaseSourceFunc,
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
@@ -339,13 +263,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>s
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToOneWithReverseRelation{TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
@@ -368,13 +286,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>s
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToOne{TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
@@ -396,10 +308,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterSubCopy{TSubCopy}" />.
-        /// </summary>
-        /// <typeparam name="TSubCopy">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterSubCopy<TSubCopy>()
             where TSubCopy : class, ICopy<TSource>, ICopy<TTarget>
         {
@@ -412,14 +321,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterMergeLevel{TSourceValue,TTargetValue,TConcreteTargetValue,TMergeValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">see link above.</typeparam>
-        /// <typeparam name="TMergeValue">see link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterMergeLevel<TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>(
             Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
@@ -446,11 +348,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyFromMany{TSourceValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyFromMany<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
             where TSourceValue : class
@@ -464,14 +362,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToManyWithReverseRelation{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention}(Func{TSource, TSourceValue}, Expression{Func{TTarget, ICollection{TTargetValue}}}, ICreateConvertHelper{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention})"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TReverseRelation">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
@@ -494,14 +385,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToManyWithReverseRelation{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention}(Func{TSource, IEnumerable{TSourceValue}}, Expression{Func{TTarget, ICollection{TTargetValue}}}, ICreateConvertHelper{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention})"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TReverseRelation">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
@@ -524,14 +408,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToManyWithReverseRelation{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention}(Func{TSource, IEnumerable{TSourceValue}}, Expression{Func{TTarget, ICollection{TTargetValue}}}, ICreateConvertHelper{TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention})"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TReverseRelation">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyGenericWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
@@ -555,13 +432,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToManyGeneric{TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
@@ -584,14 +455,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCreateToManyWithSourceFilterAndReverseRelation{TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TTargetValue">see link above.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
-        /// <typeparam name="TReverseRelation">See link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithSourceFilterAndReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
@@ -615,18 +479,14 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.EndRegistrations"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public IConvertOperations<TSource, TTarget> EndRegistrations()
         {
             return new ConvertOperations<TSource, TTarget>(
                 this.convertHelperOperationWorkUnits);
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource, TTarget}.RegisterPostProcessings(IConvertPostProcessing{TSource, TTarget}, IConvertPostProcessing{TSource, TTarget}[])"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] aFurtherAdditionalProcessings)
         {
             additionalProcessing.Should().NotBeNull();
@@ -643,12 +503,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource, TTarget}.RegisterCreateToManyFromGenericStrategyWithReverseRelation{TBaseSource, TBaseTarget, TIntention}"/>.
-        /// </summary>
-        /// <typeparam name="TBaseSource">see above.</typeparam>
-        /// <typeparam name="TBaseTarget">see above.</typeparam>
-        /// <typeparam name="TIntention">see above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
@@ -667,11 +522,7 @@ namespace BBT.StructureTools.Convert
             return this;
         }
 
-        /// <summary>
-        /// See <see cref="IConvertRegistration{TSource,TTarget}.RegisterCopyFromTemporalData{TSourceValue, TConvertIntention}(Func{TSource, IEnumerable{TSourceValue}}, Func{TSource, TTarget, DateTime})"/>.
-        /// </summary>
-        /// <typeparam name="TSourceValue">see link above.</typeparam>
-        /// <typeparam name="TConvertIntention">see link above.</typeparam>
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TSource, TTarget, DateTime> referenceDateFunc)

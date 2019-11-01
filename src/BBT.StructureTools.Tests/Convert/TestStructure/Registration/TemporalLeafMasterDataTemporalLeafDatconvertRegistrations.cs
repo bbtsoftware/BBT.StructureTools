@@ -1,7 +1,6 @@
 ﻿namespace BBT.StructureTools.Tests.Convert.TestStructure.Registration
 {
     using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Copy;
     using BBT.StructureTools.Tests.Convert.Intention;
     using BBT.StructureTools.Tests.Convert.TestStructure.Source;
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;

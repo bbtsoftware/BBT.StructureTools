@@ -1,6 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
     /// <summary>
     /// Interface to intercept the copy process.
