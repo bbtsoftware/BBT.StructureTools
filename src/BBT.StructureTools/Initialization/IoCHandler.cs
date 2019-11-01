@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// The IoC handler as singelton.
+    /// The IoC handler as singleton.
     /// </summary>
     public sealed class IocHandler
     {
@@ -11,7 +11,7 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IocHandler"/> class.
-        /// Singelton pattern.
+        /// singleton pattern.
         /// </summary>
         private IocHandler()
         {

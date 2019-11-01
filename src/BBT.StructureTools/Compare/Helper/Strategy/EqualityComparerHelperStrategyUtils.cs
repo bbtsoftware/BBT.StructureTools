@@ -58,8 +58,8 @@
         /// </summary>
         /// <typeparam name="TModel">Type of model.</typeparam>
         public static bool AreListEquivalent<TModel>(
-            IEnumerable<TModel> aist1,
-            IEnumerable<TModel> aist2,
+            IEnumerable<TModel> list1,
+            IEnumerable<TModel> list2,
             Func<TModel, TModel, bool> compareFunc)
             where TModel : class
         {
@@ -67,13 +67,13 @@
 
             // This is OK since either both are null, or have the same reference which is
             // in case of our compare infra the correct definition of equal.
-            if (aist1 == aist2)
+            if (list1 == list2)
             {
                 return true;
             }
 
-            var list1ist = aist1 as IList<TModel> ?? aist1.ToList();
-            var list2ist = aist2 as IList<TModel> ?? aist2.ToList();
+            var list1ist = list1 as IList<TModel> ?? list1.ToList();
+            var list2ist = list2 as IList<TModel> ?? list2.ToList();
 
             if (list1ist.Count != list2ist.Count)
             {

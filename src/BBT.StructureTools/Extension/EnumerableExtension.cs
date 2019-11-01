@@ -15,18 +15,18 @@
         /// Determines whether a sequence contains only one element.
         /// </summary>
         /// <typeparam name="TEntity">The type of the elements of source.</typeparam>
-        /// <param name="aist">The IEnumerable{TEntity} to check for a uniqueness.</param>
+        /// <param name="list">The IEnumerable{TEntity} to check for a uniqueness.</param>
         /// <returns>true if the source sequence contains exactly one element; otherwise, false.</returns>
-        public static bool Only<TEntity>(this IEnumerable<TEntity> aist)
+        public static bool Only<TEntity>(this IEnumerable<TEntity> list)
         {
-            aist.Should().NotBeNull();
+            list.Should().NotBeNull();
 
-            if (!aist.Any())
+            if (!list.Any())
             {
                 return false;
             }
 
-            if (aist.Skip(1).Any())
+            if (list.Skip(1).Any())
             {
                 return false;
             }
@@ -42,9 +42,9 @@
         /// <typeparam name="TEntity">
         /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aist, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
+        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-            var filteredist = aist.Where(predicate);
+            var filteredist = list.Where(predicate);
             return filteredist.SingleWithExceptionMessage(exceptionMessageFormat, furtherExceptionMessageFormat);
         }
 
@@ -56,23 +56,23 @@
         /// <typeparam name="TEntity">
         /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> aist, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
+        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-            aist.Should().NotBeNull();
+           list.Should().NotBeNull();
 
-            if (aist.Only())
+           if (list.Only())
             {
-                return aist.Single();
+                return list.Single();
             }
 
-            var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
+           var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
 
-            if (!aist.Any())
+           if (!list.Any())
             {
                 throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + message);
             }
 
-            throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
+           throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
         }
     }
 }
