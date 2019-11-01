@@ -5,7 +5,7 @@
     /// <summary>
     /// Interface for model comparison.
     /// <para>
-    /// Remark for hash code calculation
+    /// Remark for hash code calculation.
     /// </para>
     /// <para>
     /// Calculates a hash code for the object.
