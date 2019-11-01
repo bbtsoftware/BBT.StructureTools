@@ -4,7 +4,8 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// An interface that has to implement by user of this project.
+    /// Interface which defines how instances of a service are being retrieved from
+    /// an IoC container within the BBT.StructureTools.
     /// </summary>
     public interface IIocResolver
     {
