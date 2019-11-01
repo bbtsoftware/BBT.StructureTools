@@ -21,13 +21,11 @@ BuildParameters.SetParameters(
 
 BuildParameters.PrintParameters(Context);
 
-// ToDo https://github.com/bbtsoftware/BBT.StructureTools/issues/4
-// ToolSettings.SetToolSettings(
-    // context: Context,
-    // dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/BBT.StructureTools.Tests/*.cs" },
-    // testCoverageFilter: "+[*]* -[xunit.*]* -[*.Tests]* -[Shouldly]*",
-    // testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
-    // testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
+ToolSettings.SetToolSettings(
+    context: Context,
+    testCoverageFilter: "+[*]* -[xunit.*]* -[*.Tests]* -[FluentAssertions]* -[BBT.MaybePattern]* -[BBT.StrategyPattern]*",
+    testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
+    testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
