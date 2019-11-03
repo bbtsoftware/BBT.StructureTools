@@ -4,7 +4,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyCallContext : ICopyCallContext
+    internal class CopyCallContext : ICopyCallContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyCallContext"/> class.

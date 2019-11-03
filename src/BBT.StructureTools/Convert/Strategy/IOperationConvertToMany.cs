@@ -17,7 +17,7 @@
     /// The ist entries which shall be converted from
     /// the <typeparamref name="TSourceValue"/>s.</typeparam>
     /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
-    public interface IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    internal interface IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

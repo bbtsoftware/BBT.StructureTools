@@ -7,7 +7,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyValueWithSourceFilter<TSource, TTarget, TValue>
+    internal class OperationCopyValueWithSourceFilter<TSource, TTarget, TValue>
         : IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class

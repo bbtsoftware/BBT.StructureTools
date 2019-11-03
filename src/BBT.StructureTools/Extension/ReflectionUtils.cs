@@ -25,7 +25,7 @@
         /// <exception cref="CopyConvertCompareException">If the type of value is not
         /// is compatible with T.</exception>
         /// <typeparam name="T">Expected type.</typeparam>
-        public static T CastIfTypeOrSubtypeOrThrow<T>(object value)
+        internal static T CastIfTypeOrSubtypeOrThrow<T>(object value)
             where T : class
         {
             value.Should().NotBeNull();
@@ -57,7 +57,7 @@
         /// given examples are not given.</typeparam>
         /// <param name="expression">The Property Expression.</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "So a simple call is possible as shown in the example.")]
-        public static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
+        internal static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
             expression.Should().NotBeNull();
             expression.Body.Should().BeAssignableTo<MemberExpression>();
@@ -71,7 +71,7 @@
         /// Gets all inherited types, including interfaces, the specified type itself, and <see cref="object"/>
         /// if it's a class.
         /// </summary>
-        public static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
+        internal static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
         {
             extendedType.Should().NotBeNull();
 
@@ -92,7 +92,7 @@
         /// <summary>
         /// Gets all inherited types, ordered (more basic/inherited types first).
         /// </summary>
-        public static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
+        internal static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
         {
             extendedType.Should().NotBeNull();
 

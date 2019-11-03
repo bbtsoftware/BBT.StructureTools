@@ -9,7 +9,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>
+    internal class CopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>
         where T : class
         where TStrategy : class, ICopyStrategy<TChildType>
         where TChildType : class

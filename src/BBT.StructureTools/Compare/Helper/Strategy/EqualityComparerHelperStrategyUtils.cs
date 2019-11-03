@@ -11,14 +11,14 @@
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
     /// </summary>
-    public static class EqualityComparerHelperStrategyUtils
+    internal static class EqualityComparerHelperStrategyUtils
     {
         /// <summary>
         /// Get the method name.
         /// </summary>
         /// <typeparam name="T">Base type of expression.</typeparam>
         /// <typeparam name="TReturn">Return type.</typeparam>
-        public static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
+        internal static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
             expression.Should().NotBeNull();
 
@@ -30,7 +30,7 @@
         /// <summary>
         /// Check if the property exists in the exclusion list.
         /// </summary>
-        public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
+        internal static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
             exclusions.Should().NotBeNull();
             typeOfModel.Should().NotBeNull();
@@ -57,7 +57,7 @@
         /// Checks whether the two lists are equivalent or not.
         /// </summary>
         /// <typeparam name="TModel">Type of model.</typeparam>
-        public static bool AreListEquivalent<TModel>(
+        internal static bool AreListEquivalent<TModel>(
             IEnumerable<TModel> list1,
             IEnumerable<TModel> list2,
             Func<TModel, TModel, bool> compareFunc)
@@ -113,7 +113,7 @@
         /// Evaluates type that is compared.
         /// </summary>
         /// <typeparam name="T">type of comparer.</typeparam>
-        public static Type GetCompareType<T>(IEqualityComparer<T> comparer)
+        internal static Type GetCompareType<T>(IEqualityComparer<T> comparer)
         {
             comparer.Should().NotBeNull();
 

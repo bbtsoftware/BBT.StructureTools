@@ -12,7 +12,7 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
+    internal interface IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

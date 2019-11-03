@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyHelperOperations<T> : ICopyOperation<T>
+    internal class CopyHelperOperations<T> : ICopyOperation<T>
     {
         private readonly IEnumerable<ICopyOperation<T>> registeredStrategies;
 

@@ -5,7 +5,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
+    internal class OperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
         : IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
         where TSource : class
         where TTarget : class

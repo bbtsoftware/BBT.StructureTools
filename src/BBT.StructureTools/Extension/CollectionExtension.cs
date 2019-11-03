@@ -12,7 +12,7 @@
         /// </summary>
         /// <typeparam name="TBase">Type of the collection to which elements of <typeparamref name="TChild"/> added.</typeparam>
         /// <typeparam name="TChild">Type of the collection elements which are added to the <paramref name="collectionToAddTo"/>.</typeparam>
-        public static void AddRangeToMe<TBase, TChild>(this ICollection<TBase> collectionToAddTo, IEnumerable<TChild> collectionToBeAdded)
+        internal static void AddRangeToMe<TBase, TChild>(this ICollection<TBase> collectionToAddTo, IEnumerable<TChild> collectionToBeAdded)
             where TChild : TBase
         {
             foreach (var item in collectionToBeAdded)

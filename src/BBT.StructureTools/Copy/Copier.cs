@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class Copier<T> : ICopy<T>
+    internal class Copier<T> : ICopy<T>
         where T : class
     {
         private readonly ICopyHelper copyHelper;

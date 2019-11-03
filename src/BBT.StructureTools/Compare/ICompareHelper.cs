@@ -5,7 +5,7 @@
     /// <summary>
     /// Provides compare functionality.
     /// </summary>
-    public interface ICompareHelper
+    internal interface ICompareHelper
     {
         /// <summary>
         /// Start the compare post process if it's needed.

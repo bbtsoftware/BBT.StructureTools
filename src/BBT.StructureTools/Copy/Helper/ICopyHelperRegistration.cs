@@ -197,10 +197,5 @@
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
             where TCrossReferencedModel : class
             where TReferencingModel : class;
-
-        /// <summary>
-        /// Ends the registrations and start the operation phase.
-        /// </summary>
-        ICopyOperation<T> EndRegistrations();
     }
 }

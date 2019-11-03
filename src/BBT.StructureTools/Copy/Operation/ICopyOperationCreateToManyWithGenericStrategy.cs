@@ -11,7 +11,7 @@
     /// <typeparam name="T">typeof T type.</typeparam>
     /// <typeparam name="TStrategy">type of the strategy.</typeparam>
     /// <typeparam name="TChildType">type of the children being copied.</typeparam>
-    public interface ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperation<T>
+    internal interface ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperation<T>
         where TStrategy : class, ICopyStrategy<TChildType>
         where TChildType : class
     {

@@ -9,7 +9,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>
+    internal class CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
         where TChild : class

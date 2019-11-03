@@ -4,7 +4,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
+    internal class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
         where TImpl : TInterface, new()
         where TInterface : class, TBaseTargetInterface
     {

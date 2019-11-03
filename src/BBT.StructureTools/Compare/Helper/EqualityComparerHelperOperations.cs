@@ -8,7 +8,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class EqualityComparerHelperOperations<TModel> : IEqualityComparerHelperOperations<TModel>
+    internal class EqualityComparerHelperOperations<TModel> : IEqualityComparerHelperOperations<TModel>
         where TModel : class
     {
         private readonly IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies;

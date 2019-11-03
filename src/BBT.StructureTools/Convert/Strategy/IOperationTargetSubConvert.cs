@@ -10,7 +10,7 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TTargetValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
+    internal interface IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

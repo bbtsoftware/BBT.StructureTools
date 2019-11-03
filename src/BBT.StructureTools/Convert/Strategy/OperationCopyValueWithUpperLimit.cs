@@ -7,7 +7,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
+    internal class OperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
         : IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class

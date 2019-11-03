@@ -7,7 +7,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyHelper : ICopyHelper
+    internal class CopyHelper : ICopyHelper
     {
         /// <inheritdoc/>
         public void DoCopyPostProcessing<TClassToCopy>(

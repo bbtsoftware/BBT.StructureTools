@@ -10,7 +10,7 @@
     /// A more specific type is concidered "higher up" in the inheritence hierarchy, and therefore
     /// "greater" in a comparison.
     /// </summary>
-    public sealed class TypeComparer : IComparer<Type>
+    internal sealed class TypeComparer : IComparer<Type>
     {
         /// <inheritdoc/>
         public int Compare(Type x, Type y)

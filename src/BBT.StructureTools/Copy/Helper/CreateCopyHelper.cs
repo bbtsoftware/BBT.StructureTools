@@ -13,7 +13,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CreateCopyHelper<TChild, TConcreteChild, TParent> : ICreateCopyHelper<TChild, TConcreteChild, TParent>
+    internal class CreateCopyHelper<TChild, TConcreteChild, TParent> : ICreateCopyHelper<TChild, TConcreteChild, TParent>
         where TChild : class
         where TConcreteChild : class, TChild, new()
         where TParent : class
@@ -78,7 +78,7 @@
 
     /// <inheritdoc/>
     [SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMyOnlyContainASingleClass", Justification = "It is a variance of the same class with different number of generic parameters")]
-    public class CreateCopyHelper<TTarget, TConcreteTarget>
+    internal class CreateCopyHelper<TTarget, TConcreteTarget>
         : ICreateCopyHelper<TTarget, TConcreteTarget>
         where TTarget : class
         where TConcreteTarget : class, TTarget, new()

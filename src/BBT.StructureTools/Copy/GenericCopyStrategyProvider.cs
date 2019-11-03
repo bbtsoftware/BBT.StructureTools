@@ -4,7 +4,7 @@
     using BBT.StructureTools.Copy.Strategy;
 
     /// <inheritdoc/>
-    public class GenericCopyStrategyProvider<TStrategy, TCriterion>
+    internal class GenericCopyStrategyProvider<TStrategy, TCriterion>
         : GenericStrategyProvider<TStrategy, TCriterion>,
         ICopyStrategyProvider<TStrategy, TCriterion>
         where TStrategy : ICopyStrategy<TCriterion>

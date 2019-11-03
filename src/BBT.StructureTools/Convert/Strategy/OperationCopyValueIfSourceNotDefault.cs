@@ -7,7 +7,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>
+    internal class OperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>
         : IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class

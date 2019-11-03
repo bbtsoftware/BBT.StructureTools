@@ -4,7 +4,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationSubCopy<T> : ICopyOperation<T>
+    internal class CopyOperationSubCopy<T> : ICopyOperation<T>
         where T : class
     {
         private readonly ICopy<T> copier;

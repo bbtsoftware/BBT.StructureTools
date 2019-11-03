@@ -10,7 +10,7 @@
     /// <typeparam name="T">Type of the object being copied.</typeparam>
     /// <typeparam name="TCrossReferencedModel">Type of cross referenced model.</typeparam>
     /// <typeparam name="TReferencingModel">Type of the object being copied.</typeparam>
-    public interface ICopyOperationCrossReferenceProcessing<in T, TCrossReferencedModel, TReferencingModel> : ICopyOperation<T>
+    internal interface ICopyOperationCrossReferenceProcessing<in T, TCrossReferencedModel, TReferencingModel> : ICopyOperation<T>
         where T : class
         where TCrossReferencedModel : class
         where TReferencingModel : class

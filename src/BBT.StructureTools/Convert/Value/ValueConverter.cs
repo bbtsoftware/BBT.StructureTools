@@ -4,7 +4,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
+    internal class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
     {
         private readonly IValueConvertMapping<TSource, TTarget> valueConvertMap;
 

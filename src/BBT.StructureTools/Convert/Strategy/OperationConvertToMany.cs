@@ -9,7 +9,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    internal class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class

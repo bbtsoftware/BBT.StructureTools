@@ -22,6 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Convert\Strategy\ve-CB2B.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BBT.Maybe" Version="2.0.0" />
     <PackageReference Include="BBT.StrategyPattern" Version="1.0.0" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />

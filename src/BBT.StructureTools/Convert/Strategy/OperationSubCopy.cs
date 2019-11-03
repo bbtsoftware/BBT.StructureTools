@@ -5,7 +5,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationSubCopy<TSource, TTarget, TValue> : IOperationSubCopy<TSource, TTarget, TValue>
+    internal class OperationSubCopy<TSource, TTarget, TValue> : IOperationSubCopy<TSource, TTarget, TValue>
         where TSource : class, TValue
         where TTarget : class, TValue
         where TValue : class

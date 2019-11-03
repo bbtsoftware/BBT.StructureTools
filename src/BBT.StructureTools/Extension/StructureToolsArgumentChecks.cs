@@ -8,7 +8,7 @@
     /// <summary>
     /// Common runtime checks that throw <see cref="ArgumentException"/> upon failure.
     /// </summary>
-    public static class StructureToolsArgumentChecks
+    internal static class StructureToolsArgumentChecks
     {
         /// <summary>
         /// Throws an exception if the specified parameter's value is null.
@@ -18,7 +18,7 @@
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         [DebuggerStepThrough]
-        public static void NotNull<T>([ValidatedNotNull]this T value, string parameterName)
+        internal static void NotNull<T>([ValidatedNotNull]this T value, string parameterName)
             where T : class
         {
             if (value == null)
@@ -35,7 +35,7 @@
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is empty or consists only of white-space characters.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]this string value, string parameterName)
+        internal static void NotNullOrWhiteSpace([ValidatedNotNull]this string value, string parameterName)
         {
             if (value == null)
             {
@@ -55,7 +55,7 @@
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is negative.</exception>
         [DebuggerStepThrough]
-        public static void NotNegative(this int value, string parameterName)
+        internal static void NotNegative(this int value, string parameterName)
         {
             if (value < 0)
             {
@@ -70,7 +70,7 @@
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is negative or zero.</exception>
         [DebuggerStepThrough]
-        public static void NotNegativeOrZero(this int value, string parameterName)
+        internal static void NotNegativeOrZero(this int value, string parameterName)
         {
             if (value <= 0)
             {
@@ -87,7 +87,7 @@
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty<T>(this IEnumerable<T> value, string parameterName)
+        internal static void NotNullOrEmpty<T>(this IEnumerable<T> value, string parameterName)
         {
             // ReSharper disable once PossibleMultipleEnumeration
             value.NotNull(parameterName);
@@ -109,7 +109,7 @@
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> contains an empty element.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmptyElement<T>(this IEnumerable<T> value, string parameterName)
+        internal static void NotNullOrEmptyElement<T>(this IEnumerable<T> value, string parameterName)
         {
             // ReSharper disable once PossibleMultipleEnumeration
             value.NotNull(parameterName);
@@ -131,7 +131,7 @@
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> contains an empty element.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmptyOrEmptyElement<T>(this IEnumerable<T> value, string parameterName)
+        internal static void NotNullOrEmptyOrEmptyElement<T>(this IEnumerable<T> value, string parameterName)
         {
             // ReSharper disable once PossibleMultipleEnumeration
             value.NotNullOrEmpty(parameterName);

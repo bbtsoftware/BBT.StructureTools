@@ -8,7 +8,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
+    internal class OperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
         : IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
         where TSource : class
         where TTarget : class

@@ -7,7 +7,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
+    internal class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
         where T : class
     {
         private readonly Expression<Func<T, TValue>> targetexpression;

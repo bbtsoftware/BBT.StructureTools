@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     /// <inheritdoc/>
-    public class ValueConvertMapping<TSource, TTarget> : IValueConvertMapping<TSource, TTarget>
+    internal class ValueConvertMapping<TSource, TTarget> : IValueConvertMapping<TSource, TTarget>
     {
         private readonly Dictionary<TSource, TTarget> mapping = new Dictionary<TSource, TTarget>();
         private readonly HashSet<TSource> mapToException = new HashSet<TSource>();

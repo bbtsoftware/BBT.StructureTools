@@ -9,7 +9,7 @@
     /// <typeparam name="T">
     /// Type of the object being copied.
     /// </typeparam>
-    public interface ICopyOperationPostProcessing<in T> : ICopyOperation<T>
+    internal interface ICopyOperationPostProcessing<in T> : ICopyOperation<T>
         where T : class
     {
         /// <summary>

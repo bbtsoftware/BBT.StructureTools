@@ -16,7 +16,7 @@
         /// </summary>
         /// <typeparam name="TTarget">The type of the owner of the collection property.</typeparam>
         /// <typeparam name="TValue">The type of the collection entry.</typeparam>
-        public static void AddRangeToCollectionFilterNulvalues<TTarget, TValue>(
+        internal static void AddRangeToCollectionFilterNulvalues<TTarget, TValue>(
             this TTarget target,
             Expression<Func<TTarget, ICollection<TValue>>> targetExpression,
             IEnumerable<TValue> values)
@@ -46,7 +46,7 @@
         /// </summary>
         /// <typeparam name="T">Base target type.</typeparam>
         /// <typeparam name="TValue">type of the value being retrieved.</typeparam>
-        public static void SetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda, TValue valueToSet)
+        internal static void SetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda, TValue valueToSet)
             where T : class
         {
             target.Should().NotBeNull();
@@ -69,7 +69,7 @@
         /// </summary>
         /// <typeparam name="T">Base target type.</typeparam>
         /// <typeparam name="TValue">type of the value being set.</typeparam>
-        public static TValue GetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda)
+        internal static TValue GetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda)
             where T : class
         {
             target.Should().NotBeNull();
@@ -92,7 +92,7 @@
         /// </summary>
         /// <typeparam name="T">Type on which the expression works.</typeparam>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "target", Justification = "Needed for extension method.")]
-        public static string GetPropertyNameFromExpression<T>(this T target, Expression<Func<T, object>> expression)
+        internal static string GetPropertyNameFromExpression<T>(this T target, Expression<Func<T, object>> expression)
         {
             expression.Should().NotBeNull();
 
@@ -110,7 +110,7 @@
         /// </summary>
         /// <typeparam name="T">Type on which the expression works.</typeparam>
         /// <typeparam name="TValue">TValue of the property.</typeparam>
-        public static MemberInfo GetMemberInfoFromExpression<T, TValue>(this Expression<Func<T, TValue>> expression)
+        internal static MemberInfo GetMemberInfoFromExpression<T, TValue>(this Expression<Func<T, TValue>> expression)
         {
             expression.Should().NotBeNull();
 

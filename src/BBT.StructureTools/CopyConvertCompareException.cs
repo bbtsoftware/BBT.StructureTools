@@ -7,7 +7,7 @@
     /// a general copy convert compare exception.
     /// </summary>
     [Serializable]
-    public class CopyConvertCompareException : ApplicationException
+    internal class CopyConvertCompareException : ApplicationException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyConvertCompareException"/> class.

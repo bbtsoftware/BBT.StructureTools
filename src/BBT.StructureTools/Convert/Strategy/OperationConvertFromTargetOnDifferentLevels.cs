@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
+    internal class OperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
         : IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
         where TSource : class
         where TTarget : class

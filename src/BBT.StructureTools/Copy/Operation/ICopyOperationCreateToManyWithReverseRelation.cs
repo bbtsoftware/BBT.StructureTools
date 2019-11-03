@@ -12,7 +12,7 @@
     /// <typeparam name="TParent">See link above.</typeparam>
     /// <typeparam name="TChild">See link above.</typeparam>
     /// <typeparam name="TConcreteChild">concrete implementation.</typeparam>
-    public interface ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
+    internal interface ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
         : ICopyOperation<TParent>
         where TParent : class
         where TChild : class

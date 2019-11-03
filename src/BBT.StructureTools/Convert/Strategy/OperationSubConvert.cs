@@ -5,7 +5,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    internal class OperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class

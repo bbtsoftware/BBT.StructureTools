@@ -3,14 +3,14 @@
     /// <summary>
     /// Factory for create an instance of CopyHelperRegistration.
     /// </summary>
-    public interface ICopyHelperRegistrationFactory
+    internal interface ICopyHelperRegistrationFactory
     {
         /// <summary>
         /// Creates an  an instance of ICopyHelperRegistration.
         /// </summary>
         /// <typeparam name="T">Creation type.</typeparam>
         /// <returns>Created instance of EqualityComparerHelperRegistration.</returns>
-        ICopyHelperRegistration<T> Create<T>()
+        IInternalCopyHelperRegistration<T> Create<T>()
             where T : class;
     }
 }

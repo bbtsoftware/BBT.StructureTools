@@ -11,7 +11,7 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">Todo.</typeparam>
     /// <typeparam name="TConvertIntention">Todo.</typeparam>
-    public interface IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
+    internal interface IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
             where TSource : class
             where TTarget : class

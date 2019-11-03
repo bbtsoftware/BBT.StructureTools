@@ -19,7 +19,7 @@
         /// <typeparam name="TValueOfExpression">Type of the property value.</typeparam>
         /// <returns>The <see cref="PropertyInfo"/>.</returns>
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
-        public static PropertyInfo GetProperty<TOwner, TValueOfExpression>(Expression<Func<TOwner, TValueOfExpression>> expression)
+        internal static PropertyInfo GetProperty<TOwner, TValueOfExpression>(Expression<Func<TOwner, TValueOfExpression>> expression)
         {
             expression.Should().NotBeNull();
 
@@ -56,7 +56,7 @@
         /// <param name="expression">The expression.</param>
         /// <returns>The <see cref="PropertyInfo"/>.</returns>
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
-        public static PropertyInfo GetProperty(LambdaExpression expression)
+        internal static PropertyInfo GetProperty(LambdaExpression expression)
         {
             expression.Should().NotBeNull();
 

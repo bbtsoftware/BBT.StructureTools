@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class Comparer<T, TIntention> : IComparer<T, TIntention>
+    internal class Comparer<T, TIntention> : IComparer<T, TIntention>
         where T : class
         where TIntention : IBaseComparerIntention
     {
@@ -16,7 +16,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
-        public Comparer(
+        internal Comparer(
             ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)

@@ -13,7 +13,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyHelperRegistration<T> : ICopyHelperRegistration<T>
+    internal class CopyHelperRegistration<T> : IInternalCopyHelperRegistration<T>
         where T : class
     {
         private readonly List<ICopyOperation<T>> registeredStrategies;

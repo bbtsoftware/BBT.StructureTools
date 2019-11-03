@@ -21,7 +21,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertOperations{TSource,TTarget}" /> class.
         /// </summary>
-        public ConvertOperations(
+        internal ConvertOperations(
             IEnumerable<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits)
         {
             convertHelperOperationWorkUnits.Should().NotBeNull();

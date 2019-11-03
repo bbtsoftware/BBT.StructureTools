@@ -3,14 +3,14 @@
     /// <summary>
     /// Factory to create an instance of CopyHelperRegistration.
     /// </summary>
-    public class CopyHelperRegistrationFactory : ICopyHelperRegistrationFactory
+    internal class CopyHelperRegistrationFactory : ICopyHelperRegistrationFactory
     {
         /// <summary>
         /// Creates an instance of CopyHelperRegistration.
         /// </summary>
         /// <typeparam name="T">Creation type.</typeparam>
         /// <returns>Created instance of CopyHelperRegistration.</returns>
-        public ICopyHelperRegistration<T> Create<T>()
+        public IInternalCopyHelperRegistration<T> Create<T>()
             where T : class
         {
             return new CopyHelperRegistration<T>();

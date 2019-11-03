@@ -5,12 +5,12 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CompareHelper : ICompareHelper
+    internal class CompareHelper : ICompareHelper
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CompareHelper" /> class.
         /// </summary>
-        public CompareHelper()
+        internal CompareHelper()
         {
         }
 

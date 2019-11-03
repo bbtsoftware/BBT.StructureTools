@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Value
 {
     /// <inheritdoc/>
-    public class ConvertValueRegistration<TSource, TTarget> : IConvertValueRegistration<TSource, TTarget>
+    internal class ConvertValueRegistration<TSource, TTarget> : IConvertValueRegistration<TSource, TTarget>
     {
         private readonly IValueConvertMapping<TSource, TTarget> valueConvertMapping = new ValueConvertMapping<TSource, TTarget>();
 

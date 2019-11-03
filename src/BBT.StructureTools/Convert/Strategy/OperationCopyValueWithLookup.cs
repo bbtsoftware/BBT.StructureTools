@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyValueWithLookUp<TSource, TTarget, TValue>
+    internal class OperationCopyValueWithLookUp<TSource, TTarget, TValue>
         : IOperationCopyValueWithLookUp<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class

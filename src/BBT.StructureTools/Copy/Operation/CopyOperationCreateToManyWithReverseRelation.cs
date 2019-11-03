@@ -11,7 +11,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild> : ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
+    internal class CopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild> : ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
         where TParent : class
         where TChild : class
         where TConcreteChild : class, TChild, new()

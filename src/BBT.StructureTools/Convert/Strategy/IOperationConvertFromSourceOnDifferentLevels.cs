@@ -12,7 +12,7 @@
     /// <typeparam name="TSourceValue">The type of the new source type to convert.</typeparam>
     /// <typeparam name="TTargetValue">The type of the concret target (derived from <typeparamref name="TTarget"/>).</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    internal interface IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
+    internal class OperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
         : IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
         where TSource : class
         where TTarget : class

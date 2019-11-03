@@ -10,7 +10,7 @@
     /// </summary>
     /// <typeparam name="TTarget">The target abstraction to convert to.</typeparam>
     /// <typeparam name="TConcreteTarget">The target to convert.</typeparam>
-    public interface ICopyHelperFactory<TTarget, TConcreteTarget>
+    internal interface ICopyHelperFactory<TTarget, TConcreteTarget>
         where TTarget : class
         where TConcreteTarget : class, TTarget, new()
     {

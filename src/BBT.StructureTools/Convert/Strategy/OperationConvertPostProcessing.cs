@@ -5,7 +5,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class OperationConvertPostProcessing<TSource, TTarget> : IOperationConvertPostProcessing<TSource, TTarget>
+    internal class OperationConvertPostProcessing<TSource, TTarget> : IOperationConvertPostProcessing<TSource, TTarget>
             where TSource : class
             where TTarget : class
     {

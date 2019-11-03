@@ -17,7 +17,7 @@
         /// <typeparam name="TEntity">The type of the elements of source.</typeparam>
         /// <param name="list">The IEnumerable{TEntity} to check for a uniqueness.</param>
         /// <returns>true if the source sequence contains exactly one element; otherwise, false.</returns>
-        public static bool Only<TEntity>(this IEnumerable<TEntity> list)
+        internal static bool Only<TEntity>(this IEnumerable<TEntity> list)
         {
             list.Should().NotBeNull();
 
@@ -42,7 +42,7 @@
         /// <typeparam name="TEntity">
         /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
+        internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
             var filteredist = list.Where(predicate);
             return filteredist.SingleWithExceptionMessage(exceptionMessageFormat, furtherExceptionMessageFormat);
@@ -56,7 +56,7 @@
         /// <typeparam name="TEntity">
         /// The type of ist elements.
         /// </typeparam>
-        public static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
+        internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
            list.Should().NotBeNull();
 

@@ -5,7 +5,7 @@
     /// <summary>
     /// Helper for the convert implementations.
     /// </summary>
-    public interface IConvertHelper
+    internal interface IConvertHelper
     {
         /// <summary>
         /// Start the convert pre process it it's needed.

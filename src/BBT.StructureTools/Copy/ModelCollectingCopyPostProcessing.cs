@@ -5,7 +5,7 @@
     using FluentAssertions;
 
     /// <summary>
-    /// Post processing which collects models which were processed by the copy.
+    /// Post processing which collects objects which were processed by the copy.
     /// </summary>
     /// <typeparam name="TClassToCopy">Source type.</typeparam>
     public class ModelCollectingCopyPostProcessing<TClassToCopy> : ICopyPostProcessing<TClassToCopy>

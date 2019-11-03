@@ -6,7 +6,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyOperationPostProcessing<T> : ICopyOperationPostProcessing<T>
+    internal class CopyOperationPostProcessing<T> : ICopyOperationPostProcessing<T>
         where T : class
     {
         private Collection<IBaseAdditionalProcessing> additionalProcessings;

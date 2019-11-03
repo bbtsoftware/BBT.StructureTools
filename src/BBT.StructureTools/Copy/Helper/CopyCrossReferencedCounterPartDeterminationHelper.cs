@@ -17,7 +17,7 @@
     /// </summary>
     /// <typeparam name="TCrossReferencedModel">The type of the "cross-referenced model".</typeparam>
     /// <typeparam name="TReferencingModel">The type of the "referencing model".</typeparam>
-    public class CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>
+    internal class CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>
         where TCrossReferencedModel : class
         where TReferencingModel : class
     {
@@ -46,7 +46,7 @@
         /// </summary>
         /// <remarks>It is essential that the "cross-referenced models" are copied before the "referencing models".</remarks>
         /// <param name="referencingProperty">An expression representing the property on the "referencing model" that refers to the "cross-referenced model".</param>
-        public CopyCrossReferencedCounterPartDeterminationHelper(
+        internal CopyCrossReferencedCounterPartDeterminationHelper(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
             referencingProperty.Should().NotBeNull();
@@ -64,7 +64,7 @@
         /// the determination of the counter part.
         /// </summary>
         /// <param name="additionalProcessings">Set of existing additional processing items.</param>
-        public void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        internal void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             additionalProcessings.Should().NotBeNull();
 

@@ -8,7 +8,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class CopyHelperFactory<TTarget, TConcreteTarget>
+    internal class CopyHelperFactory<TTarget, TConcreteTarget>
         : ICopyHelperFactory<TTarget, TConcreteTarget>
         where TTarget : class
         where TConcreteTarget : class, TTarget, new()

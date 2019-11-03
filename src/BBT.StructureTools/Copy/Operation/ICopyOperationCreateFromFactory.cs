@@ -10,7 +10,7 @@
     /// <typeparam name="T">type to copy of the attribute.</typeparam>
     /// <typeparam name="TValue">Type of the attribute being inline processed / "copied".</typeparam>
     /// <typeparam name="TAttributeValueFactory">interface type of the attribute value factory.</typeparam>
-    public interface ICopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>
+    internal interface ICopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>
         : ICopyOperation<T>
         where TAttributeValueFactory : class
     {

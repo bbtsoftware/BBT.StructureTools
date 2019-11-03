@@ -13,7 +13,7 @@
     /// <typeparam name="TBaseSource">Contains the base type of the source which shall be converted (e.g. LiBaseCover).</typeparam>
     /// <typeparam name="TBaseTarget">Contains the base type of the target which shall be converted (e.g. LiClaicover).</typeparam>
     /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
-    public interface IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
+    internal interface IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IConvertOperation<TSource, TTarget>
             where TSource : class
             where TTarget : class

@@ -4,7 +4,7 @@
     using FluentAssertions;
 
     /// <inheritdoc/>
-    public class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
+    internal class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
         where TBase : class
         where TDerived : class, TBase
         where TConcrete : class, TDerived, new()
