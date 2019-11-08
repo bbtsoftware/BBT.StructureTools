@@ -137,7 +137,6 @@
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)

@@ -11,7 +11,7 @@
     /// </summary>
     public static class PopPropValueExtensions
     {
-        public static void CreateValueForProperty<T>(this T target, Expression<Func<T, string>> propex)
+        public static void CreateStringForProperty<T>(this T target, Expression<Func<T, string>> propex)
             where T : class
         {
             var propname = ReflectionUtils.GetPropertyName(propex);

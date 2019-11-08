@@ -23,20 +23,17 @@
 
         public IEnumerable<TService> GetAllInstances<TService>()
         {
-            var resolved = this.kernel.GetAll<TService>();
-            return resolved;
+            return this.kernel.GetAll<TService>();
         }
 
         public TService GetInstance<TService>()
         {
-            var resolved = this.kernel.Get<TService>();
-            return resolved;
+            return this.kernel.Get<TService>();
         }
 
         public object GetInstance(Type serviceType)
         {
-            var resolved = this.kernel.Get(serviceType);
-            return resolved;
+            return this.kernel.Get(serviceType);
         }
     }
 }

@@ -125,7 +125,6 @@
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder", Justification = "Suppression is OK here.")]
         private interface IChildTestClass
         {
             /// <summary>

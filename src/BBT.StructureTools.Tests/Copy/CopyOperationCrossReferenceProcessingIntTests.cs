@@ -69,7 +69,6 @@
             public TestClass Parent { get; set; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
@@ -88,7 +87,6 @@
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassCrossReferencedChildCopyRegistrations : ICopyRegistrations<TestClassCrossReferencedChild>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassCrossReferencedChild> registrations)
@@ -97,7 +95,6 @@
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Class instantiated through IOC when IComparer<> is instantiated")]
         private class TestClassChildCopyRegistrations : ICopyRegistrations<TestClassChild>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)

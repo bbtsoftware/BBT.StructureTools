@@ -31,7 +31,7 @@
             kernel.Bind<IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>>().To<TreeMasterDataToTreeConvertRegistrations>();
 
             kernel.Bind<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>>().To<LeafTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDattargetLeafConvertRegistrations>();
+            kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDataTargetLeafConvertRegistrations>();
             kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDatconvertRegistrations>();
 
             kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDatcopyRegistrations>();
@@ -79,12 +79,12 @@
             leaf.TemporalLeafMasterData.Add(temporalleafmasterdata2);
 
             // Add values to properties
-            root.CreateValueForProperty(x => x.RootName);
-            tree.CreateValueForProperty(x => x.TreeName);
-            treemasterdata.CreateValueForProperty(x => x.TreeMasterDataName);
-            leaf.CreateValueForProperty(x => x.LeafName);
-            leafmasterdata.CreateValueForProperty(x => x.LeafMasterDataName);
-            leafmasterdata2.CreateValueForProperty(x => x.LeafMasterDataName);
+            root.CreateStringForProperty(x => x.RootName);
+            tree.CreateStringForProperty(x => x.TreeName);
+            treemasterdata.CreateStringForProperty(x => x.TreeMasterDataName);
+            leaf.CreateStringForProperty(x => x.LeafName);
+            leafmasterdata.CreateStringForProperty(x => x.LeafMasterDataName);
+            leafmasterdata2.CreateStringForProperty(x => x.LeafMasterDataName);
 
             // Act
             var target = new TargetRoot();

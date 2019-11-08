@@ -39,17 +39,16 @@
 
             var kernel = new StandardKernel(settings);
 
+            var resolver = new NinjectResolver(kernel);
+            IocHandler.Instance.IocResolver = resolver;
+
             // Dependencies from BBT.StrategyPattern
             kernel.Bind(typeof(IStrategyLocator<>)).To(typeof(NinjectStrategyLocator<>));
             kernel.Bind(typeof(IInstanceCreator<,>)).To(typeof(GenericInstanceCreator<,>));
 
-            var resolver = new NinjectResolver(kernel);
-
             IocHandler.Instance.DoIocRegistrations(
                 (Type abstraction, Type implementation) =>
                     kernel.Bind(abstraction).To(implementation));
-
-            IocHandler.Instance.IocResolver = resolver;
 
             return kernel;
         }
