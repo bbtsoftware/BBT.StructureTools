@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Strategy
 {
     using BBT.StrategyPattern;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
@@ -15,7 +15,7 @@
         /// </summary>
         public GenericCreateByBaseAsCriterionStrategy(IInstanceCreator<TInterface, TImpl> instanceCreator)
         {
-            instanceCreator.Should().NotBeNull();
+            instanceCreator.NotNull(nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCopySource<TSource, TTarget>
@@ -17,7 +16,7 @@
         /// <inheritdoc/>
         public void Initialize(Expression<Func<TTarget, TSource>> targetExpression)
         {
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
             this.targetexpression = targetExpression;
         }
@@ -28,8 +27,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             target.SetPropertyValue(this.targetexpression, source);
         }

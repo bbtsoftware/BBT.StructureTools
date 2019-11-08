@@ -6,7 +6,6 @@
     using System.Linq;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
@@ -30,8 +29,8 @@
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            convert.Should().NotBeNull();
-            convertHelper.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -43,9 +42,9 @@
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
             Func<TSourceValue, TTargetValue, bool> aFilterFunc)
         {
-            sourceFunc.Should().NotBeNull();
-            targetFunc.Should().NotBeNull();
-            aFilterFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetFunc.NotNull(nameof(targetFunc));
+            aFilterFunc.NotNull(nameof(aFilterFunc));
 
             this.sourceFunc = sourceFunc;
             this.targetFunc = targetFunc;
@@ -58,9 +57,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValues = this.sourceFunc(source).ToList();
             var targetValues = this.targetFunc(target).Where(x => x != null).ToList();

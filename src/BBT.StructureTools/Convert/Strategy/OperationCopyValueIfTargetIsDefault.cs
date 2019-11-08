@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>
@@ -20,8 +19,8 @@
             Func<TSource, TValue> aSourceFunc,
             Expression<Func<TTarget, TValue>> aTargetExpression)
         {
-            aSourceFunc.Should().NotBeNull();
-            aTargetExpression.Should().NotBeNull();
+            aSourceFunc.NotNull(nameof(aSourceFunc));
+            aTargetExpression.NotNull(nameof(aTargetExpression));
 
             this.sourceFunc = aSourceFunc;
             this.targetexpression = aTargetExpression;
@@ -33,8 +32,8 @@
             TTarget aTarget,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.Should().NotBeNull();
-            aTarget.Should().NotBeNull();
+            aSource.NotNull(nameof(aSource));
+            aTarget.NotNull(nameof(aTarget));
 
             var sourceValue = this.sourceFunc.Invoke(aSource);
             var targetValue = aTarget.GetPropertyValue(this.targetexpression);

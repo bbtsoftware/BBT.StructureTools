@@ -6,7 +6,6 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>
@@ -26,7 +25,7 @@
         /// </summary>
         public CopyOperationCreateToManyWithGenericStrategy(ICopyStrategyProvider<TStrategy, TChildType> genericStrategyProvider)
         {
-            genericStrategyProvider.Should().NotBeNull();
+            genericStrategyProvider.NotNull(nameof(genericStrategyProvider));
 
             this.strategyProvider = genericStrategyProvider;
         }
@@ -56,9 +55,9 @@
             Expression<Func<T, ICollection<TChildType>>> targetExpression,
             Expression<Func<TStrategy, TChildType>> aCreateTargetChildExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            aCreateTargetChildExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            aCreateTargetChildExpression.NotNull(nameof(aCreateTargetChildExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetexpression = targetExpression;

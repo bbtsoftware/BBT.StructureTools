@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// Generic implementation of <see cref="ISourceConvertStrategy{TSource, TTarget, TIntention}"/>
@@ -27,7 +27,7 @@
         public GenericTargetConvertStrategy(
             IConvert<TSourceInterface, TCriterion, TIntention> converter)
         {
-            converter.Should().NotBeNull();
+            converter.NotNull(nameof(converter));
 
             this.converter = converter;
         }
@@ -35,15 +35,15 @@
         /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceCasted = source as TSourceInterface;
             var targetCasted = target as TCriterion;
 
-            sourceCasted.Should().NotBeNull();
-            targetCasted.Should().NotBeNull();
+            sourceCasted.NotNull(nameof(sourceCasted));
+            targetCasted.NotNull(nameof(targetCasted));
 
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }

@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
@@ -29,7 +28,7 @@
         public OperationCreateToManyWithSourceFilterAndReverseRelation(
             IConvertHelper convertHelper)
         {
-            convertHelper.Should().NotBeNull();
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
         }
@@ -40,9 +39,9 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            createConvertHelper.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
             this.targetexpression = targetExpression;
@@ -55,9 +54,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source, target);
 

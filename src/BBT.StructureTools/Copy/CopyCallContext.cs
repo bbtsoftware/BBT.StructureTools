@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CopyCallContext : ICopyCallContext
@@ -20,7 +20,7 @@
         /// </summary>
         public CopyCallContext(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.AdditionalProcessings = additionalProcessings;
         }

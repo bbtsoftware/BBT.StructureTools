@@ -4,8 +4,8 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyHelperFactory<TTarget, TConcreteTarget>
@@ -18,7 +18,7 @@
             Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
         {
-            reverseRelationFunc.Should().NotBeNull();
+            reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
 
             var copyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();
             copyHelper.SetupReverseRelation(reverseRelationFunc);

@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategyToManyRelationshipComparer<TModel, TTargetModel, TComparerIntention> : IEqualityComparerHelperStrategy<TModel>
@@ -23,8 +23,8 @@
             Expression<Func<TModel, IEnumerable<TTargetModel>>> expression,
             IComparer<TTargetModel, TComparerIntention> comparer)
         {
-            expression.Should().NotBeNull();
-            comparer.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
+            comparer.NotNull(nameof(comparer));
 
             this.func = expression.Compile();
             this.propertyName = EqualityComparerHelperStrategyUtils.GetMethodName(expression);

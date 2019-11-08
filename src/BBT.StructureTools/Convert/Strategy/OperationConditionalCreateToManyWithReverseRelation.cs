@@ -5,8 +5,8 @@
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
     using BBT.StructureTools.Strategy;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
@@ -31,8 +31,8 @@
             IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
             IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider)
         {
-            convertStrategyProvider.Should().NotBeNull();
-            createInstanceStrategyProvider.Should().NotBeNull();
+            convertStrategyProvider.NotNull(nameof(convertStrategyProvider));
+            createInstanceStrategyProvider.NotNull(nameof(createInstanceStrategyProvider));
 
             this.convertStrategyProvider = convertStrategyProvider;
             this.createInstanceStrategyProvider = createInstanceStrategyProvider;
@@ -64,9 +64,9 @@
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
             Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
         {
-            source.Should().NotBeNull();
-            targetParent.Should().NotBeNull();
-            reverseRelationOnTarget.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            targetParent.NotNull(nameof(targetParent));
+            reverseRelationOnTarget.NotNull(nameof(reverseRelationOnTarget));
 
             this.source = source;
             this.targetParent = targetParent;

@@ -4,7 +4,7 @@
     using System.Linq;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CopyHelper : ICopyHelper
@@ -16,9 +16,9 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
             where TClassToCopy : class
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.OfType<ICopyPostProcessing<TClassToCopy>>()
                                  .ToList()

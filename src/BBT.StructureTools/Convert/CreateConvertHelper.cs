@@ -6,7 +6,6 @@
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     public class CreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>
@@ -28,8 +27,8 @@
             IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
-            instanceCreator.Should().NotBeNull();
-            convert.Should().NotBeNull();
+            instanceCreator.NotNull(nameof(instanceCreator));
+            convert.NotNull(nameof(convert));
 
             this.instancecreator = instanceCreator;
             this.convert = convert;
@@ -38,7 +37,7 @@
         /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
         {
-            reverseRelationExpr.Should().NotBeNull();
+            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
 
             this.reverseRelationExpr = reverseRelationExpr;
         }
@@ -49,9 +48,9 @@
             TReverseRelation reverseRelation,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            reverseRelation.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            reverseRelation.NotNull(nameof(reverseRelation));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instancecreator.Create();
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
@@ -79,8 +78,8 @@
             IInstanceCreator<TTarget, TConcreteTarget> instancecreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
-            instancecreator.Should().NotBeNull();
-            convert.Should().NotBeNull();
+            instancecreator.NotNull(nameof(instancecreator));
+            convert.NotNull(nameof(convert));
 
             this.instancecreator = instancecreator;
             this.convert = convert;
@@ -91,8 +90,8 @@
             TSource source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instancecreator.Create();
             this.convert.Convert(source, target, additionalProcessings);

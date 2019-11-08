@@ -6,7 +6,6 @@
     using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Strategy;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
@@ -30,8 +29,8 @@
             IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
             IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider)
         {
-            convertStrategyProvider.Should().NotBeNull();
-            instanceCreationStrategyProvider.Should().NotBeNull();
+            convertStrategyProvider.NotNull(nameof(convertStrategyProvider));
+            instanceCreationStrategyProvider.NotNull(nameof(instanceCreationStrategyProvider));
 
             this.convertStrategyProvider = convertStrategyProvider;
             this.instanceCreationStrategyProvider = instanceCreationStrategyProvider;
@@ -43,9 +42,9 @@
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
             Expression<Func<TBaseTarget, TTarget>> targetParentExpression)
         {
-            aBaseSourceFunc.Should().NotBeNull();
-            targetValueExpression.Should().NotBeNull();
-            targetParentExpression.Should().NotBeNull();
+            aBaseSourceFunc.NotNull(nameof(aBaseSourceFunc));
+            targetValueExpression.NotNull(nameof(targetValueExpression));
+            targetParentExpression.NotNull(nameof(targetParentExpression));
 
             this.baseSourceFunc = aBaseSourceFunc;
             this.targetValueExpression = targetValueExpression;
@@ -58,9 +57,9 @@
             TTarget targetParent,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
+            source.NotNull(nameof(source));
 
-            targetParent.Should().NotBeNull();
+            targetParent.NotNull(nameof(targetParent));
 
             var baseSource = this.baseSourceFunc(source);
 

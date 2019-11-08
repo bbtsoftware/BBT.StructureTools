@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CompareHelper : ICompareHelper
@@ -22,7 +22,7 @@
             where T : class
             where TIntention : IBaseComparerIntention
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings
                 .OfType<IComparePostProcessing<T, TIntention>>()

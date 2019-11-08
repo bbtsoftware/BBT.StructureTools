@@ -8,7 +8,6 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     public class ConvertRegistration<TSource, TTarget> : IConvertRegistration<TSource, TTarget>
@@ -22,7 +21,7 @@
         public IConvertRegistration<TSource, TTarget> RegisterCopySource(
             Expression<Func<TTarget, TSource>> targetExpression)
         {
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopySource<TSource, TTarget>>();
             operation.Initialize(targetExpression);
@@ -35,8 +34,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -49,8 +48,8 @@
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -64,9 +63,9 @@
             Func<TSource, TValue> sourceLookUpFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            sourceLookUpFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceLookUpFunc.NotNull(nameof(sourceLookUpFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceLookUpFunc, targetExpression);
@@ -81,9 +80,9 @@
             Expression<Func<TTarget, TValue>> targetExpression)
             where TValue : IComparable<TValue>
         {
-            sourceFunc.Should().NotBeNull();
-            sourceUpperLimitFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceUpperLimitFunc.NotNull(nameof(sourceUpperLimitFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
@@ -96,8 +95,8 @@
             Func<TSource, TTarget, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -110,8 +109,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
                 this.servicelocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
@@ -125,8 +124,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
                 this.servicelocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
@@ -236,7 +235,7 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -254,7 +253,7 @@
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
         {
-            aBaseSourceFunc.Should().NotBeNull();
+            aBaseSourceFunc.NotNull(nameof(aBaseSourceFunc));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
@@ -273,8 +272,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -296,8 +295,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(
@@ -333,10 +332,10 @@
             where TMergeValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            aMergeFunc.Should().NotBeNull();
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            createConvertHelper.Should().NotBeNull();
+            aMergeFunc.NotNull(nameof(aMergeFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             var operation = this.servicelocator.GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
             operation.Initialize(
@@ -354,7 +353,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
             operation.Initialize(sourceFunc);
@@ -373,8 +372,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
@@ -396,8 +395,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator.GetInstance<IOperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
@@ -419,8 +418,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyGenericWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
@@ -442,8 +441,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -466,8 +465,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.servicelocator
                 .GetInstance<IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
@@ -489,7 +488,7 @@
         /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] aFurtherAdditionalProcessings)
         {
-            additionalProcessing.Should().NotBeNull();
+            additionalProcessing.NotNull(nameof(additionalProcessing));
 
             var list = new Collection<IBaseAdditionalProcessing>() { additionalProcessing };
 

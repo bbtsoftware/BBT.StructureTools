@@ -3,7 +3,7 @@
     using System;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// See <see cref="IComparerExclusion"/>.
@@ -16,7 +16,7 @@
         /// </summary>
         public PropertyComparerExclusion(Expression<Func<TModelInterface, object>> exclusion)
         {
-            exclusion.Should().NotBeNull();
+            exclusion.NotNull(nameof(exclusion));
 
             this.ExcludedModelType = typeof(TModelInterface);
 

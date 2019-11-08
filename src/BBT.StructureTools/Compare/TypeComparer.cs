@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// See <see cref="IComparer{T}"/>.
@@ -15,8 +15,8 @@
         /// <inheritdoc/>
         public int Compare(Type x, Type y)
         {
-            x.Should().NotBeNull();
-            y.Should().NotBeNull();
+            x.NotNull(nameof(x));
+            y.NotNull(nameof(y));
 
             // ' X and Y are the same type.
             if (x == y)

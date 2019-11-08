@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
-    using FluentAssertions;
 
     /// <summary>
     /// ReflectionUtils.
@@ -28,7 +27,7 @@
         internal static T CastIfTypeOrSubtypeOrThrow<T>(object value)
             where T : class
         {
-            value.Should().NotBeNull();
+            value.NotNull(nameof(value));
 
             if (!(value is T generictValue))
             {
@@ -59,8 +58,8 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "So a simple call is possible as shown in the example.")]
         internal static string GetPropertyName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            expression.Should().NotBeNull();
-            expression.Body.Should().BeAssignableTo<MemberExpression>();
+            expression.NotNull(nameof(expression));
+            expression.Body.IsOfType<MemberExpression>(nameof(expression.Body));
 
             var memberExpression = (MemberExpression)expression.Body;
             var memberName = memberExpression.Member.Name;
@@ -73,7 +72,7 @@
         /// </summary>
         internal static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
         {
-            extendedType.Should().NotBeNull();
+            extendedType.NotNull(nameof(extendedType));
 
             IList<Type> allInheritedTypes = new List<Type>();
             var current = extendedType;
@@ -94,7 +93,7 @@
         /// </summary>
         internal static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
         {
-            extendedType.Should().NotBeNull();
+            extendedType.NotNull(nameof(extendedType));
 
             var allInheritedTypesOrdered = extendedType.GetAllInheritedTypes().OrderBy(x => x, new TypeComparer()).ToList();
             return allInheritedTypesOrdered;

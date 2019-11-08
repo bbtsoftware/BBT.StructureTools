@@ -2,7 +2,7 @@
 {
     using System;
     using BBT.StrategyPattern;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
@@ -17,7 +17,7 @@
         /// </summary>
         public CreateInstanceOfTypeStrategy(IInstanceCreator<TConcreteTypeIntf, TConcreteTypeImpl> instanceCreator)
         {
-            instanceCreator.Should().NotBeNull();
+            instanceCreator.NotNull(nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

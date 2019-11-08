@@ -100,6 +100,22 @@
         }
 
         /// <summary>
+        /// Throws an exception if the specified parameter's value is null or empty.
+        /// </summary>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
+        [DebuggerStepThrough]
+        internal static void NotNullOrEmpty(this string value, string parameterName)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("Empty list.", parameterName);
+            }
+        }
+
+        /// <summary>
         /// Throws an exception if the specified parameter's value is null, empty or contains an empty element.
         /// </summary>
         /// <typeparam name="T">The type of the parameter.</typeparam>
@@ -138,6 +154,27 @@
 
             // ReSharper disable once PossibleMultipleEnumeration
             value.NotNullOrEmptyElement(parameterName);
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified parameter's value is null, or not of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The expected type of the parameter.</typeparam>
+        /// <param name="value">The object which is checked.</param>
+        /// <param name="objName">The name of the object variable to include in any thrown exception.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
+        /// <exception cref="InvalidCastException">Thrown if <paramref name="value"/> is not of type <typeparamref name="T"/>.</exception>
+        [DebuggerStepThrough]
+        internal static void IsOfType<T>(this object value, string objName)
+        {
+            value.NotNull(objName);
+
+            if (value is T)
+            {
+                return;
+            }
+
+            throw new InvalidCastException(FormattableString.Invariant($"{objName} isn't of type {typeof(T)}."));
         }
     }
 }

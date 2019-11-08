@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
-    using FluentAssertions;
 
     /// <summary>
     /// Contains extensions for reference types.
@@ -23,9 +22,9 @@
             where TTarget : class
             where TValue : class
         {
-            target.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            values.Should().NotBeNull();
+            target.NotNull(nameof(target));
+            targetExpression.NotNull(nameof(targetExpression));
+            values.NotNull(nameof(values));
 
             var targetExpressionMemberExpression = (MemberExpression)targetExpression.Body;
             var valueProperty = (PropertyInfo)targetExpressionMemberExpression.Member;
@@ -49,8 +48,8 @@
         internal static void SetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda, TValue valueToSet)
             where T : class
         {
-            target.Should().NotBeNull();
-            memberLamda.Should().NotBeNull();
+            target.NotNull(nameof(target));
+            memberLamda.NotNull(nameof(memberLamda));
 
             var info = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
 
@@ -72,8 +71,8 @@
         internal static TValue GetPropertyValue<T, TValue>(this T target, Expression<Func<T, TValue>> memberLamda)
             where T : class
         {
-            target.Should().NotBeNull();
-            memberLamda.Should().NotBeNull();
+            target.NotNull(nameof(target));
+            memberLamda.NotNull(nameof(memberLamda));
 
             var info = memberLamda.GetMemberInfoFromExpression() as PropertyInfo;
 
@@ -94,7 +93,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "target", Justification = "Needed for extension method.")]
         internal static string GetPropertyNameFromExpression<T>(this T target, Expression<Func<T, object>> expression)
         {
-            expression.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
 
             if (expression.Body is MemberExpression memberExpression)
             {
@@ -112,7 +111,7 @@
         /// <typeparam name="TValue">TValue of the property.</typeparam>
         internal static MemberInfo GetMemberInfoFromExpression<T, TValue>(this Expression<Func<T, TValue>> expression)
         {
-            expression.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
 
             if (expression.Body is MemberExpression memberExpression)
             {

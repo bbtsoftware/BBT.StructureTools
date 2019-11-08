@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Operation;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CopyHelperOperations<T> : ICopyOperation<T>
@@ -15,7 +15,7 @@
         /// </summary>
         internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
         {
-            registeredStrategies.Should().NotBeNull();
+            registeredStrategies.NotNull(nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }

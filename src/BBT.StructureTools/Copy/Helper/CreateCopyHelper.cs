@@ -10,7 +10,6 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CreateCopyHelper<TChild, TConcreteChild, TParent> : ICreateCopyHelper<TChild, TConcreteChild, TParent>
@@ -33,8 +32,8 @@
             IInstanceCreator<TChild, TConcreteChild> instancecreator,
             ICopy<TChild> copy)
         {
-            instancecreator.Should().NotBeNull();
-            copy.Should().NotBeNull();
+            instancecreator.NotNull(nameof(instancecreator));
+            copy.NotNull(nameof(copy));
 
             this.instancecreator = instancecreator;
             this.copy = copy;
@@ -43,7 +42,7 @@
         /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr)
         {
-            reverseRelationExpr.Should().NotBeNull();
+            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
 
             this.reverseRelationExpr = reverseRelationExpr;
         }
@@ -54,9 +53,9 @@
             TParent reverseRelation,
             ICopyCallContext copyCallContext)
         {
-            source.Should().NotBeNull();
-            reverseRelation.Should().NotBeNull();
-            copyCallContext.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            reverseRelation.NotNull(nameof(reverseRelation));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.ShallCopy(source)))
             {
@@ -93,8 +92,8 @@
             IInstanceCreator<TConcreteTarget, TConcreteTarget> instancecreator,
             ICopy<TTarget> copy)
         {
-            instancecreator.Should().NotBeNull();
-            copy.Should().NotBeNull();
+            instancecreator.NotNull(nameof(instancecreator));
+            copy.NotNull(nameof(copy));
 
             this.instancecreator = instancecreator;
             this.copy = copy;
@@ -105,8 +104,8 @@
             TConcreteTarget source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instancecreator.Create();
             this.copy.Copy(source, target, additionalProcessings);

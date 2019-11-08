@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationConvertPostProcessing<TSource, TTarget> : IOperationConvertPostProcessing<TSource, TTarget>
@@ -16,7 +15,7 @@
         /// </summary>
         public OperationConvertPostProcessing(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.additionalProcessings = additionalProcessings;
         }
@@ -24,7 +23,7 @@
         /// <inheritdoc/>
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.AddRangeToMe(this.additionalProcessings);
         }

@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <summary>
     /// Generic implementation of <see cref="ISourceConvertStrategy{TSource, TTarget, TIntention}"/>
@@ -28,7 +27,7 @@
         public GenericSourceConvertStrategy(
             IConvert<TCriterion, TTargetInterface, TIntention> converter)
         {
-            converter.Should().NotBeNull();
+            converter.NotNull(nameof(converter));
 
             this.converter = converter;
         }
@@ -36,9 +35,9 @@
         /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TCriterion>(source);
             var targetCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetInterface>(target);

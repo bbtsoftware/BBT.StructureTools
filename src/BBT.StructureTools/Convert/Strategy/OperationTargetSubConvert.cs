@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
@@ -20,7 +19,7 @@
         /// </summary>
         public OperationTargetSubConvert(IConvert<TSource, TTargetValue, TConvertIntention> convert)
         {
-            convert.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
 
             this.convert = convert;
         }
@@ -31,9 +30,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var targetValue = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetValue>(target);
             this.convert.Convert(source, targetValue, additionalProcessings);

@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
@@ -29,7 +28,7 @@
         public OperationCopyOneToManyWithReverseRelation(
             IConvertHelper convertHelper)
         {
-            convertHelper.Should().NotBeNull();
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
         }
@@ -40,11 +39,11 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
-            createConvertHelper.Should().NotBeNull();
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -57,9 +56,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValue = this.sourceFunc.Invoke(source);
             var copies = new List<TTargetValue>();

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>
@@ -24,8 +24,8 @@
             IConvert<TSourceValue, TTarget, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            convert.Should().NotBeNull();
-            convertHelper.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -34,7 +34,7 @@
         /// <inheritdoc/>
         public void Initialize(Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             this.sourceFunc = sourceFunc;
         }
@@ -45,9 +45,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source);
 

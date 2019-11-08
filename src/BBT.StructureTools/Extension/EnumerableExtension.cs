@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using FluentAssertions;
 
     /// <summary>
     /// EnumerableExtension.
@@ -19,7 +18,7 @@
         /// <returns>true if the source sequence contains exactly one element; otherwise, false.</returns>
         internal static bool Only<TEntity>(this IEnumerable<TEntity> list)
         {
-            list.Should().NotBeNull();
+            list.NotNull(nameof(list));
 
             if (!list.Any())
             {
@@ -58,7 +57,7 @@
         /// </typeparam>
         internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-           list.Should().NotBeNull();
+           list.NotNull(nameof(list));
 
            if (list.Only())
             {

@@ -5,7 +5,6 @@
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Helper.Strategy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class EqualityComparerHelperOperations<TModel> : IEqualityComparerHelperOperations<TModel>
@@ -18,7 +17,7 @@
         /// </summary>
         internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
         {
-            registeredStrategies.Should().NotBeNull();
+            registeredStrategies.NotNull(nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }

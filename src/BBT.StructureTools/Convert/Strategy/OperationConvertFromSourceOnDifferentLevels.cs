@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
@@ -24,7 +24,7 @@
         public OperationConvertFromSourceOnDifferentLevels(
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            convert.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
 
             this.convert = convert;
         }
@@ -33,7 +33,7 @@
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc)
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             this.sourceFunc = sourceFunc;
         }
@@ -44,10 +44,10 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
-            target.Should().BeAssignableTo<TTargetValue>();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
+            target.IsOfType<TTargetValue>(nameof(target));
 
             // Need to use another collection, since the given collection my change and the enumeration fails.
             var newAdditionalProcessings = new List<IBaseAdditionalProcessing>(additionalProcessings);

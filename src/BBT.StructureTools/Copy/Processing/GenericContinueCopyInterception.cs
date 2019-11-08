@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Copy.Processing
 {
     using System;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     public class GenericContinueCopyInterception<TType> : IGenericContinueCopyInterception<TType>
@@ -14,7 +14,7 @@
         /// </summary>
         public GenericContinueCopyInterception(Func<TType, bool> shallCopyFunc)
         {
-            shallCopyFunc.Should().NotBeNull();
+            shallCopyFunc.NotNull(nameof(shallCopyFunc));
 
             this.shallCopyFunc = shallCopyFunc;
         }
@@ -22,7 +22,7 @@
         /// <inheritdoc/>
         public bool ShallCopy(TType obj)
         {
-            obj.Should().NotBeNull();
+            obj.NotNull(nameof(obj));
 
             return this.shallCopyFunc.Invoke(obj);
         }

@@ -5,7 +5,6 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory> : ICopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>
@@ -28,11 +27,11 @@
         /// <inheritdoc/>
         public void Initialize(Expression<Func<T, TValue>> targetExpression, Expression<Func<TAttributeValueFactory, TValue>> aAttrValueExpression)
         {
-            targetExpression.Should().NotBeNull();
-            aAttrValueExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
+            aAttrValueExpression.NotNull(nameof(aAttrValueExpression));
 
             var attributeValueFactory = IocHandler.Instance.IocResolver.GetInstance<TAttributeValueFactory>();
-            attributeValueFactory.Should().NotBeNull();
+            attributeValueFactory.NotNull(nameof(attributeValueFactory));
 
             this.attributeValueFactory = attributeValueFactory;
             this.attrValueFunc = aAttrValueExpression.Compile();

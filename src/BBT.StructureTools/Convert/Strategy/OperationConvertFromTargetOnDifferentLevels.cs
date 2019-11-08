@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>
@@ -22,7 +22,7 @@
         public OperationConvertFromTargetOnDifferentLevels(
             IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
-            convert.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
 
             this.convert = convert;
         }
@@ -30,7 +30,7 @@
         /// <inheritdoc/>
         public void Initialize(Func<TTarget, TSourceValue> sourceFunc)
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             this.sourceFunc = sourceFunc;
         }
@@ -41,7 +41,7 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.Add(
                 new GenericConvertPostProcessing<TSource, TTarget>(

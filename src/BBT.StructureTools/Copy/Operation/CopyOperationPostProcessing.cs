@@ -3,7 +3,6 @@
     using System.Collections.ObjectModel;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationPostProcessing<T> : ICopyOperationPostProcessing<T>
@@ -14,8 +13,8 @@
         /// <inheritdoc/>
         public void Copy(T source, T aTarget, ICopyCallContext copyCallContext)
         {
-            copyCallContext.Should().NotBeNull();
-            this.additionalProcessings.Should().NotBeNull();
+            copyCallContext.NotNull(nameof(copyCallContext));
+            this.additionalProcessings.NotNull(nameof(this.additionalProcessings));
 
             copyCallContext.AdditionalProcessings.AddRangeToMe(this.additionalProcessings);
         }
@@ -23,7 +22,7 @@
         /// <inheritdoc/>
         public void Initialize(Collection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.additionalProcessings = additionalProcessings;
         }

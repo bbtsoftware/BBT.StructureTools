@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCopyValueWithLookUp<TSource, TTarget, TValue>
@@ -23,9 +22,9 @@
             Func<TSource, TValue> aSourceLookUpFunc,
             Expression<Func<TTarget, TValue>> aTargetExpression)
         {
-            aSourceFunc.Should().NotBeNull();
-            aSourceLookUpFunc.Should().NotBeNull();
-            aTargetExpression.Should().NotBeNull();
+            aSourceFunc.NotNull(nameof(aSourceFunc));
+            aSourceLookUpFunc.NotNull(nameof(aSourceLookUpFunc));
+            aTargetExpression.NotNull(nameof(aTargetExpression));
 
             this.sourceFunc = aSourceFunc;
             this.sourceLookupFunc = aSourceLookUpFunc;
@@ -38,8 +37,8 @@
             TTarget aTarget,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.Should().NotBeNull();
-            aTarget.Should().NotBeNull();
+            aSource.NotNull(nameof(aSource));
+            aTarget.NotNull(nameof(aTarget));
 
             var sourceValue = this.sourceFunc.Invoke(aSource);
 

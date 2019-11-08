@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy.Processing;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// Post processing which collects objects which were processed by the copy.
@@ -29,7 +29,7 @@
         /// <inheritdoc/>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
-            target.Should().NotBeNull();
+            target.NotNull(nameof(target));
 
             this.collectedTargetInstances.Add(target);
         }

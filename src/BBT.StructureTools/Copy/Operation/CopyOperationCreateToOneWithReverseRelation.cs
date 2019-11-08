@@ -4,7 +4,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild> : ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>
@@ -24,9 +23,9 @@
             Expression<Func<T, TChild>> targetFuncExpr,
             ICreateCopyHelper<TChild, TConcreteChild, T> aCreateCopyHelper)
         {
-            aCreateCopyHelper.Should().NotBeNull();
-            sourceFunc.Should().NotBeNull();
-            targetFuncExpr.Should().NotBeNull();
+            aCreateCopyHelper.NotNull(nameof(aCreateCopyHelper));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
             this.targetexpression = targetFuncExpr;
             this.sourceFunc = sourceFunc;
@@ -39,9 +38,9 @@
             T target,
             ICopyCallContext copyCallContext)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            copyCallContext.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             var sourceChild = this.sourceFunc.Invoke(source);
 
@@ -53,7 +52,7 @@
             }
 
             var sourceConcrete = sourceChild as TConcreteChild;
-            sourceConcrete.Should().NotBeNull();
+            sourceConcrete.NotNull(nameof(sourceConcrete));
 
             var copy = this.createCopyHelper.CreateTarget(
                 sourceConcrete,

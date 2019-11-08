@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// Post processing which collects models which were processed by the convert.
@@ -30,7 +30,7 @@
         /// <inheritdoc/>
         public void DoPostProcessing(TSource source, TTarget target)
         {
-            target.Should().NotBeNull();
+            target.NotNull(nameof(target));
 
             this.collectedTargetInstances.Add(target);
         }

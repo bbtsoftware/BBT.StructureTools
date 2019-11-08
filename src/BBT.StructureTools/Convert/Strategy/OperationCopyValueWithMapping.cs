@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert.Value;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
@@ -22,7 +21,7 @@
         /// </summary>
         public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> convertValue)
         {
-            convertValue.Should().NotBeNull();
+            convertValue.NotNull(nameof(convertValue));
 
             this.convertValue = convertValue;
         }
@@ -32,8 +31,8 @@
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetexpression = targetExpression;
@@ -45,8 +44,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
             var targetValue = this.convertValue.ConvertValue(sourceValue);

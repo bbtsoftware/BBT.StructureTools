@@ -2,8 +2,8 @@
 {
     using System;
     using System.Linq.Expressions;
+    using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     public class ConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
@@ -18,7 +18,7 @@
             Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
         {
-            reverseRelationFunc.Should().NotBeNull();
+            reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
 
             var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>>();
             convertHelper.SetupReverseRelation(reverseRelationFunc);

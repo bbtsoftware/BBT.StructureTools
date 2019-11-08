@@ -4,7 +4,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
@@ -20,8 +19,8 @@
             Expression<Func<T, TValue>> targetExpression,
             Expression<Func<TValue>> attrValueExpression)
         {
-            targetExpression.Should().NotBeNull();
-            attrValueExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
+            attrValueExpression.NotNull(nameof(attrValueExpression));
 
             this.targetexpression = targetExpression;
             this.valueFunc = attrValueExpression.Compile();

@@ -6,7 +6,6 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>
@@ -25,7 +24,7 @@
         public CopyOperationCreateToManyWithGenericStrategyWithReverseRelation(
             ICopyStrategyProvider<TStrategy, TChild> strategyProvider)
         {
-            strategyProvider.Should().NotBeNull();
+            strategyProvider.NotNull(nameof(strategyProvider));
 
             this.strategyProvider = strategyProvider;
         }
@@ -53,9 +52,9 @@
         /// <inheritdoc/>
         public void Initialize(Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            reverseRelationExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            reverseRelationExpression.NotNull(nameof(reverseRelationExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetexpression = targetExpression;

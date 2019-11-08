@@ -4,7 +4,6 @@
     using System.Globalization;
     using System.Linq.Expressions;
     using System.Reflection;
-    using FluentAssertions;
 
     /// <summary>
     /// Utility for <see cref="System.Linq.Expressions.Expression"/>.
@@ -21,7 +20,7 @@
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
         internal static PropertyInfo GetProperty<TOwner, TValueOfExpression>(Expression<Func<TOwner, TValueOfExpression>> expression)
         {
-            expression.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
 
             MemberExpression memberExpression;
             if (expression.Body is UnaryExpression unaryExpression)
@@ -58,12 +57,14 @@
         /// <exception cref="ArgumentException">If the property does not exist.</exception>
         internal static PropertyInfo GetProperty(LambdaExpression expression)
         {
-            expression.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
 
-            (expression.Body is MemberExpression).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Body of {0} is not a MemberExpression.", expression));
+            expression.Body.IsOfType<MemberExpression>(nameof(expression.Body));
+
             var memberExpression = (MemberExpression)expression.Body;
 
-            (memberExpression.Member is PropertyInfo).Should().BeTrue(string.Format(CultureInfo.InvariantCulture, "Member of {0} is not a PropertyInfo.", memberExpression));
+            memberExpression.Member.IsOfType<PropertyInfo>(nameof(memberExpression.Member));
+
             var property = (PropertyInfo)memberExpression.Member;
 
             return property;

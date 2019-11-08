@@ -6,7 +6,6 @@
     using System.Reflection;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <summary>
     /// Determines the correct counter part of a cross-referenced model within a copied structure,
@@ -49,7 +48,7 @@
         internal CopyCrossReferencedCounterPartDeterminationHelper(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            referencingProperty.Should().NotBeNull();
+            referencingProperty.NotNull(nameof(referencingProperty));
 
             this.referencingProperty = ExpressionUtils.GetProperty(referencingProperty);
 
@@ -66,7 +65,7 @@
         /// <param name="additionalProcessings">Set of existing additional processing items.</param>
         internal void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.Should().NotBeNull();
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.Add(this.crossReferencedModelPostProcessings);
             additionalProcessings.Add(this.referencingModelPostProcessings);
@@ -79,8 +78,8 @@
         /// </summary>
         private void CrossReferencedModelAction(TCrossReferencedModel source, TCrossReferencedModel target)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             // Register source target pair.
             this.referencedModelSourceTargetRepository.Add(source, target);
@@ -92,8 +91,8 @@
         /// </summary>
         private void ReferencingModelAction(TReferencingModel source, TReferencingModel target)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             // Determine correct counter part.
             var crossReferencedSourceModel = (TCrossReferencedModel)this.referencingProperty.GetValue(source);

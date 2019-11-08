@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
@@ -26,8 +26,8 @@
             ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor,
             IConvertHelper convertHelper)
         {
-            convert.Should().NotBeNull();
-            convertHelper.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.sourceTemporalCollectionDataDescriptor = sourceTemporalCollectionDataDescriptor;
@@ -39,8 +39,8 @@
             Func<TSource, IEnumerable<TSourceValue>> aSourceFunc,
             Func<TSource, TTarget, DateTime> referenceDateFunc)
         {
-            aSourceFunc.Should().NotBeNull();
-            referenceDateFunc.Should().NotBeNull();
+            aSourceFunc.NotNull(nameof(aSourceFunc));
+            referenceDateFunc.NotNull(nameof(referenceDateFunc));
 
             this.sourceFunc = aSourceFunc;
             this.referenceDateFunc = referenceDateFunc;
@@ -52,9 +52,9 @@
             TTarget aTarget,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.Should().NotBeNull();
-            aTarget.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            aSource.NotNull(nameof(aSource));
+            aTarget.NotNull(nameof(aTarget));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(aSource);
             var referenceDate = this.referenceDateFunc.Invoke(aSource, aTarget);

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// Compares two int values of a specifc model, this allows for example to sort models with the sort
@@ -19,7 +19,7 @@
         /// </summary>
         public ModelIntComparer(Func<TModel, int> sortOrderDelegate)
         {
-            sortOrderDelegate.Should().NotBeNull();
+            sortOrderDelegate.NotNull(nameof(sortOrderDelegate));
 
             this.sortOrderDelegate = sortOrderDelegate;
         }

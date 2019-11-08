@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     public class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
@@ -20,9 +20,9 @@
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
         {
-            convertEngine.Should().NotBeNull();
-            convertRegistrations.Should().NotBeNull();
-            convertHelper.Should().NotBeNull();
+            convertEngine.NotNull(nameof(convertEngine));
+            convertRegistrations.NotNull(nameof(convertRegistrations));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
             var registrations = convertEngine.StartRegistrations();
@@ -36,9 +36,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
             this.convertOperations.Convert(source, target, additionalProcessings);

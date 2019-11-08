@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>
@@ -30,7 +29,7 @@
         public OperationMergeLevel(
             IConvertHelper convertHelper)
         {
-            convertHelper.Should().NotBeNull();
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
         }
@@ -42,10 +41,10 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
-            aMergeFunc.Should().NotBeNull();
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
-            createConvertHelper.Should().NotBeNull();
+            aMergeFunc.NotNull(nameof(aMergeFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.mergeFunc = aMergeFunc;
             this.sourceFunc = sourceFunc;
@@ -59,9 +58,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var mergeValues = this.mergeFunc.Invoke(source);
 

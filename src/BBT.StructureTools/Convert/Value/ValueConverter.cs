@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Value
 {
     using System;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
@@ -13,7 +13,7 @@
         /// </summary>
         public ValueConverter(IConvertValueRegistrations<TSource, TTarget> convertValueRegistrations)
         {
-            convertValueRegistrations.Should().NotBeNull();
+            convertValueRegistrations.NotNull(nameof(convertValueRegistrations));
 
             var registrations = new ConvertValueRegistration<TSource, TTarget>();
             convertValueRegistrations.DoRegistrations(registrations);

@@ -6,7 +6,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
@@ -20,7 +19,7 @@
         /// <typeparam name="TReturn">Return type.</typeparam>
         internal static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            expression.Should().NotBeNull();
+            expression.NotNull(nameof(expression));
 
             var methodCallExpression = (MethodCallExpression)expression.Body;
 
@@ -32,9 +31,9 @@
         /// </summary>
         internal static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
-            exclusions.Should().NotBeNull();
-            typeOfModel.Should().NotBeNull();
-            name.Should().NotBeNullOrEmpty();
+            exclusions.NotNull(nameof(exclusions));
+            typeOfModel.NotNull(nameof(typeOfModel));
+            name.NotNullOrEmpty(nameof(name));
 
             // The exclusion can made for a model which inherits the property from an interface or
             // base class. We want to make sure the exclusion applies in any case.
@@ -63,7 +62,7 @@
             Func<TModel, TModel, bool> compareFunc)
             where TModel : class
         {
-            compareFunc.Should().NotBeNull();
+            compareFunc.NotNull(nameof(compareFunc));
 
             // This is OK since either both are null, or have the same reference which is
             // in case of our compare infra the correct definition of equal.
@@ -115,7 +114,7 @@
         /// <typeparam name="T">type of comparer.</typeparam>
         internal static Type GetCompareType<T>(IEqualityComparer<T> comparer)
         {
-            comparer.Should().NotBeNull();
+            comparer.NotNull(nameof(comparer));
 
             // evaluate type of a comparer
             // due to covariant restriction typeof(T) is not valid

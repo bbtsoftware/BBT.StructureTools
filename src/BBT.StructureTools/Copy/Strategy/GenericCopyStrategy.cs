@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Copy.Strategy
 {
     using BBT.StrategyPattern;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
@@ -19,8 +19,8 @@
             IInstanceCreator<TDerived, TConcrete> creator,
             ICopy<TDerived> copier)
         {
-            creator.Should().NotBeNull();
-            copier.Should().NotBeNull();
+            creator.NotNull(nameof(creator));
+            copier.NotNull(nameof(copier));
 
             this.creator = creator;
             this.copier = copier;
@@ -32,9 +32,9 @@
             TBase target,
             ICopyCallContext copyCallContext)
         {
-            source.Should().BeAssignableTo<TDerived>();
-            target.Should().BeAssignableTo<TDerived>();
-            copyCallContext.Should().NotBeNull();
+            source.IsOfType<TDerived>(nameof(source));
+            target.IsOfType<TDerived>(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             this.copier.Copy(source as TDerived, target as TDerived, copyCallContext);
         }

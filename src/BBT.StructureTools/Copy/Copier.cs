@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Operation;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class Copier<T> : ICopy<T>
@@ -20,9 +20,9 @@
             ICopyHelper copyHelper,
             ICopyHelperRegistrationFactory factory)
         {
-            copyRegistrations.Should().NotBeNull();
-            copyHelper.Should().NotBeNull();
-            factory.Should().NotBeNull();
+            copyRegistrations.NotNull(nameof(copyRegistrations));
+            copyHelper.NotNull(nameof(copyHelper));
+            factory.NotNull(nameof(factory));
 
             var registrations = factory.Create<T>();
             copyRegistrations.DoRegistrations(registrations);
@@ -37,9 +37,9 @@
             T target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.Copy(source, target, new CopyCallContext(additionalProcessings));
         }
@@ -50,9 +50,9 @@
             T target,
             ICopyCallContext copyCallContext)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            copyCallContext.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             this.operations.Copy(source, target, copyCallContext);
 

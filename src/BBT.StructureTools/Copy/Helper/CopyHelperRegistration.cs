@@ -10,7 +10,6 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyHelperRegistration<T> : IInternalCopyHelperRegistration<T>
@@ -74,8 +73,8 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            sourceFunc.Should().NotBeNull();
-            targetExpression.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
             var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
@@ -96,7 +95,7 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            sourceFunc.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             var operation = this.serviceLocator
                 .GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
@@ -119,7 +118,7 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            targetFuncExpr.Should().NotBeNull();
+            targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
             var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
             var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
@@ -136,7 +135,7 @@
         /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] aFurtherAdditionalProcessings)
         {
-            additionalProcessing.Should().NotBeNull();
+            additionalProcessing.NotNull(nameof(additionalProcessing));
 
             var list = new Collection<IBaseAdditionalProcessing>() { additionalProcessing };
 
@@ -172,7 +171,7 @@
             where TCrossReferencedModel : class
             where TReferencingModel : class
         {
-            referencingProperty.Should().NotBeNull();
+            referencingProperty.NotNull(nameof(referencingProperty));
 
             var copyOperationCrossReferenceProcessing = new CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>();
             copyOperationCrossReferenceProcessing.Initialize(referencingProperty);
@@ -193,9 +192,9 @@
             Expression<Func<TAttributeValueFactory, TValue>> aAttrValueExpression)
             where TAttributeValueFactory : class
         {
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
-            aAttrValueExpression.Should().NotBeNull();
+            aAttrValueExpression.NotNull(nameof(aAttrValueExpression));
 
             var operation = new CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>();
             operation.Initialize(targetExpression, aAttrValueExpression);
@@ -233,7 +232,7 @@
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
-            targetExpression.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
 
             var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
             copyStrategy.Initialize(targetExpression.Compile(), targetExpression, reverseRelationExpression);

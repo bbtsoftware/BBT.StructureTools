@@ -5,7 +5,6 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class OperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>
@@ -24,8 +23,8 @@
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
-            targetExpression.Should().NotBeNull();
-            createConvertHelper.Should().NotBeNull();
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.targetexpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
@@ -37,8 +36,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             if (source == null)
             {

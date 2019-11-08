@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using BBT.StructureTools.Compare.Helper;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class Comparer<T, TIntention> : IComparer<T, TIntention>
@@ -21,9 +21,9 @@
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)
         {
-            compareRegistrations.Should().NotBeNull();
-            factory.Should().NotBeNull();
-            compareHelper.Should().NotBeNull();
+            compareRegistrations.NotNull(nameof(compareRegistrations));
+            factory.NotNull(nameof(factory));
+            compareHelper.NotNull(nameof(compareHelper));
 
             this.compareHelper = compareHelper;
             var registrations = factory.Create<T>();
@@ -62,7 +62,7 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
             IEnumerable<IComparerExclusion> exclusions)
         {
-            exclusions.Should().NotBeNull();
+            exclusions.NotNull(nameof(exclusions));
 
             var isEqual = this.equalityComparerHelper.AreRegistrationsEquals(
                 candidate1,

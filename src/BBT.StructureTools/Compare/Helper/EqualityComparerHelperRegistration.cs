@@ -5,7 +5,7 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Helper.Strategy;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     public class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
@@ -49,7 +49,7 @@
             where TComparer : class
             where TComparerIntention : IBaseComparerIntention
         {
-            comparer.Should().NotBeNull();
+            comparer.NotNull(nameof(comparer));
 
             this.registeredStrategies.Add(
                 new EqualityComparerHelperStrategyToManyRelationshipComparer<T, TComparer, TComparerIntention>(
@@ -62,7 +62,7 @@
         public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention
         {
-            comparer.Should().NotBeNull();
+            comparer.NotNull(nameof(comparer));
 
             this.registeredStrategies.Add(new EqualityComparerHelperStrategySubCompareComparer<T, TComparerIntention>(comparer));
 

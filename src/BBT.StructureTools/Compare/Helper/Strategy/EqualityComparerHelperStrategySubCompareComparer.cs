@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using BBT.StructureTools.Compare;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategySubCompareComparer<T, TIntention> : IEqualityComparerHelperStrategy<T>
@@ -19,7 +19,7 @@
         /// </summary>
         public EqualityComparerHelperStrategySubCompareComparer(IComparer<T, TIntention> comparer)
         {
-            comparer.Should().NotBeNull();
+            comparer.NotNull(nameof(comparer));
 
             this.comparer = comparer;
             this.subComparerType = EqualityComparerHelperStrategyUtils.GetCompareType(comparer);

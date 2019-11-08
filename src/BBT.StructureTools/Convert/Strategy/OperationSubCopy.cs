@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationSubCopy<TSource, TTarget, TValue> : IOperationSubCopy<TSource, TTarget, TValue>
@@ -18,7 +18,7 @@
         public OperationSubCopy(
             ICopy<TValue> copy)
         {
-            copy.Should().NotBeNull();
+            copy.NotNull(nameof(copy));
 
             this.copy = copy;
         }
@@ -29,9 +29,9 @@
             TTarget aTarget,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            aTarget.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            aTarget.NotNull(nameof(aTarget));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.copy.Copy(source, aTarget, additionalProcessings);
         }

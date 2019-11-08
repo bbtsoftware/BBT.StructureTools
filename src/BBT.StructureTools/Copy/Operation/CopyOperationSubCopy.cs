@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Copy.Operation
 {
     using BBT.StructureTools.Copy;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CopyOperationSubCopy<T> : ICopyOperation<T>
@@ -14,7 +14,7 @@
         /// </summary>
         public CopyOperationSubCopy(ICopy<T> copier)
         {
-            copier.Should().NotBeNull();
+            copier.NotNull(nameof(copier));
 
             this.copier = copier;
         }

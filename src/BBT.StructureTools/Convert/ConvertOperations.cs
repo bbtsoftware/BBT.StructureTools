@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Convert.Strategy;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <summary>
     /// See <see cref="IConvertOperations{TSource,TTarget}"/>.
@@ -24,7 +24,7 @@
         internal ConvertOperations(
             IEnumerable<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits)
         {
-            convertHelperOperationWorkUnits.Should().NotBeNull();
+            convertHelperOperationWorkUnits.NotNull(nameof(convertHelperOperationWorkUnits));
 
             this.convertHelperOperationWorkUnits = convertHelperOperationWorkUnits;
         }
@@ -37,9 +37,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var convertHelperOperationWorkUnit in this.convertHelperOperationWorkUnits)
             {

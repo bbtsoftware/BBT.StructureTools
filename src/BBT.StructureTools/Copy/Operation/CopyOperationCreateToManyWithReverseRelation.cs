@@ -8,7 +8,6 @@
     using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
-    using FluentAssertions;
 
     /// <inheritdoc/>
     internal class CopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild> : ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
@@ -26,8 +25,8 @@
             Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression,
             ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper)
         {
-            sourceFunc.Should().NotBeNull();
-            createCopyHelper.Should().NotBeNull();
+            sourceFunc.NotNull(nameof(sourceFunc));
+            createCopyHelper.NotNull(nameof(createCopyHelper));
 
             this.sourceFunc = sourceFunc;
             this.maybeTargetExpression = maybeTargetExpression;
@@ -37,12 +36,12 @@
         /// <inheritdoc/>
         public void Copy(TParent source, TParent target, ICopyCallContext copyCallContext)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            copyCallContext.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             var sourceValues = this.sourceFunc.Invoke(source)?.ToList();
-            sourceValues.Should().NotBeNull();
+            sourceValues.NotNull(nameof(sourceValues));
 
             var copies = sourceValues.Select(sourceValue => this.createCopyHelper.CreateTarget(
                 sourceValue as TConcreteChild,

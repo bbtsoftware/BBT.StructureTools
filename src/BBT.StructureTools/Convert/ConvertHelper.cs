@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     public class ConvertHelper : IConvertHelper
@@ -15,9 +15,9 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings
                 .OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>()
@@ -33,9 +33,9 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings
                 .OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>()
@@ -50,8 +50,8 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
             return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));

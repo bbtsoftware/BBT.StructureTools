@@ -4,7 +4,7 @@
     using System.Linq.Expressions;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel> : ICopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>
@@ -18,7 +18,7 @@
         public void Initialize(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            referencingProperty.Should().NotBeNull();
+            referencingProperty.NotNull(nameof(referencingProperty));
 
             this.referencingProperyExpression = referencingProperty;
         }
@@ -29,7 +29,7 @@
             T target,
             ICopyCallContext copyCallContext)
         {
-            copyCallContext.Should().NotBeNull();
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingProperyExpression);
             crossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);

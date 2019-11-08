@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Convert;
-    using FluentAssertions;
+    using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class OperationSourceSubConvert<TSource, TTarget, TSourceValue, TConvertIntention>
@@ -20,7 +20,7 @@
         public OperationSourceSubConvert(
             IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
-            convert.Should().NotBeNull();
+            convert.NotNull(nameof(convert));
 
             this.convert = convert;
         }
@@ -31,9 +31,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.Should().NotBeNull();
-            target.Should().NotBeNull();
-            additionalProcessings.Should().NotBeNull();
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             // Safe guard if the conversion is the wrong way around, eg. base convert
             // is calling the child's convert.
