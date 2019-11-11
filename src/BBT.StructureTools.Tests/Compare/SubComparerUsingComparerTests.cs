@@ -15,7 +15,7 @@
     {
         #region Members, Setup
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
-        private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClassChild, ITestCompareIntention> testCandidate;
 
         public SubComparerUsingComparerTests()
         {
@@ -25,7 +25,7 @@
             kernel.Bind<ICompareRegistrations<TestClassParent, ITestCompareIntention>>().To<TestClassParentCompareRegistrations>();
 
             parentCompare = kernel.Get<IComparer<TestClassParent, ITestCompareIntention>>();
-            this.testcandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
+            this.testCandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
         #endregion
@@ -40,7 +40,7 @@
             var testClass = new TestClassChild();
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -63,7 +63,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -86,7 +86,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeFalse();
@@ -109,7 +109,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -137,7 +137,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();
@@ -165,7 +165,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

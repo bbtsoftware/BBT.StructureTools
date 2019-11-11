@@ -10,37 +10,37 @@
         /// <summary>
         /// Start the convert pre process it it's needed.
         /// </summary>
-        /// <typeparam name="TSoureClass">Type of source class.</typeparam>
+        /// <typeparam name="TSourceClass">Type of source class.</typeparam>
         /// <typeparam name="TTargetClass">Type of target class.</typeparam>
-        void DoConvertPreProcessing<TSoureClass, TTargetClass>(
-            TSoureClass source,
+        void DoConvertPreProcessing<TSourceClass, TTargetClass>(
+            TSourceClass source,
             TTargetClass target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
-            where TSoureClass : class
+            where TSourceClass : class
             where TTargetClass : class;
 
         /// <summary>
         /// Start the convert post process it it's needed.
         /// </summary>
-        /// <typeparam name="TSoureClass">Type of source class.</typeparam>
+        /// <typeparam name="TSourceClass">Type of source class.</typeparam>
         /// <typeparam name="TTargetClass">Type of target class.</typeparam>
-        void DoConvertPostProcessing<TSoureClass, TTargetClass>(
-            TSoureClass source,
+        void DoConvertPostProcessing<TSourceClass, TTargetClass>(
+            TSourceClass source,
             TTargetClass target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
-            where TSoureClass : class
+            where TSourceClass : class
             where TTargetClass : class;
 
         /// <summary>
-        /// Evaluate the implementation of <see cref="IConvertInterception{TSoureClass,TTargetClass}"/>
+        /// Evaluate the implementation of <see cref="IConvertInterception{TSourceClass,TTargetClass}"/>
         /// and return the result.
         /// </summary>
-        /// <typeparam name="TSoureClass">Type of source class.</typeparam>
+        /// <typeparam name="TSourceClass">Type of source class.</typeparam>
         /// <typeparam name="TTargetClass">Type of target class.</typeparam>
-        bool ContinueConvertProcess<TSoureClass, TTargetClass>(
-            TSoureClass source,
+        bool ContinueConvertProcess<TSourceClass, TTargetClass>(
+            TSourceClass source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
-            where TSoureClass : class
+            where TSourceClass : class
             where TTargetClass : class;
     }
 }

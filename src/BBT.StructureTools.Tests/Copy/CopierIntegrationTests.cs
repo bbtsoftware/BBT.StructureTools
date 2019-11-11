@@ -14,7 +14,7 @@
     public class CopierIntegrationTests
     {
         #region members and setup
-        private readonly ICopy<ParentTestClass> testcandidate;
+        private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopierIntegrationTests()
         {
@@ -24,7 +24,7 @@
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass2>>().To<ChildTestClass2CopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -53,7 +53,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -94,7 +94,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -140,7 +140,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>

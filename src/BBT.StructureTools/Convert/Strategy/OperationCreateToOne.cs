@@ -17,7 +17,7 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private Func<TSource, TSourceValue> sourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> targetexpression;
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
         /// <inheritdoc/>
@@ -31,7 +31,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -56,7 +56,7 @@
                     sourceValue,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.targetexpression, targetValue);
+            target.SetPropertyValue(this.targetExpression, targetValue);
         }
     }
 }

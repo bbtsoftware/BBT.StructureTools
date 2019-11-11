@@ -13,7 +13,7 @@
     {
         private Func<TSource, TValue> sourceFunc;
         private Func<TSource, TValue> sourceLookupFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -27,7 +27,7 @@
 
             this.sourceFunc = aSourceFunc;
             this.sourceLookupFunc = aSourceLookUpFunc;
-            this.targetexpression = aTargetExpression;
+            this.targetExpression = aTargetExpression;
         }
 
         /// <inheritdoc/>
@@ -47,7 +47,7 @@
             }
 
             aTarget.SetPropertyValue(
-                this.targetexpression,
+                this.targetExpression,
                 sourceValue);
         }
     }

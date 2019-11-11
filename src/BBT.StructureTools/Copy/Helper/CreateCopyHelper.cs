@@ -16,7 +16,7 @@
         where TConcreteChild : class, TChild, new()
         where TParent : class
     {
-        private readonly IInstanceCreator<TChild, TConcreteChild> instancecreator;
+        private readonly IInstanceCreator<TChild, TConcreteChild> instanceCreator;
         private readonly ICopy<TChild> copy;
 
         /// <summary>
@@ -28,13 +28,13 @@
         /// Initializes a new instance of the <see cref="CreateCopyHelper{TChild,TConcreteChild,TParent}"/> class.
         /// </summary>
         public CreateCopyHelper(
-            IInstanceCreator<TChild, TConcreteChild> instancecreator,
+            IInstanceCreator<TChild, TConcreteChild> instanceCreator,
             ICopy<TChild> copy)
         {
-            instancecreator.NotNull(nameof(instancecreator));
+            instanceCreator.NotNull(nameof(instanceCreator));
             copy.NotNull(nameof(copy));
 
-            this.instancecreator = instancecreator;
+            this.instanceCreator = instanceCreator;
             this.copy = copy;
         }
 
@@ -61,7 +61,7 @@
                 return null;
             }
 
-            var target = this.instancecreator.Create();
+            var target = this.instanceCreator.Create();
 
             // Back reference should be set before copy method because copy could potentially use this back reference.
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
@@ -81,20 +81,20 @@
         where TTarget : class
         where TConcreteTarget : class, TTarget, new()
     {
-        private readonly IInstanceCreator<TConcreteTarget, TConcreteTarget> instancecreator;
+        private readonly IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator;
         private readonly ICopy<TTarget> copy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateCopyHelper{TTarget,TConcreteTarget}"/> class.
         /// </summary>
         public CreateCopyHelper(
-            IInstanceCreator<TConcreteTarget, TConcreteTarget> instancecreator,
+            IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator,
             ICopy<TTarget> copy)
         {
-            instancecreator.NotNull(nameof(instancecreator));
+            instanceCreator.NotNull(nameof(instanceCreator));
             copy.NotNull(nameof(copy));
 
-            this.instancecreator = instancecreator;
+            this.instanceCreator = instanceCreator;
             this.copy = copy;
         }
 
@@ -106,7 +106,7 @@
             source.NotNull(nameof(source));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var target = this.instancecreator.Create();
+            var target = this.instanceCreator.Create();
             this.copy.Copy(source, target, additionalProcessings);
             return target;
         }

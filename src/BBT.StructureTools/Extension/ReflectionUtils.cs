@@ -29,13 +29,13 @@
         {
             value.NotNull(nameof(value));
 
-            if (!(value is T generictValue))
+            if (!(value is T genericValue))
             {
                 throw new CopyConvertCompareException(FormattableString.Invariant($"An object of type '{typeof(T).Name}' was expected, but the object was of type '{value.GetType().Name}'."));
             }
             else
             {
-                return generictValue;
+                return genericValue;
             }
         }
 

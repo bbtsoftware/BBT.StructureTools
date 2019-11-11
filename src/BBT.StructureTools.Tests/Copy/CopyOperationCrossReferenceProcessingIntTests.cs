@@ -10,7 +10,7 @@
 
     public class CopyOperationCrossReferenceProcessingIntTests
     {
-        private readonly ICopy<TestClass> testcandidate;
+        private readonly ICopy<TestClass> testCandidate;
 
         public CopyOperationCrossReferenceProcessingIntTests()
         {
@@ -20,7 +20,7 @@
             kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<TestClassCrossReferencedChild>>().To<TestClassCrossReferencedChildCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopy<TestClass>>();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@
             var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             crossReferenceSource.Should().NotBeSameAs(target.TestClassCrossReferencedChild);

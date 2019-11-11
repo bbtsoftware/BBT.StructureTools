@@ -7,7 +7,7 @@
     /// and strategies of type <typeparamref name="TStrategy"/>.
     /// </summary>
     /// <typeparam name="TStrategy">The type of strategy.</typeparam>
-    /// <typeparam name="TCriterion">The type of criterium.</typeparam>
+    /// <typeparam name="TCriterion">The type of criterion.</typeparam>
     public interface ICopyStrategyProvider<out TStrategy, in TCriterion> : IGenericStrategyProvider<TStrategy, TCriterion>
         where TStrategy : ICopyStrategy<TCriterion>
     {

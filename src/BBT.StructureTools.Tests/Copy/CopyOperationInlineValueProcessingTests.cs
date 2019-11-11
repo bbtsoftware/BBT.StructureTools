@@ -11,7 +11,7 @@
 
     public class CopyOperationInlineValueProcessingTests
     {
-        private readonly ICopy<TestClass> testcandidate;
+        private readonly ICopy<TestClass> testCandidate;
 
         public CopyOperationInlineValueProcessingTests()
         {
@@ -19,7 +19,7 @@
 
             kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopy<TestClass>>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@
             var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.TestGuid.Should().NotBe(Guid.Empty);

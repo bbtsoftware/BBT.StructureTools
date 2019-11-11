@@ -10,7 +10,7 @@
     /// Utilities to set up and configure for test runs.
     /// </summary>
     /// <remarks>
-    /// Keep this code testframework-agnostic!.
+    /// Keep this code test framework-agnostic!.
     /// </remarks>
     public static class TestIoContainer
     {

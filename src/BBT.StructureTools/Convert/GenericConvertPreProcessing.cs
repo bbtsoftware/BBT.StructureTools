@@ -3,24 +3,24 @@
     using System;
 
     /// <inheritdoc/>
-    public class GenericConvertPreProcessing<TSoureClass, TTargetClass>
-        : IConvertPreProcessing<TSoureClass, TTargetClass>
-        where TSoureClass : class
+    public class GenericConvertPreProcessing<TSourceClass, TTargetClass>
+        : IConvertPreProcessing<TSourceClass, TTargetClass>
+        where TSourceClass : class
         where TTargetClass : class
     {
-        private readonly Action<TSoureClass, TTargetClass> action;
+        private readonly Action<TSourceClass, TTargetClass> action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericConvertPreProcessing{TSoureClass, TTargetClass}"/> class.
+        /// Initializes a new instance of the <see cref="GenericConvertPreProcessing{TSourceClass, TTargetClass}"/> class.
         /// </summary>
-        public GenericConvertPreProcessing(Action<TSoureClass, TTargetClass> action)
+        public GenericConvertPreProcessing(Action<TSourceClass, TTargetClass> action)
         {
             this.action = action;
         }
 
         /// <inheritdoc/>
         public void DoPreProcessing(
-            TSoureClass source,
+            TSourceClass source,
             TTargetClass target)
         {
             this.action.Invoke(source, target);

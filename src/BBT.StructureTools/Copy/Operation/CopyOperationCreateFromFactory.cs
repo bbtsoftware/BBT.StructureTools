@@ -11,7 +11,7 @@
         where T : class
         where TAttributeValueFactory : class
     {
-        private Expression<Func<T, TValue>> targetexpression;
+        private Expression<Func<T, TValue>> targetExpression;
 
         private Func<TAttributeValueFactory, TValue> attrValueFunc;
 
@@ -21,7 +21,7 @@
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
             var value = this.attrValueFunc.Invoke(this.attributeValueFactory);
-            target.SetPropertyValue(this.targetexpression, value);
+            target.SetPropertyValue(this.targetExpression, value);
         }
 
         /// <inheritdoc/>
@@ -35,7 +35,7 @@
 
             this.attributeValueFactory = attributeValueFactory;
             this.attrValueFunc = aAttrValueExpression.Compile();
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
         }
     }
 }

@@ -49,7 +49,7 @@
 
             this.maybeTargetExpression.Do(targetExpression =>
             {
-                target.AddRangeToCollectionFilterNulvalues(
+                target.AddRangeToCollectionFilterNullValues(
                     targetExpression,
                     copies);
             });

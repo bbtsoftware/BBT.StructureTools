@@ -13,7 +13,7 @@
     {
         #region setup and members
 
-        private readonly ICopy<ITestClass> testcandidate;
+        private readonly ICopy<ITestClass> testCandidate;
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
         {
@@ -21,7 +21,7 @@
 
             kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<ITestClass>>();
+            this.testCandidate = kernel.Get<ICopy<ITestClass>>();
         }
 
         #endregion
@@ -40,7 +40,7 @@
             var testClassCopy = new TestClass();
 
             // Act
-            this.testcandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
 
             // Assert
             testClassCopy.TestValue.Should().Be(234);
@@ -48,6 +48,7 @@
         }
 
         #endregion
+
         #region Testdata
 
         /// <summary>

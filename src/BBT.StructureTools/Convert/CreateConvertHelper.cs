@@ -16,7 +16,7 @@
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IInstanceCreator<TTarget, TConcreteTarget> instancecreator;
+        private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
         private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
         private Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr;
 
@@ -30,7 +30,7 @@
             instanceCreator.NotNull(nameof(instanceCreator));
             convert.NotNull(nameof(convert));
 
-            this.instancecreator = instanceCreator;
+            this.instanceCreator = instanceCreator;
             this.convert = convert;
         }
 
@@ -52,7 +52,7 @@
             reverseRelation.NotNull(nameof(reverseRelation));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var target = this.instancecreator.Create();
+            var target = this.instanceCreator.Create();
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
             this.convert.Convert(source, target, additionalProcessings);
             return target;
@@ -68,20 +68,20 @@
         where TConcreteTarget : TTarget, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IInstanceCreator<TTarget, TConcreteTarget> instancecreator;
+        private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
         private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateConvertHelper{TSource,TTarget,TConcreteTarget,TConvertIntention}" /> class.
         /// </summary>
         public CreateConvertHelper(
-            IInstanceCreator<TTarget, TConcreteTarget> instancecreator,
+            IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
-            instancecreator.NotNull(nameof(instancecreator));
+            instanceCreator.NotNull(nameof(instanceCreator));
             convert.NotNull(nameof(convert));
 
-            this.instancecreator = instancecreator;
+            this.instanceCreator = instanceCreator;
             this.convert = convert;
         }
 
@@ -93,7 +93,7 @@
             source.NotNull(nameof(source));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var target = this.instancecreator.Create();
+            var target = this.instanceCreator.Create();
             this.convert.Convert(source, target, additionalProcessings);
             return target;
         }

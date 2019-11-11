@@ -16,7 +16,7 @@
     {
         #region setup
 
-        private readonly ICopy<ParentTestClass> testcandidate;
+        private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
         {
@@ -27,7 +27,7 @@
             kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
             kernel.Bind<ITestStrategy>().To<TestStrategy>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -47,7 +47,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -88,7 +88,7 @@
 
             // Act / Assert throws
             Assert.Throws<ArgumentNullException>(() =>
-                this.testcandidate.Copy(
+                this.testCandidate.Copy(
                     testClassParentOriginal,
                     testClassParentCopy,
                     new List<IBaseAdditionalProcessing>()));
@@ -106,7 +106,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());

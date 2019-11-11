@@ -7,7 +7,7 @@
     /// <summary>
     /// See <see cref="IComparer{T}"/>.
     /// Compares two types based on how they inherit each other / are assignable to each other.
-    /// A more specific type is concidered "higher up" in the inheritence hierarchy, and therefore
+    /// A more specific type is considered "higher up" in the inheritance hierarchy, and therefore
     /// "greater" in a comparison.
     /// </summary>
     internal sealed class TypeComparer : IComparer<Type>

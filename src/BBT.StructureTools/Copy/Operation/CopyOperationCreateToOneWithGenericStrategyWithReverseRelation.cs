@@ -14,7 +14,7 @@
     {
         private readonly ICopyStrategyProvider<TStrategy, TChild> strategyProvider;
         private Func<T, TChild> sourceFunc;
-        private Expression<Func<T, TChild>> targetexpression;
+        private Expression<Func<T, TChild>> targetExpression;
         private Expression<Func<TChild, T>> reverseRelationExpression;
 
         /// <summary>
@@ -38,7 +38,7 @@
             // if the source is null, set the target also to null and exit copy process step.
             if (sourceChild == null)
             {
-                target.SetPropertyValue(this.targetexpression, null);
+                target.SetPropertyValue(this.targetExpression, null);
                 return;
             }
 
@@ -48,7 +48,7 @@
             strategy.Copy(sourceChild, copy, copyCallContext);
             copy.SetPropertyValue(this.reverseRelationExpression, target);
 
-            target.SetPropertyValue(this.targetexpression, copy);
+            target.SetPropertyValue(this.targetExpression, copy);
         }
 
         /// <inheritdoc/>
@@ -59,7 +59,7 @@
             reverseRelationExpression.NotNull(nameof(reverseRelationExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.reverseRelationExpression = reverseRelationExpression;
         }
     }

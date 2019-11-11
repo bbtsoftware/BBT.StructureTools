@@ -11,7 +11,7 @@
 
     public class CopyOperationSubCopyIntTests
     {
-        private readonly ICopy<TestClassChild> testcandidate;
+        private readonly ICopy<TestClassChild> testCandidate;
 
         public CopyOperationSubCopyIntTests()
         {
@@ -20,7 +20,7 @@
             kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<TestClassParent>>().To<TestClassParentCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClassChild>>();
+            this.testCandidate = kernel.Get<ICopy<TestClassChild>>();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@
             var target = new TestClassChild();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value1.Should().Be(45);
@@ -51,7 +51,7 @@
             var target = new TestClassChild { Value2 = 35 };
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value2.Should().Be(35);
@@ -73,7 +73,7 @@
             };
 
             // Act
-            this.testcandidate.Copy(source, target, additionalProcessings);
+            this.testCandidate.Copy(source, target, additionalProcessings);
 
             // Assert
             target.Value1.Should().Be(27);
