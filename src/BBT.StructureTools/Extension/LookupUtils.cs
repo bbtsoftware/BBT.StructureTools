@@ -23,7 +23,7 @@
 
             var defaultValue = default(T);
 
-            var isDefault = value.Equals(defaultValue) == true;
+            var isDefault = value.Equals(defaultValue);
 
             return isDefault;
         }
