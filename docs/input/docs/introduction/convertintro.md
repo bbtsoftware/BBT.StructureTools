@@ -13,9 +13,7 @@ The Compare infrastructure of the BBT Structure Tools is aiming at the conversio
 data, which has a different meaning depending on the context.
 
 This is an important distinction, since the CLR types don't exhibit any business specific behaviour.
-
- Let's take a web shop for example.
-
+Let's take a web shop for example.
 If the address to which the order is being shipped is determined by looking
 up the address via the `User` who placed the order the issue where
 the user may change the address at any given time without considering the impact on the `Order` isn't accounted for.

@@ -18,7 +18,8 @@ To make this even more complicated, an object being reference-compared may also 
 
 The Compare infrastructure from BBT.StructureTools is aiming at the comparison in a business case centered view
 and leaves the technical comparison of objects (aka [Object.ReferenceEquals]) to the framework, or leverages it
-if a reference comparison is desired from a business use case.
+if a reference comparison is desired from a business use case. *Euqating* is not supported and must be achieved
+using the aforementioned .Net functionality.
 
 As in the other two of the 3Cs the comparison works per class or interface by registering the comparison on this level per attribute
 and using other registrations for parent, child or otherwise related objects.
