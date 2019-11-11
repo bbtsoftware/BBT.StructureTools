@@ -10,7 +10,6 @@
     using FluentAssertions;
     using Ninject;
     using Xunit;
-    using Xunit.Sdk;
 
     public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
