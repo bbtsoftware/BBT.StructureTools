@@ -263,12 +263,6 @@
 
         private class TestFactory : IGenericStrategyProvider<TestStrategy, IChildTestClass>
         {
-            public IEnumerable<TestStrategy> GetAllStrategies()
-            {
-                // Not needed for test scenario
-                throw new NotImplementedException();
-            }
-
             public TestStrategy GetStrategy(IChildTestClass criterion)
             {
                 return new TestStrategy();
