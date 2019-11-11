@@ -1,9 +1,8 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
