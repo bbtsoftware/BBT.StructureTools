@@ -67,10 +67,21 @@
         }
 
         /// <summary>
+        /// Gets all inherited types, ordered (more basic/inherited types first).
+        /// </summary>
+        internal static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
+        {
+            extendedType.NotNull(nameof(extendedType));
+
+            var allInheritedTypesOrdered = extendedType.GetAllInheritedTypes().OrderBy(x => x, new TypeComparer()).ToList();
+            return allInheritedTypesOrdered;
+        }
+
+        /// <summary>
         /// Gets all inherited types, including interfaces, the specified type itself, and <see cref="object"/>
         /// if it's a class.
         /// </summary>
-        internal static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
+        private static IEnumerable<Type> GetAllInheritedTypes(this Type extendedType)
         {
             extendedType.NotNull(nameof(extendedType));
 
@@ -86,17 +97,6 @@
             var interfaces = extendedType.GetInterfaces();
             allInheritedTypes.AddRangeToMe(interfaces);
             return allInheritedTypes;
-        }
-
-        /// <summary>
-        /// Gets all inherited types, ordered (more basic/inherited types first).
-        /// </summary>
-        internal static IEnumerable<Type> GetAllInheritedTypesOrdered(this Type extendedType)
-        {
-            extendedType.NotNull(nameof(extendedType));
-
-            var allInheritedTypesOrdered = extendedType.GetAllInheritedTypes().OrderBy(x => x, new TypeComparer()).ToList();
-            return allInheritedTypesOrdered;
         }
     }
 }

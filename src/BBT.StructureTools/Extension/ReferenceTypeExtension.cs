@@ -90,26 +90,8 @@
         /// Returns the name of a property on a given Type T by an expression function.
         /// </summary>
         /// <typeparam name="T">Type on which the expression works.</typeparam>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "target", Justification = "Needed for extension method.")]
-        internal static string GetPropertyNameFromExpression<T>(this T target, Expression<Func<T, object>> expression)
-        {
-            expression.NotNull(nameof(expression));
-
-            if (expression.Body is MemberExpression memberExpression)
-            {
-                return memberExpression.Member.Name;
-            }
-
-            var operand = ((UnaryExpression)expression.Body).Operand;
-            return ((MemberExpression)operand).Member.Name;
-        }
-
-        /// <summary>
-        /// Returns the name of a property on a given Type T by an expression function.
-        /// </summary>
-        /// <typeparam name="T">Type on which the expression works.</typeparam>
         /// <typeparam name="TValue">TValue of the property.</typeparam>
-        internal static MemberInfo GetMemberInfoFromExpression<T, TValue>(this Expression<Func<T, TValue>> expression)
+        private static MemberInfo GetMemberInfoFromExpression<T, TValue>(this Expression<Func<T, TValue>> expression)
         {
             expression.NotNull(nameof(expression));
 

@@ -12,14 +12,6 @@
         /// <summary>
         /// Circular shift to the left by <paramref name="count"/>.
         /// </summary>
-        internal static uint RotateL(uint value, int count)
-        {
-            return (value << count) | (value >> checked(32 - count));
-        }
-
-        /// <summary>
-        /// Circular shift to the left by <paramref name="count"/>.
-        /// </summary>
         internal static int RotateL(int value, int count)
         {
             checked
@@ -30,30 +22,6 @@
                 }
 
                 return (value << count) | (value >> (32 - count));
-            }
-        }
-
-        /// <summary>
-        /// Circular shift to the right by <paramref name="count"/>.
-        /// </summary>
-        internal static uint RotateR(uint value, int count)
-        {
-            return (value >> count) | (value << checked(32 - count));
-        }
-
-        /// <summary>
-        /// Circular shift to the right by <paramref name="count"/>.
-        /// </summary>
-        internal static int RotateR(int value, int count)
-        {
-            checked
-            {
-                if (value < 0)
-                {
-                    return ((value >> count) & ~(-1 << (32 - count))) | (value << (32 - count));
-                }
-
-                return (value >> count) | (value << (32 - count));
             }
         }
     }
