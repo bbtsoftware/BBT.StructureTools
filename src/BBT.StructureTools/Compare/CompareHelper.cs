@@ -7,13 +7,6 @@
     /// <inheritdoc/>
     internal class CompareHelper : ICompareHelper
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CompareHelper" /> class.
-        /// </summary>
-        internal CompareHelper()
-        {
-        }
-
         /// <inheritdoc/>
         public void DoComparePostProcessing<T, TIntention>(
             T candidate1Nullable,

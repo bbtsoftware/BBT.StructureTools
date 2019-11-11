@@ -209,10 +209,6 @@
 
         private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
         {
-            public TestClassCopyRegistrations()
-            {
-            }
-
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
                 registrations.Should().NotBeNull();
