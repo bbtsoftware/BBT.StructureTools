@@ -16,6 +16,10 @@
     <copyright>Copyright © BBT Software AG</copyright>
     <tags>copy compare convert</tags>
     <releaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/1.0.0</releaseNotes>
+    <dependencies>
+      <dependency id="BBT.Maybe" version="2.0.0" />
+      <dependency id="BBT.StrategyPattern" version="1.0.0" />
+    </dependencies>
   </metadata>
   <files>
     <file src="netstandard2.0\BBT.StructureTools.dll" target="lib\netstandard2.0" />
