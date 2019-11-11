@@ -90,7 +90,7 @@
             // This exception is not originating from XUnit per se,
             // but from the assertion library which is itself using
             // Xunit internally.
-            Assert.Throws<XunitException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
                 this.testcandidate.Copy(
                     testClassParentOriginal,
                     testClassParentCopy,
