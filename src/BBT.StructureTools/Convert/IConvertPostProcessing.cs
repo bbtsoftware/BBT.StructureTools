@@ -3,15 +3,15 @@
     /// <summary>
     /// Interface to add some additional functions on the end of the convert process.
     /// </summary>
-    /// <typeparam name="TSoureClass">Type of source class.</typeparam>
+    /// <typeparam name="TSourceClass">Type of source class.</typeparam>
     /// <typeparam name="TTargetClass">Type of target class.</typeparam>
-    public interface IConvertPostProcessing<TSoureClass, TTargetClass> : IBaseAdditionalProcessing
-        where TSoureClass : class
+    public interface IConvertPostProcessing<TSourceClass, TTargetClass> : IBaseAdditionalProcessing
+        where TSourceClass : class
         where TTargetClass : class
     {
         /// <summary>
         /// This method will be called at the end of a convert process.
         /// </summary>
-        void DoPostProcessing(TSoureClass source, TTargetClass target);
+        void DoPostProcessing(TSourceClass source, TTargetClass target);
     }
 }

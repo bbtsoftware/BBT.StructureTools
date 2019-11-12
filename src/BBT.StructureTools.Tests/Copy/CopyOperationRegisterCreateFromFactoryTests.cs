@@ -1,7 +1,6 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
-    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
@@ -11,7 +10,7 @@
 
     public class CopyOperationRegisterCreateFromFactoryTests
     {
-        private readonly ICopy<TestClass> testcandidate;
+        private readonly ICopy<TestClass> testCandidate;
 
         public CopyOperationRegisterCreateFromFactoryTests()
         {
@@ -20,7 +19,7 @@
             kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ITestFactory>().To<TestFactory>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopy<TestClass>>();
         }
 
         /// <summary>
@@ -34,7 +33,7 @@
             var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value1.Should().Be(888);

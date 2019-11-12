@@ -17,7 +17,7 @@
 
     public class ConvertRootTreeLeafWithMasterDataTests
     {
-        private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testcandidate;
+        private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testCandidate;
 
         public ConvertRootTreeLeafWithMasterDataTests()
         {
@@ -36,7 +36,7 @@
 
             kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDatcopyRegistrations>();
 
-            this.testcandidate = kernel.Get<IConvert<Root, TargetRoot, ITestConvertIntention>>();
+            this.testCandidate = kernel.Get<IConvert<Root, TargetRoot, ITestConvertIntention>>();
         }
 
         [Fact]
@@ -88,7 +88,7 @@
 
             // Act
             var target = new TargetRoot();
-            this.testcandidate.Convert(root, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Convert(root, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             // Find target objects

@@ -5,7 +5,7 @@
     using BBT.StructureTools.Extension;
 
     /// <summary>
-    /// Compares two int values of a specifc model, this allows for example to sort models with the sort
+    /// Compares two int values of a specific model, this allows for example to sort models with the sort
     /// order of an enum value.
     /// </summary>
     /// <typeparam name="TModel">The model which shall be sorted.</typeparam>

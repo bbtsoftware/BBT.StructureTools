@@ -12,7 +12,7 @@
         where TCrossReferencedModel : class
         where TReferencingModel : class
     {
-        private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperyExpression;
+        private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingPropertyExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -20,7 +20,7 @@
         {
             referencingProperty.NotNull(nameof(referencingProperty));
 
-            this.referencingProperyExpression = referencingProperty;
+            this.referencingPropertyExpression = referencingProperty;
         }
 
         /// <inheritdoc/>
@@ -31,7 +31,7 @@
         {
             copyCallContext.NotNull(nameof(copyCallContext));
 
-            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingProperyExpression);
+            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingPropertyExpression);
             crossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);
         }
     }

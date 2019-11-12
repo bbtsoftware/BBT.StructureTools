@@ -43,8 +43,8 @@
                 return true;
             }
 
-            var value1 = this.func.Invoke(candidate1) as TTargetModel;
-            var value2 = this.func.Invoke(candidate2) as TTargetModel;
+            var value1 = this.func.Invoke(candidate1);
+            var value2 = this.func.Invoke(candidate2);
 
             return this.comparer.Equals(value1, value2, additionalProcessings, exclusions);
         }

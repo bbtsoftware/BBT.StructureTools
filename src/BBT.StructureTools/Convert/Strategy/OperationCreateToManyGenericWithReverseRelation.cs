@@ -21,7 +21,7 @@
 
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-        private Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetexpression;
+        private Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCreateToManyGenericWithReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}" /> class.
@@ -45,7 +45,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -78,7 +78,7 @@
                 copies.Add(copy);
             }
 
-            target.SetPropertyValue(this.targetexpression, copies);
+            target.SetPropertyValue(this.targetExpression, copies);
         }
     }
 }

@@ -13,7 +13,7 @@
     {
         private Func<T, TChild> sourceFunc;
 
-        private Expression<Func<T, TChild>> targetexpression;
+        private Expression<Func<T, TChild>> targetExpression;
 
         private ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper;
 
@@ -27,7 +27,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
-            this.targetexpression = targetFuncExpr;
+            this.targetExpression = targetFuncExpr;
             this.sourceFunc = sourceFunc;
             this.createCopyHelper = aCreateCopyHelper;
         }
@@ -47,7 +47,7 @@
             // if the source is null, set the target also to null and exit copy process step.
             if (sourceChild == null)
             {
-                target.SetPropertyValue(this.targetexpression, null);
+                target.SetPropertyValue(this.targetExpression, null);
                 return;
             }
 
@@ -59,7 +59,7 @@
                 target,
                 copyCallContext);
 
-            target.SetPropertyValue(this.targetexpression, copy);
+            target.SetPropertyValue(this.targetExpression, copy);
         }
     }
 }

@@ -8,7 +8,7 @@
     /// <summary>
     /// Utility for <see cref="System.Linq.Expressions.Expression"/>.
     /// </summary>
-    internal class ExpressionUtils
+    internal static class ExpressionUtils
     {
         /// <summary>
         /// Extract the <see cref="PropertyInfo"/> out of a <see cref="System.Linq.Expressions.Expression"/>.
@@ -45,27 +45,6 @@
                 var message = string.Format(CultureInfo.InvariantCulture, "Property {0} not a member of Type {1}.", memberExpression.Member.Name, typeof(TOwner));
                 throw new ArgumentException(message);
             }
-
-            return property;
-        }
-
-        /// <summary>
-        /// Extract the <see cref="PropertyInfo"/> out of a <see cref="System.Linq.Expressions.Expression"/>.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <returns>The <see cref="PropertyInfo"/>.</returns>
-        /// <exception cref="ArgumentException">If the property does not exist.</exception>
-        internal static PropertyInfo GetProperty(LambdaExpression expression)
-        {
-            expression.NotNull(nameof(expression));
-
-            expression.Body.IsOfType<MemberExpression>(nameof(expression.Body));
-
-            var memberExpression = (MemberExpression)expression.Body;
-
-            memberExpression.Member.IsOfType<PropertyInfo>(nameof(memberExpression.Member));
-
-            var property = (PropertyInfo)memberExpression.Member;
 
             return property;
         }

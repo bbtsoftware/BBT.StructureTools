@@ -1,9 +1,7 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
@@ -14,7 +12,7 @@
     public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
         #region members and setup
-        private readonly ICopy<IParentTestClass> testcandidate;
+        private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToOneWithReverseRelationIntTests()
         {
@@ -23,7 +21,7 @@
             kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -44,7 +42,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -73,7 +71,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());

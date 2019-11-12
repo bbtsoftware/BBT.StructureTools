@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq.Expressions;
-    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;

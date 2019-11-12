@@ -12,7 +12,7 @@
         where TTarget : class
     {
         private Func<TSource, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -23,7 +23,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
@@ -36,7 +36,7 @@
             target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
-            target.SetPropertyValue(this.targetexpression, sourceValue);
+            target.SetPropertyValue(this.targetExpression, sourceValue);
         }
     }
 }
