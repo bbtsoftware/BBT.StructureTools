@@ -17,7 +17,7 @@
 
         public CopyOperationPostProcessingUsingParamsIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
 

@@ -21,7 +21,7 @@
 
         public ConvertRootTreeLeafWithMasterDataTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind(typeof(ITemporalDataDescriptor<>)).To<TemporalDataDescriptor>();
 
