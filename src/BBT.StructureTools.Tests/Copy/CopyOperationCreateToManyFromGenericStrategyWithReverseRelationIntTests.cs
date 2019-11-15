@@ -20,7 +20,7 @@
 
         public CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
             kernel.Bind<ITestStrategy>().To<TestStrategy>();

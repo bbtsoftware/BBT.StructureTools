@@ -15,7 +15,7 @@
 
         public CopyOperationSubCopyIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<TestClassParent>>().To<TestClassParentCopyRegistrations>();
