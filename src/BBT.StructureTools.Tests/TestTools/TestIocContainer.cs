@@ -39,7 +39,9 @@
 
             IocHandler.Instance.DoIocRegistrations(
                 (Type abstraction, Type implementation) =>
-                    kernel.Bind(abstraction).To(implementation));
+                    kernel.Bind(abstraction).To(implementation),
+                (Type abstraction, Type implementation) =>
+                    kernel.Bind(abstraction).To(implementation).InTransientScope());
 
             return kernel;
         }
