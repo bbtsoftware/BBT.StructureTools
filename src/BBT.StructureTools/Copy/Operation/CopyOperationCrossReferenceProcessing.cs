@@ -14,6 +14,17 @@
     {
         private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingPropertyExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CopyOperationCrossReferenceProcessing{T, TCrossReferencedModel, TReferencingModel}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyOperationCrossReferenceProcessing()
+        {
+        }
+
         /// <inheritdoc/>
         public void Initialize(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)

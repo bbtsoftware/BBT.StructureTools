@@ -17,6 +17,17 @@
 
         private TAttributeValueFactory attributeValueFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CopyOperationCreateFromFactory{T, TValue, TAttributeValueFactory}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyOperationCreateFromFactory()
+        {
+        }
+
         /// <inheritdoc/>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {

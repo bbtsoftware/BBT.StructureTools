@@ -12,6 +12,17 @@
     /// </summary>
     internal sealed class TypeComparer : IComparer<Type>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypeComparer"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public TypeComparer()
+        {
+        }
+
         /// <inheritdoc/>
         public int Compare(Type x, Type y)
         {

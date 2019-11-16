@@ -23,10 +23,7 @@
         /// </summary>
         public static IKernel Initialize()
         {
-            var settings = new NinjectSettings
-            {
-                InjectNonPublic = true,
-            };
+            var settings = new NinjectSettings();
 
             var kernel = new StandardKernel(settings);
 

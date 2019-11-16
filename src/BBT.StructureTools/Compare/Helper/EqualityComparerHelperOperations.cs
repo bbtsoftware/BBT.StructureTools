@@ -15,7 +15,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperOperations{TModel}"/> class.
         /// </summary>
-        internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
         {
             registeredStrategies.NotNull(nameof(registeredStrategies));
 

@@ -17,6 +17,17 @@
 
         private ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CopyOperationCreateToOneWithReverseRelation{T, TChild, TConcreteChild}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyOperationCreateToOneWithReverseRelation()
+        {
+        }
+
         /// <inheritdoc/>
         public void Initialize(
             Func<T, TChild> sourceFunc,

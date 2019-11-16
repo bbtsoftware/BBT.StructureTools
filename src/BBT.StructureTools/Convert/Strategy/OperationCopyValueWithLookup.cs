@@ -15,6 +15,17 @@
         private Func<TSource, TValue> sourceLookupFunc;
         private Expression<Func<TTarget, TValue>> targetExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueWithLookUp{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValueWithLookUp()
+        {
+        }
+
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TValue> aSourceFunc,

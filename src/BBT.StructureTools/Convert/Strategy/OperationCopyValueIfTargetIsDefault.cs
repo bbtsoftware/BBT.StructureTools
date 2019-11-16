@@ -14,6 +14,17 @@
         private Func<TSource, TValue> sourceFunc;
         private Expression<Func<TTarget, TValue>> targetExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueIfTargetIsDefault{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValueIfTargetIsDefault()
+        {
+        }
+
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TValue> aSourceFunc,

@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    public class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
+    internal class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TConvertIntention : IBaseConvertIntention
@@ -15,7 +15,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
-        internal Converter(
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public Converter(
             IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
