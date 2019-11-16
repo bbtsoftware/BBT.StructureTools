@@ -13,7 +13,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyHelperOperations{T}"/> class.
         /// </summary>
-        internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
         {
             registeredStrategies.NotNull(nameof(registeredStrategies));
 

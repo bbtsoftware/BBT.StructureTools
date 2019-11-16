@@ -7,6 +7,17 @@
     /// <inheritdoc/>
     internal class CompareHelper : ICompareHelper
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompareHelper" /> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CompareHelper()
+        {
+        }
+
         /// <inheritdoc/>
         public void DoComparePostProcessing<T, TIntention>(
             T candidate1Nullable,

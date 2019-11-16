@@ -18,6 +18,17 @@
         private Func<TParent, IEnumerable<TChild>> sourceFunc;
         private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CopyOperationCreateToManyWithReverseRelation{TParent, TChild, TConcreteChild}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyOperationCreateToManyWithReverseRelation()
+        {
+        }
+
         /// <inheritdoc/>
         public void Initialize(
             Func<TParent, IEnumerable<TChild>> sourceFunc,
