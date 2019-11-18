@@ -18,6 +18,8 @@ If the address to which the order is being shipped is determined by looking
 up the address via the `User` who placed the order the issue where
 the user may change the address at any given time without considering the impact on the `Order` isn't accounted for.
 
+<!-- markdownlint-disable MD033 -->
+
 <div class="mermaid">
 classDiagram
     class User
@@ -29,6 +31,8 @@ classDiagram
     User "1" --> "*" Order
     Order "1" --> "1" OrderAddress
 </div>
+
+<!-- markdownlint-enable MD033 -->
 
 If in turn the `Order` knows it's own address to which it needs to be shipped this issue is solved, but
 we stand at another issue: An address may need different conversion on various use cases:
