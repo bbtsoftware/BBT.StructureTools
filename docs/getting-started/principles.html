@@ -87,6 +87,8 @@
                     <ul class="treeview-menu">
                         
                 <li><a href="/BBT.StructureTools/docs/getting-started/whystructuretools">Why does BBT.StructureTools exist?</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/obtain">Obtain</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/configure">Configuration</a></li>
                 <li class="selected"><a href="/BBT.StructureTools/docs/getting-started/principles">Technical core principles</a></li>
 
                     </ul>
@@ -164,15 +166,146 @@ according to the user-made registrations.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sub-operations">Sub operations</h3>
+<h2 id="registration-interfaces">Registration interfaces</h2>
 <p>The paragraph above states the technical difference between the operations regarding the business case specific intention.
 This is a rather minor difference - As mentioned before, the base objects do the job or resolving the sub operations
 defined in user-code by the responsible developer on a defined structure.
-Basically, one registration is needed for each data class type for a specific intention. The registrations
+One registration is needed for each data class type for a specific intention. The registrations
 can be seen as walking through the tree and deciding for each node which properties and child / parent objects need
 to be handled in a certain way which can be done by using what is generally called a <em>sub operation</em>. These
 <em>sub operations</em> are specific to each of the operation, though some can be mixed (for example, while converting an object implementing
 the same interface as the master data it is being converted from the interface's properties can be copied using a sub copy).</p>
+<p>There is one registration interface per each operation supported by the library. All of these registration
+interfaces share the same raison d'être and work as containers which hold the definition for each operation.
+They are internally retrieved from the IoC, shall be stateless and shall exist per data class or interface which is
+being processed.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Technical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2">ICompareRegistrations&lt;TModelToCompare, TCompareIntention&gt;</a></code></td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistrations_3">IConvertRegistrations&lt;TSource, TTarget, TConvertIntention&gt;</a></code></td>
+</tr>
+<tr>
+<td>Copy</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyRegistrations_1">ICopyRegistrations&lt;T&gt;</a></code></td>
+</tr>
+</tbody>
+</table>
+<div class="alert alert-info"><p>Consider these tips when writing registrations</p>
+<hr>
+<ul>
+<li>Register your implementation of the registration in the IoC container.</li>
+<li>Do not traverse over multiple tree leafs when registering properties, except for reference level sub operations.</li>
+<li>It's usually better to unit test each registration, not the entire tree being copied.</li>
+<li>Keep your implementation stateless</li>
+<li>Do not mix registrations for multiple types into one implementation - See <a href="https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#toc-single-responsibility-principle">Single Responsibility Principle</a></li>
+</ul>
+</div>
+<h2 id="controlling-object-initialization">Controlling object initialization</h2>
+<p>The copy and convert registrations can create a new instance of a target object if neccessary.
+How an object is initialized is defined by a registration of an <code>IInstanceCreator</code>
+implementation into the IoC container.
+The Copy and Convert infrastructure resolves the correct instance creator when it needs
+to create a new object while copying or converting an object.</p>
+<div class="alert alert-info"><p>Consider these tips when instantiating objects</p>
+<hr>
+<ul>
+<li>Overwrite the <code>IInstanceCreator</code> with the matching generic type parameters in the IoC
+registrations so the library can detect it while converting or copying objects.</li>
+<li>An empty constructor on the target class is mandatory if the infrastructure resorts to use the
+default generic <code>InstanceCreator</code> because the default constructor is used there.</li>
+</ul>
+</div>
+<h2 id="processings-and-interceptions">Processings and Interceptions</h2>
+<p>Copy, Convert, and Compare can be controlled depending on the objects being processed by using
+post-, preprocessings, or interceptors.
+Please note that these operations are not taken from the IoC but passed into the operation
+as additional argument.</p>
+<div class="alert alert-info"><p>If possible, use the generic implementations supplied with the libary.</p>
+</div>
+<h3 id="preprocessings">Preprocessings</h3>
+<p>Preprocessings are executed before the object is processed.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison</td>
+<td style="text-align: right;">not supported</td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPreProcessing_2">IConvertPreProcessing&lt;TSoureClass, TTargetClass&gt;</a></code></td>
+</tr>
+<tr>
+<td>Copy</td>
+<td style="text-align: right;">not supported</td>
+</tr>
+</tbody>
+</table>
+<h3 id="postprocessings">Postprocessings</h3>
+<p>Postprocessings are executed after the object is processed.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2">IComparePostProcessing&lt;T, TIntention&gt;</a></code></td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPostProcessing_2">IConvertPostProcessing&lt;TSoureClass, TTargetClass&gt;</a></code></td>
+</tr>
+<tr>
+<td>Copy</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/ICopyPostProcessing_1">ICopyPostProcessing&lt;TClassToCopy&gt;</a></code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="interceptors">Interceptors</h3>
+<p>Interceptors analyze a given object and stop the copy or convert process from continuing
+if a specified condition is met.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison</td>
+<td style="text-align: right;">not supported</td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertInterception_2">IConvertInterception&lt;TSoureClass, TTargetClass&gt;</a></code></td>
+</tr>
+<tr>
+<td>Copy</td>
+<td style="text-align: right;"><code><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/IGenericContinueCopyInterception_1">IGenericContinueCopyInterception&lt;TType&gt;</a></code>, <code><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyChildInterception_1">ICopyChildInterception&lt;TClassToCopy&gt;</a></code></td>
+</tr>
+</tbody>
+</table>
 
 	</section>
                 

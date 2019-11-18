@@ -89,6 +89,8 @@
                     <ul class="treeview-menu">
                         
                 <li><a href="/BBT.StructureTools/docs/getting-started/whystructuretools">Why does BBT.StructureTools exist?</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/obtain">Obtain</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/configure">Configuration</a></li>
                 <li><a href="/BBT.StructureTools/docs/getting-started/principles">Technical core principles</a></li>
 
                     </ul>
@@ -143,6 +145,7 @@ Let's take a web shop for example.
 If the address to which the order is being shipped is determined by looking
 up the address via the <code>User</code> who placed the order the issue where
 the user may change the address at any given time without considering the impact on the <code>Order</code> isn't accounted for.</p>
+<!-- markdownlint-disable MD033 -->
 <div class="mermaid">
 classDiagram
     class User
@@ -154,6 +157,7 @@ classDiagram
     User "1" --> "*" Order
     Order "1" --> "1" OrderAddress
 </div>
+<!-- markdownlint-enable MD033 -->
 <p>If in turn the <code>Order</code> knows it's own address to which it needs to be shipped this issue is solved, but
 we stand at another issue: An address may need different conversion on various use cases:</p>
 <ul>

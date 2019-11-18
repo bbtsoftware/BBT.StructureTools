@@ -1,19 +1,21 @@
-﻿<!DOCTYPE html><html><head>
+﻿<!DOCTYPE html>
+<html>
+    <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="description">
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="description" />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/BBT.StructureTools/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/BBT.StructureTools/assets/img/favicon.ico" type="image/x-icon">
-        <title>BBT.StructureTools - API - IComparePostProcessing&lt;T, TIntention&gt; Interface</title>
+        <title>BBT.StructureTools - Obtain</title>
         <link href="/BBT.StructureTools/assets/css/highlight.css" rel="stylesheet">
-        <link href="/BBT.StructureTools/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
-        <link href="/BBT.StructureTools/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
-        <link href="/BBT.StructureTools/assets/css/theme/theme.css" rel="stylesheet">
+        <link href="/BBT.StructureTools/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="/BBT.StructureTools/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
+        <link href="/BBT.StructureTools/assets/css/theme/theme.css" rel="stylesheet" />
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/BBT.StructureTools/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/BBT.StructureTools/assets/css/override.css" rel="stylesheet">
+        <link href="/BBT.StructureTools/assets/css/override.css" rel="stylesheet" />
         <script src="/BBT.StructureTools/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/BBT.StructureTools/assets/js/bootstrap.min.js"></script>        
         <script src="/BBT.StructureTools/assets/js/app.min.js"></script>         
@@ -56,8 +58,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li><a href="/BBT.StructureTools/docs">Documentation</a></li>
-        <li class="active"><a href="/BBT.StructureTools/api/BBT.StructureTools">API</a></li>
+                                    <li class="active"><a href="/BBT.StructureTools/docs">Documentation</a></li>
+        <li><a href="/BBT.StructureTools/api/BBT.StructureTools">API</a></li>
  
                         </ul>       
                     </div>
@@ -71,84 +73,52 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Summary">Summary</a></p>
-<p><a href="#Syntax">Syntax</a></p>
-<p><a href="#TypeParameters">Type Parameters</a></p>
-<p><a href="#Methods">Methods</a></p>
-<hr class="infobar-hidden">
-</div>
+        <div><p><a href="https://github.com/bbtsoftware/BBT.StructureTools/tree/develop/docs/input/docs/getting-started/obtain.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"></div>
 
                 </section>
                 <section class="sidebar">    
                                      
-                    	
-	    <script src="/BBT.StructureTools/assets/js/lunr.min.js"></script>
-    <script src="/BBT.StructureTools/assets/js/searchIndex.js"></script>
-    <div class="sidebar-form">
-        <div class="input-group">
-            <input type="text" name="search" id="search" class="form-control" placeholder="Search Types...">
-            <span class="input-group-btn">
-                <button class="btn btn-flat"><i class="fa fa-search"></i></button>
-            </span>
-        </div>
-    </div>
-    <div id="search-results">
-    </div>
-    <script>
-        function runSearch(query){
-            $("#search-results").empty();			
-            if( query.length < 2 ){
-                return;
-            }			
-            var results = searchModule.search("*" + query + "*");
-            var listHtml = "<ul class='sidebar-menu'>";	
-            listHtml += "<li class='header'>Type Results</li>";	
-            if(results.length == 0 ){
-                listHtml += "<li>No results found</li>";
-            } else {					
-                for(var i = 0; i < results.length; ++i){
-                    var res = results[i];
-                    listHtml += "<li><a href='" + res.url + "'>" + htmlEscape(res.title) + "</a></li>";
-                }				
-            }
-            listHtml += "</ul>";				
-            $("#search-results").append(listHtml);
-        }
-
-        $(document).ready(function(){
-            $("#search").on('input propertychange paste', function() {
-                runSearch($("#search").val());
-            });
-        });
-
-        function htmlEscape(html) {
-            return document.createElement('div')
-                .appendChild(document.createTextNode(html))
-                .parentNode
-                .innerHTML;
-        }
-    </script>
-	
-    <hr>
+                    
 
                     <ul class="sidebar-menu">
                         
-			<li class="header">Namespace</li>
-		<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare">BBT<wbr>.StructureTools<wbr>.Compare</a></li>
-		<li role="separator" class="divider"></li>
-			<li class="header">Enum Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion">Type<wbr>Of<wbr>Comparer<wbr>Exclusion</a></li>
-			<li class="header">Class Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1">ModelIntComparer<wbr>&lt;TModel&gt;<wbr></a></li>
-			<li class="header">Interface Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IBaseComparerIntention">I<wbr>Base<wbr>Comparer<wbr>Intention</a></li>
-				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2">I<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparer_2">IComparer<wbr>&lt;<wbr>T<wbr>Model<wbr>To<wbr>Compare, <wbr>T<wbr>Comparer<wbr>Intention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2">I<wbr>Compare<wbr>Registrations<wbr>&lt;<wbr>T<wbr>Model<wbr>To<wbr>Compare, <wbr>T<wbr>Compare<wbr>Intention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparerExclusion">IComparerExclusion</a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IFlatComparer">IFlatComparer</a></li>
 
+                <li class="treeview active">
+                    <a href="/BBT.StructureTools/docs/getting-started">Getting Started</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li><a href="/BBT.StructureTools/docs/getting-started/whystructuretools">Why does BBT.StructureTools exist?</a></li>
+                <li class="selected"><a href="/BBT.StructureTools/docs/getting-started/obtain">Obtain</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/configure">Configuration</a></li>
+                <li><a href="/BBT.StructureTools/docs/getting-started/principles">Technical core principles</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/BBT.StructureTools/docs/comparing-objects">Comparing Objects</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li><a href="/BBT.StructureTools/docs/comparing-objects/fundamentals">Fundamentals</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/BBT.StructureTools/docs/converting-objects">Converting Objects</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li><a href="/BBT.StructureTools/docs/converting-objects/fundamentals">Fundamentals</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/BBT.StructureTools/docs/copying-objects">Copying Objects</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li><a href="/BBT.StructureTools/docs/copying-objects/fundamentals">Fundamentals</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                             
@@ -161,123 +131,16 @@
 
 
 
-<section class="content-header">
-	<h1>I<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr> <small>Interface</small></h1>
-</section>
-<section class="content">
-	
-	
-		<h1 id="Summary">Summary</h1>
-	<div class="lead">
-    Interface to add some additional functions on the end of the compare process.
-    </div>
+		<section class="content-header">
+			<h1>Obtain</h1>
+		</section>
+	<section class="content">
+		<h2 id="nuget">Nuget</h2>
+<blockquote class="blockquote">
+<p><code>nuget install bbt.structuretools</code></p>
+</blockquote>
 
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-6">
-						<dl class="dl-horizontal">		
-
-								<dt>Namespace</dt>
-								<dd><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare">BBT<wbr>.StructureTools<wbr>.Compare</a></dd>
-											
-								<dt>Interfaces</dt>
-								<dd>
-									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing">I<wbr>Base<wbr>Additional<wbr>Processing</a></li>								
-									</ul>
-								</dd>
-							
-							
-							
-								<dt>Implementing Types</dt>
-								<dd>
-									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-T">T</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-TIntention">TIntention</a>&gt;<wbr></li>								
-									</ul>
-								</dd>				
-						</dl>
-					</div>		
-					<div class="col-md-6">
-						<div class="mermaid">
-							graph BT
-	Type-.-&gt;Interface0["IBaseAdditionalProcessing"]
-	click Interface0 "/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing"
-	Type["IComparePostProcessing&lt;T, TIntention&gt;"]
-class Type type-node
-	Implementing0["GenericComparePostProcessing&lt;T, TIntention&gt;"]-.-&gt;Type
-	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2"
-
-						</div>
-					</div>
-				</div>
-  			</div>
-		</div>
-
-	<h1 id="Syntax">Syntax</h1>
-	<pre><code>public interface IComparePostProcessing&lt;in T, TIntention&gt; : IBaseAdditionalProcessing 
-    where T : class where TIntention : IBaseComparerIntention</code></pre>
-
-
-
-
-	<h1 id="TypeParameters">Type Parameters</h1>
-	<div class="box">
-		<div class="box-body no-padding table-responsive">
-			<table class="table table-striped table-hover two-cols">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-					<tbody><tr id="typeparam-T">
-						<td>T</td>
-						<td>Type of class to compare.</td>
-					</tr>
-					<tr id="typeparam-TIntention">
-						<td>TIntention</td>
-						<td>Type of comparer intention of concern.</td>
-					</tr>
-			</tbody></table>
-		</div>
-	</div>	
-
-
-
-
-
-
-
-			<h1 id="Methods">Methods</h1>
-			<div class="box">
-				<div class="box-body no-padding table-responsive">
-					<table class="table table-striped table-hover three-cols">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Value</th>
-								<th>Summary</th>
-							</tr>
-						</thead>
-							<tbody><tr>
-								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2/87BFF91B">DoPostProcessing<wbr>(T, <wbr>T)<wbr></a></td>
-								<td>void</td>
-								<td>
-									<div>
-    This method will be called at the end of a compare process.
-    </div>
-								</td>
-							</tr>
-					</tbody></table>
-				</div>
-			</div>
-		
-
-
-
-	
-</section>
+	</section>
                 
             </div>           
             
@@ -289,8 +152,8 @@ class Type type-node
         <div class="wrapper bottom-wrapper">
             <footer class="bottom-footer">
                 <p class="text-muted">
-    Copyright © <a href="http://bbtsoftware.ch" target="_blank">BBT Software AG</a> and <a href="https://github.com/bbtsoftware/BBT.StructureTools/graphs/contributors" target="_blank">contributors</a>.
-    <br>
+    Copyright &copy; <a href="http://bbtsoftware.ch" target="_blank">BBT Software AG</a> and <a href="https://github.com/bbtsoftware/BBT.StructureTools/graphs/contributors" target="_blank">contributors</a>.
+    <br/>
     Website generated by <a href="http://wyam.io" target="_blank">Wyam</a>
 </p>
 
@@ -417,5 +280,5 @@ class Type type-node
                 }, 500);
             });
         </script>
-    
-</body></html>
+    </body>
+</html>
