@@ -72,7 +72,10 @@
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
         <div><p><a href="https://github.com/bbtsoftware/BBT.StructureTools/tree/develop/docs/input/docs/getting-started/configure.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#preconditions">Preconditions</a></p>
+<p><a href="#ioc-container">IoC Container</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">    
@@ -135,17 +138,17 @@
 	<section class="content">
 		<p>The BBT Structure Tools are entirely configurable by code. This section covers the
 correct IoC container registration of the infrastructure components.</p>
-<h2 id="preconditions">Preconditions</h2>
+<h1 id="preconditions">Preconditions</h1>
 <ul>
 <li>The library requires an IoC container to resolve components internally.</li>
 </ul>
-<h2 id="ioc-container">IoC Container</h2>
+<h1 id="ioc-container">IoC Container</h1>
 <p>The library is usable with any IoC container, but it must support some preconditions:</p>
 <ul>
 <li>Injection to public constructors of <code>internal</code> classes</li>
 <li>Registration of unbound generic types</li>
 </ul>
-<h3 id="initialization">Initialization</h3>
+<h2 id="initialization">Initialization</h2>
 <p>Before the registrations can be done the <code><a href="/BBT.StructureTools/api/BBT.StructureTools.Initialization/IocHandler">IocHandler</a></code> resolver must be set.
 Implement the resolver using the <code><a href="/BBT.StructureTools/api/BBT.StructureTools.Initialization/IIocResolver">IIocResolver</a></code>.
 Once this is done you can configure the <code><a href="/BBT.StructureTools/api/BBT.StructureTools.Initialization/IocHandler">IocHandler</a></code>:</p>
