@@ -4,7 +4,7 @@ Title: Why does BBT.StructureTools exist?
 Description: Introduction to BBT.StructureTools, what problems are solved and how it is distinctive from the known .NET functions
 ---
 
-## Solve business problems
+# Solve business problems
 
 BBT.StructureTools is a toolset intended to help you handle a tree-like business object structure in relation to the
 following tasks:

@@ -4,7 +4,7 @@ Title: Fundamentals
 Description: Introduction to the compare capabilities
 ---
 
-## Distinction towards .NET Framework interfaces
+# Distinction towards .NET Framework interfaces
 
 The .NET Framework comes with multiple interfaces which allow for comparison of objects:
 
