@@ -49,8 +49,8 @@ ___
 * Register your implementation of the registration in the IoC container.
 * Do not traverse over multiple tree leafs when registering properties, except for reference level sub operations.
 * It's usually better to unit test each registration, not the entire tree being copied.
-* Keep your implementation stateless
-* Do not mix registrations for multiple types into one implementation - See [Single Responsibility Principle]
+* Keep your implementation stateless.
+* Do not mix registrations for multiple types into one implementation. See [Single Responsibility Principle].
 :::
 
 # Controlling object initialization
@@ -79,7 +79,7 @@ Please note that these operations are not taken from the IoC but passed into the
 as additional argument.
 
 :::{.alert .alert-info}
-If possible, use the generic implementations supplied with the libary.
+If possible, use the generic implementations supplied with the library.
 :::
 
 ## Preprocessings
