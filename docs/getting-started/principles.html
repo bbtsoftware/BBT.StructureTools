@@ -211,8 +211,8 @@ being processed.</p>
 <li>Register your implementation of the registration in the IoC container.</li>
 <li>Do not traverse over multiple tree leafs when registering properties, except for reference level sub operations.</li>
 <li>It's usually better to unit test each registration, not the entire tree being copied.</li>
-<li>Keep your implementation stateless</li>
-<li>Do not mix registrations for multiple types into one implementation - See <a href="https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#toc-single-responsibility-principle">Single Responsibility Principle</a></li>
+<li>Keep your implementation stateless.</li>
+<li>Do not mix registrations for multiple types into one implementation. See <a href="https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#toc-single-responsibility-principle">Single Responsibility Principle</a>.</li>
 </ul>
 </div>
 <h1 id="controlling-object-initialization">Controlling object initialization</h1>
@@ -235,7 +235,7 @@ default generic <code>InstanceCreator</code> because the default constructor is 
 post-, preprocessings, or interceptors.
 Please note that these operations are not taken from the IoC but passed into the operation
 as additional argument.</p>
-<div class="alert alert-info"><p>If possible, use the generic implementations supplied with the libary.</p>
+<div class="alert alert-info"><p>If possible, use the generic implementations supplied with the library.</p>
 </div>
 <h2 id="preprocessings">Preprocessings</h2>
 <p>Preprocessings are executed before the object is processed.</p>
