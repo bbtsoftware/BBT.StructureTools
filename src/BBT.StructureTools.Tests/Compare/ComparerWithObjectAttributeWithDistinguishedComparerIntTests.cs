@@ -8,25 +8,25 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
         #region Members, Setup
 
-        private static IComparer<TestAttribute, ITestCompareIntention> distinguishedComparer;
+        private static IComparer<TestWithProperties, ITestCompareIntention> distinguishedComparer;
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithObjectAttributeWithDistinguishedComparerIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
-            kernel.Bind<ICompareRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestWithProperties, ITestCompareIntention>, TestAttributeCompareRegistrations>();
 
-            distinguishedComparer = kernel.Get<IComparer<TestAttribute, ITestCompareIntention>>();
-            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            distinguishedComparer = kernel.GetInstance<IComparer<TestWithProperties, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
@@ -34,14 +34,14 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass
             {
                 // Explicit instance init on purpose
-                TestAttribute = new TestAttribute(),
+                TestAttribute = new TestWithProperties(),
             };
 
             // Act
@@ -54,7 +54,7 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstanceAndObjectAttributeNull_MustReturnTrue()
         {
             // Arrange
@@ -74,11 +74,11 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsEqual_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
+            var testAttribute = new TestWithProperties();
             var testClassA = new TestClass { TestAttribute = testAttribute };
             var testClassB = new TestClass { TestAttribute = testAttribute };
 
@@ -92,12 +92,12 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenBaseModelAttributeObjectsNotEqualButHaveSameValue_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestWithProperties();
+            var testAttribute2 = new TestWithProperties();
             var testClassA = new TestClass { TestAttribute = testAttribute };
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
@@ -111,12 +111,12 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenBaseModelAttributeObjectsNotEqualAndHaveDifferentValue_MustReturnFalse()
         {
             // Arrange
-            var testAttribute = new TestAttribute { TestValue1 = 55 };
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestWithProperties { TestValue1 = 55 };
+            var testAttribute2 = new TestWithProperties();
             var testClassA = new TestClass { TestAttribute = testAttribute };
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
@@ -130,12 +130,12 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute() { TestValue2 = 2 };
-            var testAttribute2 = new TestAttribute() { TestValue2 = 1 };
+            var testAttribute = new TestWithProperties() { TestValue2 = 2 };
+            var testAttribute2 = new TestWithProperties() { TestValue2 = 1 };
             var testClassA = new TestClass { TestAttribute = testAttribute };
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
@@ -149,12 +149,12 @@
         /// <summary>
         /// Tests IComparer.Equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute() { TestValue1 = 2 };
-            var testAttribute2 = new TestAttribute() { TestValue1 = 1 };
+            var testAttribute = new TestWithProperties() { TestValue1 = 2 };
+            var testAttribute2 = new TestWithProperties() { TestValue1 = 1 };
             var testClassA = new TestClass { TestAttribute = testAttribute };
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
             var comparerExclusions = new List<IComparerExclusion>
@@ -174,19 +174,19 @@
 
         private class TestClass
         {
-            public TestAttribute TestAttribute { get; set; }
+            public TestWithProperties TestAttribute { get; set; }
         }
 
-        private class TestAttribute
+        private class TestWithProperties
         {
             public int TestValue1 { get; set; }
 
             public int TestValue2 { get; set; }
         }
 
-        private class TestAttributeCompareRegistrations : ICompareRegistrations<TestAttribute, ITestCompareIntention>
+        private class TestAttributeCompareRegistrations : ICompareRegistrations<TestWithProperties, ITestCompareIntention>
         {
-            public void DoRegistrations(IEqualityComparerHelperRegistration<TestAttribute> registrations)
+            public void DoRegistrations(IEqualityComparerHelperRegistration<TestWithProperties> registrations)
             {
                 registrations.Should().NotBeNull();
 

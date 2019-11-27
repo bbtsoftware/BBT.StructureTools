@@ -7,27 +7,27 @@
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationSubCopyIntTests
     {
         private readonly ICopy<TestClassChild> testcandidate;
 
         public CopyOperationSubCopyIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<TestClassParent>>().To<TestClassParentCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<TestClassChild>, TestClassChildCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<TestClassParent>, TestClassParentCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClassChild>>();
+            this.testcandidate = kernel.GetInstance<ICopy<TestClassChild>>();
         }
 
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_WhenAttributeRegistered_MustCopyAttribute()
         {
             // Arrange
@@ -44,7 +44,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_WhenAttributeNotRegistered_MustNotCopyAttribute()
         {
             // Arrange
@@ -61,7 +61,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustExecuteAdditionalProcessings()
         {
             // Arrange

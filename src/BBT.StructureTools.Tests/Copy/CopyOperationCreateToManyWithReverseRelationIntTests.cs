@@ -8,10 +8,9 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
-    using Xunit.Sdk;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
         #region members and setup
@@ -19,12 +18,12 @@
 
         public CopyOperationCreateToManyWithReverseRelationIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -32,7 +31,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyParentReference()
         {
             // Arrange
@@ -77,7 +76,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustFailWhenChildrenistNull()
         {
             // Arrange
@@ -87,9 +86,9 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act / Assert throws
-            // This exception is not originating from XUnit per se,
+            // This exception is not originating from NUnit.Framework per se,
             // but from the assertion library which is itself using
-            // Xunit internally.
+            // NUnit.Framework internally.
             Assert.Throws<ArgumentNullException>(() =>
                 this.testcandidate.Copy(
                     testClassParentOriginal,
@@ -100,7 +99,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyEmptyCollection()
         {
             // Arrange

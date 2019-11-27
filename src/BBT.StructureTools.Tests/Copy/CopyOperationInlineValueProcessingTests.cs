@@ -7,26 +7,26 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationInlineValueProcessingTests
     {
         private readonly ICopy<TestClass> testcandidate;
 
         public CopyOperationInlineValueProcessingTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<TestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustExecuteInlineCopyProcessing()
         {
             // Arrange

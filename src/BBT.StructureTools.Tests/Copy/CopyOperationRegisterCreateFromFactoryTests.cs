@@ -6,27 +6,27 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationRegisterCreateFromFactoryTests
     {
         private readonly ICopy<TestClass> testcandidate;
 
         public CopyOperationRegisterCreateFromFactoryTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ITestFactory>().To<TestFactory>();
+            kernel.RegisterSingleton(typeof(ICopyRegistrations<TestClass>), typeof(TestClassCopyRegistrations));
+            kernel.RegisterSingleton(typeof(ITestFactory), typeof(TestFactory));
 
-            this.testcandidate = kernel.Get<ICopy<TestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustExecuteInlineCopyProcessing()
         {
             // Arrange
@@ -42,7 +42,7 @@
         }
 
         /// <summary>
-        /// An interface defining a factory for test values - Used with RegisterInlineIocFactoryProcessing.
+        /// An interface defining a Factory for test values - Used with RegisterInlineIocFactoryProcessing.
         /// </summary>
         private interface ITestFactory
         {

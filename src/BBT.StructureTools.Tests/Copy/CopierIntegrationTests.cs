@@ -8,9 +8,9 @@
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopierIntegrationTests
     {
         #region members and setup
@@ -18,13 +18,13 @@
 
         public CopierIntegrationTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass2>>().To<ChildTestClass2CopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass2>, ChildTestClass2CopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -32,7 +32,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustNotCopyChildrenWhenIntercepted()
         {
             // Arrange
@@ -73,7 +73,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyInheritedChildrenWhenIntercepted()
         {
             // Arrange
@@ -119,7 +119,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustNotCopyInheritedChildrenAndChildrenWhenChildrenIntercepted()
         {
             // Arrange

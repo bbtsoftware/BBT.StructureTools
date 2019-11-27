@@ -6,9 +6,9 @@
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
         #region setup and members
@@ -17,11 +17,11 @@
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
+            kernel.RegisterSingleton(typeof(ICopyRegistrations<ITestClass>), typeof(TestClassCopyRegistrations));
 
-            this.testcandidate = kernel.Get<ICopy<ITestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<ITestClass>>();
         }
 
         #endregion
@@ -32,7 +32,7 @@
         /// Tests for the execution of a single post processing which was registered via
         /// Copy Registrations.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustExecuteRegisteredSinglePostProcessings()
         {
             // Arrange

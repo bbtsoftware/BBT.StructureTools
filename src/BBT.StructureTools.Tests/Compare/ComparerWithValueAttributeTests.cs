@@ -8,23 +8,23 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class ComparerWithValueAttributeTests
     {
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithValueAttributeTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
@@ -37,7 +37,7 @@
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesEqual_MustReturnTrue()
         {
             // Arrange
@@ -51,7 +51,7 @@
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqual_MustReturnFalse()
         {
             // Arrange
@@ -65,7 +65,7 @@
             result.Should().BeFalse();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
@@ -79,7 +79,7 @@
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
