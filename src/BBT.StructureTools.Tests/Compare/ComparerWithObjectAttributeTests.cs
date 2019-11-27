@@ -5,7 +5,7 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
@@ -13,18 +13,19 @@
     /// Test for Comparer infrastructure with object attributes.
     /// </summary>
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ComparerWithObjectAttributeTests
     {
         #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
-        public ComparerWithObjectAttributeTests()
+        public ComparerWithObjectAttributeTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = iocContainer.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion

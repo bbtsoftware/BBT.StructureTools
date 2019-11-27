@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
-    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;

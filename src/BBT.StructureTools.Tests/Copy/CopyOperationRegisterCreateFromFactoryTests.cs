@@ -4,23 +4,24 @@
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationRegisterCreateFromFactoryTests
     {
         private readonly ICopy<TestClass> testcandidate;
 
-        public CopyOperationRegisterCreateFromFactoryTests()
+        public CopyOperationRegisterCreateFromFactoryTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton(typeof(ICopyRegistrations<TestClass>), typeof(TestClassCopyRegistrations));
-            kernel.RegisterSingleton(typeof(ITestFactory), typeof(TestFactory));
+            iocContainer.RegisterSingleton(typeof(ICopyRegistrations<TestClass>), typeof(TestClassCopyRegistrations));
+            iocContainer.RegisterSingleton(typeof(ITestFactory), typeof(TestFactory));
 
-            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>

@@ -6,24 +6,25 @@
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
         #region members and setup
         private readonly ICopy<IParentTestClass> testcandidate;
 
-        public CopyOperationCreateToManyWithReverseRelationIntTests()
+        public CopyOperationCreateToManyWithReverseRelationIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion

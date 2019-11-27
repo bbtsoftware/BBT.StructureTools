@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.MaybePattern;
-    using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
 

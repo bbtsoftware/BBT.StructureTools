@@ -7,27 +7,28 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Strategy;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationCreateToManyFromGenericStrategyIntTests
     {
         #region setup
 
         private readonly ICopy<ParentTestClass> testcandidate;
 
-        public CopyOperationCreateToManyFromGenericStrategyIntTests()
+        public CopyOperationCreateToManyFromGenericStrategyIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
-            kernel.RegisterSingleton<IGenericStrategyProvider<TestStrategy, IChildTestClass>, TestFactory>();
-            kernel.RegisterSingleton<ITestStrategy, TestStrategy>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<IGenericStrategyProvider<TestStrategy, IChildTestClass>, TestFactory>();
+            iocContainer.RegisterSingleton<ITestStrategy, TestStrategy>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion

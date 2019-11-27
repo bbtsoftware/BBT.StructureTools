@@ -16,7 +16,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
-        internal Comparer(
+        public Comparer(
             ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)

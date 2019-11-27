@@ -7,6 +7,7 @@
     using Moq;
     using NUnit.Framework;
 
+    [TestFixture]
     public class ConvertHelperTests
     {
         [Test]

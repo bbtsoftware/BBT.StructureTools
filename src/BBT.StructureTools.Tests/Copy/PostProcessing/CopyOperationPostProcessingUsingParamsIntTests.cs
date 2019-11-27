@@ -4,24 +4,25 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public sealed class CopyOperationPostProcessingUsingParamsIntTests
     {
         #region setup and members
 
         private readonly ICopy<ITestClass> testcandidate;
 
-        public CopyOperationPostProcessingUsingParamsIntTests()
+        public CopyOperationPostProcessingUsingParamsIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton(typeof(ICopyRegistrations<ITestClass>), typeof(TestClassCopyRegistrations));
+            iocContainer.RegisterSingleton(typeof(ICopyRegistrations<ITestClass>), typeof(TestClassCopyRegistrations));
 
-            this.testcandidate = kernel.GetInstance<ICopy<ITestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<ITestClass>>();
         }
 
         #endregion

@@ -6,22 +6,23 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ComparerWithValueAttributeTests
     {
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
-        public ComparerWithValueAttributeTests()
+        public ComparerWithValueAttributeTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = iocContainer.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         [Test]

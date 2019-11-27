@@ -5,22 +5,23 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationIntTests
     {
         private readonly ICopy<TestClass> testcandidate;
 
-        public CopyOperationIntTests()
+        public CopyOperationIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>

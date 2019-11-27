@@ -6,11 +6,12 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
         #region Members, Setup
@@ -18,15 +19,15 @@
         private static IComparer<TestWithProperties, ITestCompareIntention> distinguishedComparer;
         private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
-        public ComparerWithObjectAttributeWithDistinguishedComparerIntTests()
+        public ComparerWithObjectAttributeWithDistinguishedComparerIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
-            kernel.RegisterSingleton<ICompareRegistrations<TestWithProperties, ITestCompareIntention>, TestAttributeCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestWithProperties, ITestCompareIntention>, TestAttributeCompareRegistrations>();
 
-            distinguishedComparer = kernel.GetInstance<IComparer<TestWithProperties, ITestCompareIntention>>();
-            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
+            distinguishedComparer = iocContainer.GetInstance<IComparer<TestWithProperties, ITestCompareIntention>>();
+            this.testcandidate = iocContainer.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion

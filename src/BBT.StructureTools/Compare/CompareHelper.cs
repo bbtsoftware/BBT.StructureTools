@@ -10,7 +10,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CompareHelper" /> class.
         /// </summary>
-        internal CompareHelper()
+        public CompareHelper()
         {
         }
 

@@ -15,7 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
-        internal Converter(
+        public Converter(
             IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)

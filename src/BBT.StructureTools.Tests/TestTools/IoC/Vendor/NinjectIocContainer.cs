@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.TestTools
+﻿namespace BBT.StructureTools.Tests.TestTools.IoC.Vendor
 {
     using System;
     using BBT.StrategyPattern;
@@ -10,14 +10,6 @@
     internal class NinjectIocContainer : IIocContainer
     {
         private StandardKernel ninjectKernel;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectIocContainer"/> class.
-        /// </summary>
-        public NinjectIocContainer()
-        {
-            this.Initialize();
-        }
 
         /// <inheritdoc/>
         public T GetInstance<T>()
@@ -39,7 +31,7 @@
             IocHandler.Instance.IocResolver = resolver;
 
             // Dependencies from BBT.StrategyPattern
-            this.ninjectKernel.Bind(typeof(IStrategyLocator<>)).To(typeof(NinjectStrategyLocator<>));
+            this.ninjectKernel.Bind(typeof(IStrategyLocator<>)).To(typeof(IocHandlerStrategyLocator<>));
             this.ninjectKernel.Bind(typeof(IInstanceCreator<,>)).To(typeof(GenericInstanceCreator<,>));
 
             IocHandler.Instance.DoIocRegistrations(this.RegisterSingleton);
@@ -47,6 +39,7 @@
 
         /// <inheritdoc/>
         public void RegisterSingleton<TAbstraction, TImplementation>()
+            where TAbstraction : class
             where TImplementation : TAbstraction
         {
             this.ninjectKernel.Bind<TAbstraction>().To<TImplementation>().InSingletonScope();
@@ -54,6 +47,7 @@
 
         /// <inheritdoc/>
         public void RegisterTransient<TAbstraction, TImplementation>()
+            where TAbstraction : class
             where TImplementation : TAbstraction
         {
             this.ninjectKernel.Bind<TAbstraction>().To<TImplementation>().InTransientScope();

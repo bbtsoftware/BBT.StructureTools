@@ -1,7 +1,5 @@
 ﻿namespace BBT.StructureTools.Extension
 {
-    using System;
-
     /// <summary>
     /// Helps with bit operations.
     /// </summary>

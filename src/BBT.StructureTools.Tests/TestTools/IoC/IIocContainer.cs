@@ -5,7 +5,7 @@
     /// <summary>
     /// Abstraction of any IoC container to be used for testing.
     /// </summary>
-    internal interface IIocContainer
+    public interface IIocContainer
     {
         /// <summary>
         /// Initializes the IoC container.
@@ -19,6 +19,7 @@
         /// <typeparam name="TAbstraction">Abstraction (interface) type.</typeparam>
         /// <typeparam name="TImplementation">Implementation of <typeparamref name="TAbstraction"/>.</typeparam>
         void RegisterSingleton<TAbstraction, TImplementation>()
+            where TAbstraction : class
             where TImplementation : TAbstraction;
 
         /// <summary>
@@ -28,6 +29,7 @@
         /// <typeparam name="TAbstraction">Abstraction (interface) type.</typeparam>
         /// <typeparam name="TImplementation">Implementation of <typeparamref name="TAbstraction"/>.</typeparam>
         void RegisterTransient<TAbstraction, TImplementation>()
+            where TAbstraction : class
             where TImplementation : TAbstraction;
 
         /// <summary>

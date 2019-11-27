@@ -6,25 +6,26 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopierIntegrationTests
     {
         #region members and setup
         private readonly ICopy<ParentTestClass> testcandidate;
 
-        public CopierIntegrationTests()
+        public CopierIntegrationTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass2>, ChildTestClass2CopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IChildTestClass2>, ChildTestClass2CopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
+            this.testcandidate = iocContainer.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion

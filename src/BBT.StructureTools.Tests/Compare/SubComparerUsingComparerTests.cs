@@ -6,26 +6,27 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class SubComparerUsingComparerTests
     {
         #region Members, Setup
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
         private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
 
-        public SubComparerUsingComparerTests()
+        public SubComparerUsingComparerTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClassChild, ITestCompareIntention>, TestClassChildCompareRegistrations>();
-            kernel.RegisterSingleton<ICompareRegistrations<TestClassParent, ITestCompareIntention>, TestClassParentCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClassChild, ITestCompareIntention>, TestClassChildCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClassParent, ITestCompareIntention>, TestClassParentCompareRegistrations>();
 
-            parentCompare = kernel.GetInstance<IComparer<TestClassParent, ITestCompareIntention>>();
-            this.testcandidate = kernel.GetInstance<IComparer<TestClassChild, ITestCompareIntention>>();
+            parentCompare = iocContainer.GetInstance<IComparer<TestClassParent, ITestCompareIntention>>();
+            this.testcandidate = iocContainer.GetInstance<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
         #endregion
