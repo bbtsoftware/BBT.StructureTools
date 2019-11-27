@@ -14,11 +14,11 @@ functionality can be used for a business case-selective copy where some of the d
 Each of the operations has it's very own object, abstracted using an interface which cares about resolving the needed sub operations
 according to the user-made registrations.
 
-| Operation     | Technical                                                      | Base intention          |
-| ------------- |---------------------------------------------------------------:| -----------------------:|
-| Comparison    | `IComparer<in TModelToCompare, TComparerIntention>`            | `IBaseCompareIntention` |
-| Conversion    | `IConvert<in TSourceClass, in TTargetClass, TConvertIntention>`| `IBaseConvertIntention` |
-| Copy          | `ICopy<in TClassToCopy>`                                       | no intention            |
+| Operation     | Technical                                                        | Base intention          |
+| ------------- |-----------------------------------------------------------------:| -----------------------:|
+| Comparison    | `IComparer<in TModelToCompare, TComparerIntention>`              | `IBaseCompareIntention` |
+| Conversion    | `IConverter<in TSourceClass, in TTargetClass, TConvertIntention>`| `IBaseConvertIntention` |
+| Copy          | `ICopier<in TClassToCopy>`                                       | no intention            |
 
 # Registration interfaces
 
@@ -36,11 +36,11 @@ interfaces share the same raison d'être and work as containers which hold the d
 They are internally retrieved from the IoC, shall be stateless and shall exist per data class or interface which is
 being processed.
 
-| Operation     | Technical                                                     |
-| ------------- |--------------------------------------------------------------:|
-| Comparison    | `ICompareRegistrations<TModelToCompare, TCompareIntention>`   |
-| Conversion    | `IConvertRegistrations<TSource, TTarget, TConvertIntention>`  |
-| Copy          | `ICopyRegistrations<T>`                                       |
+| Operation     | Technical                                                       |
+| ------------- |----------------------------------------------------------------:|
+| Comparison    | `IComparerRegistrations<TModelToCompare, TCompareIntention>`    |
+| Conversion    | `IConverterRegistrations<TSource, TTarget, TConvertIntention>`  |
+| Copy          | `ICopierRegistrations<T>`                                       |
 
 :::{.alert .alert-info}
 Consider these tips when writing registrations
