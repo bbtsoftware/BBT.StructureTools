@@ -7,46 +7,46 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
     /// <summary>
     /// Test for Comparer infrastructure with object attributes.
     /// </summary>
+    [TestFixture]
     public class ComparerWithObjectAttributeTests
     {
         #region Members, Setup
-        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithObjectAttributeTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass
             {
                 // Explicit instance init on purpose
-                TestAttribute1 = new TestAttribute(),
+                TestAttribute1 = new TestObjProperty(),
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstanceAndObjectAttributeNull_MustReturnTrue()
         {
             // Arrange
@@ -57,64 +57,64 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsEqual_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
+            var testAttribute = new TestObjProperty();
             var testClassA = new TestClass { TestAttribute1 = testAttribute };
             var testClassB = new TestClass { TestAttribute1 = testAttribute };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotEqual_MustReturnFalse()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestObjProperty();
+            var testAttribute2 = new TestObjProperty();
             var testClassA = new TestClass { TestAttribute1 = testAttribute };
             var testClassB = new TestClass { TestAttribute1 = testAttribute2 };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
+            var testAttribute = new TestObjProperty();
             var testClassA = new TestClass { TestAttribute2 = testAttribute };
             var testClassB = new TestClass { TestAttribute2 = testAttribute };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestObjProperty();
+            var testAttribute2 = new TestObjProperty();
             var testClassA = new TestClass { TestAttribute1 = testAttribute };
             var testClassB = new TestClass { TestAttribute1 = testAttribute2 };
             var comparerExclusions = new List<IComparerExclusion>
@@ -124,7 +124,7 @@
                                           };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB, System.Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testcandidate.Equals(testClassA, testClassB, System.Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();
@@ -133,12 +133,12 @@
         #region private test classes and test class helpers
         private class TestClass
         {
-            public TestAttribute TestAttribute1 { get; set; }
+            public TestObjProperty TestAttribute1 { get; set; }
 
-            public TestAttribute TestAttribute2 { get; set; }
+            public TestObjProperty TestAttribute2 { get; set; }
         }
 
-        private class TestAttribute
+        private class TestObjProperty
         {
         }
 

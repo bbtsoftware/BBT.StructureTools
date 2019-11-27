@@ -1,31 +1,32 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationIntTests
     {
-        private readonly ICopy<TestClass> testCandidate;
+        private readonly ICopy<TestClass> testcandidate;
 
         public CopyOperationIntTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_WhenAttributeRegistered_MustCopyAttribute()
         {
             // Arrange
@@ -33,7 +34,7 @@
             var target = new TestClass();
 
             // Act
-            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value1.Should().Be(42);
@@ -42,7 +43,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_WhenAttributeNotRegistered_MustNotCopyAttribute()
         {
             // Arrange
@@ -50,7 +51,7 @@
             var target = new TestClass { Value2 = 35 };
 
             // Act
-            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value2.Should().Be(35);
@@ -59,7 +60,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustExecuteAdditionalProcessings()
         {
             // Arrange
@@ -72,7 +73,7 @@
             };
 
             // Act
-            this.testCandidate.Copy(source, target, additionalProcessings);
+            this.testcandidate.Copy(source, target, additionalProcessings);
 
             // Assert
             target.Value1.Should().Be(27);

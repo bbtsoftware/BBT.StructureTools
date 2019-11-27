@@ -8,24 +8,24 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class SubComparerUsingComparerTests
     {
         #region Members, Setup
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
-        private readonly IComparer<TestClassChild, ITestCompareIntention> testCandidate;
+        private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
 
         public SubComparerUsingComparerTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClassChild, ITestCompareIntention>>().To<TestClassChildCompareRegistrations>();
-            kernel.Bind<ICompareRegistrations<TestClassParent, ITestCompareIntention>>().To<TestClassParentCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClassChild, ITestCompareIntention>, TestClassChildCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClassParent, ITestCompareIntention>, TestClassParentCompareRegistrations>();
 
-            parentCompare = kernel.Get<IComparer<TestClassParent, ITestCompareIntention>>();
-            this.testCandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
+            parentCompare = kernel.GetInstance<IComparer<TestClassParent, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
         #endregion
@@ -33,14 +33,14 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_SameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClassChild();
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -49,7 +49,7 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_DifferentInstancesSameAttributes_MustReturnTrue()
         {
             // Arrange
@@ -63,7 +63,7 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -72,7 +72,7 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_DifferentInstancesNotSameAttributes_MustReturnFalse()
         {
             // Arrange
@@ -86,7 +86,7 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeFalse();
@@ -95,7 +95,7 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_DifferentInstancesNotSameAttributesNotRegistered_MustReturnTrue()
         {
             // Arrange
@@ -109,7 +109,7 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass2);
+            var result = this.testcandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -118,7 +118,7 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_DifferentInstancesNotSameAttributesButExcludedByParent_MustReturnTrue()
         {
             // Arrange
@@ -137,7 +137,7 @@
                                           };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();
@@ -146,7 +146,7 @@
         /// <summary>
         /// Tests equals.
         /// </summary>
-        [Fact]
+        [Test]
         public void Equals_DifferentInstancesNotSameAttributesButExcludedBySubCompareExclusion_MustReturnTrue()
         {
             // Arrange
@@ -165,7 +165,7 @@
                                           };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

@@ -8,36 +8,36 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class ComparerWithValueAttributeTests
     {
-        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithValueAttributeTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass { Value1 = 45 };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesEqual_MustReturnTrue()
         {
             // Arrange
@@ -45,13 +45,13 @@
             var testClassB = new TestClass { Value1 = 45 };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqual_MustReturnFalse()
         {
             // Arrange
@@ -59,13 +59,13 @@
             var testClassB = new TestClass { Value1 = 44 };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
@@ -73,13 +73,13 @@
             var testClassB = new TestClass { Value2 = 44 };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeValuesNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
@@ -88,7 +88,7 @@
             var comparerExclusions = new List<IComparerExclusion> { new PropertyComparerExclusion<TestClass>(x => x.Value1) };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testcandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

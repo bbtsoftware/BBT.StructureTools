@@ -1,27 +1,28 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
         #region members and setup
-        private readonly ICopy<IParentTestClass> testCandidate;
+        private readonly ICopy<IParentTestClass> testcandidate;
 
         public CopyOperationCreateToOneWithReverseRelationIntTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -29,7 +30,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyParentReference()
         {
             // Arrange
@@ -42,7 +43,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -59,7 +60,7 @@
         /// Tests if the infrastructure can handle a copy create to one with reverse relation
         /// where the child is null.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustNotFailWhenChildIsNull()
         {
             // Arrange
@@ -71,7 +72,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());

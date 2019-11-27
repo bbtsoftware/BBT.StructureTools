@@ -6,22 +6,22 @@
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
         #region setup and members
 
-        private readonly ICopy<ITestClass> testCandidate;
+        private readonly ICopy<ITestClass> testcandidate;
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
+            kernel.RegisterSingleton(typeof(ICopyRegistrations<ITestClass>), typeof(TestClassCopyRegistrations));
 
-            this.testCandidate = kernel.Get<ICopy<ITestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<ITestClass>>();
         }
 
         #endregion
@@ -32,7 +32,7 @@
         /// Tests for the execution of a single post processing which was registered via
         /// Copy Registrations.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustExecuteRegisteredSinglePostProcessings()
         {
             // Arrange
@@ -40,7 +40,7 @@
             var testClassCopy = new TestClass();
 
             // Act
-            this.testCandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
 
             // Assert
             testClassCopy.TestValue.Should().Be(234);
@@ -48,7 +48,6 @@
         }
 
         #endregion
-
         #region Testdata
 
         /// <summary>

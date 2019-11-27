@@ -8,23 +8,23 @@
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopierIntegrationTests
     {
         #region members and setup
-        private readonly ICopy<ParentTestClass> testCandidate;
+        private readonly ICopy<ParentTestClass> testcandidate;
 
         public CopierIntegrationTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass2>>().To<ChildTestClass2CopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass2>, ChildTestClass2CopyRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -32,7 +32,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustNotCopyChildrenWhenIntercepted()
         {
             // Arrange
@@ -53,7 +53,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -73,7 +73,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyInheritedChildrenWhenIntercepted()
         {
             // Arrange
@@ -94,7 +94,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -119,7 +119,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustNotCopyInheritedChildrenAndChildrenWhenChildrenIntercepted()
         {
             // Arrange
@@ -140,7 +140,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>

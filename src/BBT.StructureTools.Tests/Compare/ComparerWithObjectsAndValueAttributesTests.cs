@@ -8,44 +8,43 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class ComparerWithObjectsAndValueAttributesTests
     {
         #region Members, Setup
-        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
 
         public ComparerWithObjectsAndValueAttributesTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
+            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
-
-            this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass
             {
                 // Explicit instance init on purpose
-                TestAttribute1 = new TestAttribute(),
+                TestAttribute1 = new TestWithProperties(),
                 TestValue2 = 1,
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenSameInstanceAndObjectAttributeNullButValueNot_MustReturnTrue()
         {
             // Arrange
@@ -57,17 +56,17 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClass, testClass);
+            var result = this.testcandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsAndValueEqual_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
+            var testAttribute = new TestWithProperties();
             var testClassA = new TestClass
             {
                 TestAttribute1 = testAttribute,
@@ -80,17 +79,17 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsButNotValueEqual_MustReturnFalse()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
+            var testAttribute = new TestWithProperties();
             var testClassA = new TestClass
             {
                 TestAttribute1 = testAttribute,
@@ -103,18 +102,18 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsNotButValueEqual_MustReturnFalse()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestWithProperties();
+            var testAttribute2 = new TestWithProperties();
             var testClassA = new TestClass
             {
                 TestAttribute1 = testAttribute,
@@ -127,18 +126,18 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsAndValuesNotEqualButNotRegistered_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestWithProperties();
+            var testAttribute2 = new TestWithProperties();
             var testClassA = new TestClass
             {
                 TestAttribute2 = testAttribute,
@@ -151,18 +150,18 @@
             };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB);
+            var result = this.testcandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
         }
 
-        [Fact]
+        [Test]
         public void Equals_WhenAttributeObjectsAndValuesNotEqualButExcluded_MustReturnTrue()
         {
             // Arrange
-            var testAttribute = new TestAttribute();
-            var testAttribute2 = new TestAttribute();
+            var testAttribute = new TestWithProperties();
+            var testAttribute2 = new TestWithProperties();
             var testClassA = new TestClass
             {
                 TestAttribute1 = testAttribute,
@@ -182,7 +181,7 @@
                                           };
 
             // Act
-            var result = this.testCandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testcandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();
@@ -191,16 +190,16 @@
         #region private test classes and test class helpers
         private class TestClass
         {
-            public TestAttribute TestAttribute1 { get; set; }
+            public TestWithProperties TestAttribute1 { get; set; }
 
-            public TestAttribute TestAttribute2 { get; set; }
+            public TestWithProperties TestAttribute2 { get; set; }
 
             public int TestValue1 { get; set; }
 
             public int TestValue2 { get; set; }
         }
 
-        private class TestAttribute
+        private class TestWithProperties
         {
         }
 

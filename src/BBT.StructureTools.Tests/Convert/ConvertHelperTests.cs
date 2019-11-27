@@ -5,11 +5,11 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Source;
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
     using Moq;
-    using Xunit;
+    using NUnit.Framework;
 
     public class ConvertHelperTests
     {
-        [Fact]
+        [Test]
         public void PreProcessing_WithEmptyist_Succeeds()
         {
             var testCandidate = new ConvertHelper();
@@ -21,7 +21,7 @@
             testCandidate.DoConvertPreProcessing(source, target, preprocessings);
         }
 
-        [Fact]
+        [Test]
         public void PreProcessing_ExecutesPreprocessing()
         {
             var testCandidate = new ConvertHelper();
@@ -51,7 +51,7 @@
             preprocShouldNotExecuteBecauseWrongProcessingType.Verify(x => x.DoPostProcessing(source, target), Times.Never);
         }
 
-        [Fact]
+        [Test]
         public void PostProcessing_WithEmptyist_Succeeds()
         {
             var testCandidate = new ConvertHelper();
@@ -63,7 +63,7 @@
             testCandidate.DoConvertPostProcessing(source, target, preprocessings);
         }
 
-        [Fact]
+        [Test]
         public void PostProcessing_ExecutesPostprocessing()
         {
             var testCandidate = new ConvertHelper();
@@ -93,7 +93,7 @@
             postprocShouldNotExecuteBecauseWrongProcessingType.Verify(x => x.DoPreProcessing(source, target), Times.Never);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_WithEmptyist_Succeeds()
         {
             var testCandidate = new ConvertHelper();
@@ -104,7 +104,7 @@
             testCandidate.ContinueConvertProcess<Root, TargetRoot>(source, preprocessings);
         }
 
-        [Fact]
+        [Test]
         public void ConvertInterception_Intercepts()
         {
             var testCandidate = new ConvertHelper();

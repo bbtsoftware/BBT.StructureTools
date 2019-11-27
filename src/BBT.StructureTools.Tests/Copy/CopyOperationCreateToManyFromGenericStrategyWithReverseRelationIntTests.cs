@@ -9,25 +9,25 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
     {
         #region setup
 
-        private readonly ICopy<IParentTestClass> testCandidate;
+        private readonly ICopy<IParentTestClass> testcandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
-            kernel.Bind<ITestStrategy>().To<TestStrategy>();
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
+            kernel.RegisterSingleton<IGenericStrategyProvider<TestStrategy, IChildTestClass>, TestFactory>();
+            kernel.RegisterSingleton<ITestStrategy, TestStrategy>();
+            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -35,7 +35,7 @@
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustUseStrategyWhenCopying()
         {
             // Arrange
@@ -47,7 +47,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -83,7 +83,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustFailWhenChildrenistNull()
         {
             // Arrange
@@ -94,7 +94,7 @@
 
             // Act / Assert throws
             Assert.Throws<ArgumentNullException>(() =>
-                this.testCandidate.Copy(
+                this.testcandidate.Copy(
                     testClassParentOriginal,
                     testClassParentCopy,
                     new List<IBaseAdditionalProcessing>()));
@@ -103,7 +103,7 @@
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void Copy_MustCopyEmptyCollection()
         {
             // Arrange
@@ -112,7 +112,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testCandidate.Copy(
+            this.testcandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -263,6 +263,12 @@
 
         private class TestFactory : IGenericStrategyProvider<TestStrategy, IChildTestClass>
         {
+            public IEnumerable<TestStrategy> GetAllStrategies()
+            {
+                // Not needed for test scenario
+                throw new NotImplementedException();
+            }
+
             public TestStrategy GetStrategy(IChildTestClass criterion)
             {
                 return new TestStrategy();

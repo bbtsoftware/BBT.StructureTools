@@ -1,31 +1,32 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class CopyOperationInlineValueProcessingTests
     {
-        private readonly ICopy<TestClass> testCandidate;
+        private readonly ICopy<TestClass> testcandidate;
 
         public CopyOperationInlineValueProcessingTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var kernel = new NinjectIocContainer();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
+            kernel.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClass>>();
+            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
-        [Fact]
+        [Test]
         public void MustExecuteInlineCopyProcessing()
         {
             // Arrange
@@ -33,7 +34,7 @@
             var target = new TestClass();
 
             // Act
-            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.TestGuid.Should().NotBe(Guid.Empty);

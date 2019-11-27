@@ -7,9 +7,9 @@
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
     using FluentAssertions;
-    using Ninject;
-    using Xunit;
+    using NUnit.Framework;
 
+    [TestFixture]
     public class ToManyComparerTests
     {
         #region Members, Setup
@@ -17,12 +17,12 @@
 
         public ToManyComparerTests()
         {
-            var kernel = TestIocContainer.Initialize();
+            var iocContainer = new NinjectIocContainer();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
-            kernel.Bind<ICompareRegistrations<TestClassistOfChildrenItem, ITestCompareIntention>>().To<TestClassistOfChildrenItecompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClassListOfChildrenItem, ITestCompareIntention>, TestClassListOfChildrenItemCompareRegistrations>();
 
-            this.comparer = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.comparer = iocContainer.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
@@ -30,17 +30,17 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_SameInstance_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass()
             {
                 ListOfChildren =
-                                         new List<TestClassistOfChildrenItem>
+                                         new List<TestClassListOfChildrenItem>
                                              {
-                                                 new TestClassistOfChildrenItem(),
-                                                 new TestClassistOfChildrenItem(),
+                                                 new TestClassListOfChildrenItem(),
+                                                 new TestClassListOfChildrenItem(),
                                              },
             };
 
@@ -54,7 +54,7 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_SameInstanceButistNull_MustReturnTrue()
         {
             // Arrange
@@ -74,15 +74,15 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_DifferentInstancesSameist_MustReturnTrue()
         {
             // Arrange
             var listOfChildren =
-                new List<TestClassistOfChildrenItem>
+                new List<TestClassListOfChildrenItem>
                     {
-                        new TestClassistOfChildrenItem { TestValue1 = 1 },
-                        new TestClassistOfChildrenItem { TestValue1 = 1 },
+                        new TestClassListOfChildrenItem { TestValue1 = 1 },
+                        new TestClassListOfChildrenItem { TestValue1 = 1 },
                     };
 
             var testClass = new TestClass()
@@ -107,27 +107,27 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_DifferentInstancesDifferentistsSameValues_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                           {
-                                                              new TestClassistOfChildrenItem { TestValue1 = 1 },
-                                                              new TestClassistOfChildrenItem { TestValue1 = 1 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 1 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 1 },
                                                           },
             };
 
             var testClass2 = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                            {
-                                                               new TestClassistOfChildrenItem { TestValue1 = 1 },
-                                                               new TestClassistOfChildrenItem { TestValue1 = 1 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 1 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 1 },
                                                            },
             };
 
@@ -141,27 +141,27 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_DifferentInstancesDifferentistsSameValuesDifferentistPositions_MustReturnTrue()
         {
             // Arrange
             var testClass = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                           {
-                                                              new TestClassistOfChildrenItem { TestValue1 = 1 },
-                                                              new TestClassistOfChildrenItem { TestValue1 = 2 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 1 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 2 },
                                                           },
             };
 
             var testClass2 = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                            {
-                                                               new TestClassistOfChildrenItem { TestValue1 = 2 },
-                                                               new TestClassistOfChildrenItem { TestValue1 = 1 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 2 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 1 },
                                                            },
             };
 
@@ -175,27 +175,27 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_DifferentInstancesDifferentistsDifferentValues_MustReturnFalse()
         {
             // Arrange
             var testClass = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                           {
-                                                              new TestClassistOfChildrenItem { TestValue1 = 1 },
-                                                              new TestClassistOfChildrenItem { TestValue1 = 2 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 1 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 2 },
                                                           },
             };
 
             var testClass2 = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                            {
-                                                               new TestClassistOfChildrenItem { TestValue1 = 2 },
-                                                               new TestClassistOfChildrenItem { TestValue1 = 2 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 2 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 2 },
                                                            },
             };
 
@@ -209,26 +209,26 @@
         /// <summary>
         /// Tests the compare infrastructure.
         /// </summary>
-        [Fact]
+        [Test]
         public void Compare_DifferentInstancesDifferentistsDifferentValuesDifferentistCounts_MustReturnFalse()
         {
             // Arrange
             var testClass = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                           {
-                                                              new TestClassistOfChildrenItem { TestValue1 = 2 },
+                                                              new TestClassListOfChildrenItem { TestValue1 = 2 },
                                                           },
             };
 
             var testClass2 = new TestClass()
             {
                 // Explicitly set to different ist instance
-                ListOfChildren = new List<TestClassistOfChildrenItem>
+                ListOfChildren = new List<TestClassListOfChildrenItem>
                                                            {
-                                                               new TestClassistOfChildrenItem { TestValue1 = 2 },
-                                                               new TestClassistOfChildrenItem { TestValue1 = 2 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 2 },
+                                                               new TestClassListOfChildrenItem { TestValue1 = 2 },
                                                            },
             };
 
@@ -243,15 +243,15 @@
 
         private class TestClass
         {
-            public List<TestClassistOfChildrenItem> ListOfChildren { private get; set; }
+            public List<TestClassListOfChildrenItem> ListOfChildren { private get; set; }
 
-            public List<TestClassistOfChildrenItem> GetChildren()
+            public List<TestClassListOfChildrenItem> GetChildren()
             {
                 return this.ListOfChildren;
             }
         }
 
-        private class TestClassistOfChildrenItem
+        private class TestClassListOfChildrenItem
         {
             public int TestValue1 { get; set; }
 
@@ -266,13 +266,13 @@
 
                 registrations.RegisterToManyRelationship(
                     x => x.GetChildren(),
-                    IocHandler.Instance.IocResolver.GetInstance<IComparer<TestClassistOfChildrenItem, ITestCompareIntention>>());
+                    IocHandler.Instance.IocResolver.GetInstance<IComparer<TestClassListOfChildrenItem, ITestCompareIntention>>());
             }
         }
 
-        private class TestClassistOfChildrenItecompareRegistrations : ICompareRegistrations<TestClassistOfChildrenItem, ITestCompareIntention>
+        private class TestClassListOfChildrenItemCompareRegistrations : ICompareRegistrations<TestClassListOfChildrenItem, ITestCompareIntention>
         {
-            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassistOfChildrenItem> registrations)
+            public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassListOfChildrenItem> registrations)
             {
                 registrations.Should().NotBeNull();
 
