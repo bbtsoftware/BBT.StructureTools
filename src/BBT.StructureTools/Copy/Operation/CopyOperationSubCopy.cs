@@ -7,12 +7,12 @@
     internal class CopyOperationSubCopy<T> : ICopyOperation<T>
         where T : class
     {
-        private readonly ICopy<T> copier;
+        private readonly ICopier<T> copier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationSubCopy{T}"/> class.
         /// </summary>
-        public CopyOperationSubCopy(ICopy<T> copier)
+        public CopyOperationSubCopy(ICopier<T> copier)
         {
             copier.NotNull(nameof(copier));
 

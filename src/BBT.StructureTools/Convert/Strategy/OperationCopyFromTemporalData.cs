@@ -12,7 +12,7 @@
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+        private readonly IConverter<TSourceValue, TTarget, TConvertIntention> convert;
         private readonly IConvertHelper convertHelper;
         private readonly ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor;
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
@@ -22,7 +22,7 @@
         /// Initializes a new instance of the <see cref="OperationCopyFromTemporalData{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationCopyFromTemporalData(
-            IConvert<TSourceValue, TTarget, TConvertIntention> convert,
+            IConverter<TSourceValue, TTarget, TConvertIntention> convert,
             ITemporalDataDescriptor<TSourceValue> sourceTemporalCollectionDataDescriptor,
             IConvertHelper convertHelper)
         {

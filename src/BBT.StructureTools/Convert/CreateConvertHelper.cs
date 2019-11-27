@@ -17,7 +17,7 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
-        private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
+        private readonly IConverter<TSource, TTarget, TConvertIntention> convert;
         private Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr;
 
         /// <summary>
@@ -25,7 +25,7 @@
         /// </summary>
         public CreateConvertHelper(
             IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
-            IConvert<TSource, TTarget, TConvertIntention> convert)
+            IConverter<TSource, TTarget, TConvertIntention> convert)
         {
             instanceCreator.NotNull(nameof(instanceCreator));
             convert.NotNull(nameof(convert));
@@ -69,14 +69,14 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
-        private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
+        private readonly IConverter<TSource, TTarget, TConvertIntention> convert;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateConvertHelper{TSource,TTarget,TConcreteTarget,TConvertIntention}" /> class.
         /// </summary>
         public CreateConvertHelper(
             IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
-            IConvert<TSource, TTarget, TConvertIntention> convert)
+            IConverter<TSource, TTarget, TConvertIntention> convert)
         {
             instanceCreator.NotNull(nameof(instanceCreator));
             convert.NotNull(nameof(convert));

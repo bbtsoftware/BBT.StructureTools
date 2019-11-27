@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     /// <summary>
-    /// Convert operation post processing interface.
+    /// Converter operation post processing interface.
     /// </summary>
     /// <typeparam name="TSource">Source object type.</typeparam>
     /// <typeparam name="TTarget">Target object name.</typeparam>

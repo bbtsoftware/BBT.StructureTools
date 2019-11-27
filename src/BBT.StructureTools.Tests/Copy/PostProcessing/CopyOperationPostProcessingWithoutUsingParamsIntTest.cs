@@ -13,15 +13,15 @@
     {
         #region setup and members
 
-        private readonly ICopy<ITestClass> testCandidate;
+        private readonly ICopier<ITestClass> testCandidate;
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<ITestClass>>().To<TestClassCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<ITestClass>>();
+            this.testCandidate = kernel.Get<ICopier<ITestClass>>();
         }
 
         #endregion
@@ -83,7 +83,7 @@
             public int TestValue2 { get; set; }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<ITestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<ITestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<ITestClass> registrations)
             {

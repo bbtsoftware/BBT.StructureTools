@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="TSource">Source type.</typeparam>
     /// <typeparam name="TTarget">Target type.</typeparam>
-    /// <typeparam name="TIntention">Convert intention.</typeparam>
+    /// <typeparam name="TIntention">Converter intention.</typeparam>
     internal interface IConvertStrategyProvider<TSource, TTarget, TIntention>
         where TIntention : IBaseConvertIntention
     {

@@ -10,13 +10,13 @@
         where TTarget : class, TValue
         where TValue : class
     {
-        private readonly ICopy<TValue> copy;
+        private readonly ICopier<TValue> copy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationSubCopy{TSource,TTarget, TSubCopy}" /> class.
         /// </summary>
         public OperationSubCopy(
-            ICopy<TValue> copy)
+            ICopier<TValue> copy)
         {
             copy.NotNull(nameof(copy));
 

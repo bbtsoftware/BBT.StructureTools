@@ -11,15 +11,15 @@
 
     public class CopyOperationIntTests
     {
-        private readonly ICopy<TestClass> testCandidate;
+        private readonly ICopier<TestClass> testCandidate;
 
         public CopyOperationIntTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClass>>().To<TestClassCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopier<TestClass>>();
         }
 
         /// <summary>
@@ -86,7 +86,7 @@
             public int Value2 { get; set; }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<TestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {

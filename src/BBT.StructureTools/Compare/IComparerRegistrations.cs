@@ -7,7 +7,7 @@
     /// </summary>
     /// <typeparam name="TModelToCompare">The model type which shall be compared.</typeparam>
     /// <typeparam name="TCompareIntention">The intention of the comparison.</typeparam>
-    public interface ICompareRegistrations<TModelToCompare, TCompareIntention>
+    public interface IComparerRegistrations<TModelToCompare, TCompareIntention>
         where TModelToCompare : class
         where TCompareIntention : IBaseComparerIntention
     {

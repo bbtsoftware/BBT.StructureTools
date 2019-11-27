@@ -309,7 +309,7 @@
 
         /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterSubCopy<TSubCopy>()
-            where TSubCopy : class, ICopy<TSource>, ICopy<TTarget>
+            where TSubCopy : class, ICopier<TSource>, ICopier<TTarget>
         {
             var copyType = typeof(TSubCopy).GenericTypeArguments[0];
 

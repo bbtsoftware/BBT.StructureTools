@@ -9,7 +9,7 @@
     /// <typeparam name="TTargetClass">Type of target class.</typeparam>
     /// <typeparam name="TReverseRelation">Type of reverse relation.</typeparam>
     /// <typeparam name="TConvertIntention">Type of convert intention.</typeparam>
-    public interface IConvertWithReverseRelation<in TSourceClass, in TTargetClass, in TReverseRelation, TConvertIntention>
+    public interface IConverterWithReverseRelation<in TSourceClass, in TTargetClass, in TReverseRelation, TConvertIntention>
         where TSourceClass : class
         where TTargetClass : class
         where TReverseRelation : class

@@ -14,17 +14,17 @@
     public class CopierIntegrationTests
     {
         #region members and setup
-        private readonly ICopy<ParentTestClass> testCandidate;
+        private readonly ICopier<ParentTestClass> testCandidate;
 
         public CopierIntegrationTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass2>>().To<ChildTestClass2CopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<IParentTestClass>>().To<TestClassCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<IChildTestClass>>().To<ChildTestClassCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<IChildTestClass2>>().To<ChildTestClass2CopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopier<IParentTestClass>>();
         }
 
         #endregion
@@ -248,7 +248,7 @@
         {
         }
 
-        private class ChildTestClassCopyRegistrations : ICopyRegistrations<IChildTestClass>
+        private class ChildTestClassCopierRegistrations : ICopierRegistrations<IChildTestClass>
         {
             // Further notice: This class is needed and it's registration via IoC container
             // is mandatory. Otherwise copying the child elements wouldn't work!
@@ -258,17 +258,17 @@
             }
         }
 
-        private class ChildTestClass2CopyRegistrations : ICopyRegistrations<IChildTestClass2>
+        private class ChildTestClass2CopierRegistrations : ICopierRegistrations<IChildTestClass2>
         {
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass2> registrations)
             {
                 registrations.Should().NotBeNull();
 
-                registrations.RegisterSubCopy<ICopy<IChildTestClass>>();
+                registrations.RegisterSubCopy<ICopier<IChildTestClass>>();
             }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<IParentTestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {

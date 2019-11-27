@@ -16,7 +16,7 @@
         where TTargetValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> convert;
+        private readonly IConverter<TSourceValue, TTargetValue, TConvertIntention> convert;
         private readonly IConvertHelper convertHelper;
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
         private Func<TTarget, IEnumerable<TTargetValue>> targetFunc;
@@ -26,7 +26,7 @@
         /// Initializes a new instance of the <see cref="OperationConvertToMany{TSource,TTarget,TSourceValue,TTargetValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationConvertToMany(
-            IConvert<TSourceValue, TTargetValue, TConvertIntention> convert,
+            IConverter<TSourceValue, TTargetValue, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
             convert.NotNull(nameof(convert));

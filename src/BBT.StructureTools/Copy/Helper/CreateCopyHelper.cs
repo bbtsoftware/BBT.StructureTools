@@ -17,7 +17,7 @@
         where TParent : class
     {
         private readonly IInstanceCreator<TChild, TConcreteChild> instanceCreator;
-        private readonly ICopy<TChild> copy;
+        private readonly ICopier<TChild> copy;
 
         /// <summary>
         /// The <typeparamref name="TConcreteChild"/>'s reverse relation.
@@ -29,7 +29,7 @@
         /// </summary>
         public CreateCopyHelper(
             IInstanceCreator<TChild, TConcreteChild> instanceCreator,
-            ICopy<TChild> copy)
+            ICopier<TChild> copy)
         {
             instanceCreator.NotNull(nameof(instanceCreator));
             copy.NotNull(nameof(copy));
@@ -82,14 +82,14 @@
         where TConcreteTarget : class, TTarget, new()
     {
         private readonly IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator;
-        private readonly ICopy<TTarget> copy;
+        private readonly ICopier<TTarget> copy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateCopyHelper{TTarget,TConcreteTarget}"/> class.
         /// </summary>
         public CreateCopyHelper(
             IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator,
-            ICopy<TTarget> copy)
+            ICopier<TTarget> copy)
         {
             instanceCreator.NotNull(nameof(instanceCreator));
             copy.NotNull(nameof(copy));

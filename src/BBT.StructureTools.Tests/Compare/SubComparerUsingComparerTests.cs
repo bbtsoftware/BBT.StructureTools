@@ -21,8 +21,8 @@
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICompareRegistrations<TestClassChild, ITestCompareIntention>>().To<TestClassChildCompareRegistrations>();
-            kernel.Bind<ICompareRegistrations<TestClassParent, ITestCompareIntention>>().To<TestClassParentCompareRegistrations>();
+            kernel.Bind<IComparerRegistrations<TestClassChild, ITestCompareIntention>>().To<TestClassChildComparerRegistrations>();
+            kernel.Bind<IComparerRegistrations<TestClassParent, ITestCompareIntention>>().To<TestClassParentComparerRegistrations>();
 
             parentCompare = kernel.Get<IComparer<TestClassParent, ITestCompareIntention>>();
             this.testCandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
@@ -184,7 +184,7 @@
         {
         }
 
-        private class TestClassParentCompareRegistrations : ICompareRegistrations<TestClassParent, ITestCompareIntention>
+        private class TestClassParentComparerRegistrations : IComparerRegistrations<TestClassParent, ITestCompareIntention>
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassParent> registrations)
             {
@@ -194,7 +194,7 @@
             }
         }
 
-        private class TestClassChildCompareRegistrations : ICompareRegistrations<TestClassChild, ITestCompareIntention>
+        private class TestClassChildComparerRegistrations : IComparerRegistrations<TestClassChild, ITestCompareIntention>
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassChild> registrations)
             {

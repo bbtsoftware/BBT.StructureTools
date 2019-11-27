@@ -16,18 +16,18 @@
     {
         #region setup
 
-        private readonly ICopy<ParentTestClass> testCandidate;
+        private readonly ICopier<ParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<IParentTestClass>>().To<TestClassCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<IChildTestClass>>().To<ChildTestClassCopierRegistrations>();
             kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
             kernel.Bind<ITestStrategy>().To<TestStrategy>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopier<IParentTestClass>>();
         }
 
         #endregion
@@ -198,7 +198,7 @@
             public int TestValue { get; set; }
         }
 
-        private class ChildTestClassCopyRegistrations : ICopyRegistrations<IChildTestClass>
+        private class ChildTestClassCopierRegistrations : ICopierRegistrations<IChildTestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
@@ -206,7 +206,7 @@
             }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<IParentTestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {

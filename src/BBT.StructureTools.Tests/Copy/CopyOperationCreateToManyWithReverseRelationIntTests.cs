@@ -13,16 +13,16 @@
     public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
         #region members and setup
-        private readonly ICopy<IParentTestClass> testCandidate;
+        private readonly ICopier<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyWithReverseRelationIntTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<IParentTestClass>>().To<TestClassCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<IChildTestClass>>().To<ChildTestClassCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopier<IParentTestClass>>();
         }
 
         #endregion
@@ -196,7 +196,7 @@
             public IParentTestClass ParentReference { get; set; }
         }
 
-        private class ChildTestClassCopyRegistrations : ICopyRegistrations<IChildTestClass>
+        private class ChildTestClassCopierRegistrations : ICopierRegistrations<IChildTestClass>
         {
             // Further notice: This class is needed and it's registration via IoC container
             // is mandatory. Otherwise copying the child elements wouldn't work!
@@ -206,7 +206,7 @@
             }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<IParentTestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {

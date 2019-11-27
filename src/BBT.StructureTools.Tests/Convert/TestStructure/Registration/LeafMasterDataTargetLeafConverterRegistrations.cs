@@ -6,7 +6,7 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
     using FluentAssertions;
 
-    public class LeafMasterDataTargetLeafConvertRegistrations : IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>
+    public class LeafMasterDataTargetLeafConverterRegistrations : IConverterRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>
     {
         public void DoRegistrations(IConvertRegistration<LeafMasterData, TargetLeaf> registrations)
         {

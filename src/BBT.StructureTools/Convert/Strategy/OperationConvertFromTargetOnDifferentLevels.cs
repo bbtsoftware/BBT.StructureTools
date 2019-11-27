@@ -13,14 +13,14 @@
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+        private readonly IConverter<TSourceValue, TTarget, TConvertIntention> convert;
         private Func<TTarget, TSourceValue> sourceFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationConvertFromTargetOnDifferentLevels{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationConvertFromTargetOnDifferentLevels(
-            IConvert<TSourceValue, TTarget, TConvertIntention> convert)
+            IConverter<TSourceValue, TTarget, TConvertIntention> convert)
         {
             convert.NotNull(nameof(convert));
 

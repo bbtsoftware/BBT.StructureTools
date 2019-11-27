@@ -5,7 +5,7 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Source;
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
 
-    public class TemporalLeafMasterDataTemporalLeafDatconvertRegistrations : IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>
+    public class TemporalLeafMasterDataTemporalLeafDataConverterRegistrations : IConverterRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>
     {
         public void DoRegistrations(IConvertRegistration<TemporalLeafMasterData, TargetLeaf> registrations)
         {

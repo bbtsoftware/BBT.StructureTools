@@ -6,11 +6,11 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
     using FluentAssertions;
 
-    public class RootTargetRootConvertRegistrations : IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>
+    public class RootTargetRootConverterRegistrations : IConverterRegistrations<Root, TargetRoot, ITestConvertIntention>
     {
         private readonly IConvertHelperFactory<Tree, TargetTree, TargetTree, ITestConvertIntention> convertHelperFactory;
 
-        public RootTargetRootConvertRegistrations(IConvertHelperFactory<Tree, TargetTree, TargetTree, ITestConvertIntention> convertHelperFactory)
+        public RootTargetRootConverterRegistrations(IConvertHelperFactory<Tree, TargetTree, TargetTree, ITestConvertIntention> convertHelperFactory)
         {
             this.convertHelperFactory = convertHelperFactory;
         }

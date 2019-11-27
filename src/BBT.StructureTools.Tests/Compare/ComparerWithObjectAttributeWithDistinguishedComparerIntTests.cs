@@ -22,8 +22,8 @@
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
-            kernel.Bind<ICompareRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeCompareRegistrations>();
+            kernel.Bind<IComparerRegistrations<TestClass, ITestCompareIntention>>().To<TestClassComparerRegistrations>();
+            kernel.Bind<IComparerRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeComparerRegistrations>();
 
             distinguishedComparer = kernel.Get<IComparer<TestAttribute, ITestCompareIntention>>();
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
@@ -32,7 +32,7 @@
         #endregion
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenSameInstance_MustReturnTrue()
@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenSameInstanceAndObjectAttributeNull_MustReturnTrue()
@@ -72,7 +72,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenAttributeObjectsEqual_MustReturnTrue()
@@ -90,7 +90,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenBaseModelAttributeObjectsNotEqualButHaveSameValue_MustReturnTrue()
@@ -109,7 +109,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenBaseModelAttributeObjectsNotEqualAndHaveDifferentValue_MustReturnFalse()
@@ -128,7 +128,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenAttributeObjectsNotEqualButNotRegistered_MustReturnTrue()
@@ -147,7 +147,7 @@
         }
 
         /// <summary>
-        /// Tests IComparer.Equals.
+        /// Tests ICompare.Equals.
         /// </summary>
         [Fact]
         public void Equals_WhenAttributeObjectsNotEqualButExcluded_MustReturnTrue()
@@ -184,7 +184,7 @@
             public int TestValue2 { get; set; }
         }
 
-        private class TestAttributeCompareRegistrations : ICompareRegistrations<TestAttribute, ITestCompareIntention>
+        private class TestAttributeComparerRegistrations : IComparerRegistrations<TestAttribute, ITestCompareIntention>
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestAttribute> registrations)
             {
@@ -194,7 +194,7 @@
             }
         }
 
-        private class TestClassCompareRegistrations : ICompareRegistrations<TestClass, ITestCompareIntention>
+        private class TestClassComparerRegistrations : IComparerRegistrations<TestClass, ITestCompareIntention>
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> registrations)
             {

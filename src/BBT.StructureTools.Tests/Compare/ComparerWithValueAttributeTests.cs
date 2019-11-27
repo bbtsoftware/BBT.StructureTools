@@ -19,7 +19,7 @@
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
+            kernel.Bind<IComparerRegistrations<TestClass, ITestCompareIntention>>().To<TestClassComparerRegistrations>();
 
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
@@ -101,7 +101,7 @@
             public int Value2 { get; set; }
         }
 
-        private class TestClassCompareRegistrations : ICompareRegistrations<TestClass, ITestCompareIntention>
+        private class TestClassComparerRegistrations : IComparerRegistrations<TestClass, ITestCompareIntention>
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> registrations)
             {

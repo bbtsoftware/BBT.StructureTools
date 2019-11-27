@@ -110,7 +110,7 @@
         /// An ICopy of T.
         /// </typeparam>
         ICopyHelperRegistration<T> RegisterSubCopy<TSubCopyOfT>()
-            where TSubCopyOfT : class, ICopy<T>;
+            where TSubCopyOfT : class, ICopier<T>;
 
         /// <summary>
         /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
@@ -171,14 +171,14 @@
             where TConcreteChild : class, TChild, new();
 
         /// <summary>
-        /// Registers post processing operations which are passed to the <see cref="ICopy{TClassToCopy}"/>
+        /// Registers post processing operations which are passed to the <see cref="ICopier{TClassToCopy}"/>
         /// while copying an object and then executed at the end of the copy process.
         /// </summary>
         ICopyHelperRegistration<T> RegisterPostProcessings(
             IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] furtherAdditionalProcessings);
 
         /// <summary>
-        /// Registers post processing operations which are passed to the <see cref="ICopy{TClassToCopy}"/>
+        /// Registers post processing operations which are passed to the <see cref="ICopier{TClassToCopy}"/>
         /// The post processing is resolved via IoC container.
         /// </summary>
         /// <typeparam name="TPostProcessing">

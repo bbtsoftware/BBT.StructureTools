@@ -10,16 +10,16 @@
 
     public class CopyOperationRegisterCreateFromFactoryTests
     {
-        private readonly ICopy<TestClass> testCandidate;
+        private readonly ICopier<TestClass> testCandidate;
 
         public CopyOperationRegisterCreateFromFactoryTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClass>>().To<TestClassCopierRegistrations>();
             kernel.Bind<ITestFactory>().To<TestFactory>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopier<TestClass>>();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@
             }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<TestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {

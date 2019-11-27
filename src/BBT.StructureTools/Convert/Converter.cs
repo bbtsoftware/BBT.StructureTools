@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
+    internal class Converter<TSource, TTarget, TConvertIntention> : IConverter<TSource, TTarget, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TConvertIntention : IBaseConvertIntention
@@ -20,7 +20,7 @@
         /// described in GH-17.
         /// </remarks>
         public Converter(
-            IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
+            IConverterRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
         {

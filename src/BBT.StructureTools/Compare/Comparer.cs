@@ -21,7 +21,7 @@
         /// described in GH-17.
         /// </remarks>
         public Comparer(
-            ICompareRegistrations<T, TIntention> compareRegistrations,
+            IComparerRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)
         {

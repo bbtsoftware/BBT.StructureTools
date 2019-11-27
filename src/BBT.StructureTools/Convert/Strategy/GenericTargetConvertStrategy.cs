@@ -19,13 +19,13 @@
         where TSourceInterface : class, TSource
         where TCriterion : class, TTarget
     {
-        private readonly IConvert<TSourceInterface, TCriterion, TIntention> converter;
+        private readonly IConverter<TSourceInterface, TCriterion, TIntention> converter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericTargetConvertStrategy{TSource, TTarget, TIntention, TSourceInterface, TCriterion}"/> class.
         /// </summary>
         public GenericTargetConvertStrategy(
-            IConvert<TSourceInterface, TCriterion, TIntention> converter)
+            IConverter<TSourceInterface, TCriterion, TIntention> converter)
         {
             converter.NotNull(nameof(converter));
 

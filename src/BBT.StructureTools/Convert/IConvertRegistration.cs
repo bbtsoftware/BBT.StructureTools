@@ -259,9 +259,9 @@
         /// <summary>
         /// Registers the copy of <typeparamref name="TSubCopy"/> from the source to the target.
         /// </summary>
-        /// <typeparam name="TSubCopy">The <see cref="ICopy{TValue}"/> type of the value to copy.</typeparam>
+        /// <typeparam name="TSubCopy">The <see cref="ICopier{TValue}"/> type of the value to copy.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterSubCopy<TSubCopy>()
-            where TSubCopy : class, ICopy<TSource>, ICopy<TTarget>;
+            where TSubCopy : class, ICopier<TSource>, ICopier<TTarget>;
 
         /// <summary>
         /// Registers a <c>to many</c> relationships where one hierarchy level between

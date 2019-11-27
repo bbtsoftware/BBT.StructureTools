@@ -17,7 +17,7 @@
 
     public class ConvertRootTreeLeafWithMasterDataTests
     {
-        private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testCandidate;
+        private readonly IConverter<Root, TargetRoot, ITestConvertIntention> testCandidate;
 
         public ConvertRootTreeLeafWithMasterDataTests()
         {
@@ -25,18 +25,18 @@
 
             kernel.Bind(typeof(ITemporalDataDescriptor<>)).To<TemporalDataDescriptor>();
 
-            kernel.Bind<IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>>().To<RootTargetRootConvertRegistrations>();
+            kernel.Bind<IConverterRegistrations<Root, TargetRoot, ITestConvertIntention>>().To<RootTargetRootConverterRegistrations>();
 
-            kernel.Bind<IConvertRegistrations<Tree, TargetTree, ITestConvertIntention>>().To<TreeTargetTreeConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>>().To<TreeMasterDataToTreeConvertRegistrations>();
+            kernel.Bind<IConverterRegistrations<Tree, TargetTree, ITestConvertIntention>>().To<TreeTargetTreeConverterRegistrations>();
+            kernel.Bind<IConverterRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>>().To<TreeMasterDataToTreeConverterRegistrations>();
 
-            kernel.Bind<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>>().To<LeafTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDataTargetLeafConvertRegistrations>();
-            kernel.Bind<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDatconvertRegistrations>();
+            kernel.Bind<IConverterRegistrations<Leaf, TargetLeaf, ITestConvertIntention>>().To<LeafTargetLeafConverterRegistrations>();
+            kernel.Bind<IConverterRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>>().To<LeafMasterDataTargetLeafConverterRegistrations>();
+            kernel.Bind<IConverterRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>>().To<TemporalLeafMasterDataTemporalLeafDataConverterRegistrations>();
 
-            kernel.Bind<ICopyRegistrations<ITemporalData>>().To<TemporalDatcopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<ITemporalData>>().To<TemporalDataCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<IConvert<Root, TargetRoot, ITestConvertIntention>>();
+            this.testCandidate = kernel.Get<IConverter<Root, TargetRoot, ITestConvertIntention>>();
         }
 
         [Fact]

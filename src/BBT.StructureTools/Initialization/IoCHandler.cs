@@ -79,7 +79,7 @@
         private static void RegisterConvertTypes(Action<Type, Type> singletonRegistrationAction, Action<Type, Type> transientRegistrationAction)
         {
             // Tools
-            singletonRegistrationAction.Invoke(typeof(IConvert<,,>), typeof(Converter<,,>));
+            singletonRegistrationAction.Invoke(typeof(IConverter<,,>), typeof(Converter<,,>));
             singletonRegistrationAction.Invoke(typeof(IConvertEngine<,>), typeof(ConvertEngine<,>));
             singletonRegistrationAction.Invoke(typeof(IConvertHelperFactory<,,,>), typeof(ConvertHelperFactory<,,,>));
             singletonRegistrationAction.Invoke(typeof(ICreateConvertHelper<,,,,>), typeof(CreateConvertHelper<,,,,>));
@@ -132,7 +132,7 @@
             singletonRegistrationAction.Invoke(typeof(ICreateCopyHelper<,>), typeof(CreateCopyHelper<,>));
             singletonRegistrationAction.Invoke(typeof(ICreateCopyHelper<,,>), typeof(CreateCopyHelper<,,>));
             singletonRegistrationAction.Invoke(typeof(ICopyHelperFactory<,>), typeof(CopyHelperFactory<,>));
-            singletonRegistrationAction.Invoke(typeof(ICopy<>), typeof(Copier<>));
+            singletonRegistrationAction.Invoke(typeof(ICopier<>), typeof(Copier<>));
             singletonRegistrationAction.Invoke(typeof(ICopyHelperRegistrationFactory), typeof(CopyHelperRegistrationFactory));
             singletonRegistrationAction.Invoke(typeof(ICopyStrategyProvider<,>), typeof(GenericCopyStrategyProvider<,>));
 

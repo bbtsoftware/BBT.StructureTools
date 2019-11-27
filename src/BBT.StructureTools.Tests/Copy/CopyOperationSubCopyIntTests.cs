@@ -11,16 +11,16 @@
 
     public class CopyOperationSubCopyIntTests
     {
-        private readonly ICopy<TestClassChild> testCandidate;
+        private readonly ICopier<TestClassChild> testCandidate;
 
         public CopyOperationSubCopyIntTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<TestClassParent>>().To<TestClassParentCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClassChild>>().To<TestClassChildCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClassParent>>().To<TestClassParentCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClassChild>>();
+            this.testCandidate = kernel.Get<ICopier<TestClassChild>>();
         }
 
         /// <summary>
@@ -91,18 +91,18 @@
             public int Value2 { get; set; }
         }
 
-        private class TestClassChildCopyRegistrations : ICopyRegistrations<TestClassChild>
+        private class TestClassChildCopierRegistrations : ICopierRegistrations<TestClassChild>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)
             {
                 registrations.Should().NotBeNull();
 
                 registrations
-                    .RegisterSubCopy<ICopy<TestClassParent>>();
+                    .RegisterSubCopy<ICopier<TestClassParent>>();
             }
         }
 
-        private class TestClassParentCopyRegistrations : ICopyRegistrations<TestClassParent>
+        private class TestClassParentCopierRegistrations : ICopierRegistrations<TestClassParent>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassParent> registrations)
             {

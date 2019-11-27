@@ -7,7 +7,7 @@
     /// Used to declare properties to copy.
     /// </summary>
     /// <typeparam name="T">class to copy.</typeparam>
-    public interface ICopyRegistrations<T> : ICopyRegistrationMarker
+    public interface ICopierRegistrations<T> : ICopyRegistrationMarker
         where T : class
     {
         /// <summary>

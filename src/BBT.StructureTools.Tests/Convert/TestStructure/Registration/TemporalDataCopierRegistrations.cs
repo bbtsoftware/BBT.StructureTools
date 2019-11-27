@@ -4,7 +4,7 @@
     using BBT.StructureTools.Copy.Helper;
     using FluentAssertions;
 
-    public class TemporalDatcopyRegistrations : ICopyRegistrations<ITemporalData>
+    public class TemporalDataCopierRegistrations : ICopierRegistrations<ITemporalData>
     {
         public void DoRegistrations(ICopyHelperRegistration<ITemporalData> registrations)
         {

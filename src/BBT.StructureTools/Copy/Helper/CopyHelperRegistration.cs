@@ -58,7 +58,7 @@
 
         /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterSubCopy<TSubCopyOfT>()
-            where TSubCopyOfT : class, ICopy<T>
+            where TSubCopyOfT : class, ICopier<T>
         {
             var copy = IocHandler.Instance.IocResolver.GetInstance<TSubCopyOfT>();
             this.registeredStrategies.Add(new CopyOperationSubCopy<T>(copy));

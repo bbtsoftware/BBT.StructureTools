@@ -6,7 +6,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class Copier<T> : ICopy<T>
+    internal class Copier<T> : ICopier<T>
         where T : class
     {
         private readonly ICopyHelper copyHelper;
@@ -16,7 +16,7 @@
         /// Initializes a new instance of the <see cref="Copier{T}" /> class.
         /// </summary>
         public Copier(
-            ICopyRegistrations<T> copyRegistrations,
+            ICopierRegistrations<T> copyRegistrations,
             ICopyHelper copyHelper,
             ICopyHelperRegistrationFactory factory)
         {

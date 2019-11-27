@@ -10,17 +10,17 @@
 
     public class CopyOperationCrossReferenceProcessingIntTests
     {
-        private readonly ICopy<TestClass> testCandidate;
+        private readonly ICopier<TestClass> testCandidate;
 
         public CopyOperationCrossReferenceProcessingIntTests()
         {
             var kernel = TestIocContainer.Initialize();
 
-            kernel.Bind<ICopyRegistrations<TestClass>>().To<TestClassCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<TestClassChild>>().To<TestClassChildCopyRegistrations>();
-            kernel.Bind<ICopyRegistrations<TestClassCrossReferencedChild>>().To<TestClassCrossReferencedChildCopyRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClass>>().To<TestClassCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClassChild>>().To<TestClassChildCopierRegistrations>();
+            kernel.Bind<ICopierRegistrations<TestClassCrossReferencedChild>>().To<TestClassCrossReferencedChildCopierRegistrations>();
 
-            this.testCandidate = kernel.Get<ICopy<TestClass>>();
+            this.testCandidate = kernel.Get<ICopier<TestClass>>();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@
             public TestClass Parent { get; set; }
         }
 
-        private class TestClassCopyRegistrations : ICopyRegistrations<TestClass>
+        private class TestClassCopierRegistrations : ICopierRegistrations<TestClass>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
@@ -86,7 +86,7 @@
             }
         }
 
-        private class TestClassCrossReferencedChildCopyRegistrations : ICopyRegistrations<TestClassCrossReferencedChild>
+        private class TestClassCrossReferencedChildCopierRegistrations : ICopierRegistrations<TestClassCrossReferencedChild>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassCrossReferencedChild> registrations)
             {
@@ -94,7 +94,7 @@
             }
         }
 
-        private class TestClassChildCopyRegistrations : ICopyRegistrations<TestClassChild>
+        private class TestClassChildCopierRegistrations : ICopierRegistrations<TestClassChild>
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)
             {

@@ -11,7 +11,7 @@
     /// works with <see cref="ICopyOperation{T}"/>.
     /// </summary>
     /// <typeparam name="TClassToCopy">Type of model.</typeparam>
-    public interface ICopy<in TClassToCopy> : ICopyMarker
+    public interface ICopier<in TClassToCopy> : ICopyMarker
         where TClassToCopy : class
     {
         /// <summary>

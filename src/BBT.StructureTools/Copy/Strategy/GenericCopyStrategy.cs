@@ -10,14 +10,14 @@
         where TConcrete : class, TDerived, new()
     {
         private readonly IInstanceCreator<TDerived, TConcrete> creator;
-        private readonly ICopy<TDerived> copier;
+        private readonly ICopier<TDerived> copier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericCopyStrategy{TBase, TDerived, TConcrete}"/> class.
         /// </summary>
         public GenericCopyStrategy(
             IInstanceCreator<TDerived, TConcrete> creator,
-            ICopy<TDerived> copier)
+            ICopier<TDerived> copier)
         {
             creator.NotNull(nameof(creator));
             copier.NotNull(nameof(copier));

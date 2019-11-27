@@ -12,13 +12,13 @@
         where TSourceValue : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+        private readonly IConverter<TSourceValue, TTarget, TConvertIntention> convert;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationSourceSubConvert{TSource,TTarget,TSourceValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationSourceSubConvert(
-            IConvert<TSourceValue, TTarget, TConvertIntention> convert)
+            IConverter<TSourceValue, TTarget, TConvertIntention> convert)
         {
             convert.NotNull(nameof(convert));
 
