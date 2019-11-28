@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.TestTools.IoC
+﻿namespace BBT.StructureTools.Tests.TestTools.IoC.Vendor
 {
     using System;
     using System.Collections.Generic;

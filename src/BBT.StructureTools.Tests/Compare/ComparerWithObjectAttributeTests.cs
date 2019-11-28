@@ -5,7 +5,7 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
@@ -13,18 +13,19 @@
     /// Test for Comparer infrastructure with object attributes.
     /// </summary>
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ComparerWithObjectAttributeTests
     {
         #region Members, Setup
-        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
-        public ComparerWithObjectAttributeTests()
+        public ComparerWithObjectAttributeTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
+            this.testCandidate = iocContainer.GetInstance<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
@@ -40,7 +41,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -57,7 +58,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -72,7 +73,7 @@
             var testClassB = new TestClass { TestAttribute1 = testAttribute };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -88,7 +89,7 @@
             var testClassB = new TestClass { TestAttribute1 = testAttribute2 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
@@ -103,7 +104,7 @@
             var testClassB = new TestClass { TestAttribute2 = testAttribute };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -124,7 +125,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB, System.Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClassA, testClassB, System.Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

@@ -1,28 +1,29 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
         #region members and setup
-        private readonly ICopy<IParentTestClass> testcandidate;
+        private readonly ICopy<IParentTestClass> testCandidate;
 
-        public CopyOperationCreateToOneWithReverseRelationIntTests()
+        public CopyOperationCreateToOneWithReverseRelationIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IParentTestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<IChildTestClass>, ChildTestClassCopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<IParentTestClass>>();
+            this.testCandidate = iocContainer.GetInstance<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -43,7 +44,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -72,7 +73,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());

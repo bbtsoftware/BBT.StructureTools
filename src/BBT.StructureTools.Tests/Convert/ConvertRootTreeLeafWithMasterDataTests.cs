@@ -11,32 +11,35 @@
     using BBT.StructureTools.Tests.Convert.TestStructure.Source;
     using BBT.StructureTools.Tests.Convert.TestStructure.Target;
     using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [NonParallelizable]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ConvertRootTreeLeafWithMasterDataTests
     {
-        private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testcandidate;
+        private readonly IConvert<Root, TargetRoot, ITestConvertIntention> testCandidate;
 
-        public ConvertRootTreeLeafWithMasterDataTests()
+        public ConvertRootTreeLeafWithMasterDataTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton(typeof(ITemporalDataDescriptor<>), typeof(TemporalDataDescriptor));
+            iocContainer.RegisterSingleton(typeof(ITemporalDataDescriptor<TemporalLeafMasterData>), typeof(TemporalDataDescriptor));
 
-            kernel.RegisterSingleton<IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>, RootTargetRootConvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<Root, TargetRoot, ITestConvertIntention>, RootTargetRootConvertRegistrations>();
 
-            kernel.RegisterSingleton<IConvertRegistrations<Tree, TargetTree, ITestConvertIntention>, TreeTargetTreeConvertRegistrations>();
-            kernel.RegisterSingleton<IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>, TreeMasterDataToTreeConvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<Tree, TargetTree, ITestConvertIntention>, TreeTargetTreeConvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<TreeMasterData, TargetTree, ITestConvertIntention>, TreeMasterDataToTreeConvertRegistrations>();
 
-            kernel.RegisterSingleton<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>, LeafTargetLeafConvertRegistrations>();
-            kernel.RegisterSingleton<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>, LeafMasterDataTargetLeafConvertRegistrations>();
-            kernel.RegisterSingleton<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>, TemporalLeafMasterDataTemporalLeafDatconvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<Leaf, TargetLeaf, ITestConvertIntention>, LeafTargetLeafConvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<LeafMasterData, TargetLeaf, ITestConvertIntention>, LeafMasterDataTargetLeafConvertRegistrations>();
+            iocContainer.RegisterSingleton<IConvertRegistrations<TemporalLeafMasterData, TargetLeaf, ITestConvertIntention>, TemporalLeafMasterDataTemporalLeafDatconvertRegistrations>();
 
-            kernel.RegisterSingleton<ICopyRegistrations<ITemporalData>, TemporalDatcopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<ITemporalData>, TemporalDatcopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<IConvert<Root, TargetRoot, ITestConvertIntention>>();
+            this.testCandidate = iocContainer.GetInstance<IConvert<Root, TargetRoot, ITestConvertIntention>>();
         }
 
         [Test]
@@ -88,7 +91,7 @@
 
             // Act
             var target = new TargetRoot();
-            this.testcandidate.Convert(root, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Convert(root, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             // Find target objects

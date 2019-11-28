@@ -6,26 +6,27 @@
     using BBT.StructureTools.Compare.Exclusions;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class SubComparerUsingComparerTests
     {
         #region Members, Setup
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
-        private readonly IComparer<TestClassChild, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClassChild, ITestCompareIntention> testCandidate;
 
-        public SubComparerUsingComparerTests()
+        public SubComparerUsingComparerTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICompareRegistrations<TestClassChild, ITestCompareIntention>, TestClassChildCompareRegistrations>();
-            kernel.RegisterSingleton<ICompareRegistrations<TestClassParent, ITestCompareIntention>, TestClassParentCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClassChild, ITestCompareIntention>, TestClassChildCompareRegistrations>();
+            iocContainer.RegisterSingleton<ICompareRegistrations<TestClassParent, ITestCompareIntention>, TestClassParentCompareRegistrations>();
 
-            parentCompare = kernel.GetInstance<IComparer<TestClassParent, ITestCompareIntention>>();
-            this.testcandidate = kernel.GetInstance<IComparer<TestClassChild, ITestCompareIntention>>();
+            parentCompare = iocContainer.GetInstance<IComparer<TestClassParent, ITestCompareIntention>>();
+            this.testCandidate = iocContainer.GetInstance<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
         #endregion
@@ -40,7 +41,7 @@
             var testClass = new TestClassChild();
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -63,7 +64,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -86,7 +87,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeFalse();
@@ -109,7 +110,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2);
+            var result = this.testCandidate.Equals(testClass, testClass2);
 
             // Assert
             result.Should().BeTrue();
@@ -137,7 +138,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();
@@ -165,7 +166,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClass, testClass2, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

@@ -1,26 +1,27 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationRegisterCreateFromFactoryTests
     {
-        private readonly ICopy<TestClass> testcandidate;
+        private readonly ICopy<TestClass> testCandidate;
 
-        public CopyOperationRegisterCreateFromFactoryTests()
+        public CopyOperationRegisterCreateFromFactoryTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton(typeof(ICopyRegistrations<TestClass>), typeof(TestClassCopyRegistrations));
-            kernel.RegisterSingleton(typeof(ITestFactory), typeof(TestFactory));
+            iocContainer.RegisterSingleton(typeof(ICopyRegistrations<TestClass>), typeof(TestClassCopyRegistrations));
+            iocContainer.RegisterSingleton(typeof(ITestFactory), typeof(TestFactory));
 
-            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
+            this.testCandidate = iocContainer.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
@@ -34,7 +35,7 @@
             var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value1.Should().Be(888);

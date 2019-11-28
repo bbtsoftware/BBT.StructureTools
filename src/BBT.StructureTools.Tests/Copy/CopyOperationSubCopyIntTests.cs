@@ -1,27 +1,28 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationSubCopyIntTests
     {
-        private readonly ICopy<TestClassChild> testcandidate;
+        private readonly ICopy<TestClassChild> testCandidate;
 
-        public CopyOperationSubCopyIntTests()
+        public CopyOperationSubCopyIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<TestClassChild>, TestClassChildCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<TestClassParent>, TestClassParentCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClassChild>, TestClassChildCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClassParent>, TestClassParentCopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<TestClassChild>>();
+            this.testCandidate = iocContainer.GetInstance<ICopy<TestClassChild>>();
         }
 
         /// <summary>
@@ -35,7 +36,7 @@
             var target = new TestClassChild();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value1.Should().Be(45);
@@ -52,7 +53,7 @@
             var target = new TestClassChild { Value2 = 35 };
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             target.Value2.Should().Be(35);
@@ -74,7 +75,7 @@
             };
 
             // Act
-            this.testcandidate.Copy(source, target, additionalProcessings);
+            this.testCandidate.Copy(source, target, additionalProcessings);
 
             // Assert
             target.Value1.Should().Be(27);

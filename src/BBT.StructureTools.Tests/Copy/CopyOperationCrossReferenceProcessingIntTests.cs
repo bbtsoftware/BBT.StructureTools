@@ -1,27 +1,28 @@
-﻿namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy
+﻿namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class CopyOperationCrossReferenceProcessingIntTests
     {
-        private readonly ICopy<TestClass> testcandidate;
+        private readonly ICopy<TestClass> testCandidate;
 
-        public CopyOperationCrossReferenceProcessingIntTests()
+        public CopyOperationCrossReferenceProcessingIntTests(IIocContainer iocContainer)
         {
-            var kernel = new NinjectIocContainer();
+            iocContainer.Initialize();
 
-            kernel.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<TestClassChild>, TestClassChildCopyRegistrations>();
-            kernel.RegisterSingleton<ICopyRegistrations<TestClassCrossReferencedChild>, TestClassCrossReferencedChildCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClass>, TestClassCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClassChild>, TestClassChildCopyRegistrations>();
+            iocContainer.RegisterSingleton<ICopyRegistrations<TestClassCrossReferencedChild>, TestClassCrossReferencedChildCopyRegistrations>();
 
-            this.testcandidate = kernel.GetInstance<ICopy<TestClass>>();
+            this.testCandidate = iocContainer.GetInstance<ICopy<TestClass>>();
         }
 
         /// <summary>
@@ -43,7 +44,7 @@
             var target = new TestClass();
 
             // Act
-            this.testcandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
+            this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
             crossReferenceSource.Should().NotBeSameAs(target.TestClassCrossReferencedChild);

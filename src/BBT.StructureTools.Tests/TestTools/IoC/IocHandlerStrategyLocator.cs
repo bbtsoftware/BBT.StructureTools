@@ -4,7 +4,7 @@
     using BBT.StrategyPattern;
     using BBT.StructureTools.Initialization;
 
-    public class NinjectStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
+    public class IocHandlerStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
     {
         public IEnumerable<TStrategy> GetAllStrategies()
         {

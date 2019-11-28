@@ -5,19 +5,20 @@
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Initialization;
     using BBT.StructureTools.Tests.Compare.Intention;
-    using BBT.StructureTools.Tests.TestTools;
+    using BBT.StructureTools.Tests.TestTools.IoC;
     using FluentAssertions;
     using NUnit.Framework;
 
     [TestFixture]
+    [TestFixtureSource(typeof(IocTestFixtureSource), "IocContainers")]
     public class ToManyComparerTests
     {
         #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> comparer;
 
-        public ToManyComparerTests()
+        public ToManyComparerTests(IIocContainer iocContainer)
         {
-            var iocContainer = new NinjectIocContainer();
+            iocContainer.Initialize();
 
             iocContainer.RegisterSingleton<ICompareRegistrations<TestClass, ITestCompareIntention>, TestClassCompareRegistrations>();
             iocContainer.RegisterSingleton<ICompareRegistrations<TestClassListOfChildrenItem, ITestCompareIntention>, TestClassListOfChildrenItemCompareRegistrations>();

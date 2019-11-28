@@ -5,7 +5,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
+    public class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
         where TBaseTypeIntf : class
         where TConcreteTypeIntf : class, TBaseTypeIntf
         where TConcreteTypeImpl : TConcreteTypeIntf, new()
