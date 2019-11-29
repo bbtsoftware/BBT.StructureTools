@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
+    public class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
         where TImpl : TInterface, new()
         where TInterface : class, TBaseTargetInterface
     {

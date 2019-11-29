@@ -9,7 +9,7 @@
     /// <typeparam name="TSource">The source to copy from.</typeparam>
     /// <typeparam name="TTarget">The target to copy to.</typeparam>
     /// <typeparam name="TValue">The type of the value to copy.</typeparam>
-    internal interface IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>
+    public interface IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

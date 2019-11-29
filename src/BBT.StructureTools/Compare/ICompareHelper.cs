@@ -3,9 +3,9 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides compare functionality.
+    /// Provides compare 'processings' functionality.
     /// </summary>
-    internal interface ICompareHelper
+    public interface ICompareHelper
     {
         /// <summary>
         /// Start the compare post process if it's needed.

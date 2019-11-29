@@ -5,7 +5,7 @@
     using BBT.StructureTools.Initialization;
 
     /// <inheritdoc/>
-    internal class ConvertStrategyProvider<TSource, TTarget, TIntention> : IConvertStrategyProvider<TSource, TTarget, TIntention>
+    public class ConvertStrategyProvider<TSource, TTarget, TIntention> : IConvertStrategyProvider<TSource, TTarget, TIntention>
         where TIntention : IBaseConvertIntention
     {
         /// <summary>

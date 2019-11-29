@@ -3,9 +3,9 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides copy functionality.
+    /// Provides copy 'processings' functionality.
     /// </summary>
-    internal interface ICopyHelper
+    public interface ICopyHelper
     {
         /// <summary>
         /// Start the copy post process it it's needed.

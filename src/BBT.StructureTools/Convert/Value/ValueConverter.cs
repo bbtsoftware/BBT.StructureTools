@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
+    public class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
     {
         private readonly IValueConvertMapping<TSource, TTarget> valueConvertMap;
 

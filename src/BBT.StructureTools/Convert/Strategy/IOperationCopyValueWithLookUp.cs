@@ -10,7 +10,7 @@
     /// <typeparam name="TSource">The source to copy from.</typeparam>
     /// <typeparam name="TTarget">The target to copy to.</typeparam>
     /// <typeparam name="TValue">The type of the value to copy.</typeparam>
-    internal interface IOperationCopyValueWithLookUp<TSource, TTarget, TValue>
+    public interface IOperationCopyValueWithLookUp<TSource, TTarget, TValue>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

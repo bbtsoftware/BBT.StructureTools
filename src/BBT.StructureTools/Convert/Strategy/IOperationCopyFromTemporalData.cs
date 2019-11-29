@@ -11,7 +11,7 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    internal interface IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
+    public interface IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

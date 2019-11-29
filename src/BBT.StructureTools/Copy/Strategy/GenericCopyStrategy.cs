@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
+    public class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
         where TBase : class
         where TDerived : class, TBase
         where TConcrete : class, TDerived, new()
