@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.MaybePattern;
 
     /// <summary>
     /// Provides methods to support copy.
@@ -24,7 +25,7 @@
         /// <summary>
         /// Creates a new <typeparamref name="TConcreteChild"/> converted from <paramref name="source"/>.
         /// </summary>
-        TChild CreateTarget(TConcreteChild source, TParent reverseRelation, ICopyCallContext copyCallContext);
+        Maybe<TChild> CreateTarget(TConcreteChild source, TParent reverseRelation, ICopyCallContext copyCallContext);
     }
 
     /// <summary>
@@ -40,6 +41,9 @@
         /// <summary>
         /// Creates a new <typeparamref name="TConcreteTarget"/> copied from <paramref name="source"/>.
         /// </summary>
+        /// <remarks>
+        /// Should return a <see cref="Maybe{TTarget}"/>, see https://github.com/bbtsoftware/BBT.Maybe/issues/60.
+        /// </remarks>
         TTarget CreateTarget(TConcreteTarget source, ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 }

@@ -20,7 +20,7 @@
         private readonly IConvertHelper convertHelper;
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
         private Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc;
-        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
+        private Func<TTarget, ICollection<TTargetValue>> targetFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCreateToManyWithSourceFilterAndReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}" /> class.
@@ -44,7 +44,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetExpression = targetExpression;
+            this.targetFunc = targetExpression.Compile();
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -74,10 +74,15 @@
                     sourceValue,
                     target,
                     additionalProcessings);
-                copies.Add(copy);
+
+                if (copy != null)
+                {
+                    copies.Add(copy);
+                }
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.targetExpression, copies);
+            var targetCollection = this.targetFunc.Invoke(target);
+            targetCollection.AddRangeToMe(copies);
         }
     }
 }

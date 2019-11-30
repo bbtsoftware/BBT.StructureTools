@@ -16,7 +16,7 @@
     {
         private ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper;
         private Func<TParent, IEnumerable<TChild>> sourceFunc;
-        private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
+        private Maybe<Func<TParent, ICollection<TChild>>> maybeTargetFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationCreateToManyWithReverseRelation{TParent, TChild, TConcreteChild}"/> class.
@@ -32,14 +32,14 @@
         /// <inheritdoc/>
         public void Initialize(
             Func<TParent, IEnumerable<TChild>> sourceFunc,
-            Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression,
+            Maybe<Func<TParent, ICollection<TChild>>> maybeTargetFunc,
             ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             createCopyHelper.NotNull(nameof(createCopyHelper));
 
             this.sourceFunc = sourceFunc;
-            this.maybeTargetExpression = maybeTargetExpression;
+            this.maybeTargetFunc = maybeTargetFunc;
             this.createCopyHelper = createCopyHelper;
         }
 
@@ -58,11 +58,13 @@
                 target,
                 copyCallContext)).ToList();
 
-            this.maybeTargetExpression.Do(targetExpression =>
+            this.maybeTargetFunc.Do(targetFunc =>
             {
-                target.AddRangeToCollectionFilterNullValues(
-                    targetExpression,
-                    copies);
+                var targetCollection = targetFunc.Invoke(target);
+                foreach (var maybeCopy in copies)
+                {
+                    maybeCopy.Do(child => targetCollection.Add(child));
+                }
             });
         }
     }

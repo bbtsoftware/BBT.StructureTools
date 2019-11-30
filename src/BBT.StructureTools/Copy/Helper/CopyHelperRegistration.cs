@@ -81,7 +81,7 @@
 
             operation.Initialize(
                 sourceFunc,
-                Maybe.Some(targetExpression),
+                Maybe.Some(targetExpression.Compile()),
                 copyHelperFactory.GetCopyHelper(reverseRelationFunc));
 
             this.registeredStrategies.Add(operation);
@@ -103,7 +103,7 @@
 
             operation.Initialize(
                 sourceFunc,
-                Maybe.None<Expression<Func<T, ICollection<TChild>>>>(),
+                Maybe.None<Func<T, ICollection<TChild>>>(),
                 copyHelperFactory.GetCopyHelper(reverseRelationFunc));
 
             this.registeredStrategies.Add(operation);

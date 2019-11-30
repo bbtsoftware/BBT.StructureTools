@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
+    using BBT.MaybePattern;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
@@ -47,7 +48,7 @@
         }
 
         /// <inheritdoc/>
-        public TChild CreateTarget(
+        public Maybe<TChild> CreateTarget(
             TConcreteChild source,
             TParent reverseRelation,
             ICopyCallContext copyCallContext)
@@ -58,7 +59,7 @@
 
             if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.ShallCopy(source)))
             {
-                return null;
+                return Maybe.None<TChild>();
             }
 
             var target = this.instanceCreator.Create();
@@ -70,7 +71,7 @@
             // Make sure that copy did not overwrite the target's reverse relation therefore back reference is set here
             // for a second time.
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
-            return target;
+            return Maybe.Some(target);
         }
     }
 

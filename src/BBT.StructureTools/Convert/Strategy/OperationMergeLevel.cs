@@ -20,7 +20,7 @@
         private readonly IConvertHelper convertHelper;
         private Func<TSource, IEnumerable<TMergeValue>> mergeFunc;
         private Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc;
-        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
+        private Func<TTarget, ICollection<TTargetValue>> targetFunc;
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
 
         /// <summary>
@@ -48,7 +48,7 @@
 
             this.mergeFunc = aMergeFunc;
             this.sourceFunc = sourceFunc;
-            this.targetExpression = targetExpression;
+            this.targetFunc = targetExpression.Compile();
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -88,11 +88,16 @@
                         sourceValue,
                         target,
                         additionalProcessings);
-                    copies.Add(copy);
+
+                    if (copy != null)
+                    {
+                        copies.Add(copy);
+                    }
                 }
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.targetExpression, copies);
+            var targetCollection = this.targetFunc.Invoke(target);
+            targetCollection.AddRangeToMe(copies);
         }
     }
 }

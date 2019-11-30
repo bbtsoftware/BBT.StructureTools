@@ -23,7 +23,7 @@
         /// </summary>
         void Initialize(
             Func<TParent, IEnumerable<TChild>> sourceFunc,
-            Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression,
+            Maybe<Func<TParent, ICollection<TChild>>> maybeTargetFunc,
             ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper);
     }
 }

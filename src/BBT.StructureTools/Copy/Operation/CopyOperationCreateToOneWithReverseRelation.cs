@@ -65,12 +65,12 @@
             var sourceConcrete = sourceChild as TConcreteChild;
             sourceConcrete.NotNull(nameof(sourceConcrete));
 
-            var copy = this.createCopyHelper.CreateTarget(
+            var maybeCopiedChild = this.createCopyHelper.CreateTarget(
                 sourceConcrete,
                 target,
                 copyCallContext);
 
-            target.SetPropertyValue(this.targetExpression, copy);
+            maybeCopiedChild.Do(child => target.SetPropertyValue(this.targetExpression, child));
         }
     }
 }
