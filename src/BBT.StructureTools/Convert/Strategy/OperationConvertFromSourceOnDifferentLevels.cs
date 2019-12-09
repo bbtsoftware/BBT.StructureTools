@@ -59,7 +59,17 @@
 
             additionalProcessings.Add(
                 new GenericConvertPostProcessing<TSource, TTarget>(
-                    (x, y) => this.convert.Convert(this.sourceFunc(x), y as TTargetValue, newAdditionalProcessings)));
+                    (subSource, subTarget) =>
+                    {
+                        // Once added post processings are executed on each model tree.
+                        // Therefore this additional null guard is needed.
+                        if (this.sourceFunc(subSource) == null)
+                        {
+                            return;
+                        }
+
+                        this.convert.Convert(this.sourceFunc(subSource), subTarget as TTargetValue, newAdditionalProcessings);
+                    }));
         }
     }
 }
