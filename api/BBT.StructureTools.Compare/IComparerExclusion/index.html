@@ -135,11 +135,6 @@
 			<li class="header">Namespace</li>
 		<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare">BBT<wbr>.StructureTools<wbr>.Compare</a></li>
 		<li role="separator" class="divider"></li>
-			<li class="header">Class Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1">ModelIntComparer<wbr>&lt;TModel&gt;<wbr></a></li>
-			<li class="header">Enum Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion">Type<wbr>Of<wbr>Comparer<wbr>Exclusion</a></li>
 			<li class="header">Interface Types</li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IBaseComparerIntention">I<wbr>Base<wbr>Comparer<wbr>Intention</a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2">I<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
@@ -147,6 +142,11 @@
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2">I<wbr>Compare<wbr>Registrations<wbr>&lt;<wbr>T<wbr>Model<wbr>To<wbr>Compare, <wbr>T<wbr>Compare<wbr>Intention&gt;<wbr></a></li>
 				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparerExclusion">IComparerExclusion</a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IFlatComparer">IFlatComparer</a></li>
+			<li class="header">Enum Types</li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion">Type<wbr>Of<wbr>Comparer<wbr>Exclusion</a></li>
+			<li class="header">Class Types</li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1">ModelIntComparer<wbr>&lt;TModel&gt;<wbr></a></li>
 
 
                     </ul>
@@ -186,8 +186,8 @@
 								<dt>Implementing Types</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1">Sub<wbr>Interface<wbr>Comparer<wbr>Exclusion</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1#typeparam-TSubInterface">TSubInterface</a>&gt;<wbr></li>								
 											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1">Property<wbr>Comparer<wbr>Exclusion</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1#typeparam-TModelInterface">TModelInterface</a>&gt;<wbr></li>								
+											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1">Sub<wbr>Interface<wbr>Comparer<wbr>Exclusion</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1#typeparam-TSubInterface">TSubInterface</a>&gt;<wbr></li>								
 									</ul>
 								</dd>				
 						</dl>
@@ -197,10 +197,10 @@
 							graph BT
 	Type["IComparerExclusion"]
 class Type type-node
-	Implementing0["SubInterfaceComparerExclusion&lt;TSubInterface&gt;"]-.-&gt;Type
-	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1"
-	Implementing1["PropertyComparerExclusion&lt;TModelInterface&gt;"]-.-&gt;Type
-	click Implementing1 "/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1"
+	Implementing0["PropertyComparerExclusion&lt;TModelInterface&gt;"]-.-&gt;Type
+	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1"
+	Implementing1["SubInterfaceComparerExclusion&lt;TSubInterface&gt;"]-.-&gt;Type
+	click Implementing1 "/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/SubInterfaceComparerExclusion_1"
 
 						</div>
 					</div>
