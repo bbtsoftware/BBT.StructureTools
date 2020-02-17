@@ -9,7 +9,7 @@
     internal class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
         where T : class
     {
-        private readonly Expression<Func<T, TValue>> targetexpression;
+        private readonly Expression<Func<T, TValue>> targetExpression;
         private readonly Func<TValue> valueFunc;
 
         /// <summary>
@@ -22,14 +22,14 @@
             targetExpression.NotNull(nameof(targetExpression));
             attrValueExpression.NotNull(nameof(attrValueExpression));
 
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.valueFunc = attrValueExpression.Compile();
         }
 
         /// <inheritdoc/>
         public void Copy(T source, T target, ICopyCallContext copyCallContext)
         {
-            target.SetPropertyValue(this.targetexpression, this.valueFunc.Invoke());
+            target.SetPropertyValue(this.targetExpression, this.valueFunc.Invoke());
         }
     }
 }

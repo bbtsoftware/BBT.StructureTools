@@ -16,7 +16,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
-        internal Comparer(
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public Comparer(
             ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)

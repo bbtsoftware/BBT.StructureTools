@@ -14,7 +14,18 @@
     {
         private Func<TSource, TValue> sourceFunc;
         private Func<TSource, TValue> sourceUpperLimitFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueWithUpperLimit{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValueWithUpperLimit()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -28,7 +39,7 @@
 
             this.sourceFunc = aSourceFunc;
             this.sourceUpperLimitFunc = aSourceUpperLimitFunc;
-            this.targetexpression = aTargetExpression;
+            this.targetExpression = aTargetExpression;
         }
 
         /// <inheritdoc/>
@@ -45,7 +56,7 @@
 
             var value = LookupUtils.ApplyUpperLimit(sourceValue, upperLimitValue);
             aTarget.SetPropertyValue(
-                this.targetexpression,
+                this.targetExpression,
                 value);
         }
     }

@@ -16,7 +16,7 @@
         private readonly ICopyStrategyProvider<TStrategy, TChildType> strategyProvider;
 
         private Func<T, IEnumerable<TChildType>> sourceFunc;
-        private Expression<Func<T, ICollection<TChildType>>> targetexpression;
+        private Expression<Func<T, ICollection<TChildType>>> targetExpression;
         private Func<TStrategy, TChildType> createTargetChildFunc;
 
         /// <summary>
@@ -46,7 +46,7 @@
                 newKids.Add(childCopy);
             }
 
-            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, newKids);
+            target.AddRangeToCollectionFilterNullValues(this.targetExpression, newKids);
         }
 
         /// <inheritdoc/>
@@ -60,7 +60,7 @@
             aCreateTargetChildExpression.NotNull(nameof(aCreateTargetChildExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createTargetChildFunc = aCreateTargetChildExpression.Compile();
         }
     }

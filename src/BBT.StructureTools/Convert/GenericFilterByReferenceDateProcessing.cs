@@ -4,7 +4,7 @@
 
     /// <summary>
     /// Provides a filter for a specific reference date.
-    /// Generic implementation of <see cref="IConvertInterception{TSoureClass,TTargetClass}"/>.
+    /// Generic implementation of <see cref="IConvertInterception{TSourceClass,TTargetClass}"/>.
     /// </summary>
     /// <typeparam name="TSourceClass">See link above.</typeparam>
     /// <typeparam name="TTargetClass">Also see link above.</typeparam>

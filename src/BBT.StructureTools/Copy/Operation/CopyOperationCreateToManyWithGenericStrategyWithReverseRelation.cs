@@ -15,7 +15,7 @@
     {
         private readonly ICopyStrategyProvider<TStrategy, TChild> strategyProvider;
         private Func<T, IEnumerable<TChild>> sourceFunc;
-        private Expression<Func<T, ICollection<TChild>>> targetexpression;
+        private Expression<Func<T, ICollection<TChild>>> targetExpression;
         private Expression<Func<TChild, T>> reverseRelationExpression;
 
         /// <summary>
@@ -46,7 +46,7 @@
                 newKids.Add(childCopy);
             }
 
-            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, newKids);
+            target.AddRangeToCollectionFilterNullValues(this.targetExpression, newKids);
         }
 
         /// <inheritdoc/>
@@ -57,7 +57,7 @@
             reverseRelationExpression.NotNull(nameof(reverseRelationExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.reverseRelationExpression = reverseRelationExpression;
         }
     }

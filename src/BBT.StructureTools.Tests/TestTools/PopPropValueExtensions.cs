@@ -11,16 +11,16 @@
     /// </summary>
     public static class PopPropValueExtensions
     {
-        public static void CreateStringForProperty<T>(this T target, Expression<Func<T, string>> propex)
+        public static void CreateStringForProperty<T>(this T target, Expression<Func<T, string>> propertyExpression)
             where T : class
         {
-            var propname = ReflectionUtils.GetPropertyName(propex);
+            var propertyName = ReflectionUtils.GetPropertyName(propertyExpression);
             var targetType = typeof(T);
             var type = targetType.Name;
 
-            var targetProperty = targetType.GetProperty(propname, BindingFlags.Public | BindingFlags.Instance);
+            var targetProperty = targetType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-            var value = $"{type}.{propname}_{DateTime.Now.ToLongTimeString()}";
+            var value = $"{type}.{propertyName}_{DateTime.Now.ToLongTimeString()}";
 
             targetProperty.SetValue(target, value);
         }

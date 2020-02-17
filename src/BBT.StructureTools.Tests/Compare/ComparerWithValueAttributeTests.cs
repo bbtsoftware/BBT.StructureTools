@@ -13,15 +13,15 @@
 
     public class ComparerWithValueAttributeTests
     {
-        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
         public ComparerWithValueAttributeTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
 
-            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         [Fact]
@@ -31,7 +31,7 @@
             var testClass = new TestClass { Value1 = 45 };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -45,7 +45,7 @@
             var testClassB = new TestClass { Value1 = 45 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -59,7 +59,7 @@
             var testClassB = new TestClass { Value1 = 44 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
@@ -73,7 +73,7 @@
             var testClassB = new TestClass { Value2 = 44 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -88,7 +88,7 @@
             var comparerExclusions = new List<IComparerExclusion> { new PropertyComparerExclusion<TestClass>(x => x.Value1) };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

@@ -17,8 +17,19 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private Func<TSource, TSourceValue> sourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> targetexpression;
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCreateToOne{TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCreateToOne()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -31,7 +42,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -56,7 +67,7 @@
                     sourceValue,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.targetexpression, targetValue);
+            target.SetPropertyValue(this.targetExpression, targetValue);
         }
     }
 }

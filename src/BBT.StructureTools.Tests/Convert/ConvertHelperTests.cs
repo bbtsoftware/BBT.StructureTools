@@ -12,19 +12,19 @@
         [Fact]
         public void PreProcessing_WithEmptyist_Succeeds()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
             var preprocessings = new List<IBaseAdditionalProcessing>();
 
             var source = new Root();
             var target = new TargetRoot();
 
-            testcandidate.DoConvertPreProcessing(source, target, preprocessings);
+            testCandidate.DoConvertPreProcessing(source, target, preprocessings);
         }
 
         [Fact]
         public void PreProcessing_ExecutesPreprocessing()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
 
             var source = new Root();
             var target = new TargetRoot();
@@ -44,7 +44,7 @@
                 preprocShouldNotExecuteBecauseWrongProcessingType.Object,
             };
 
-            testcandidate.DoConvertPreProcessing(source, target, preprocessings);
+            testCandidate.DoConvertPreProcessing(source, target, preprocessings);
 
             preprocShouldExecute.Verify(x => x.DoPreProcessing(source, target), Times.Once);
             preprocShouldNotExecuteBecauseWrongSource.Verify(x => x.DoPreProcessing(It.IsAny<Leaf>(), target), Times.Never);
@@ -54,19 +54,19 @@
         [Fact]
         public void PostProcessing_WithEmptyist_Succeeds()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
             var preprocessings = new List<IBaseAdditionalProcessing>();
 
             var source = new Root();
             var target = new TargetRoot();
 
-            testcandidate.DoConvertPostProcessing(source, target, preprocessings);
+            testCandidate.DoConvertPostProcessing(source, target, preprocessings);
         }
 
         [Fact]
         public void PostProcessing_ExecutesPostprocessing()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
 
             var source = new Root();
             var target = new TargetRoot();
@@ -86,7 +86,7 @@
                 postprocShouldNotExecuteBecauseWrongProcessingType.Object,
             };
 
-            testcandidate.DoConvertPostProcessing(source, target, postprocessings);
+            testCandidate.DoConvertPostProcessing(source, target, postprocessings);
 
             postprocShouldExecute.Verify(x => x.DoPostProcessing(source, target), Times.Once);
             postprocShouldNotExecuteBecauseWrongSource.Verify(x => x.DoPostProcessing(It.IsAny<Leaf>(), target), Times.Never);
@@ -96,18 +96,18 @@
         [Fact]
         public void Intercept_WithEmptyist_Succeeds()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
             var preprocessings = new List<IBaseAdditionalProcessing>();
 
             var source = new Root();
 
-            testcandidate.ContinueConvertProcess<Root, TargetRoot>(source, preprocessings);
+            testCandidate.ContinueConvertProcess<Root, TargetRoot>(source, preprocessings);
         }
 
         [Fact]
         public void ConvertInterception_Intercepts()
         {
-            var testcandidate = new ConvertHelper();
+            var testCandidate = new ConvertHelper();
 
             var source = new Root();
             var target = new TargetRoot();
@@ -127,7 +127,7 @@
                 postprocShouldNotExecuteBecauseWrongProcessingType.Object,
             };
 
-            testcandidate.ContinueConvertProcess<Root, TargetRoot>(source, postprocessings);
+            testCandidate.ContinueConvertProcess<Root, TargetRoot>(source, postprocessings);
 
             postprocShouldExecute.Verify(x => x.CallConverter(source), Times.Once);
             postprocShouldNotExecuteBecauseWrongSource.Verify(x => x.CallConverter(It.IsAny<Leaf>()), Times.Never);

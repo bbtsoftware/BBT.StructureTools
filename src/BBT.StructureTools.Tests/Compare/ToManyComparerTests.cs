@@ -17,7 +17,7 @@
 
         public ToManyComparerTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
             kernel.Bind<ICompareRegistrations<TestClassistOfChildrenItem, ITestCompareIntention>>().To<TestClassistOfChildrenItecompareRegistrations>();

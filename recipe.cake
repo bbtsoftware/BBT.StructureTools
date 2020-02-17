@@ -7,7 +7,7 @@
 Environment.SetVariableNames();
 
 BuildParameters.SetParameters(
-    context: Context, 
+    context: Context,
     buildSystem: BuildSystem,
     sourceDirectoryPath: "./src",
     title: "BBT.StructureTools",

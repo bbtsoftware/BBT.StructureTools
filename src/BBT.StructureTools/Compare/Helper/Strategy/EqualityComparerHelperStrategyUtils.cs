@@ -71,17 +71,17 @@
                 return true;
             }
 
-            var list1ist = list1 as IList<TModel> ?? list1.ToList();
-            var list2ist = list2 as IList<TModel> ?? list2.ToList();
+            var list1List = list1 as IList<TModel> ?? list1.ToList();
+            var list2List = list2 as IList<TModel> ?? list2.ToList();
 
-            if (list1ist.Count != list2ist.Count)
+            if (list1List.Count != list2List.Count)
             {
                 return false;
             }
 
             var comparer = new DictionaryComparer<TModel>(compareFunc);
             var counterDictionary = new Dictionary<TModel, int>(comparer);
-            foreach (var item1 in list1ist)
+            foreach (var item1 in list1List)
             {
                 if (counterDictionary.ContainsKey(item1))
                 {
@@ -93,7 +93,7 @@
                 }
             }
 
-            foreach (var item2 in list2ist)
+            foreach (var item2 in list2List)
             {
                 if (counterDictionary.ContainsKey(item2))
                 {

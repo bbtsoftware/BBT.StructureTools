@@ -12,7 +12,18 @@
         where TTarget : class
     {
         private Func<TSource, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValue{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValue()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -23,7 +34,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
@@ -36,7 +47,7 @@
             target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
-            target.SetPropertyValue(this.targetexpression, sourceValue);
+            target.SetPropertyValue(this.targetExpression, sourceValue);
         }
     }
 }

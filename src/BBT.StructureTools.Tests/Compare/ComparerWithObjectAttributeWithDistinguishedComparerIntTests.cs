@@ -16,17 +16,17 @@
         #region Members, Setup
 
         private static IComparer<TestAttribute, ITestCompareIntention> distinguishedComparer;
-        private readonly IComparer<TestClass, ITestCompareIntention> testcandidate;
+        private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
         public ComparerWithObjectAttributeWithDistinguishedComparerIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICompareRegistrations<TestClass, ITestCompareIntention>>().To<TestClassCompareRegistrations>();
             kernel.Bind<ICompareRegistrations<TestAttribute, ITestCompareIntention>>().To<TestAttributeCompareRegistrations>();
 
             distinguishedComparer = kernel.Get<IComparer<TestAttribute, ITestCompareIntention>>();
-            this.testcandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
+            this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
         #endregion
@@ -45,7 +45,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -65,7 +65,7 @@
             };
 
             // Act
-            var result = this.testcandidate.Equals(testClass, testClass);
+            var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
             result.Should().BeTrue();
@@ -83,7 +83,7 @@
             var testClassB = new TestClass { TestAttribute = testAttribute };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -102,7 +102,7 @@
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -121,7 +121,7 @@
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeFalse();
@@ -140,7 +140,7 @@
             var testClassB = new TestClass { TestAttribute = testAttribute2 };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB);
+            var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
             result.Should().BeTrue();
@@ -164,7 +164,7 @@
                                           };
 
             // Act
-            var result = this.testcandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
+            var result = this.testCandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
             result.Should().BeTrue();

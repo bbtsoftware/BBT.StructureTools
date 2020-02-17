@@ -12,7 +12,18 @@
         where TTarget : class
     {
         private Func<TSource, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueIfTargetIsDefault{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValueIfTargetIsDefault()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -23,7 +34,7 @@
             aTargetExpression.NotNull(nameof(aTargetExpression));
 
             this.sourceFunc = aSourceFunc;
-            this.targetexpression = aTargetExpression;
+            this.targetExpression = aTargetExpression;
         }
 
         /// <inheritdoc/>
@@ -36,14 +47,14 @@
             aTarget.NotNull(nameof(aTarget));
 
             var sourceValue = this.sourceFunc.Invoke(aSource);
-            var targetValue = aTarget.GetPropertyValue(this.targetexpression);
+            var targetValue = aTarget.GetPropertyValue(this.targetExpression);
             if (!LookupUtils.IsDefaultValue(targetValue))
             {
                 return;
             }
 
             aTarget.SetPropertyValue(
-                this.targetexpression,
+                this.targetExpression,
                 sourceValue);
         }
     }

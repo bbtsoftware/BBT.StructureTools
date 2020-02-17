@@ -15,7 +15,7 @@
         where TTarget : class
     {
         private readonly ICollection<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits = new Collection<IConvertOperation<TSource, TTarget>>();
-        private readonly IIocResolver servicelocator = IocHandler.Instance.IocResolver;
+        private readonly IIocResolver serviceLocator = IocHandler.Instance.IocResolver;
 
         /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCopySource(
@@ -23,7 +23,7 @@
         {
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopySource<TSource, TTarget>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopySource<TSource, TTarget>>();
             operation.Initialize(targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -37,7 +37,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -51,7 +51,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -67,7 +67,7 @@
             sourceLookUpFunc.NotNull(nameof(sourceLookUpFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceLookUpFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -84,7 +84,7 @@
             sourceUpperLimitFunc.NotNull(nameof(sourceUpperLimitFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -98,7 +98,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -113,7 +113,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
-                this.servicelocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
+                this.serviceLocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -128,7 +128,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
-                this.servicelocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
+                this.serviceLocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -139,7 +139,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationSourceSubConvert<TSource, TTarget, TSourceValue, TConvertIntention>>();
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -151,7 +151,7 @@
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -162,7 +162,7 @@
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>>();
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -177,7 +177,7 @@
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
@@ -193,7 +193,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>>();
             operation.Initialize(sourceExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
@@ -206,7 +206,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTarget, TConvertIntention>>();
             operation.Initialize(sourceFunc);
             this.convertHelperOperationWorkUnits.Add(operation);
@@ -220,7 +220,7 @@
             where TTargetValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             operation.Initialize(sourceFunc);
             this.convertHelperOperationWorkUnits.Add(operation);
@@ -237,7 +237,7 @@
         {
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(targetExpression, createConvertHelper);
             this.convertHelperOperationWorkUnits.Add(operation);
@@ -255,7 +255,7 @@
         {
             aBaseSourceFunc.NotNull(nameof(aBaseSourceFunc));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
             operation.Initialize(aBaseSourceFunc, targetValueExpression, targetParentExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
@@ -275,7 +275,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
@@ -298,7 +298,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -315,7 +315,7 @@
 
             var copyOperationType = typeof(IOperationSubCopy<,,>).MakeGenericType(typeof(TSource), typeof(TTarget), copyType);
 
-            var operation = (IConvertOperation<TSource, TTarget>)this.servicelocator.GetInstance(copyOperationType);
+            var operation = (IConvertOperation<TSource, TTarget>)this.serviceLocator.GetInstance(copyOperationType);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
@@ -337,7 +337,7 @@
             targetExpression.NotNull(nameof(targetExpression));
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
-            var operation = this.servicelocator.GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
+            var operation = this.serviceLocator.GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
             operation.Initialize(
                 aMergeFunc,
                 sourceFunc,
@@ -355,7 +355,7 @@
         {
             sourceFunc.NotNull(nameof(sourceFunc));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
             operation.Initialize(sourceFunc);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -375,7 +375,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -398,7 +398,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator.GetInstance<IOperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+            var operation = this.serviceLocator.GetInstance<IOperationCopyOneToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -421,7 +421,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyGenericWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
@@ -444,7 +444,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
@@ -468,7 +468,7 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
@@ -528,7 +528,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            var operation = this.servicelocator
+            var operation = this.serviceLocator
                    .GetInstance<IOperationCopyFromTemporalData<TSource, TTarget, TSourceValue, TConvertIntention>>();
             operation.Initialize(sourceFunc, referenceDateFunc);
             this.convertHelperOperationWorkUnits.Add(operation);

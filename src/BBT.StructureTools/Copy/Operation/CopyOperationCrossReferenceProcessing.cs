@@ -12,7 +12,18 @@
         where TCrossReferencedModel : class
         where TReferencingModel : class
     {
-        private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperyExpression;
+        private Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingPropertyExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CopyOperationCrossReferenceProcessing{T, TCrossReferencedModel, TReferencingModel}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public CopyOperationCrossReferenceProcessing()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -20,7 +31,7 @@
         {
             referencingProperty.NotNull(nameof(referencingProperty));
 
-            this.referencingProperyExpression = referencingProperty;
+            this.referencingPropertyExpression = referencingProperty;
         }
 
         /// <inheritdoc/>
@@ -31,7 +42,7 @@
         {
             copyCallContext.NotNull(nameof(copyCallContext));
 
-            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingProperyExpression);
+            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingPropertyExpression);
             crossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);
         }
     }

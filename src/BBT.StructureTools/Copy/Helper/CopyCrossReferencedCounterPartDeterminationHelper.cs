@@ -87,7 +87,7 @@
 
         /// <summary>
         /// Is called when the "referencing models" are processed.
-        /// Determines the correct counter part for the property specified in the constructer.
+        /// Determines the correct counter part for the property specified in the constructor.
         /// </summary>
         private void ReferencingModelAction(TReferencingModel source, TReferencingModel target)
         {

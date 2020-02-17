@@ -7,11 +7,22 @@
     /// <summary>
     /// See <see cref="IComparer{T}"/>.
     /// Compares two types based on how they inherit each other / are assignable to each other.
-    /// A more specific type is concidered "higher up" in the inheritence hierarchy, and therefore
+    /// A more specific type is considered "higher up" in the inheritance hierarchy, and therefore
     /// "greater" in a comparison.
     /// </summary>
     internal sealed class TypeComparer : IComparer<Type>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypeComparer"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public TypeComparer()
+        {
+        }
+
         /// <inheritdoc/>
         public int Compare(Type x, Type y)
         {

@@ -5,8 +5,19 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    public class ConvertHelper : IConvertHelper
+    internal class ConvertHelper : IConvertHelper
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConvertHelper"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public ConvertHelper()
+        {
+        }
+
         /// <inheritdoc/>
         public void DoConvertPreProcessing<TSourceClass, TTargetClass>(
             TSourceClass source,

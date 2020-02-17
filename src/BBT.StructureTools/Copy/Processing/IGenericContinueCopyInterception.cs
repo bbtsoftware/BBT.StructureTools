@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface to intercept the copy process.
     /// </summary>
-    /// <typeparam name="TType">Typisation here.</typeparam>
+    /// <typeparam name="TType">Typification here.</typeparam>
     public interface IGenericContinueCopyInterception<in TType> : IBaseAdditionalProcessing
         where TType : class
     {

@@ -75,7 +75,7 @@
                 additionalProcessings);
             copies.Add(copy);
 
-            target.AddRangeToCollectionFilterNulvalues(this.targetExpression, copies);
+            target.AddRangeToCollectionFilterNullValues(this.targetExpression, copies);
         }
     }
 }

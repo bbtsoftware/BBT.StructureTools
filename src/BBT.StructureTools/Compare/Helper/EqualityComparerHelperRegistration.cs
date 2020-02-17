@@ -8,7 +8,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    public class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
+    internal class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
         where T : class
     {
         private readonly ICollection<IEqualityComparerHelperStrategy<T>> registeredStrategies;
@@ -16,6 +16,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperRegistration{T}"/> class.
         /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
         public EqualityComparerHelperRegistration()
         {
             this.registeredStrategies = new List<IEqualityComparerHelperStrategy<T>>();

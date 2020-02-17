@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
@@ -14,7 +13,18 @@
     {
         private Func<TSource, TValue> sourceFunc;
         private Func<TSource, TValue> sourceLookupFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueWithLookUp{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor is required and needs to be public because of the issue
+        /// described in GH-17.
+        /// </remarks>
+        public OperationCopyValueWithLookUp()
+        {
+        }
 
         /// <inheritdoc/>
         public void Initialize(
@@ -28,7 +38,7 @@
 
             this.sourceFunc = aSourceFunc;
             this.sourceLookupFunc = aSourceLookUpFunc;
-            this.targetexpression = aTargetExpression;
+            this.targetExpression = aTargetExpression;
         }
 
         /// <inheritdoc/>
@@ -48,7 +58,7 @@
             }
 
             aTarget.SetPropertyValue(
-                this.targetexpression,
+                this.targetExpression,
                 sourceValue);
         }
     }
