@@ -34,7 +34,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BBT.Maybe" Version="2.0.0" />
+    <PackageReference Include="BBT.Maybe" Version="3.1.0" />
     <PackageReference Include="BBT.StrategyPattern" Version="1.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4">
       <PrivateAssets>all</PrivateAssets>
