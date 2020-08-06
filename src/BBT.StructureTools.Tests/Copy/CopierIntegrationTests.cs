@@ -108,7 +108,7 @@
             // Make sure original and copy of the parent object are not the same.
             testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
 
-            testClassParentOriginal.Children.Count().Should().Be(3);
+            testClassParentOriginal.Children.Count.Should().Be(3);
 
             foreach (var childhild in testClassParentCopyChildren)
             {

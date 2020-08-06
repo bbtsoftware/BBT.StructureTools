@@ -13,13 +13,9 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyHelperOperations{T}"/> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
+        internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
         {
-            registeredStrategies.NotNull(nameof(registeredStrategies));
+            StructureToolsArgumentChecks.NotNull(registeredStrategies, nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }

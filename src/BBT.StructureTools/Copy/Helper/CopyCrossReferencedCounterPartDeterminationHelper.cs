@@ -16,7 +16,7 @@
     /// </summary>
     /// <typeparam name="TCrossReferencedModel">The type of the "cross-referenced model".</typeparam>
     /// <typeparam name="TReferencingModel">The type of the "referencing model".</typeparam>
-    internal class CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>
+    public class CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>
         where TCrossReferencedModel : class
         where TReferencingModel : class
     {
@@ -45,10 +45,10 @@
         /// </summary>
         /// <remarks>It is essential that the "cross-referenced models" are copied before the "referencing models".</remarks>
         /// <param name="referencingProperty">An expression representing the property on the "referencing model" that refers to the "cross-referenced model".</param>
-        internal CopyCrossReferencedCounterPartDeterminationHelper(
+        public CopyCrossReferencedCounterPartDeterminationHelper(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            referencingProperty.NotNull(nameof(referencingProperty));
+            StructureToolsArgumentChecks.NotNull(referencingProperty, nameof(referencingProperty));
 
             this.referencingProperty = ExpressionUtils.GetProperty(referencingProperty);
 
@@ -63,9 +63,9 @@
         /// the determination of the counter part.
         /// </summary>
         /// <param name="additionalProcessings">Set of existing additional processing items.</param>
-        internal void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             additionalProcessings.Add(this.crossReferencedModelPostProcessings);
             additionalProcessings.Add(this.referencingModelPostProcessings);
@@ -78,8 +78,8 @@
         /// </summary>
         private void CrossReferencedModelAction(TCrossReferencedModel source, TCrossReferencedModel target)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
 
             // Register source target pair.
             this.referencedModelSourceTargetRepository.Add(source, target);
@@ -87,12 +87,12 @@
 
         /// <summary>
         /// Is called when the "referencing models" are processed.
-        /// Determines the correct counter part for the property specified in the constructor.
+        /// Determines the correct counter part for the property specified in the constructer.
         /// </summary>
         private void ReferencingModelAction(TReferencingModel source, TReferencingModel target)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
 
             // Determine correct counter part.
             var crossReferencedSourceModel = (TCrossReferencedModel)this.referencingProperty.GetValue(source);
@@ -110,7 +110,11 @@
                 var referencingType = typeof(TReferencingModel);
                 var crossReferencedType = typeof(TCrossReferencedModel);
 
-                throw new CopyConvertCompareException($"The correct cross-referenced counter part could not be determined. The referenced models ('{crossReferencedType}') must be processed before the referencing models ('{referencingType}')");
+                throw new StructureToolsException("The correct cross-referenced counter part could not be determined. The referenced models ('" +
+                    crossReferencedType +
+                    "') must be processed before the referencing models ('" +
+                    referencingType +
+                    "')");
             }
 
             // Set correct counter part.

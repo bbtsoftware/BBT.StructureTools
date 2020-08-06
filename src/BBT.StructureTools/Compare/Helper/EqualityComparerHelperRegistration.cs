@@ -7,7 +7,10 @@
     using BBT.StructureTools.Compare.Helper.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Helper for the equals and get hash code calculation.
+    /// </summary>
+    /// <typeparam name="T">Class to compare.</typeparam>
     internal class EqualityComparerHelperRegistration<T> : IEqualityComparerHelperRegistration<T>
         where T : class
     {
@@ -16,16 +19,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperRegistration{T}"/> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
         public EqualityComparerHelperRegistration()
         {
             this.registeredStrategies = new List<IEqualityComparerHelperStrategy<T>>();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Register a compare attribute of type <typeparamref name="TValue"/>.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the attribute to compare.</typeparam>
         public IEqualityComparerHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
             this.registeredStrategies.Add(new EqualityComparerHelperStrategyCompareAttribute<T, TValue>(expression));
@@ -43,17 +45,13 @@
             return this;
         }
 
-        /// <summary>
-        /// Register a to many relationship.
-        /// </summary>
-        /// <typeparam name="TComparer">Type of combined-comparer"/>.</typeparam>
-        /// <typeparam name="TComparerIntention">The comparer intention.</typeparam>
+        /// <inheritdoc/>
         public IEqualityComparerHelperRegistration<T> RegisterToManyRelationship<TComparer, TComparerIntention>(
             Expression<Func<T, IEnumerable<TComparer>>> expression, IComparer<TComparer, TComparerIntention> comparer)
             where TComparer : class
             where TComparerIntention : IBaseComparerIntention
         {
-            comparer.NotNull(nameof(comparer));
+            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
 
             this.registeredStrategies.Add(
                 new EqualityComparerHelperStrategyToManyRelationshipComparer<T, TComparer, TComparerIntention>(
@@ -66,7 +64,7 @@
         public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention
         {
-            comparer.NotNull(nameof(comparer));
+            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
 
             this.registeredStrategies.Add(new EqualityComparerHelperStrategySubCompareComparer<T, TComparerIntention>(comparer));
 

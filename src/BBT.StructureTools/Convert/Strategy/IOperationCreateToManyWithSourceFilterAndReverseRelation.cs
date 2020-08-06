@@ -16,7 +16,7 @@
     /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
     /// <typeparam name="TReverseRelation">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    internal interface IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
+    public interface IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

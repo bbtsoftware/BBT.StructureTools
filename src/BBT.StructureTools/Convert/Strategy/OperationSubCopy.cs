@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
 
@@ -18,7 +19,7 @@
         public OperationSubCopy(
             ICopy<TValue> copy)
         {
-            copy.NotNull(nameof(copy));
+            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
 
             this.copy = copy;
         }
@@ -26,14 +27,14 @@
         /// <inheritdoc/>
         public void Execute(
             TSource source,
-            TTarget aTarget,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            aTarget.NotNull(nameof(aTarget));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            this.copy.Copy(source, aTarget, additionalProcessings);
+            this.copy.Copy(source, target, additionalProcessings);
         }
     }
 }

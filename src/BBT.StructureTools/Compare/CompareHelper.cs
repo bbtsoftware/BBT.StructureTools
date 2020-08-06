@@ -2,18 +2,15 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CompareHelper : ICompareHelper
+    public class CompareHelper : ICompareHelper
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CompareHelper" /> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
         public CompareHelper()
         {
         }
@@ -26,12 +23,12 @@
             where T : class
             where TIntention : IBaseComparerIntention
         {
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IComparePostProcessing<T, TIntention>>()
-                .ToList()
-                .ForEach(x => x.DoPostProcessing(candidate1Nullable, candidate2Nullable));
+            foreach (var additionalProcessing in additionalProcessings.OfType<IComparePostProcessing<T, TIntention>>())
+            {
+                additionalProcessing.DoPostProcessing(candidate1Nullable, candidate2Nullable);
+            }
         }
     }
 }

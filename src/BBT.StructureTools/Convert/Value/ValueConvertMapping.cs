@@ -3,23 +3,16 @@
     using System;
     using System.Collections.Generic;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implements the <see cref="IValueConvertMapping{TSource, TTarget}"/>.
+    /// </summary>
+    /// <typeparam name="TSource">Source type.</typeparam>
+    /// <typeparam name="TTarget">Target type.</typeparam>
     internal class ValueConvertMapping<TSource, TTarget> : IValueConvertMapping<TSource, TTarget>
     {
         private readonly Dictionary<TSource, TTarget> mapping = new Dictionary<TSource, TTarget>();
         private readonly HashSet<TSource> mapToException = new HashSet<TSource>();
         private Func<TTarget> nullCaseFunc;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ValueConvertMapping{TSource, TTarget}"/> class.
-        /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public ValueConvertMapping()
-        {
-        }
 
         /// <inheritdoc/>
         public void AddException(TSource sourceValue)
@@ -52,7 +45,7 @@
             {
                 if (this.nullCaseFunc == null)
                 {
-                    targetValue = default;
+                    targetValue = default(TTarget);
                     return false;
                 }
 
@@ -72,7 +65,7 @@
             {
                 if (this.nullCaseFunc != null)
                 {
-                    throw new CopyConvertCompareException(
+                    throw new StructureToolsException(
                         FormattableString.Invariant($"Null case is already registered for target value {this.nullCaseFunc()}."));
                 }
 
@@ -81,12 +74,14 @@
 
             if (this.mapping.TryGetValue(sourceValue, out var targetValue))
             {
-                throw new CopyConvertCompareException(FormattableString.Invariant($"{sourceValue} is already registered for target value {targetValue}."));
+                throw new StructureToolsException(
+                    FormattableString.Invariant($"{sourceValue} is already registered for target value {targetValue}."));
             }
 
             if (this.mapToException.Contains(sourceValue))
             {
-                throw new CopyConvertCompareException(FormattableString.Invariant($"{sourceValue} is already registered for an exception."));
+                throw new StructureToolsException(
+                    FormattableString.Invariant($"{sourceValue} is already registered for an exception."));
             }
         }
     }

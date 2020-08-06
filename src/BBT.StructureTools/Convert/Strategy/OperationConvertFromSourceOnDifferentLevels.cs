@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -24,8 +25,7 @@
         public OperationConvertFromSourceOnDifferentLevels(
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            convert.NotNull(nameof(convert));
-
+            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
             this.convert = convert;
         }
 
@@ -33,8 +33,7 @@
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc)
         {
-            sourceFunc.NotNull(nameof(sourceFunc));
-
+            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
             this.sourceFunc = sourceFunc;
         }
 
@@ -44,22 +43,18 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
-            target.IsOfType<TTargetValue>(nameof(target));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            StructureToolsArgumentChecks.IsOfType<TTargetValue>(target, nameof(target));
 
-            // Need to use another collection, since the given collection my change and the enumeration fails.
-            var newAdditionalProcessings = new List<IBaseAdditionalProcessing>(additionalProcessings);
-
-            if (this.sourceFunc(source) == null)
+            var actualSource = this.sourceFunc(source);
+            if (actualSource == null)
             {
                 return;
             }
 
-            additionalProcessings.Add(
-                new GenericConvertPostProcessing<TSource, TTarget>(
-                    (x, y) => this.convert.Convert(this.sourceFunc(x), y as TTargetValue, newAdditionalProcessings)));
+            this.convert.Convert(actualSource, target as TTargetValue, additionalProcessings);
         }
     }
 }

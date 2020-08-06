@@ -4,7 +4,7 @@
     /// Strategy to copy the different attribute types.
     /// </summary>
     /// <typeparam name="T">Type of class to copy.</typeparam>
-    internal interface ICopyOperation<in T>
+    public interface ICopyOperation<in T>
     {
         /// <summary>
         /// Copies a single element.

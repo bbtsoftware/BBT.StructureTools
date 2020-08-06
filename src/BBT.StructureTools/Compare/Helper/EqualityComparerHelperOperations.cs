@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Compare.Helper.Strategy;
     using BBT.StructureTools.Extension;
@@ -15,13 +16,9 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EqualityComparerHelperOperations{TModel}"/> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
+        internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
         {
-            registeredStrategies.NotNull(nameof(registeredStrategies));
+            StructureToolsArgumentChecks.NotNull(registeredStrategies, nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }
@@ -30,7 +27,7 @@
         public bool AreRegistrationsEquals(TModel candidate1, TModel candidate2)
         {
             return this.AreRegistrationsEquals(
-                candidate1, candidate2, System.Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
+                candidate1, candidate2, new IBaseAdditionalProcessing[0], new List<IComparerExclusion>());
         }
 
         /// <inheritdoc/>
@@ -73,7 +70,7 @@
             // Hash in case of no attributes
             var hash = model.GetType().GetHashCode();
 
-            for (var index = 0; index < hashCodes.Count; index++)
+            for (int index = 0; index < hashCodes.Count; index++)
             {
                 hash ^= BitOperations.RotateL(hashCodes.ElementAt(index), index % 32);
             }

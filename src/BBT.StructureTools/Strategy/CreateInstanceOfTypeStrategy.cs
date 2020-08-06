@@ -1,11 +1,13 @@
-﻿namespace BBT.StructureTools.Strategy
+﻿// Copyright © BBT Software AG. All rights reserved.
+
+namespace BBT.StructureTools.Strategy
 {
     using System;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
+    public class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
         where TBaseTypeIntf : class
         where TConcreteTypeIntf : class, TBaseTypeIntf
         where TConcreteTypeImpl : TConcreteTypeIntf, new()
@@ -17,7 +19,7 @@
         /// </summary>
         public CreateInstanceOfTypeStrategy(IInstanceCreator<TConcreteTypeIntf, TConcreteTypeImpl> instanceCreator)
         {
-            instanceCreator.NotNull(nameof(instanceCreator));
+            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

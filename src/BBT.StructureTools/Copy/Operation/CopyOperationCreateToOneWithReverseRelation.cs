@@ -5,7 +5,19 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implementation of
+    /// <see cref="ICopyOperationCreateToOneWithReverseRelation{TParent,TChild,TConcreteChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">
+    /// See documentation on interface declaration.
+    /// </typeparam>
+    /// <typeparam name="TChild">
+    /// See documentation on interface declaration.
+    /// </typeparam>
+    /// <typeparam name="TConcreteChild">
+    /// See documentation on interface declaration.
+    /// </typeparam>
     internal class CopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild> : ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>
         where T : class
         where TChild : class
@@ -17,30 +29,19 @@
 
         private ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CopyOperationCreateToOneWithReverseRelation{T, TChild, TConcreteChild}"/> class.
-        /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public CopyOperationCreateToOneWithReverseRelation()
-        {
-        }
-
         /// <inheritdoc/>
         public void Initialize(
             Func<T, TChild> sourceFunc,
             Expression<Func<T, TChild>> targetFuncExpr,
-            ICreateCopyHelper<TChild, TConcreteChild, T> aCreateCopyHelper)
+            ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper)
         {
-            aCreateCopyHelper.NotNull(nameof(aCreateCopyHelper));
+            createCopyHelper.NotNull(nameof(createCopyHelper));
             sourceFunc.NotNull(nameof(sourceFunc));
             targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
             this.targetExpression = targetFuncExpr;
             this.sourceFunc = sourceFunc;
-            this.createCopyHelper = aCreateCopyHelper;
+            this.createCopyHelper = createCopyHelper;
         }
 
         /// <inheritdoc/>

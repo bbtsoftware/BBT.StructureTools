@@ -15,7 +15,7 @@
     /// <typeparam name="TTargetValue">See link above.</typeparam>
     /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    internal interface IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    public interface IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class
@@ -32,7 +32,7 @@
         /// <param name="createConvertHelper">Used to create the collection entries on target.</param>
         void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper);
     }
 }

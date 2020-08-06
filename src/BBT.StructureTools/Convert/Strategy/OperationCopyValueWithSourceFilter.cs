@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
@@ -11,27 +12,23 @@
         where TSource : class
         where TTarget : class
     {
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TTarget, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCopyValueWithSourceFilter{TSource, TTarget, TValue}"/> class.
+        ///  Expression which declares the target value.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public OperationCopyValueWithSourceFilter()
-        {
-        }
+        private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TTarget, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            sourceFunc.NotNull(nameof(sourceFunc));
-            targetExpression.NotNull(nameof(targetExpression));
+            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -43,11 +40,13 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source, target);
-            target.SetPropertyValue(this.targetExpression, sourceValue);
+            target.SetPropertyValue(
+                this.targetExpression,
+                sourceValue);
         }
     }
 }

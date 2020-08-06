@@ -7,7 +7,7 @@
     /// </summary>
     /// <typeparam name="TSource">The source to copy from.</typeparam>
     /// <typeparam name="TTarget">The target to copy to.</typeparam>
-    internal interface IConvertOperation<in TSource, in TTarget>
+    public interface IConvertOperation<in TSource, in TTarget>
         where TSource : class
         where TTarget : class
     {

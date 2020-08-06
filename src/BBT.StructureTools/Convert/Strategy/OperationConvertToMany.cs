@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -18,8 +19,20 @@
     {
         private readonly IConvert<TSourceValue, TTargetValue, TConvertIntention> convert;
         private readonly IConvertHelper convertHelper;
+
+        /// <summary>
+        /// The function to obtain the source values.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
+
+        /// <summary>
+        /// The function to obtain the target values.
+        /// </summary>
         private Func<TTarget, IEnumerable<TTargetValue>> targetFunc;
+
+        /// <summary>
+        /// The function to filter the target value corresponding to the source value.
+        /// </summary>
         private Func<TSourceValue, TTargetValue, bool> filterFunc;
 
         /// <summary>
@@ -29,8 +42,8 @@
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            convert.NotNull(nameof(convert));
-            convertHelper.NotNull(nameof(convertHelper));
+            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -40,15 +53,15 @@
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
-            Func<TSourceValue, TTargetValue, bool> aFilterFunc)
+            Func<TSourceValue, TTargetValue, bool> filterFunc)
         {
-            sourceFunc.NotNull(nameof(sourceFunc));
-            targetFunc.NotNull(nameof(targetFunc));
-            aFilterFunc.NotNull(nameof(aFilterFunc));
+            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            StructureToolsArgumentChecks.NotNull(targetFunc, nameof(targetFunc));
+            StructureToolsArgumentChecks.NotNull(filterFunc, nameof(filterFunc));
 
             this.sourceFunc = sourceFunc;
             this.targetFunc = targetFunc;
-            this.filterFunc = aFilterFunc;
+            this.filterFunc = filterFunc;
         }
 
         /// <inheritdoc/>
@@ -57,9 +70,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.NotNull(nameof(additionalProcessings));
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
 
             var sourceValues = this.sourceFunc(source).ToList();
             var targetValues = this.targetFunc(target).Where(x => x != null).ToList();
@@ -73,7 +86,8 @@
                 }
 
                 var errorMsg = string.Format(CultureInfo.InvariantCulture, $"One result expected to convert from '{typeof(TSourceValue).Name}' to '{typeof(TTargetValue).Name}'");
-                var targetValue = targetValues.SingleWithExceptionMessage(x => this.filterFunc(sourceValue, x), errorMsg);
+                var targetValue = targetValues
+                    .SingleWithExceptionMessage(x => this.filterFunc(sourceValue, x), errorMsg);
                 this.convert.Convert(sourceValue, targetValue, additionalProcessings);
             }
         }

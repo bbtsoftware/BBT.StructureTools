@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
 
     /// <summary>
@@ -12,7 +13,7 @@
     /// <typeparam name="TIntention">Conversion use case defining intention.</typeparam>
     /// <typeparam name="TSourceInterface">Source interface type - Specific interface of <typeparamref name="TSource"/>.</typeparam>
     /// <typeparam name="TCriterion">Criterion type - Specific interface of <typeparamref name="TTarget"/>.</typeparam>
-    internal class GenericTargetConvertStrategy<TSource, TTarget, TIntention, TSourceInterface, TCriterion> : ITargetConvertStrategy<TSource, TTarget, TIntention>
+    public class GenericTargetConvertStrategy<TSource, TTarget, TIntention, TSourceInterface, TCriterion> : ITargetConvertStrategy<TSource, TTarget, TIntention>
         where TSource : class
         where TTarget : class
         where TIntention : IBaseConvertIntention
@@ -27,7 +28,7 @@
         public GenericTargetConvertStrategy(
             IConvert<TSourceInterface, TCriterion, TIntention> converter)
         {
-            converter.NotNull(nameof(converter));
+            StructureToolsArgumentChecks.NotNull(converter, nameof(converter));
 
             this.converter = converter;
         }
@@ -35,20 +36,22 @@
         /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             var sourceCasted = source as TSourceInterface;
             var targetCasted = target as TCriterion;
 
-            sourceCasted.NotNull(nameof(sourceCasted));
-            targetCasted.NotNull(nameof(targetCasted));
+            StructureToolsArgumentChecks.NotNull(sourceCasted, nameof(sourceCasted));
+            StructureToolsArgumentChecks.NotNull(targetCasted, nameof(targetCasted));
 
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// See <see cref="IGenericStrategy{T}"/>.
+        /// </summary>
         public bool IsResponsible(TTarget criterion)
         {
             var isResponsible = criterion is TCriterion;

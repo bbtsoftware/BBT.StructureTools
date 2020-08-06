@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
 
@@ -12,8 +13,19 @@
         where TTargetModel : class
         where TComparerIntention : IBaseComparerIntention
     {
+        /// <summary>
+        /// Function to get the attribute value.
+        /// </summary>
         private readonly Func<TModel, IEnumerable<TTargetModel>> func;
+
+        /// <summary>
+        /// The comparer.
+        /// </summary>
         private readonly IComparer<TTargetModel, TComparerIntention> comparer;
+
+        /// <summary>
+        /// Name of compared property.
+        /// </summary>
         private readonly string propertyName;
 
         /// <summary>
@@ -23,8 +35,8 @@
             Expression<Func<TModel, IEnumerable<TTargetModel>>> expression,
             IComparer<TTargetModel, TComparerIntention> comparer)
         {
-            expression.NotNull(nameof(expression));
-            comparer.NotNull(nameof(comparer));
+            StructureToolsArgumentChecks.NotNull(expression, nameof(expression));
+            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
 
             this.func = expression.Compile();
             this.propertyName = EqualityComparerHelperStrategyUtils.GetMethodName(expression);
@@ -55,18 +67,18 @@
         }
 
         /// <inheritdoc/>
-        public int? GetElementHashCode(TModel model)
+        public int? GetElementHashCode(TModel element)
         {
-            var models = this.func.Invoke(model);
+            var models = this.func.Invoke(element);
             if (!models.Any())
             {
                 return null;
             }
 
             var hash = models.Count().GetHashCode();
-            foreach (var childModel in models)
+            foreach (var model in models)
             {
-                hash ^= this.comparer.GetHashCode(childModel);
+                hash ^= this.comparer.GetHashCode(model);
             }
 
             return hash;

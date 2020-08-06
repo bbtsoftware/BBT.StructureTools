@@ -2,11 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class Comparer<T, TIntention> : IComparer<T, TIntention>
+    /// <summary>
+    /// Generic comparer"/>.
+    /// Declaration of attributes to compare is delegated to
+    /// <see cref="ICompareRegistrations{TModelToCompare,TCompareIntention}"/>.
+    /// </summary>
+    /// <typeparam name="T">The model type which shall be compared.</typeparam>
+    /// <typeparam name="TIntention">The intention of the comparison.</typeparam>
+    public class Comparer<T, TIntention> : IComparer<T, TIntention>
         where T : class
         where TIntention : IBaseComparerIntention
     {
@@ -16,18 +23,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
         public Comparer(
             ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)
         {
-            compareRegistrations.NotNull(nameof(compareRegistrations));
-            factory.NotNull(nameof(factory));
-            compareHelper.NotNull(nameof(compareHelper));
+            StructureToolsArgumentChecks.NotNull(compareRegistrations, nameof(compareRegistrations));
+            StructureToolsArgumentChecks.NotNull(factory, nameof(factory));
+            StructureToolsArgumentChecks.NotNull(compareHelper, nameof(compareHelper));
 
             this.compareHelper = compareHelper;
             var registrations = factory.Create<T>();
@@ -66,7 +69,7 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
             IEnumerable<IComparerExclusion> exclusions)
         {
-            exclusions.NotNull(nameof(exclusions));
+            StructureToolsArgumentChecks.NotNull(exclusions, nameof(exclusions));
 
             var isEqual = this.equalityComparerHelper.AreRegistrationsEquals(
                 candidate1,

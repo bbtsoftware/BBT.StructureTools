@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
 
@@ -12,8 +13,16 @@
         where TTargetModel : class
         where TIntention : IBaseComparerIntention
     {
+        /// <summary>
+        /// Function to get the property value.
+        /// </summary>
         private readonly Func<TModel, TTargetModel> func;
+
+        /// <summary>
+        /// Name of compared property.
+        /// </summary>
         private readonly string propertyName;
+
         private readonly IComparer<TTargetModel, TIntention> comparer;
 
         /// <summary>
@@ -23,8 +32,8 @@
             Expression<Func<TModel, TTargetModel>> expression,
             IComparer<TTargetModel, TIntention> comparer)
         {
-            expression.NotNull(nameof(expression));
-            comparer.NotNull(nameof(comparer));
+            StructureToolsArgumentChecks.NotNull(expression, nameof(expression));
+            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
 
             this.func = expression.Compile();
             this.propertyName = ReflectionUtils.GetPropertyName(expression);
@@ -43,8 +52,8 @@
                 return true;
             }
 
-            var value1 = this.func.Invoke(candidate1);
-            var value2 = this.func.Invoke(candidate2);
+            var value1 = this.func.Invoke(candidate1) as TTargetModel;
+            var value2 = this.func.Invoke(candidate2) as TTargetModel;
 
             return this.comparer.Equals(value1, value2, additionalProcessings, exclusions);
         }

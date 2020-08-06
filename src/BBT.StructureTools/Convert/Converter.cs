@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
@@ -15,18 +16,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
         public Converter(
             IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
         {
-            convertEngine.NotNull(nameof(convertEngine));
-            convertRegistrations.NotNull(nameof(convertRegistrations));
-            convertHelper.NotNull(nameof(convertHelper));
+            StructureToolsArgumentChecks.NotNull(convertEngine, nameof(convertEngine));
+            StructureToolsArgumentChecks.NotNull(convertRegistrations, nameof(convertRegistrations));
+            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
 
             this.convertHelper = convertHelper;
             var registrations = convertEngine.StartRegistrations();
@@ -40,13 +37,14 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
             this.convertOperations.Convert(source, target, additionalProcessings);
-            this.convertHelper.DoConvertPostProcessing(source, target, additionalProcessings);
+            this.convertHelper.DoConvertPostProcessing(
+                source, target, additionalProcessings);
         }
     }
 }

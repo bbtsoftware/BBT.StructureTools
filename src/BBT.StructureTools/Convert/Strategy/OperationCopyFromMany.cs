@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -14,7 +15,12 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+
         private readonly IConvertHelper convertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
@@ -24,8 +30,8 @@
             IConvert<TSourceValue, TTarget, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            convert.NotNull(nameof(convert));
-            convertHelper.NotNull(nameof(convertHelper));
+            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -34,8 +40,7 @@
         /// <inheritdoc/>
         public void Initialize(Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
         {
-            sourceFunc.NotNull(nameof(sourceFunc));
-
+            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
             this.sourceFunc = sourceFunc;
         }
 
@@ -45,9 +50,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source);
 
@@ -56,17 +61,21 @@
             var isAlreadyProcessed = false;
             foreach (var sourceValue in sourceValues)
             {
-                if (this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(sourceValue, additionalProcessings))
+                if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(
+                    sourceValue, additionalProcessings))
                 {
-                    if (isAlreadyProcessed)
-                    {
-                        var message = FormattableString.Invariant($"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at mximum.");
-                        throw new CopyConvertCompareException(message);
-                    }
-
-                    this.convert.Convert(sourceValue, target, additionalProcessings);
-                    isAlreadyProcessed = true;
+                    continue;
                 }
+
+                if (isAlreadyProcessed)
+                {
+                    var msg = FormattableString.Invariant(
+                        $"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at maximum.");
+                    throw new StructureToolsException(msg);
+                }
+
+                this.convert.Convert(sourceValue, target, additionalProcessings);
+                isAlreadyProcessed = true;
             }
         }
     }

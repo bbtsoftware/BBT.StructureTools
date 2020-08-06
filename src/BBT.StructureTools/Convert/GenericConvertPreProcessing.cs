@@ -2,25 +2,34 @@
 {
     using System;
 
-    /// <inheritdoc/>
-    public class GenericConvertPreProcessing<TSourceClass, TTargetClass>
-        : IConvertPreProcessing<TSourceClass, TTargetClass>
-        where TSourceClass : class
+    /// <summary>
+    /// Generic implementation of <see cref="IConvertPreProcessing{TSoureClass, TTargetClass}"/>.
+    /// </summary>
+    /// <typeparam name="TSoureClass">Type of source class.</typeparam>
+    /// <typeparam name="TTargetClass">Type of target class.</typeparam>
+    public class GenericConvertPreProcessing<TSoureClass, TTargetClass>
+        : IConvertPreProcessing<TSoureClass, TTargetClass>
+        where TSoureClass : class
         where TTargetClass : class
     {
-        private readonly Action<TSourceClass, TTargetClass> action;
+        /// <summary>
+        /// The action.
+        /// </summary>
+        private readonly Action<TSoureClass, TTargetClass> action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericConvertPreProcessing{TSourceClass, TTargetClass}"/> class.
+        /// Initializes a new instance of the <see cref="GenericConvertPreProcessing{TSoureClass, TTargetClass}"/> class.
         /// </summary>
-        public GenericConvertPreProcessing(Action<TSourceClass, TTargetClass> action)
+        public GenericConvertPreProcessing(Action<TSoureClass, TTargetClass> action)
         {
             this.action = action;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// This method will called at the beginning of a convert process.
+        /// </summary>
         public void DoPreProcessing(
-            TSourceClass source,
+            TSoureClass source,
             TTargetClass target)
         {
             this.action.Invoke(source, target);

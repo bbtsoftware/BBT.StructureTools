@@ -7,7 +7,12 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly{T,TStrategy,TChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">c aboF.</typeparam>
+    /// <typeparam name="TStrategy">c aboF.</typeparam>
+    /// <typeparam name="TChild">c aboF.</typeparam>
     internal class CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
@@ -28,13 +33,15 @@
             this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperation{T}"/>.
+        /// </summary>
         public void Copy(
             T source,
             T target,
             ICopyCallContext copyCallContext)
         {
-            var newKids = new List<TChild>();
+            var newKidsList = new List<TChild>();
 
             foreach (var child in this.sourceFunc.Invoke(source))
             {
@@ -42,17 +49,18 @@
                 var childCopy = strategy.Create();
                 strategy.Copy(child, childCopy, copyCallContext);
                 childCopy.SetPropertyValue(this.reverseRelationExpression, target);
-                newKids.Add(childCopy);
+                newKidsList.Add(childCopy);
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly{T,TStrategy,TChild}"/>.
+        /// </summary>
         public void Initialize(
             Func<T, IEnumerable<TChild>> sourceFunc,
             Expression<Func<TChild, T>> reverseRelationExpression)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
-
             reverseRelationExpression.NotNull(nameof(reverseRelationExpression));
 
             this.sourceFunc = sourceFunc;

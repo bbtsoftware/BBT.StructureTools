@@ -12,7 +12,7 @@
     /// <typeparam name="TIntention">Conversion use case defining intention.</typeparam>
     /// <typeparam name="TCriterion">Criterion type - Specific interface of <typeparamref name="TSource"/>.</typeparam>
     /// <typeparam name="TTargetInterface">Target interface type - Specific interface of <typeparamref name="TTarget"/>.</typeparam>
-    internal class GenericSourceConvertStrategy<TSource, TTarget, TIntention, TCriterion, TTargetInterface> : ISourceConvertStrategy<TSource, TTarget, TIntention>
+    public class GenericSourceConvertStrategy<TSource, TTarget, TIntention, TCriterion, TTargetInterface> : ISourceConvertStrategy<TSource, TTarget, TIntention>
         where TSource : class
         where TTarget : class
         where TIntention : IBaseConvertIntention
@@ -27,7 +27,7 @@
         public GenericSourceConvertStrategy(
             IConvert<TCriterion, TTargetInterface, TIntention> converter)
         {
-            converter.NotNull(nameof(converter));
+            StructureToolsArgumentChecks.NotNull(converter, nameof(converter));
 
             this.converter = converter;
         }
@@ -35,12 +35,12 @@
         /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            var sourceCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TCriterion>(source);
-            var targetCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetInterface>(target);
+            var sourceCasted = StructureToolsArgumentChecks.IsOfType<TCriterion>(source, nameof(source));
+            var targetCasted = StructureToolsArgumentChecks.IsOfType<TTargetInterface>(target, nameof(target));
 
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }

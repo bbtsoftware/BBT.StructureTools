@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CopyCallContext : ICopyCallContext
+    public class CopyCallContext : ICopyCallContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyCallContext"/> class.
@@ -20,7 +20,7 @@
         /// </summary>
         public CopyCallContext(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             this.AdditionalProcessings = additionalProcessings;
         }

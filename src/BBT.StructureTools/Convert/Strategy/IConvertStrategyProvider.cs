@@ -6,16 +6,16 @@
     /// <typeparam name="TSource">Source type.</typeparam>
     /// <typeparam name="TTarget">Target type.</typeparam>
     /// <typeparam name="TIntention">Convert intention.</typeparam>
-    internal interface IConvertStrategyProvider<TSource, TTarget, TIntention>
+    public interface IConvertStrategyProvider<TSource, TTarget, TIntention>
         where TIntention : IBaseConvertIntention
     {
         /// <summary>
-        /// Gets a convert strategy which is responsible (determined by source).
+        /// Gets a convert strategy which is responsible (determined by Source).
         /// </summary>
         ISourceConvertStrategy<TSource, TTarget, TIntention> GetConvertStrategyFromSource(TSource source);
 
         /// <summary>
-        /// Gets a convert strategy which is responsible (determined by target).
+        /// Gets a convert strategy which is responsible (determined by Target).
         /// </summary>
         ITargetConvertStrategy<TSource, TTarget, TIntention> GetConvertStrategyFromTarget(TTarget target);
     }

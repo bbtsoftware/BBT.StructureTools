@@ -2,22 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class ConvertHelper : IConvertHelper
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertHelper"/> class.
-        /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public ConvertHelper()
-        {
-        }
-
         /// <inheritdoc/>
         public void DoConvertPreProcessing<TSourceClass, TTargetClass>(
             TSourceClass source,
@@ -26,14 +16,14 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPreProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPreProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>
@@ -44,14 +34,14 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPostProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPostProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>
@@ -61,8 +51,8 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            source.NotNull(nameof(source));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
             return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));

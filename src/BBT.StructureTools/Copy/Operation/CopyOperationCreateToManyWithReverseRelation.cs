@@ -15,19 +15,16 @@
         where TConcreteChild : class, TChild, new()
     {
         private ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper;
-        private Func<TParent, IEnumerable<TChild>> sourceFunc;
-        private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CopyOperationCreateToManyWithReverseRelation{TParent, TChild, TConcreteChild}"/> class.
+        /// Function to get the source's property value.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public CopyOperationCreateToManyWithReverseRelation()
-        {
-        }
+        private Func<TParent, IEnumerable<TChild>> sourceFunc;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -53,6 +50,7 @@
             var sourceValues = this.sourceFunc.Invoke(source)?.ToList();
             sourceValues.NotNull(nameof(sourceValues));
 
+            // ReSharper disable once AssignNullToNotNullAttribute -> StructureToolsArgumentChecks.NotNull is called before!
             var copies = sourceValues.Select(sourceValue => this.createCopyHelper.CreateTarget(
                 sourceValue as TConcreteChild,
                 target,
@@ -60,7 +58,7 @@
 
             this.maybeTargetExpression.Do(targetExpression =>
             {
-                target.AddRangeToCollectionFilterNullValues(
+                target.AddRangeFilterNullValues(
                     targetExpression,
                     copies);
             });

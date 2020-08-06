@@ -10,6 +10,7 @@
         where T : class
     {
         private readonly Expression<Func<T, TValue>> targetExpression;
+
         private readonly Func<TValue> valueFunc;
 
         /// <summary>

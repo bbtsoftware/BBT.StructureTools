@@ -4,13 +4,13 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// Strategy to copy.
+    /// Strategy to copy <see cref="DateTime"/>.
     /// </summary>
     /// <typeparam name="TSource">The source to copy from.</typeparam>
     /// <typeparam name="TTarget">The target to copy to.</typeparam>
     /// <typeparam name="TSourceValue">The type of the source attribute to copy from.</typeparam>
     /// <typeparam name="TTargetValue">The type of the target attribute to copy to.</typeparam>
-    internal interface IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
+    public interface IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

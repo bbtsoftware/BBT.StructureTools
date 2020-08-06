@@ -1,10 +1,19 @@
-﻿namespace BBT.StructureTools.Strategy
+﻿// Copyright © BBT Software AG. All rights reserved.
+
+namespace BBT.StructureTools.Strategy
 {
     using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
+    /// <summary>
+    /// Implementation of <see cref="ICreateByBaseAsCriterionStrategy{TBaseInterface, TInterface}"/>.
+    /// </summary>
+    /// <typeparam name="TBaseInterface">See above.</typeparam>
+    /// <typeparam name="TCriterion">Implementation does return true on IsResponsible if <typeparamref name="TBaseInterface"/> is of type <typeparamref name="TCriterion"/>.</typeparam>
+    /// <typeparam name="TBaseTargetInterface">Target base type interface.</typeparam>
+    /// <typeparam name="TInterface">See above.</typeparam>
+    /// <typeparam name="TImpl">Impl type of of <typeparamref name="TInterface"/>.</typeparam>
+    public class GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl> : ICreateByBaseAsCriterionStrategy<TBaseInterface, TBaseTargetInterface>
         where TImpl : TInterface, new()
         where TInterface : class, TBaseTargetInterface
     {
@@ -15,7 +24,7 @@
         /// </summary>
         public GenericCreateByBaseAsCriterionStrategy(IInstanceCreator<TInterface, TImpl> instanceCreator)
         {
-            instanceCreator.NotNull(nameof(instanceCreator));
+            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

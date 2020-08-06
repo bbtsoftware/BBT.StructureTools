@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Strategy;
@@ -21,7 +22,7 @@
         private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider;
 
         private Func<TSource, IEnumerable<TBaseSource>> source;
-        private Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent;
+        private Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParentExpression;
         private Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget;
 
         /// <summary>
@@ -31,8 +32,8 @@
             IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
             IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider)
         {
-            convertStrategyProvider.NotNull(nameof(convertStrategyProvider));
-            createInstanceStrategyProvider.NotNull(nameof(createInstanceStrategyProvider));
+            StructureToolsArgumentChecks.NotNull(convertStrategyProvider, nameof(convertStrategyProvider));
+            StructureToolsArgumentChecks.NotNull(createInstanceStrategyProvider, nameof(createInstanceStrategyProvider));
 
             this.convertStrategyProvider = convertStrategyProvider;
             this.createInstanceStrategyProvider = createInstanceStrategyProvider;
@@ -51,10 +52,10 @@
                 strategy.Convert(sourceChildElement, childTarget, additionalProcessings);
 
                 // set reverse relation
-                this.reverseRelationOnTarget.Compile().Invoke(childTarget);
+                childTarget.SetPropertyValue(this.reverseRelationOnTarget, target);
 
                 // Add to target collection
-                this.targetParent.Compile().Invoke(target).Add(childTarget);
+                this.targetParentExpression.Compile().Invoke(target).Add(childTarget);
             }
         }
 
@@ -64,12 +65,12 @@
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
             Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
         {
-            source.NotNull(nameof(source));
-            targetParent.NotNull(nameof(targetParent));
-            reverseRelationOnTarget.NotNull(nameof(reverseRelationOnTarget));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(targetParent, nameof(targetParent));
+            StructureToolsArgumentChecks.NotNull(reverseRelationOnTarget, nameof(reverseRelationOnTarget));
 
             this.source = source;
-            this.targetParent = targetParent;
+            this.targetParentExpression = targetParent;
             this.reverseRelationOnTarget = reverseRelationOnTarget;
         }
     }

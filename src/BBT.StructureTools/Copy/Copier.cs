@@ -1,12 +1,16 @@
 ﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class Copier<T> : ICopy<T>
+    /// <summary>
+    /// Generic copy class.
+    /// </summary>
+    /// <typeparam name="T">class to copy.</typeparam>
+    public class Copier<T> : ICopy<T>
         where T : class
     {
         private readonly ICopyHelper copyHelper;
@@ -20,9 +24,9 @@
             ICopyHelper copyHelper,
             ICopyHelperRegistrationFactory factory)
         {
-            copyRegistrations.NotNull(nameof(copyRegistrations));
-            copyHelper.NotNull(nameof(copyHelper));
-            factory.NotNull(nameof(factory));
+            StructureToolsArgumentChecks.NotNull(copyRegistrations, nameof(copyRegistrations));
+            StructureToolsArgumentChecks.NotNull(copyHelper, nameof(copyHelper));
+            StructureToolsArgumentChecks.NotNull(factory, nameof(factory));
 
             var registrations = factory.Create<T>();
             copyRegistrations.DoRegistrations(registrations);
@@ -37,9 +41,9 @@
             T target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             this.Copy(source, target, new CopyCallContext(additionalProcessings));
         }
@@ -50,9 +54,9 @@
             T target,
             ICopyCallContext copyCallContext)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            copyCallContext.NotNull(nameof(copyCallContext));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(copyCallContext, nameof(copyCallContext));
 
             this.operations.Copy(source, target, copyCallContext);
 

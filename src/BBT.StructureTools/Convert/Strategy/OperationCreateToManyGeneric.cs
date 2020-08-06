@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -17,9 +18,18 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
+
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-        private Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCreateToManyGeneric{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}" /> class.
@@ -27,7 +37,7 @@
         public OperationCreateToManyGeneric(
             IConvertHelper convertHelper)
         {
-            convertHelper.NotNull(nameof(convertHelper));
+            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
 
             this.convertHelper = convertHelper;
         }
@@ -35,12 +45,12 @@
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
         {
-            sourceFunc.NotNull(nameof(sourceFunc));
-            targetExpression.NotNull(nameof(targetExpression));
-            createConvertHelper.NotNull(nameof(createConvertHelper));
+            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            StructureToolsArgumentChecks.NotNull(createConvertHelper, nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -53,9 +63,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source);
 
@@ -75,7 +85,9 @@
                 copies.Add(copy);
             }
 
-            target.SetPropertyValue(this.targetExpression, copies);
+            target.AddRangeFilterNullValues(
+                this.targetExpression,
+                copies);
         }
     }
 }

@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
@@ -31,8 +32,8 @@
             IInstanceCreator<TChild, TConcreteChild> instanceCreator,
             ICopy<TChild> copy)
         {
-            instanceCreator.NotNull(nameof(instanceCreator));
-            copy.NotNull(nameof(copy));
+            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
+            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
 
             this.instanceCreator = instanceCreator;
             this.copy = copy;
@@ -41,8 +42,7 @@
         /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr)
         {
-            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
-
+            StructureToolsArgumentChecks.NotNull(reverseRelationExpr, nameof(reverseRelationExpr));
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
@@ -52,9 +52,9 @@
             TParent reverseRelation,
             ICopyCallContext copyCallContext)
         {
-            source.NotNull(nameof(source));
-            reverseRelation.NotNull(nameof(reverseRelation));
-            copyCallContext.NotNull(nameof(copyCallContext));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(reverseRelation, nameof(reverseRelation));
+            StructureToolsArgumentChecks.NotNull(copyCallContext, nameof(copyCallContext));
 
             if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.ShallCopy(source)))
             {
@@ -75,7 +75,10 @@
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMyOnlyContainASingleClass", Justification = "It is a variance of the same class with different number of generic parameters")]
+    [SuppressMessage(
+        "Microsoft.StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification = "It is a variance of the same class with different number of generic parameters")]
     internal class CreateCopyHelper<TTarget, TConcreteTarget>
         : ICreateCopyHelper<TTarget, TConcreteTarget>
         where TTarget : class
@@ -91,8 +94,8 @@
             IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator,
             ICopy<TTarget> copy)
         {
-            instanceCreator.NotNull(nameof(instanceCreator));
-            copy.NotNull(nameof(copy));
+            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
+            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
 
             this.instanceCreator = instanceCreator;
             this.copy = copy;
@@ -103,8 +106,8 @@
             TConcreteTarget source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
             var target = this.instanceCreator.Create();
             this.copy.Copy(source, target, additionalProcessings);

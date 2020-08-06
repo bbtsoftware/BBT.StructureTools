@@ -50,13 +50,13 @@
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <exception cref="InvalidCastException">Thrown if <paramref name="value"/> is not of type <typeparamref name="T"/>.</exception>
         [DebuggerStepThrough]
-        internal static void IsOfType<T>(this object value, string objName)
+        internal static T IsOfType<T>(this object value, string objName)
         {
             value.NotNull(objName);
 
-            if (value is T)
+            if (value is T castedValue)
             {
-                return;
+                return castedValue;
             }
 
             throw new InvalidCastException(FormattableString.Invariant($"{objName} isn't of type {typeof(T)}."));

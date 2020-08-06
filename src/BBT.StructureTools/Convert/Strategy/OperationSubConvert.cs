@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -21,8 +22,7 @@
         public OperationSubConvert(
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            convert.NotNull(nameof(convert));
-
+            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
             this.convert = convert;
         }
 
@@ -32,13 +32,12 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            StructureToolsArgumentChecks.NotNull(source, nameof(source));
+            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
 
-            // Safe guard if the conversion is the wrong way around, eg. base convert
-            // is calling the child's convert.
-            if (source is TSourceValue sourceValue && target is TTargetValue targetValue)
+            var targetValue = target as TTargetValue;
+            if (source is TSourceValue sourceValue && targetValue != null)
             {
                 this.convert.Convert(sourceValue, targetValue, additionalProcessings);
             }
