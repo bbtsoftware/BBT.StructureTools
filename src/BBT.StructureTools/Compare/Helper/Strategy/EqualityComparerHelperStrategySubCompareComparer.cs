@@ -20,7 +20,7 @@
         /// </summary>
         public EqualityComparerHelperStrategySubCompareComparer(IComparer<T, TIntention> comparer)
         {
-            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
+            comparer.NotNull(nameof(comparer));
             this.comparer = comparer;
             this.subComparerType = EqualityComparerHelperStrategyUtils.GetCompareType(comparer);
         }

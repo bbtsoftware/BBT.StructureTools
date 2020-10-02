@@ -80,8 +80,8 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
@@ -103,7 +103,7 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             var operation = this.serviceLocator
                 .GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
@@ -126,7 +126,7 @@
             where TChild : class
             where TConcreteChild : class, TChild, new()
         {
-            StructureToolsArgumentChecks.NotNull(targetFuncExpr, nameof(targetFuncExpr));
+            targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
             var operation = this.serviceLocator
                 .GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
@@ -144,7 +144,7 @@
         /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] furtherAdditionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessing, nameof(additionalProcessing));
+            additionalProcessing.NotNull(nameof(additionalProcessing));
 
             var list = new Collection<IBaseAdditionalProcessing>()
                             {
@@ -186,7 +186,7 @@
             where TCrossReferencedModel : class
             where TReferencingModel : class
         {
-            StructureToolsArgumentChecks.NotNull(referencingProperty, nameof(referencingProperty));
+            referencingProperty.NotNull(nameof(referencingProperty));
 
             var copyOperationCrossReferenceProcessing = new CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>();
             copyOperationCrossReferenceProcessing.Initialize(referencingProperty);
@@ -207,8 +207,8 @@
             Expression<Func<TAttributeValueFactory, TValue>> attrValueExpression)
             where TAttributeValueFactory : class
         {
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(attrValueExpression, nameof(attrValueExpression));
+            targetExpression.NotNull(nameof(targetExpression));
+            attrValueExpression.NotNull(nameof(attrValueExpression));
 
             var operation = new CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>();
             operation.Initialize(targetExpression, attrValueExpression);
@@ -248,7 +248,7 @@
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            targetExpression.NotNull(nameof(targetExpression));
             var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
             copyStrategy.Initialize(targetExpression.Compile(), targetExpression, reverseRelationExpression);
             this.registeredStrategies.Add(copyStrategy);

@@ -20,7 +20,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         public CreateToManyGenericWithReverseRelationRegistrations(
             IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelperFactory, nameof(convertHelperFactory));
+            convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
             this.convertHelperFactory = convertHelperFactory;
         }
@@ -30,7 +30,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations.RegisterCreateToManyWithReverseRelation(
                 x => x.Leafs,

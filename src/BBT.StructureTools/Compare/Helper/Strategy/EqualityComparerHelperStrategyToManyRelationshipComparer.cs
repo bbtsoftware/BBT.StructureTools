@@ -35,8 +35,8 @@
             Expression<Func<TModel, IEnumerable<TTargetModel>>> expression,
             IComparer<TTargetModel, TComparerIntention> comparer)
         {
-            StructureToolsArgumentChecks.NotNull(expression, nameof(expression));
-            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
+            expression.NotNull(nameof(expression));
+            comparer.NotNull(nameof(comparer));
 
             this.func = expression.Compile();
             this.propertyName = EqualityComparerHelperStrategyUtils.GetMethodName(expression);

@@ -17,7 +17,7 @@
         /// </summary>
         public GenericContinueCopyInterception(Func<TType, bool> shallCopyFunc)
         {
-            StructureToolsArgumentChecks.NotNull(shallCopyFunc, nameof(shallCopyFunc));
+            shallCopyFunc.NotNull(nameof(shallCopyFunc));
             this.shallCopyFunc = shallCopyFunc;
         }
 
@@ -26,7 +26,7 @@
         /// </summary>
         public bool ShallCopy(TType @object)
         {
-            StructureToolsArgumentChecks.NotNull(@object, nameof(@object));
+            @object.NotNull(nameof(@object));
 
             return this.shallCopyFunc.Invoke(@object);
         }

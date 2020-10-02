@@ -32,8 +32,8 @@
             IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
             IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider)
         {
-            StructureToolsArgumentChecks.NotNull(convertStrategyProvider, nameof(convertStrategyProvider));
-            StructureToolsArgumentChecks.NotNull(createInstanceStrategyProvider, nameof(createInstanceStrategyProvider));
+            convertStrategyProvider.NotNull(nameof(convertStrategyProvider));
+            createInstanceStrategyProvider.NotNull(nameof(createInstanceStrategyProvider));
 
             this.convertStrategyProvider = convertStrategyProvider;
             this.createInstanceStrategyProvider = createInstanceStrategyProvider;
@@ -65,9 +65,9 @@
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
             Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(targetParent, nameof(targetParent));
-            StructureToolsArgumentChecks.NotNull(reverseRelationOnTarget, nameof(reverseRelationOnTarget));
+            source.NotNull(nameof(source));
+            targetParent.NotNull(nameof(targetParent));
+            reverseRelationOnTarget.NotNull(nameof(reverseRelationOnTarget));
 
             this.source = source;
             this.targetParentExpression = targetParent;

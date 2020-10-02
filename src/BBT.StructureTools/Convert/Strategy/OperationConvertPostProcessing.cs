@@ -20,7 +20,7 @@
         /// </summary>
         public OperationConvertPostProcessing(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.additionalProcessings = additionalProcessings;
         }
@@ -30,7 +30,7 @@
         /// </summary>
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.AddRangeToMe(this.additionalProcessings);
         }

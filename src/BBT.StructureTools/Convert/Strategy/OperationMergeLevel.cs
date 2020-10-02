@@ -43,7 +43,7 @@
         public OperationMergeLevel(
             IConvertHelper convertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
         }
@@ -55,10 +55,10 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(mergeFunc, nameof(mergeFunc));
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(createConvertHelper, nameof(createConvertHelper));
+            mergeFunc.NotNull(nameof(mergeFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.mergeFunc = mergeFunc;
             this.sourceFunc = sourceFunc;
@@ -72,9 +72,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var mergeValues = this.mergeFunc.Invoke(source);
 

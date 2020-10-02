@@ -28,9 +28,9 @@
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)
         {
-            StructureToolsArgumentChecks.NotNull(compareRegistrations, nameof(compareRegistrations));
-            StructureToolsArgumentChecks.NotNull(factory, nameof(factory));
-            StructureToolsArgumentChecks.NotNull(compareHelper, nameof(compareHelper));
+            compareRegistrations.NotNull(nameof(compareRegistrations));
+            factory.NotNull(nameof(factory));
+            compareHelper.NotNull(nameof(compareHelper));
 
             this.compareHelper = compareHelper;
             var registrations = factory.Create<T>();
@@ -69,7 +69,7 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings,
             IEnumerable<IComparerExclusion> exclusions)
         {
-            StructureToolsArgumentChecks.NotNull(exclusions, nameof(exclusions));
+            exclusions.NotNull(nameof(exclusions));
 
             var isEqual = this.equalityComparerHelper.AreRegistrationsEquals(
                 candidate1,

@@ -30,8 +30,8 @@
             IConvert<TSourceValue, TTarget, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -40,7 +40,7 @@
         /// <inheritdoc/>
         public void Initialize(Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
             this.sourceFunc = sourceFunc;
         }
 
@@ -50,9 +50,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source);
 

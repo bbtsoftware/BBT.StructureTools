@@ -19,7 +19,7 @@
         public OperationSubCopy(
             ICopy<TValue> copy)
         {
-            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
+            copy.NotNull(nameof(copy));
 
             this.copy = copy;
         }
@@ -30,9 +30,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.copy.Copy(source, target, additionalProcessings);
         }

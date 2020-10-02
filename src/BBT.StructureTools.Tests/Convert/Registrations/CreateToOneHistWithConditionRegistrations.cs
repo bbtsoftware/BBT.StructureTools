@@ -19,7 +19,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         public CreateToOneHistWithConditionRegistrations(
             IConvertHelperFactory<SourceTreeHist, TargetTreeHist, TargetTreeHist, IForTest> convertHelperFactory)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelperFactory, nameof(convertHelperFactory));
+            convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
             this.convertHelperFactory = convertHelperFactory;
         }
@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+            registrations.NotNull(nameof(registrations));
 
             registrations.RegisterCreateToOneHistWithCondition<SourceTreeHist, TargetTreeHist, TargetTreeHist, TargetTree, ITemporalData, IForTest>(
                 (x, y) => x.Hists,

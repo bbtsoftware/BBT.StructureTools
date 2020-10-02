@@ -15,7 +15,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<RootBase, TargetRoot> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+            registrations.NotNull(nameof(registrations));
 
             registrations.RegisterCopyAttribute(x => x.Id, x => x.RootId);
         }

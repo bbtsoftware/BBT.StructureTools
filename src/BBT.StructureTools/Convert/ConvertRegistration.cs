@@ -25,8 +25,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -39,8 +39,8 @@
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -54,9 +54,9 @@
             Func<TSource, TValue> sourceLookUpFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(sourceLookUpFunc, nameof(sourceLookUpFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceLookUpFunc.NotNull(nameof(sourceLookUpFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithLookUp<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceLookUpFunc, targetExpression);
@@ -71,9 +71,9 @@
             Expression<Func<TTarget, TValue>> targetExpression)
             where TValue : IComparable<TValue>
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(sourceUpperLimitFunc, nameof(sourceUpperLimitFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceUpperLimitFunc.NotNull(nameof(sourceUpperLimitFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
@@ -86,8 +86,8 @@
             Func<TSource, TTarget, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
@@ -100,8 +100,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
                 this.serviceLocator.GetInstance<IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>>();
@@ -115,8 +115,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation =
                 this.serviceLocator.GetInstance<IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>>();
@@ -226,7 +226,7 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -244,7 +244,7 @@
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(baseSourceFunc, nameof(baseSourceFunc));
+            baseSourceFunc.NotNull(nameof(baseSourceFunc));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>>();
@@ -263,8 +263,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -288,9 +288,9 @@
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(relationFunc, nameof(relationFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            relationFunc.NotNull(nameof(relationFunc));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToOneWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
@@ -313,8 +313,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -351,10 +351,10 @@
             where TMergeValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(mergeFunc, nameof(mergeFunc));
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(createConvertHelper, nameof(createConvertHelper));
+            mergeFunc.NotNull(nameof(mergeFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             var operation =
                 this.serviceLocator
@@ -376,7 +376,7 @@
             where TTemporalDataType : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCopyFromHist<TSource, TTarget, TSourceValue, TTemporalDataType, TConvertIntention>>();
@@ -391,7 +391,7 @@
             where TSourceValue : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>>();
             operation.Initialize(sourceFunc);
@@ -410,8 +410,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
@@ -435,8 +435,8 @@
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
@@ -459,8 +459,8 @@
             where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
@@ -483,8 +483,8 @@
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
@@ -510,10 +510,10 @@
             where TTemporalData : class
             where TConvertIntention : IBaseConvertIntention
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(toOneHistCriteria, nameof(toOneHistCriteria));
-            StructureToolsArgumentChecks.NotNull(toOneReferenceDate, nameof(toOneReferenceDate));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            toOneHistCriteria.NotNull(nameof(toOneHistCriteria));
+            toOneReferenceDate.NotNull(nameof(toOneReferenceDate));
 
             var operation = this.serviceLocator
                 .GetInstance<IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>>();
@@ -537,7 +537,7 @@
         /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] furtherAdditionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessing, nameof(additionalProcessing));
+            additionalProcessing.NotNull(nameof(additionalProcessing));
 
             var list = new Collection<IBaseAdditionalProcessing>()
                             {

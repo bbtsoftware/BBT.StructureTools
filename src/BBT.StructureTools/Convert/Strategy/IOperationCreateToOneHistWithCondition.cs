@@ -8,6 +8,14 @@
     /// <summary>
     /// Strategy to convert entities with a <c>ToMany</c> relationship.
     /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
+    /// <typeparam name="TSource">See link above.</typeparam>
+    /// <typeparam name="TTarget">See link above.</typeparam>
+    /// <typeparam name="TSourceValue">The entity to convert from.</typeparam>
+    /// <typeparam name="TTargetValue">The entity to create.</typeparam>
+    /// <typeparam name="TConcreteTargetValue">The concrete entity to create.</typeparam>
+    /// <typeparam name="TReverseRelation">The relation to the target entities root entity.</typeparam>
+    /// <typeparam name="TTemporalData">See link above.</typeparam>
+    /// <typeparam name="TConvertIntention">See link above.</typeparam>
     /// </summary>
     public interface IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
         : IConvertOperation<TSource, TTarget>

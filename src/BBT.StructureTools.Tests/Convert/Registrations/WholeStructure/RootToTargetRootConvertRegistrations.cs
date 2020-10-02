@@ -32,7 +32,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceRoot, TargetRoot> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+            registrations.NotNull(nameof(registrations));
 
             registrations
                 .RegisterCopyAttribute(x => x, x => x.OriginRoot)
@@ -63,7 +63,7 @@
         private static SourceTreeHist GetLeafPerReferenceDate(
             IEnumerable<SourceTreeHist> temporalLeafs, DateTime referenceDate)
         {
-            StructureToolsArgumentChecks.NotNull(temporalLeafs, nameof(temporalLeafs));
+            temporalLeafs.NotNull(nameof(temporalLeafs));
             var temporalLeaf = temporalLeafs.Single(x => x.From <= referenceDate && x.To >= referenceDate);
             return temporalLeaf;
         }

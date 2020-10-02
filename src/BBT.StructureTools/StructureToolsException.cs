@@ -8,7 +8,7 @@
     /// occured within the StructureTools library.
     /// </summary>
     [Serializable]
-    public class StructureToolsException : Exception
+    public class StructureToolsException : ApplicationException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StructureToolsException"/> class.

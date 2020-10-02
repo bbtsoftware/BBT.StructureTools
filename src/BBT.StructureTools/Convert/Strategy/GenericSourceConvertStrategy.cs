@@ -27,7 +27,7 @@
         public GenericSourceConvertStrategy(
             IConvert<TCriterion, TTargetInterface, TIntention> converter)
         {
-            StructureToolsArgumentChecks.NotNull(converter, nameof(converter));
+            converter.NotNull(nameof(converter));
 
             this.converter = converter;
         }
@@ -35,12 +35,12 @@
         /// <inheritdoc/>
         public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var sourceCasted = StructureToolsArgumentChecks.IsOfType<TCriterion>(source, nameof(source));
-            var targetCasted = StructureToolsArgumentChecks.IsOfType<TTargetInterface>(target, nameof(target));
+            var sourceCasted = source.IsOfType<TCriterion>(nameof(source));
+            var targetCasted = target.IsOfType<TTargetInterface>(nameof(target));
 
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }

@@ -16,9 +16,9 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var addProcessing in additionalProcessings.OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>())
             {
@@ -34,9 +34,9 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var addProcessing in additionalProcessings.OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>())
             {
@@ -51,8 +51,8 @@
             where TSourceClass : class
             where TTargetClass : class
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
             return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));

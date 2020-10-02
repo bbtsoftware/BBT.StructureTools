@@ -15,7 +15,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<MasterData, TargetTree> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations
                 .RegisterCopyAttribute(x => x.Id, x => x.MasterDataId);

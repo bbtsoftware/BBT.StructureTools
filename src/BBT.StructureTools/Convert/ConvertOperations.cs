@@ -21,7 +21,7 @@
         public ConvertOperations(
             IEnumerable<IConvertOperation<TSource, TTarget>> convertHelperOperationWorkUnits)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelperOperationWorkUnits, nameof(convertHelperOperationWorkUnits));
+            convertHelperOperationWorkUnits.NotNull(nameof(convertHelperOperationWorkUnits));
 
             this.convertHelperOperationWorkUnits = convertHelperOperationWorkUnits;
         }
@@ -32,9 +32,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var convertHelperOperationWorkUnit in this.convertHelperOperationWorkUnits)
             {

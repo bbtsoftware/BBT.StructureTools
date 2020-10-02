@@ -19,7 +19,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         public CreateToOneWithRelationRegistrations(
             IConvertHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> convertHelperFactory)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelperFactory, nameof(convertHelperFactory));
+            convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
             this.convertHelperFactory = convertHelperFactory;
         }
@@ -29,7 +29,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceRoot, TargetRoot> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+            registrations.NotNull(nameof(registrations));
 
             registrations.RegisterCreateToOneWithRelation(
                 x => x.Tree,

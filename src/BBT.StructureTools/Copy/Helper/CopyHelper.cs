@@ -17,9 +17,9 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
             where TClassToCopy : class
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var additionalProcessing in additionalProcessings.OfType<ICopyPostProcessing<TClassToCopy>>())
             {

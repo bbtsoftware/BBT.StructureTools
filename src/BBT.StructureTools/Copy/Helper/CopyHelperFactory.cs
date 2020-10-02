@@ -17,7 +17,7 @@
             Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
             where TReverseRelation : class
         {
-            StructureToolsArgumentChecks.NotNull(reverseRelationFunc, nameof(reverseRelationFunc));
+            reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
 
             var copyHelper = IocHandler.Instance.IocResolver
                 .GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();

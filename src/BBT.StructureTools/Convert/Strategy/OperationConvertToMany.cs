@@ -42,8 +42,8 @@
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert,
             IConvertHelper convertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -55,9 +55,9 @@
             Func<TTarget, IEnumerable<TTargetValue>> targetFunc,
             Func<TSourceValue, TTargetValue, bool> filterFunc)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetFunc, nameof(targetFunc));
-            StructureToolsArgumentChecks.NotNull(filterFunc, nameof(filterFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetFunc.NotNull(nameof(targetFunc));
+            filterFunc.NotNull(nameof(filterFunc));
 
             this.sourceFunc = sourceFunc;
             this.targetFunc = targetFunc;
@@ -70,9 +70,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValues = this.sourceFunc(source).ToList();
             var targetValues = this.targetFunc(target).Where(x => x != null).ToList();

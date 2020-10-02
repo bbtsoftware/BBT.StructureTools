@@ -43,8 +43,8 @@
             IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider,
             IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider)
         {
-            StructureToolsArgumentChecks.NotNull(convertStrategyProvider, nameof(convertStrategyProvider));
-            StructureToolsArgumentChecks.NotNull(instanceCreationStrategyProvider, nameof(instanceCreationStrategyProvider));
+            convertStrategyProvider.NotNull(nameof(convertStrategyProvider));
+            instanceCreationStrategyProvider.NotNull(nameof(instanceCreationStrategyProvider));
 
             this.convertStrategyProvider = convertStrategyProvider;
             this.instanceCreationStrategyProvider = instanceCreationStrategyProvider;
@@ -56,9 +56,9 @@
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
             Expression<Func<TBaseTarget, TTarget>> targetParentExpression)
         {
-            StructureToolsArgumentChecks.NotNull(baseSourceFunc, nameof(baseSourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetValueExpression, nameof(targetValueExpression));
-            StructureToolsArgumentChecks.NotNull(targetParentExpression, nameof(targetParentExpression));
+            baseSourceFunc.NotNull(nameof(baseSourceFunc));
+            targetValueExpression.NotNull(nameof(targetValueExpression));
+            targetParentExpression.NotNull(nameof(targetParentExpression));
 
             this.baseSourceFunc = baseSourceFunc;
             this.targetValueExpression = targetValueExpression;
@@ -71,8 +71,8 @@
             TTarget targetParent,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(targetParent, nameof(targetParent));
+            source.NotNull(nameof(source));
+            targetParent.NotNull(nameof(targetParent));
 
             var baseSource = this.baseSourceFunc(source);
 

@@ -32,8 +32,8 @@
             IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            instanceCreator.NotNull(nameof(instanceCreator));
+            convert.NotNull(nameof(convert));
 
             this.instanceCreator = instanceCreator;
             this.convert = convert;
@@ -42,7 +42,7 @@
         /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
         {
-            StructureToolsArgumentChecks.NotNull(reverseRelationExpr, nameof(reverseRelationExpr));
+            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
@@ -52,9 +52,9 @@
             TReverseRelation reverseRelation,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(reverseRelation, nameof(reverseRelation));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            reverseRelation.NotNull(nameof(reverseRelation));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instanceCreator.Create();
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
@@ -85,8 +85,8 @@
             IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            instanceCreator.NotNull(nameof(instanceCreator));
+            convert.NotNull(nameof(convert));
 
             this.instanceCreator = instanceCreator;
             this.convert = convert;
@@ -97,8 +97,8 @@
             TSource source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instanceCreator.Create();
             this.convert.Convert(source, target, additionalProcessings);

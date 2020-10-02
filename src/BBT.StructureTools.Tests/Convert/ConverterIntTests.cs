@@ -336,7 +336,7 @@
             targetRoot.NumberSourceLookedUp.Should().Be(sourceRoot.NumberSourceNotDefault);
             targetRoot.NumberSourceNotLookedUp.Should().Be(sourceRoot.NumberSourceNotDefault);
 
-            // ToDo LIS: Check is this a bug?
+            // ToDo: Check is this a bug? see https://github.com/bbtsoftware/BBT.StructureTools/issues/65.
             // targetRoot.NumberLimitNotApplied.Should().Be(sourceRoot.NumberSourceDefault);
             targetRoot.NumberLimitApplied.Should().NotBe(sourceRoot.NumberSourceNotDefault);
             targetRoot.EnumValue.Should().Be(sourceRoot.EnumValue.Target);

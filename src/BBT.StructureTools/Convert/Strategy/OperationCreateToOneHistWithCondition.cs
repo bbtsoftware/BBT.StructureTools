@@ -39,8 +39,8 @@
             ITemporalDataHandler<TTemporalData> targetValueTemporalDataHandler,
             ITemporalDataHandler<TTemporalData> sourceValueTemporalDataHandler)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
-            StructureToolsArgumentChecks.NotNull(targetValueTemporalDataHandler, nameof(targetValueTemporalDataHandler));
+            convertHelper.NotNull(nameof(convertHelper));
+            targetValueTemporalDataHandler.NotNull(nameof(targetValueTemporalDataHandler));
 
             this.convertHelper = convertHelper;
             this.targetValueTemporalDataHandler = targetValueTemporalDataHandler;
@@ -55,11 +55,11 @@
             Func<TSource, TTarget, DateTime> toOneReferenceDate,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(toOneHistCriteria, nameof(toOneHistCriteria));
-            StructureToolsArgumentChecks.NotNull(toOneReferenceDate, nameof(toOneReferenceDate));
-            StructureToolsArgumentChecks.NotNull(createConvertHelper, nameof(createConvertHelper));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            toOneHistCriteria.NotNull(nameof(toOneHistCriteria));
+            toOneReferenceDate.NotNull(nameof(toOneReferenceDate));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -74,9 +74,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var copyToOne = this.toOneHistCriteria.Invoke(source, target);
             var toOneReferenceDate = this.toOneReferenceDate.Invoke(source, target);

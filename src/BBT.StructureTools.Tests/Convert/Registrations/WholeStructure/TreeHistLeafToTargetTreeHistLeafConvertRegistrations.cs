@@ -16,7 +16,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceTreeHistLeaf, TargetTreeHistLeaf> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations
                 .RegisterCopyAttribute(x => x.TreeHistLeafId, x => x.OriginTreeHistLeafId);

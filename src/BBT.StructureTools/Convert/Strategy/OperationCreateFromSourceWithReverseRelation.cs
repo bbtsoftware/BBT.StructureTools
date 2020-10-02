@@ -28,8 +28,8 @@
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
-            StructureToolsArgumentChecks.NotNull(createConvertHelper, nameof(createConvertHelper));
+            targetExpression.NotNull(nameof(targetExpression));
+            createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
@@ -41,8 +41,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             if (source == null)
             {

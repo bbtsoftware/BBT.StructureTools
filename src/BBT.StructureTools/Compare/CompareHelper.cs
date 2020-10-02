@@ -23,7 +23,7 @@
             where T : class
             where TIntention : IBaseComparerIntention
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             foreach (var additionalProcessing in additionalProcessings.OfType<IComparePostProcessing<T, TIntention>>())
             {

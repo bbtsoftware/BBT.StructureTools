@@ -19,7 +19,7 @@
         /// <typeparam name="TReturn">Return type.</typeparam>
         public static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
-            StructureToolsArgumentChecks.NotNull(expression, nameof(expression));
+            expression.NotNull(nameof(expression));
 
             var methodCallExpression = (MethodCallExpression)expression.Body;
 
@@ -31,9 +31,9 @@
         /// </summary>
         public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
-            StructureToolsArgumentChecks.NotNull(exclusions, nameof(exclusions));
-            StructureToolsArgumentChecks.NotNull(typeOfModel, nameof(typeOfModel));
-            StructureToolsArgumentChecks.NotNullOrEmpty(name, nameof(name));
+            exclusions.NotNull(nameof(exclusions));
+            typeOfModel.NotNull(nameof(typeOfModel));
+            name.NotNullOrEmpty(nameof(name));
 
             // The exclusion can made for a model which inherits the property from an interface or
             // base class. We want to make sure the exclusion applies in any case.
@@ -62,7 +62,7 @@
             Func<TModel, TModel, bool> compareFunc)
             where TModel : class
         {
-            StructureToolsArgumentChecks.NotNull(compareFunc, nameof(compareFunc));
+            compareFunc.NotNull(nameof(compareFunc));
 
             // ReSharper disable once PossibleUnintendedReferenceComparison
             // BER says this is OK since either both are null, or have the same reference which is
@@ -115,7 +115,7 @@
         /// <typeparam name="T">type of comparer.</typeparam>
         public static Type GetCompareType<T>(IEqualityComparer<T> comparer)
         {
-            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
+            comparer.NotNull(nameof(comparer));
 
             // evaluate type of a comparer
             // due to covariant restriction typeof(T) is not valid

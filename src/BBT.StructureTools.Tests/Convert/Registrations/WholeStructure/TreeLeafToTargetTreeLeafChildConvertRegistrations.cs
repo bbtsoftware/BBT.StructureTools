@@ -14,11 +14,11 @@
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeafChild> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeafChild> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations
+            registrations
                 .RegisterCopyAttribute(x => x.Id, x => x.OriginId);
         }
     }

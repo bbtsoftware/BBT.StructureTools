@@ -36,7 +36,7 @@
         public OperationCopyValueWithLookUp(
             IDefaultValueProvider defaultValueProvider)
         {
-            StructureToolsArgumentChecks.NotNull(defaultValueProvider, nameof(defaultValueProvider));
+            defaultValueProvider.NotNull(nameof(defaultValueProvider));
 
             this.defaultValueProvider = defaultValueProvider;
         }
@@ -47,9 +47,9 @@
             Func<TSource, TValue> sourceLookUpFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(sourceLookUpFunc, nameof(sourceLookUpFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceLookUpFunc.NotNull(nameof(sourceLookUpFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
             this.sourceLookUpFunc = sourceLookUpFunc;
@@ -62,8 +62,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
             if (this.defaultValueProvider.IsDefault(sourceValue))

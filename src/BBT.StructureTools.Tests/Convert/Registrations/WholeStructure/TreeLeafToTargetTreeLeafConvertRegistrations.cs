@@ -19,7 +19,7 @@
         public TreeLeafToTargetTreeLeafConvertRegistrations(
             IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeafChild, TargetTreeLeafChild, IForTest> convertHelperFactory)
         {
-            StructureToolsArgumentChecks.NotNull(convertHelperFactory, nameof(convertHelperFactory));
+            convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
             this.convertHelperFactory = convertHelperFactory;
         }
@@ -27,11 +27,11 @@
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeaf> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeaf> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations
+            registrations
                 .RegisterCopyAttribute(x => x, x => x.OriginLeaf)
                 .RegisterCopyAttribute(x => x.Id, x => x.OriginId)
                 .RegisterCopyAttribute(x => x.LeafName, x => x.LeafName)

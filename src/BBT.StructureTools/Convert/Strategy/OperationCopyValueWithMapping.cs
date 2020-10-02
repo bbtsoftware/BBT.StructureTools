@@ -22,7 +22,7 @@
         /// </summary>
         public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> convertValue)
         {
-            StructureToolsArgumentChecks.NotNull(convertValue, nameof(convertValue));
+            convertValue.NotNull(nameof(convertValue));
             this.convertValue = convertValue;
         }
 
@@ -31,8 +31,8 @@
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -44,8 +44,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
             var targetValue = this.convertValue.ConvertValue(sourceValue);

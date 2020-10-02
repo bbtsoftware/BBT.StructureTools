@@ -14,7 +14,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceRoot, TargetRoot> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations.RegisterCreateToManyFromGenericStrategyWithReverseRelation<SourceBaseLeaf, TargetBaseLeaf, IForTest>(
                 x => x.Leafs,

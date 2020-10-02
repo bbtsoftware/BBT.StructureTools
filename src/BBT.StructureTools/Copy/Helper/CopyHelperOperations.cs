@@ -15,7 +15,7 @@
         /// </summary>
         internal CopyHelperOperations(IEnumerable<ICopyOperation<T>> registeredStrategies)
         {
-            StructureToolsArgumentChecks.NotNull(registeredStrategies, nameof(registeredStrategies));
+            registeredStrategies.NotNull(nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }

@@ -19,7 +19,7 @@ namespace BBT.StructureTools.Strategy
         /// </summary>
         public CreateInstanceOfTypeStrategy(IInstanceCreator<TConcreteTypeIntf, TConcreteTypeImpl> instanceCreator)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
+            instanceCreator.NotNull(nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

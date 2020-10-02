@@ -20,7 +20,7 @@
         /// </summary>
         public CopyCallContext(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.AdditionalProcessings = additionalProcessings;
         }

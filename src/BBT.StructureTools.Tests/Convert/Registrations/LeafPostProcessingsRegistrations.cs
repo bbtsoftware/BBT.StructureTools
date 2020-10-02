@@ -14,7 +14,7 @@
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeaf> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations.RegisterPostProcessings(
                 new GenericConvertPostProcessing<SourceTreeLeaf, TargetTreeLeaf>(

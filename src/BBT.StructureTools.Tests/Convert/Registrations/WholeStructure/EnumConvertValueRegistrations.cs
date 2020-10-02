@@ -16,7 +16,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
         /// </summary>
         public void DoRegistrations(IConvertValueRegistration<SourceEnum, TargetEnum> aRegistration)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistration, nameof(aRegistration));
+            aRegistration.NotNull(nameof(aRegistration));
 
             aRegistration
                 .Register(SourceEnum.Value1, TargetEnum.Value1)

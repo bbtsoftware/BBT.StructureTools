@@ -31,7 +31,7 @@
         /// </summary>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            target.NotNull(nameof(target));
 
             this.collectedTargetInstances.Add(target);
         }

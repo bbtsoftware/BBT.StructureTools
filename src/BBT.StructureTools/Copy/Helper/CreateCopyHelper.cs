@@ -32,8 +32,8 @@
             IInstanceCreator<TChild, TConcreteChild> instanceCreator,
             ICopy<TChild> copy)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
-            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
+            instanceCreator.NotNull(nameof(instanceCreator));
+            copy.NotNull(nameof(copy));
 
             this.instanceCreator = instanceCreator;
             this.copy = copy;
@@ -42,7 +42,7 @@
         /// <inheritdoc/>
         public void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr)
         {
-            StructureToolsArgumentChecks.NotNull(reverseRelationExpr, nameof(reverseRelationExpr));
+            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
@@ -52,9 +52,9 @@
             TParent reverseRelation,
             ICopyCallContext copyCallContext)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(reverseRelation, nameof(reverseRelation));
-            StructureToolsArgumentChecks.NotNull(copyCallContext, nameof(copyCallContext));
+            source.NotNull(nameof(source));
+            reverseRelation.NotNull(nameof(reverseRelation));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             if (copyCallContext.AdditionalProcessings.OfType<IGenericContinueCopyInterception<TChild>>().Any(continueCopyInterception => !continueCopyInterception.ShallCopy(source)))
             {
@@ -94,8 +94,8 @@
             IInstanceCreator<TConcreteTarget, TConcreteTarget> instanceCreator,
             ICopy<TTarget> copy)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
-            StructureToolsArgumentChecks.NotNull(copy, nameof(copy));
+            instanceCreator.NotNull(nameof(instanceCreator));
+            copy.NotNull(nameof(copy));
 
             this.instanceCreator = instanceCreator;
             this.copy = copy;
@@ -106,8 +106,8 @@
             TConcreteTarget source,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var target = this.instanceCreator.Create();
             this.copy.Copy(source, target, additionalProcessings);

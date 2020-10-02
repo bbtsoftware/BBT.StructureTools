@@ -50,7 +50,7 @@
             var sourceValues = this.sourceFunc.Invoke(source)?.ToList();
             sourceValues.NotNull(nameof(sourceValues));
 
-            // ReSharper disable once AssignNullToNotNullAttribute -> StructureToolsArgumentChecks.NotNull is called before!
+            // ReSharper disable once AssignNullToNotNullAttribute -> .NotNull is called before!
             var copies = sourceValues.Select(sourceValue => this.createCopyHelper.CreateTarget(
                 sourceValue as TConcreteChild,
                 target,

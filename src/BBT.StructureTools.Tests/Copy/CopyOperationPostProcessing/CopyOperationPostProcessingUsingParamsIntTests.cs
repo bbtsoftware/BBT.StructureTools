@@ -95,7 +95,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
         {
             public void DoRegistrations(ICopyHelperRegistration<ITestClass> registrations)
             {
-                StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+                registrations.NotNull(nameof(registrations));
                 registrations.RegisterPostProcessings(
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234),
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue2 = 4321));

@@ -22,7 +22,7 @@
         public OperationSubConvert(
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            convert.NotNull(nameof(convert));
             this.convert = convert;
         }
 
@@ -32,9 +32,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var targetValue = target as TTargetValue;
             if (source is TSourceValue sourceValue && targetValue != null)

@@ -92,10 +92,10 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
 
         private class TestClassCopyRegistrations : ICopyRegistrations<ITestClass>
         {
-            public void DoRegistrations(ICopyHelperRegistration<ITestClass> aRegistrations)
+            public void DoRegistrations(ICopyHelperRegistration<ITestClass> registrations)
             {
-                StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
-                aRegistrations.RegisterPostProcessings(
+                registrations.NotNull(nameof(registrations));
+                registrations.RegisterPostProcessings(
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234));
             }
         }

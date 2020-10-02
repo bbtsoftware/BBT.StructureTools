@@ -24,8 +24,8 @@
             IInstanceCreator<TDerived, TConcrete> creator,
             ICopy<TDerived> copier)
         {
-            StructureToolsArgumentChecks.NotNull(creator, nameof(creator));
-            StructureToolsArgumentChecks.NotNull(copier, nameof(copier));
+            creator.NotNull(nameof(creator));
+            copier.NotNull(nameof(copier));
 
             this.creator = creator;
             this.copier = copier;
@@ -37,9 +37,9 @@
             TBase target,
             ICopyCallContext copyCallContext)
         {
-            var sourceCastConcrete = StructureToolsArgumentChecks.IsOfType<TDerived>(source, nameof(source));
-            var targetCastConcrete = StructureToolsArgumentChecks.IsOfType<TDerived>(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(copyCallContext, nameof(copyCallContext));
+            var sourceCastConcrete = source.IsOfType<TDerived>(nameof(source));
+            var targetCastConcrete = target.IsOfType<TDerived>(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             this.copier.Copy(sourceCastConcrete, targetCastConcrete, copyCallContext);
         }

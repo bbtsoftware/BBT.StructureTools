@@ -14,7 +14,7 @@
         public ValueConverter(
             IConvertValueRegistrations<TSource, TTarget> convertValueRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(convertValueRegistrations, nameof(convertValueRegistrations));
+            convertValueRegistrations.NotNull(nameof(convertValueRegistrations));
 
             var registrations = new ConvertValueRegistration<TSource, TTarget>();
             convertValueRegistrations.DoRegistrations(registrations);

@@ -18,7 +18,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
         /// </summary>
         public void DoRegistrations(IConvertRegistration<SourceDerivedLeaf, TargetDerivedLeaf> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations
                 .RegisterCopyAttribute(x => x.Id, x => x.OriginId);

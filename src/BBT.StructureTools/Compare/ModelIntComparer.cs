@@ -18,7 +18,7 @@
         /// </summary>
         public ModelIntComparer(Func<TModel, int> sortOrderDelegate)
         {
-            StructureToolsArgumentChecks.NotNull(sortOrderDelegate, nameof(sortOrderDelegate));
+            sortOrderDelegate.NotNull(nameof(sortOrderDelegate));
 
             this.sortOrderDelegate = sortOrderDelegate;
         }

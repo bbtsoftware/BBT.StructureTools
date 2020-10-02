@@ -1,9 +1,8 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+﻿namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Provider;
-    using BBT.StructureTools.Tests.Convert.TestData;
 
     /// <summary>
     /// Implementation of temporal data handler for test purposes.
@@ -17,7 +16,7 @@
         /// </summary>
         public DateTime GetBegin(T aData)
         {
-            StructureToolsArgumentChecks.NotNull(aData, nameof(aData));
+            aData.NotNull(nameof(aData));
 
             return aData.From;
         }
@@ -27,7 +26,7 @@
         /// </summary>
         public DateTime GetEnd(T aData)
         {
-            StructureToolsArgumentChecks.NotNull(aData, nameof(aData));
+            aData.NotNull(nameof(aData));
 
             return aData.To;
         }

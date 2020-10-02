@@ -32,7 +32,7 @@
         /// </summary>
         public void DoPostProcessing(TSource source, TTarget target)
         {
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            target.NotNull(nameof(target));
 
             this.collectedTargetInstances.Add(target);
         }

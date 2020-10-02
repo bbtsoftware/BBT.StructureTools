@@ -24,7 +24,7 @@ namespace BBT.StructureTools.Strategy
         /// </summary>
         public GenericCreateByBaseAsCriterionStrategy(IInstanceCreator<TInterface, TImpl> instanceCreator)
         {
-            StructureToolsArgumentChecks.NotNull(instanceCreator, nameof(instanceCreator));
+            instanceCreator.NotNull(nameof(instanceCreator));
 
             this.instanceCreator = instanceCreator;
         }

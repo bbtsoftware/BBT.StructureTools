@@ -31,7 +31,7 @@
         public OperationCopyValueIfTargetIsDefault(
             IDefaultValueProvider defaultValueProvider)
         {
-            StructureToolsArgumentChecks.NotNull(defaultValueProvider, nameof(defaultValueProvider));
+            defaultValueProvider.NotNull(nameof(defaultValueProvider));
 
             this.defaultValueProvider = defaultValueProvider;
         }
@@ -41,8 +41,8 @@
             Func<TSource, TValue> sourceFunc,
             Expression<Func<TTarget, TValue>> targetExpression)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(targetExpression, nameof(targetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
@@ -54,8 +54,8 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
             var targetValue = target.GetPropertyValue(this.targetExpression);

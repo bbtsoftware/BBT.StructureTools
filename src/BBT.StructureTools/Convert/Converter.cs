@@ -21,9 +21,9 @@
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
         {
-            StructureToolsArgumentChecks.NotNull(convertEngine, nameof(convertEngine));
-            StructureToolsArgumentChecks.NotNull(convertRegistrations, nameof(convertRegistrations));
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
+            convertEngine.NotNull(nameof(convertEngine));
+            convertRegistrations.NotNull(nameof(convertRegistrations));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convertHelper = convertHelper;
             var registrations = convertEngine.StartRegistrations();
@@ -37,9 +37,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
             this.convertOperations.Convert(source, target, additionalProcessings);

@@ -16,7 +16,7 @@
         /// </summary>
         public void DoRegistrations(ICopyHelperRegistration<ITemporalData> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(registrations, nameof(registrations));
+            registrations.NotNull(nameof(registrations));
 
             registrations
                 .RegisterAttribute(x => x.From)

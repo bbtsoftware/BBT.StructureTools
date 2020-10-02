@@ -1,5 +1,6 @@
 ﻿namespace BBT.StructureTools.Compare.Helper
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using BBT.StructureTools;
@@ -18,7 +19,7 @@
         /// </summary>
         internal EqualityComparerHelperOperations(IEnumerable<IEqualityComparerHelperStrategy<TModel>> registeredStrategies)
         {
-            StructureToolsArgumentChecks.NotNull(registeredStrategies, nameof(registeredStrategies));
+            registeredStrategies.NotNull(nameof(registeredStrategies));
 
             this.registeredStrategies = registeredStrategies;
         }
@@ -27,7 +28,7 @@
         public bool AreRegistrationsEquals(TModel candidate1, TModel candidate2)
         {
             return this.AreRegistrationsEquals(
-                candidate1, candidate2, new IBaseAdditionalProcessing[0], new List<IComparerExclusion>());
+                candidate1, candidate2, Array.Empty<IBaseAdditionalProcessing>(), new List<IComparerExclusion>());
         }
 
         /// <inheritdoc/>

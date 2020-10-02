@@ -48,7 +48,7 @@
         public CopyCrossReferencedCounterPartDeterminationHelper(
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
-            StructureToolsArgumentChecks.NotNull(referencingProperty, nameof(referencingProperty));
+            referencingProperty.NotNull(nameof(referencingProperty));
 
             this.referencingProperty = ExpressionUtils.GetProperty(referencingProperty);
 
@@ -65,7 +65,7 @@
         /// <param name="additionalProcessings">Set of existing additional processing items.</param>
         public void FillAdditionalProcessings(ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             additionalProcessings.Add(this.crossReferencedModelPostProcessings);
             additionalProcessings.Add(this.referencingModelPostProcessings);
@@ -78,8 +78,8 @@
         /// </summary>
         private void CrossReferencedModelAction(TCrossReferencedModel source, TCrossReferencedModel target)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             // Register source target pair.
             this.referencedModelSourceTargetRepository.Add(source, target);
@@ -91,8 +91,8 @@
         /// </summary>
         private void ReferencingModelAction(TReferencingModel source, TReferencingModel target)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
             // Determine correct counter part.
             var crossReferencedSourceModel = (TCrossReferencedModel)this.referencingProperty.GetValue(source);

@@ -28,11 +28,11 @@
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> registrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations
+            registrations
                 .RegisterCopyAttribute(x => x, x => x.OriginTree)
                 .RegisterCopyAttribute(x => x.TreeName, x => x.TreeName)
                 .RegisterConvertFromSourceOnDifferentLevels<MasterData, TargetTree, IForTest>(x => x.MasterData)

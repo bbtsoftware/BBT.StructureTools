@@ -38,8 +38,8 @@
             IConvertHelper convertHelper,
             ITemporalDataHandler<TTemporalDataType> sourceValueTemporalDataHandler)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
-            StructureToolsArgumentChecks.NotNull(convertHelper, nameof(convertHelper));
+            convert.NotNull(nameof(convert));
+            convertHelper.NotNull(nameof(convertHelper));
 
             this.convert = convert;
             this.convertHelper = convertHelper;
@@ -51,8 +51,8 @@
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Func<TSource, TTarget, DateTime> referenceDateFunc)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
-            StructureToolsArgumentChecks.NotNull(referenceDateFunc, nameof(referenceDateFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            referenceDateFunc.NotNull(nameof(referenceDateFunc));
 
             this.sourceFunc = sourceFunc;
             this.referenceDateFunc = referenceDateFunc;
@@ -64,9 +64,9 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var sourceValues = this.sourceFunc.Invoke(source);
             var referenceDate = this.referenceDateFunc.Invoke(source, target);

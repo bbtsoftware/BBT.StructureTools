@@ -18,7 +18,7 @@
         /// </summary>
         public ModelDateComparer(Func<TModel, DateTime> sortOrderDelegate)
         {
-            StructureToolsArgumentChecks.NotNull(sortOrderDelegate, nameof(sortOrderDelegate));
+            sortOrderDelegate.NotNull(nameof(sortOrderDelegate));
 
             this.sortOrderDelegate = sortOrderDelegate;
         }

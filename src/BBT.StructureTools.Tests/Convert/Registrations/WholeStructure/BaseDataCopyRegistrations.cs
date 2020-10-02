@@ -18,7 +18,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
         /// </summary>
         public void DoRegistrations(ICopyHelperRegistration<BaseData> aRegistrations)
         {
-            StructureToolsArgumentChecks.NotNull(aRegistrations, nameof(aRegistrations));
+            aRegistrations.NotNull(nameof(aRegistrations));
 
             aRegistrations.RegisterAttribute(x => x.BaseDataId);
         }

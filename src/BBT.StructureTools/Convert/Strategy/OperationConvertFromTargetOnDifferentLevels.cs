@@ -27,14 +27,14 @@
         public OperationConvertFromTargetOnDifferentLevels(
             IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            convert.NotNull(nameof(convert));
             this.convert = convert;
         }
 
         /// <inheritdoc/>
         public void Initialize(Func<TTarget, TSourceValue> sourceFunc)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
             this.sourceFunc = sourceFunc;
         }
 
@@ -44,7 +44,7 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             var actualSource = this.sourceFunc(target);
             this.convert.Convert(actualSource, target, additionalProcessings);

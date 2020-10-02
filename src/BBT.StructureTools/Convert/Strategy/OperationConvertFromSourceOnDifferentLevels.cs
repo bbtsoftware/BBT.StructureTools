@@ -25,7 +25,7 @@
         public OperationConvertFromSourceOnDifferentLevels(
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
-            StructureToolsArgumentChecks.NotNull(convert, nameof(convert));
+            convert.NotNull(nameof(convert));
             this.convert = convert;
         }
 
@@ -33,7 +33,7 @@
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc)
         {
-            StructureToolsArgumentChecks.NotNull(sourceFunc, nameof(sourceFunc));
+            sourceFunc.NotNull(nameof(sourceFunc));
             this.sourceFunc = sourceFunc;
         }
 
@@ -43,10 +43,10 @@
             TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
-            StructureToolsArgumentChecks.IsOfType<TTargetValue>(target, nameof(target));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
+            target.IsOfType<TTargetValue>(nameof(target));
 
             var actualSource = this.sourceFunc(source);
             if (actualSource == null)

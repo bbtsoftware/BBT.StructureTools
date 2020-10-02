@@ -24,9 +24,9 @@
             ICopyHelper copyHelper,
             ICopyHelperRegistrationFactory factory)
         {
-            StructureToolsArgumentChecks.NotNull(copyRegistrations, nameof(copyRegistrations));
-            StructureToolsArgumentChecks.NotNull(copyHelper, nameof(copyHelper));
-            StructureToolsArgumentChecks.NotNull(factory, nameof(factory));
+            copyRegistrations.NotNull(nameof(copyRegistrations));
+            copyHelper.NotNull(nameof(copyHelper));
+            factory.NotNull(nameof(factory));
 
             var registrations = factory.Create<T>();
             copyRegistrations.DoRegistrations(registrations);
@@ -41,9 +41,9 @@
             T target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(additionalProcessings, nameof(additionalProcessings));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            additionalProcessings.NotNull(nameof(additionalProcessings));
 
             this.Copy(source, target, new CopyCallContext(additionalProcessings));
         }
@@ -54,9 +54,9 @@
             T target,
             ICopyCallContext copyCallContext)
         {
-            StructureToolsArgumentChecks.NotNull(source, nameof(source));
-            StructureToolsArgumentChecks.NotNull(target, nameof(target));
-            StructureToolsArgumentChecks.NotNull(copyCallContext, nameof(copyCallContext));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
+            copyCallContext.NotNull(nameof(copyCallContext));
 
             this.operations.Copy(source, target, copyCallContext);
 

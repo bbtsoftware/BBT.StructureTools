@@ -51,7 +51,7 @@
             where TComparer : class
             where TComparerIntention : IBaseComparerIntention
         {
-            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
+            comparer.NotNull(nameof(comparer));
 
             this.registeredStrategies.Add(
                 new EqualityComparerHelperStrategyToManyRelationshipComparer<T, TComparer, TComparerIntention>(
@@ -64,7 +64,7 @@
         public IEqualityComparerHelperRegistration<T> RegisterSubCompare<TComparerIntention>(IComparer<T, TComparerIntention> comparer)
             where TComparerIntention : IBaseComparerIntention
         {
-            StructureToolsArgumentChecks.NotNull(comparer, nameof(comparer));
+            comparer.NotNull(nameof(comparer));
 
             this.registeredStrategies.Add(new EqualityComparerHelperStrategySubCompareComparer<T, TComparerIntention>(comparer));
 
