@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Strategy;
 
@@ -18,8 +20,20 @@
     {
         private readonly IConvertStrategyProvider<TBaseSource, TBaseTarget, TIntention> convertStrategyProvider;
         private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> instanceCreationStrategyProvider;
+
+        /// <summary>
+        /// Function which declares the base source value (e.g. LiBaseCover).
+        /// </summary>
         private Func<TSource, TBaseSource> baseSourceFunc;
+
+        /// <summary>
+        /// Expression which declares the target value (created target class, e.g. LiClaimCover).
+        /// </summary>
         private Expression<Func<TTarget, TBaseTarget>> targetValueExpression;
+
+        /// <summary>
+        /// Expression which declares the target parent (e.g. LiClaimCoverWrapper).
+        /// </summary>
         private Expression<Func<TBaseTarget, TTarget>> targetParentExpression;
 
         /// <summary>
@@ -38,15 +52,15 @@
 
         /// <inheritdoc/>
         public void Initialize(
-            Func<TSource, TBaseSource> aBaseSourceFunc,
+            Func<TSource, TBaseSource> baseSourceFunc,
             Expression<Func<TTarget, TBaseTarget>> targetValueExpression,
             Expression<Func<TBaseTarget, TTarget>> targetParentExpression)
         {
-            aBaseSourceFunc.NotNull(nameof(aBaseSourceFunc));
+            baseSourceFunc.NotNull(nameof(baseSourceFunc));
             targetValueExpression.NotNull(nameof(targetValueExpression));
             targetParentExpression.NotNull(nameof(targetParentExpression));
 
-            this.baseSourceFunc = aBaseSourceFunc;
+            this.baseSourceFunc = baseSourceFunc;
             this.targetValueExpression = targetValueExpression;
             this.targetParentExpression = targetParentExpression;
         }
@@ -58,7 +72,6 @@
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             source.NotNull(nameof(source));
-
             targetParent.NotNull(nameof(targetParent));
 
             var baseSource = this.baseSourceFunc(source);

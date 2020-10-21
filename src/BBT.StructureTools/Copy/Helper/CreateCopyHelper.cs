@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
@@ -42,7 +43,6 @@
         public void SetupReverseRelation(Expression<Func<TChild, TParent>> reverseRelationExpr)
         {
             reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
-
             this.reverseRelationExpr = reverseRelationExpr;
         }
 
@@ -75,7 +75,10 @@
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMyOnlyContainASingleClass", Justification = "It is a variance of the same class with different number of generic parameters")]
+    [SuppressMessage(
+        "Microsoft.StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification = "It is a variance of the same class with different number of generic parameters")]
     internal class CreateCopyHelper<TTarget, TConcreteTarget>
         : ICreateCopyHelper<TTarget, TConcreteTarget>
         where TTarget : class

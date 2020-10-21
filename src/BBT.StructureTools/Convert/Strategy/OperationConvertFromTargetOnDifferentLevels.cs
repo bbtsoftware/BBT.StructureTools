@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -14,6 +15,10 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+
+        /// <summary>
+        /// Declares the source value to convert from.
+        /// </summary>
         private Func<TTarget, TSourceValue> sourceFunc;
 
         /// <summary>
@@ -23,7 +28,6 @@
             IConvert<TSourceValue, TTarget, TConvertIntention> convert)
         {
             convert.NotNull(nameof(convert));
-
             this.convert = convert;
         }
 
@@ -31,7 +35,6 @@
         public void Initialize(Func<TTarget, TSourceValue> sourceFunc)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
-
             this.sourceFunc = sourceFunc;
         }
 
@@ -43,9 +46,8 @@
         {
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings.Add(
-                new GenericConvertPostProcessing<TSource, TTarget>(
-                    (x, y) => this.convert.Convert(this.sourceFunc(y), y, additionalProcessings)));
+            var actualSource = this.sourceFunc(target);
+            this.convert.Convert(actualSource, target, additionalProcessings);
         }
     }
 }

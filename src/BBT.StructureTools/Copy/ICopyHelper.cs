@@ -5,7 +5,7 @@
     /// <summary>
     /// Provides copy functionality.
     /// </summary>
-    internal interface ICopyHelper
+    public interface ICopyHelper
     {
         /// <summary>
         /// Start the copy post process it it's needed.

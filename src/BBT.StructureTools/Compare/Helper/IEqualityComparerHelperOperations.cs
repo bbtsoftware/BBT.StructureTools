@@ -6,18 +6,20 @@
     /// <summary>
     /// Helper for the equals and get hash code calculation.
     /// </summary>
-    /// <typeparam name="TModel">Model type.</typeparam>
+    /// <typeparam name="TModel">Type which is compared.</typeparam>
     public interface IEqualityComparerHelperOperations<TModel>
         where TModel : class
     {
         /// <summary>
         /// Compares the registered attributes.
         /// </summary>
+        /// <returns>True if the registrations are equal.</returns>
         bool AreRegistrationsEquals(TModel candidate1, TModel candidate2);
 
         /// <summary>
         /// Compares the registered attributes.
         /// </summary>
+        /// <returns>True if the registrations are equal.</returns>
         bool AreRegistrationsEquals(
             TModel candidate1,
             TModel candidate2,

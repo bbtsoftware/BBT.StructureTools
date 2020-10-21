@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -17,10 +18,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationTargetSubConvert{TSource,TTarget,TTargetValue,TConvertIntention}" /> class.
         /// </summary>
-        public OperationTargetSubConvert(IConvert<TSource, TTargetValue, TConvertIntention> convert)
+        public OperationTargetSubConvert(
+            IConvert<TSource, TTargetValue, TConvertIntention> convert)
         {
             convert.NotNull(nameof(convert));
-
             this.convert = convert;
         }
 
@@ -34,7 +35,7 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var targetValue = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetValue>(target);
+            var targetValue = target.IsOfType<TTargetValue>(nameof(target));
             this.convert.Convert(source, targetValue, additionalProcessings);
         }
     }

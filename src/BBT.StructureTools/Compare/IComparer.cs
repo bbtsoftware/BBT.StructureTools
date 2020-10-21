@@ -4,15 +4,13 @@
 
     /// <summary>
     /// Interface for model comparison.
-    /// <para>
-    /// Remark for hash code calculation.
-    /// </para>
-    /// <para>
+    /// ---------------------------------
+    /// Remark for hash code calculation:
+    /// ---------------------------------
     /// Calculates a hash code for the object.
     /// Attention, hash codes for the same object can change in
     /// database operations with the object itself or one of it's children,
     /// because some base models include ID/GUID in the hash code calculation.
-    /// </para>
     /// </summary>
     /// <typeparam name="TModelToCompare">Model to compare.</typeparam>
     /// <typeparam name="TComparerIntention">Type of compare. A sub interface of <see cref="IBaseComparerIntention"/>.</typeparam>

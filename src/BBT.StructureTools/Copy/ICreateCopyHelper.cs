@@ -9,9 +9,13 @@
     /// TODO ber: one type declaration per file.
     /// </summary>
     /// <typeparam name="TChild">The target interface to convert to.</typeparam>
-    /// <typeparam name="TConcreteChild">The target to convert to.</typeparam>
-    /// <typeparam name="TParent">Reverse relation type.</typeparam>
-    public interface ICreateCopyHelper<TChild, TConcreteChild, TParent>
+    /// <typeparam name="TConcreteChild">
+    /// The target to convert to.
+    /// </typeparam>
+    /// <typeparam name="TParent">
+    /// Reverse relation type.
+    /// </typeparam>
+    internal interface ICreateCopyHelper<TChild, TConcreteChild, TParent>
         where TChild : class
         where TConcreteChild : class, TChild, new()
         where TParent : class
@@ -24,7 +28,10 @@
         /// <summary>
         /// Creates a new <typeparamref name="TConcreteChild"/> converted from <paramref name="source"/>.
         /// </summary>
-        TChild CreateTarget(TConcreteChild source, TParent reverseRelation, ICopyCallContext copyCallContext);
+        TChild CreateTarget(
+            TConcreteChild source,
+            TParent reverseRelation,
+            ICopyCallContext copyCallContext);
     }
 
     /// <summary>
@@ -33,13 +40,15 @@
     /// </summary>
     /// <typeparam name="TTarget">The target abstraction to convert to.</typeparam>
     /// <typeparam name="TConcreteTarget">The target to convert to.</typeparam>
-    public interface ICreateCopyHelper<out TTarget, in TConcreteTarget>
+    internal interface ICreateCopyHelper<out TTarget, in TConcreteTarget>
         where TTarget : class
         where TConcreteTarget : class, TTarget, new()
     {
         /// <summary>
         /// Creates a new <typeparamref name="TConcreteTarget"/> copied from <paramref name="source"/>.
         /// </summary>
-        TTarget CreateTarget(TConcreteTarget source, ICollection<IBaseAdditionalProcessing> additionalProcessings);
+        TTarget CreateTarget(
+            TConcreteTarget source,
+            ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 }

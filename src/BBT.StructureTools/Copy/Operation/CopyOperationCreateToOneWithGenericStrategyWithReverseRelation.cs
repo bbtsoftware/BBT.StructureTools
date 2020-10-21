@@ -6,7 +6,12 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">c aboF.</typeparam>
+    /// <typeparam name="TStrategy">c aboF.</typeparam>
+    /// <typeparam name="TChild">c aboF.</typeparam>
     internal class CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild> : ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
@@ -20,14 +25,17 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T, TStrategy, TChild}"/> class.
         /// </summary>
-        public CopyOperationCreateToOneWithGenericStrategyWithReverseRelation(ICopyStrategyProvider<TStrategy, TChild> strategyProvider)
+        public CopyOperationCreateToOneWithGenericStrategyWithReverseRelation(
+            ICopyStrategyProvider<TStrategy, TChild> genericStrategyProvider)
         {
-            strategyProvider.NotNull(nameof(strategyProvider));
+            genericStrategyProvider.NotNull(nameof(genericStrategyProvider));
 
-            this.strategyProvider = strategyProvider;
+            this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperation{T}"/>.
+        /// </summary>
         public void Copy(
             T source,
             T target,
@@ -51,7 +59,9 @@
             target.SetPropertyValue(this.targetExpression, copy);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+        /// </summary>
         public void Initialize(Func<T, TChild> sourceFunc, Expression<Func<T, TChild>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
         {
             sourceFunc.NotNull(nameof(sourceFunc));

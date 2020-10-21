@@ -10,7 +10,7 @@
     /// <typeparam name="TSourceValue">The specific source class. Must derive from the source.</typeparam>
     /// <typeparam name="TTargetValue">The specific target class. Must derive from the target.</typeparam>
     /// <typeparam name="TConvertIntention">The intention used for the conversion.</typeparam>
-    internal interface IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    public interface IOperationSubConvert<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

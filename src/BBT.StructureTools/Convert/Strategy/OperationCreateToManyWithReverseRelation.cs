@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -18,8 +19,17 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
+
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
@@ -77,7 +87,9 @@
                 copies.Add(copy);
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.targetExpression, copies);
+            target.AddRangeFilterNullValues(
+                this.targetExpression,
+                copies);
         }
     }
 }

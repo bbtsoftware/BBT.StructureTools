@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert.Value;
     using BBT.StructureTools.Extension;
 
@@ -22,7 +23,6 @@
         public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> convertValue)
         {
             convertValue.NotNull(nameof(convertValue));
-
             this.convertValue = convertValue;
         }
 

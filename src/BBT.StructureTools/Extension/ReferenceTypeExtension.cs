@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -11,11 +12,11 @@
     internal static class ReferenceTypeExtension
     {
         /// <summary>
-        /// An extension enabling addition of many elements to a Collection.
+        /// An extension enabling addition of many elements to an enumeration without adding null values within the origin.
         /// </summary>
         /// <typeparam name="TTarget">The type of the owner of the collection property.</typeparam>
         /// <typeparam name="TValue">The type of the collection entry.</typeparam>
-        internal static void AddRangeToCollectionFilterNullValues<TTarget, TValue>(
+        internal static void AddRangeFilterNullValues<TTarget, TValue>(
             this TTarget target,
             Expression<Func<TTarget, ICollection<TValue>>> targetExpression,
             IEnumerable<TValue> values)
@@ -26,18 +27,12 @@
             targetExpression.NotNull(nameof(targetExpression));
             values.NotNull(nameof(values));
 
-            var targetExpressionMemberExpression = (MemberExpression)targetExpression.Body;
-            var valueProperty = (PropertyInfo)targetExpressionMemberExpression.Member;
-
-            var addMethod = targetExpression.Compile().Invoke(target);
-
-            foreach (var value in values)
-            {
-                if (value != null)
-                {
-                    addMethod.Add(value);
-                }
-            }
+            var targetListFunc = targetExpression.Compile();
+            var targetList = targetListFunc.Invoke(target);
+            targetList.AddRangeToMe(
+                values
+                .Where(value => value != null)
+                .Where(value => !targetList.Contains(value)));
         }
 
         /// <summary>
@@ -59,7 +54,7 @@
             }
             else
             {
-                throw new CopyConvertCompareException(FormattableString.Invariant($"Failed to set PropertyInfo from type {target}, Expression = {memberLambda.Name}"));
+                throw new StructureToolsException(FormattableString.Invariant($"Failed to set PropertyInfo on {target}, Expression = {memberLambda}"));
             }
         }
 
@@ -82,7 +77,7 @@
             }
             else
             {
-                throw new CopyConvertCompareException(FormattableString.Invariant($"Failed to retrieve PropertyInfo from type {target}, Expression = {memberLambda.Name}"));
+                throw new StructureToolsException(FormattableString.Invariant($"Failed to retrieve PropertyInfo from type {target}, Expression = {memberLambda.Name}"));
             }
         }
 

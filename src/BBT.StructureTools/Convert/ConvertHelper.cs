@@ -2,22 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class ConvertHelper : IConvertHelper
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertHelper"/> class.
-        /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public ConvertHelper()
-        {
-        }
-
         /// <inheritdoc/>
         public void DoConvertPreProcessing<TSourceClass, TTargetClass>(
             TSourceClass source,
@@ -30,10 +20,10 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPreProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPreProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>
@@ -48,10 +38,10 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPostProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPostProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>

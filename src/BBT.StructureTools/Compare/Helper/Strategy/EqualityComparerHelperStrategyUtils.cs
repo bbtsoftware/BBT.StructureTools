@@ -10,14 +10,14 @@
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
     /// </summary>
-    internal static class EqualityComparerHelperStrategyUtils
+    public static class EqualityComparerHelperStrategyUtils
     {
         /// <summary>
         /// Get the method name.
         /// </summary>
         /// <typeparam name="T">Base type of expression.</typeparam>
         /// <typeparam name="TReturn">Return type.</typeparam>
-        internal static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
+        public static string GetMethodName<T, TReturn>(Expression<Func<T, TReturn>> expression)
         {
             expression.NotNull(nameof(expression));
 
@@ -29,7 +29,7 @@
         /// <summary>
         /// Check if the property exists in the exclusion list.
         /// </summary>
-        internal static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
+        public static bool IsPropertyExcluded(IEnumerable<IComparerExclusion> exclusions, Type typeOfModel, string name)
         {
             exclusions.NotNull(nameof(exclusions));
             typeOfModel.NotNull(nameof(typeOfModel));
@@ -53,10 +53,10 @@
         }
 
         /// <summary>
-        /// Checks whether the two lists are equivalent or not.
+        /// Checks whether the two list are equivalent or not.
         /// </summary>
         /// <typeparam name="TModel">Type of model.</typeparam>
-        internal static bool AreListEquivalent<TModel>(
+        public static bool AreListEquivalent<TModel>(
             IEnumerable<TModel> list1,
             IEnumerable<TModel> list2,
             Func<TModel, TModel, bool> compareFunc)
@@ -64,7 +64,8 @@
         {
             compareFunc.NotNull(nameof(compareFunc));
 
-            // This is OK since either both are null, or have the same reference which is
+            // ReSharper disable once PossibleUnintendedReferenceComparison
+            // BER says this is OK since either both are null, or have the same reference which is
             // in case of our compare infra the correct definition of equal.
             if (list1 == list2)
             {
@@ -112,7 +113,7 @@
         /// Evaluates type that is compared.
         /// </summary>
         /// <typeparam name="T">type of comparer.</typeparam>
-        internal static Type GetCompareType<T>(IEqualityComparer<T> comparer)
+        public static Type GetCompareType<T>(IEqualityComparer<T> comparer)
         {
             comparer.NotNull(nameof(comparer));
 
@@ -134,6 +135,9 @@
         private class DictionaryComparer<TModel> : IEqualityComparer<TModel>
             where TModel : class
         {
+            /// <summary>
+            /// Returns true if the 2 models are equal.
+            /// </summary>
             private readonly Func<TModel, TModel, bool> compareFunc;
 
             /// <summary>

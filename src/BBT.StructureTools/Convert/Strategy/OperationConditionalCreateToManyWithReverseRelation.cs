@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Strategy;
@@ -21,7 +22,7 @@
         private readonly IGenericStrategyProvider<ICreateByBaseAsCriterionStrategy<TBaseSource, TBaseTarget>, TBaseSource> createInstanceStrategyProvider;
 
         private Func<TSource, IEnumerable<TBaseSource>> source;
-        private Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent;
+        private Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParentExpression;
         private Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget;
 
         /// <summary>
@@ -51,10 +52,10 @@
                 strategy.Convert(sourceChildElement, childTarget, additionalProcessings);
 
                 // set reverse relation
-                this.reverseRelationOnTarget.Compile().Invoke(childTarget);
+                childTarget.SetPropertyValue(this.reverseRelationOnTarget, target);
 
                 // Add to target collection
-                this.targetParent.Compile().Invoke(target).Add(childTarget);
+                this.targetParentExpression.Compile().Invoke(target).Add(childTarget);
             }
         }
 
@@ -69,7 +70,7 @@
             reverseRelationOnTarget.NotNull(nameof(reverseRelationOnTarget));
 
             this.source = source;
-            this.targetParent = targetParent;
+            this.targetParentExpression = targetParent;
             this.reverseRelationOnTarget = reverseRelationOnTarget;
         }
     }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -25,7 +26,6 @@
             IConvert<TSourceValue, TTargetValue, TConvertIntention> convert)
         {
             convert.NotNull(nameof(convert));
-
             this.convert = convert;
         }
 
@@ -34,7 +34,6 @@
             Func<TSource, TSourceValue> sourceFunc)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
-
             this.sourceFunc = sourceFunc;
         }
 
@@ -49,17 +48,13 @@
             additionalProcessings.NotNull(nameof(additionalProcessings));
             target.IsOfType<TTargetValue>(nameof(target));
 
-            // Need to use another collection, since the given collection my change and the enumeration fails.
-            var newAdditionalProcessings = new List<IBaseAdditionalProcessing>(additionalProcessings);
-
-            if (this.sourceFunc(source) == null)
+            var actualSource = this.sourceFunc(source);
+            if (actualSource == null)
             {
                 return;
             }
 
-            additionalProcessings.Add(
-                new GenericConvertPostProcessing<TSource, TTarget>(
-                    (x, y) => this.convert.Convert(this.sourceFunc(x), y as TTargetValue, newAdditionalProcessings)));
+            this.convert.Convert(actualSource, target as TTargetValue, additionalProcessings);
         }
     }
 }
