@@ -23,11 +23,13 @@
         }
 
         /// <summary>
-        /// Gets a ist of the collected objects.
+        /// Gets a list of the collected objects.
         /// </summary>
         public IEnumerable<TTarget> CollectedObjects => this.collectedTargetInstances;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="IConvertPostProcessing{TSoureClass, TTargetClass}"/>.
+        /// </summary>
         public void DoPostProcessing(TSource source, TTarget target)
         {
             target.NotNull(nameof(target));

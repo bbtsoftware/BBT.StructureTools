@@ -8,9 +8,15 @@
     /// Strategy to copy entities with a <c>ToMany</c> relationship.
     /// <see cref="ICopyOperation{T}"/>.
     /// </summary>
-    /// <typeparam name="TParent">See link above.</typeparam>
-    /// <typeparam name="TChild">See link above.</typeparam>
-    /// <typeparam name="TConcreteChild">concrete implementation.</typeparam>
+    /// <typeparam name="TParent">
+    /// See link above.
+    /// </typeparam>
+    /// <typeparam name="TChild">
+    /// See link above.
+    /// </typeparam>
+    /// <typeparam name="TConcreteChild">
+    /// concrete implementation.
+    /// </typeparam>
     internal interface ICopyOperationCreateToOneWithReverseRelation<TParent, TChild, TConcreteChild>
         : ICopyOperation<TParent>
         where TParent : class

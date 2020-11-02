@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
 
     /// <summary>
@@ -12,7 +13,7 @@
     /// <typeparam name="TIntention">Conversion use case defining intention.</typeparam>
     /// <typeparam name="TSourceInterface">Source interface type - Specific interface of <typeparamref name="TSource"/>.</typeparam>
     /// <typeparam name="TCriterion">Criterion type - Specific interface of <typeparamref name="TTarget"/>.</typeparam>
-    internal class GenericTargetConvertStrategy<TSource, TTarget, TIntention, TSourceInterface, TCriterion> : ITargetConvertStrategy<TSource, TTarget, TIntention>
+    public class GenericTargetConvertStrategy<TSource, TTarget, TIntention, TSourceInterface, TCriterion> : ITargetConvertStrategy<TSource, TTarget, TIntention>
         where TSource : class
         where TTarget : class
         where TIntention : IBaseConvertIntention
@@ -48,7 +49,9 @@
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// See <see cref="IGenericStrategy{T}"/>.
+        /// </summary>
         public bool IsResponsible(TTarget criterion)
         {
             var isResponsible = criterion is TCriterion;

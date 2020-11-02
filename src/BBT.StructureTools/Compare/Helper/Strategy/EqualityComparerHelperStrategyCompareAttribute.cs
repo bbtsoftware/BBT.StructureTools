@@ -3,13 +3,21 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategyCompareAttribute<TModel, TValue> : IEqualityComparerHelperStrategy<TModel>
     {
+        /// <summary>
+        /// Function to get the property value.
+        /// </summary>
         private readonly Func<TModel, TValue> func;
+
+        /// <summary>
+        /// Name of compared property.
+        /// </summary>
         private readonly string propertyName;
 
         /// <summary>

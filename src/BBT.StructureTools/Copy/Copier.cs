@@ -1,12 +1,16 @@
 ﻿namespace BBT.StructureTools.Copy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class Copier<T> : ICopy<T>
+    /// <summary>
+    /// Generic copy class.
+    /// </summary>
+    /// <typeparam name="T">class to copy.</typeparam>
+    public class Copier<T> : ICopy<T>
         where T : class
     {
         private readonly ICopyHelper copyHelper;

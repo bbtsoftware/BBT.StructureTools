@@ -5,14 +5,18 @@
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
     using BBT.MaybePattern;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
 
-    /// <inheritdoc/>
-    internal class CopyHelperRegistration<T> : IInternalCopyHelperRegistration<T>
+    /// <summary>
+    /// Helper for the copy mechanism.
+    /// </summary>
+    /// <typeparam name="T">class to copy.</typeparam>
+    internal class CopyHelperRegistration<T> : ICopyHelperRegistration<T>
         where T : class
     {
         private readonly List<ICopyOperation<T>> registeredStrategies;
@@ -26,7 +30,10 @@
             this.registeredStrategies = new List<ICopyOperation<T>>();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Register a copy attribute of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the attribute to compare. Must be a reference type.</typeparam>
         public ICopyHelperRegistration<T> RegisterAttribute<TValue>(Expression<Func<T, TValue>> expression)
         {
             this.registeredStrategies.Add(new CopyOperation<T, TValue>(expression));
@@ -36,9 +43,9 @@
         /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterInlineValueProcessing<TValue>(
             Expression<Func<T, TValue>> targetExpression,
-            Expression<Func<TValue>> aAttrValueExpression)
+            Expression<Func<TValue>> attrValueExpression)
         {
-            this.registeredStrategies.Add(new CopyOperationInlineProcessValue<T, TValue>(targetExpression, aAttrValueExpression));
+            this.registeredStrategies.Add(new CopyOperationInlineProcessValue<T, TValue>(targetExpression, attrValueExpression));
             return this;
         }
 
@@ -46,12 +53,12 @@
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategy<TStrategy, TChildType>(
             Func<T, IEnumerable<TChildType>> sourceFunc,
             Expression<Func<T, ICollection<TChildType>>> targetExpression,
-            Expression<Func<TStrategy, TChildType>> aCreateTargetChildExpression)
+            Expression<Func<TStrategy, TChildType>> createTargetChildExpression)
             where TStrategy : class, ICopyStrategy<TChildType>
             where TChildType : class
         {
             var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>>();
-            copyStrategy.Initialize(sourceFunc, targetExpression, aCreateTargetChildExpression);
+            copyStrategy.Initialize(sourceFunc, targetExpression, createTargetChildExpression);
             this.registeredStrategies.Add(copyStrategy);
             return this;
         }
@@ -76,7 +83,8 @@
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
-            var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
+            var operation = this.serviceLocator
+                .GetInstance<ICopyOperationCreateToManyWithReverseRelation<T, TChild, TConcreteChild>>();
             var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
 
             operation.Initialize(
@@ -120,7 +128,8 @@
         {
             targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
-            var operation = this.serviceLocator.GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
+            var operation = this.serviceLocator
+                .GetInstance<ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>>();
             var copyHelperFactory = this.serviceLocator.GetInstance<ICopyHelperFactory<TChild, TConcreteChild>>();
 
             operation.Initialize(
@@ -133,15 +142,18 @@
         }
 
         /// <inheritdoc/>
-        public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] aFurtherAdditionalProcessings)
+        public ICopyHelperRegistration<T> RegisterPostProcessings(IBaseAdditionalProcessing additionalProcessing, params IBaseAdditionalProcessing[] furtherAdditionalProcessings)
         {
             additionalProcessing.NotNull(nameof(additionalProcessing));
 
-            var list = new Collection<IBaseAdditionalProcessing>() { additionalProcessing };
+            var list = new Collection<IBaseAdditionalProcessing>()
+                            {
+                                additionalProcessing,
+                            };
 
-            if (aFurtherAdditionalProcessings != null)
+            if (furtherAdditionalProcessings != null)
             {
-                list.AddRangeToMe(aFurtherAdditionalProcessings);
+                list.AddRangeToMe(furtherAdditionalProcessings);
             }
 
             var copyOperationPostProcessings = new CopyOperationPostProcessing<T>();
@@ -156,7 +168,10 @@
         {
             var postProcessing = IocHandler.Instance.IocResolver.GetInstance<TPostProcessing>();
 
-            var list = new Collection<IBaseAdditionalProcessing>() { postProcessing };
+            var list = new Collection<IBaseAdditionalProcessing>()
+                            {
+                                postProcessing,
+                            };
 
             var copyOperationPostProcessings = new CopyOperationPostProcessing<T>();
             copyOperationPostProcessings.Initialize(list);
@@ -189,22 +204,23 @@
         public ICopyHelperRegistration<T>
             RegisterCreateFromFactory<TAttributeValueFactory, TValue>(
             Expression<Func<T, TValue>> targetExpression,
-            Expression<Func<TAttributeValueFactory, TValue>> aAttrValueExpression)
+            Expression<Func<TAttributeValueFactory, TValue>> attrValueExpression)
             where TAttributeValueFactory : class
         {
             targetExpression.NotNull(nameof(targetExpression));
-
-            aAttrValueExpression.NotNull(nameof(aAttrValueExpression));
+            attrValueExpression.NotNull(nameof(attrValueExpression));
 
             var operation = new CopyOperationCreateFromFactory<T, TValue, TAttributeValueFactory>();
-            operation.Initialize(targetExpression, aAttrValueExpression);
+            operation.Initialize(targetExpression, attrValueExpression);
             this.registeredStrategies.Add(operation);
             return this;
         }
 
         /// <inheritdoc/>
         public ICopyHelperRegistration<T> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TStrategy, TChild>(
-            Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
+            Func<T, IEnumerable<TChild>> sourceFunc,
+            Expression<Func<T, ICollection<TChild>>> targetExpression,
+            Expression<Func<TChild, T>> reverseRelationExpression)
             where TStrategy : class, ICopyStrategy<TChild>
             where TChild : class
         {
@@ -233,7 +249,6 @@
             where TChild : class
         {
             targetExpression.NotNull(nameof(targetExpression));
-
             var copyStrategy = IocHandler.Instance.IocResolver.GetInstance<ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>>();
             copyStrategy.Initialize(targetExpression.Compile(), targetExpression, reverseRelationExpression);
             this.registeredStrategies.Add(copyStrategy);

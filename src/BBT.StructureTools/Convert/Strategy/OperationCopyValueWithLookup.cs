@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Provider;
 
     /// <inheritdoc/>
     internal class OperationCopyValueWithLookUp<TSource, TTarget, TValue>
@@ -11,53 +13,65 @@
         where TSource : class
         where TTarget : class
     {
+        private readonly IDefaultValueProvider defaultValueProvider;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TValue> sourceFunc;
-        private Func<TSource, TValue> sourceLookupFunc;
+
+        /// <summary>
+        /// Function to get the look-up value.
+        /// </summary>
+        private Func<TSource, TValue> sourceLookUpFunc;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
         private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCopyValueWithLookUp{TSource, TTarget, TValue}"/> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public OperationCopyValueWithLookUp()
+        public OperationCopyValueWithLookUp(
+            IDefaultValueProvider defaultValueProvider)
         {
+            defaultValueProvider.NotNull(nameof(defaultValueProvider));
+
+            this.defaultValueProvider = defaultValueProvider;
         }
 
         /// <inheritdoc/>
         public void Initialize(
-            Func<TSource, TValue> aSourceFunc,
-            Func<TSource, TValue> aSourceLookUpFunc,
-            Expression<Func<TTarget, TValue>> aTargetExpression)
+            Func<TSource, TValue> sourceFunc,
+            Func<TSource, TValue> sourceLookUpFunc,
+            Expression<Func<TTarget, TValue>> targetExpression)
         {
-            aSourceFunc.NotNull(nameof(aSourceFunc));
-            aSourceLookUpFunc.NotNull(nameof(aSourceLookUpFunc));
-            aTargetExpression.NotNull(nameof(aTargetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceLookUpFunc.NotNull(nameof(sourceLookUpFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
-            this.sourceFunc = aSourceFunc;
-            this.sourceLookupFunc = aSourceLookUpFunc;
-            this.targetExpression = aTargetExpression;
+            this.sourceFunc = sourceFunc;
+            this.sourceLookUpFunc = sourceLookUpFunc;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
         public void Execute(
-            TSource aSource,
-            TTarget aTarget,
+            TSource source,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.NotNull(nameof(aSource));
-            aTarget.NotNull(nameof(aTarget));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
-            var sourceValue = this.sourceFunc.Invoke(aSource);
-
-            if (LookupUtils.IsDefaultValue(sourceValue))
+            var sourceValue = this.sourceFunc.Invoke(source);
+            if (this.defaultValueProvider.IsDefault(sourceValue))
             {
-                sourceValue = this.sourceLookupFunc.Invoke(aSource);
+                sourceValue = this.sourceLookUpFunc.Invoke(source);
             }
 
-            aTarget.SetPropertyValue(
+            target.SetPropertyValue(
                 this.targetExpression,
                 sourceValue);
         }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -16,20 +17,17 @@
         where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TSourceValue> sourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> targetExpression;
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToOne{TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention}"/> class.
+        ///  Expression which declares the target value.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public OperationCreateToOne()
-        {
-        }
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
+
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -67,7 +65,9 @@
                     sourceValue,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.targetExpression, targetValue);
+            target.SetPropertyValue(
+                this.targetExpression,
+                targetValue);
         }
     }
 }

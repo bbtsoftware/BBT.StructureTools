@@ -12,7 +12,7 @@
     /// <typeparam name="TIntention">Conversion use case defining intention.</typeparam>
     /// <typeparam name="TCriterion">Criterion type - Specific interface of <typeparamref name="TSource"/>.</typeparam>
     /// <typeparam name="TTargetInterface">Target interface type - Specific interface of <typeparamref name="TTarget"/>.</typeparam>
-    internal class GenericSourceConvertStrategy<TSource, TTarget, TIntention, TCriterion, TTargetInterface> : ISourceConvertStrategy<TSource, TTarget, TIntention>
+    public class GenericSourceConvertStrategy<TSource, TTarget, TIntention, TCriterion, TTargetInterface> : ISourceConvertStrategy<TSource, TTarget, TIntention>
         where TSource : class
         where TTarget : class
         where TIntention : IBaseConvertIntention
@@ -39,8 +39,8 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var sourceCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TCriterion>(source);
-            var targetCasted = ReflectionUtils.CastIfTypeOrSubtypeOrThrow<TTargetInterface>(target);
+            var sourceCasted = source.IsOfType<TCriterion>(nameof(source));
+            var targetCasted = target.IsOfType<TTargetInterface>(nameof(target));
 
             this.converter.Convert(sourceCasted, targetCasted, additionalProcessings);
         }

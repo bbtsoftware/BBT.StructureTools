@@ -1,12 +1,13 @@
 ﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
 
     /// <summary>
     /// Strategy to compare the different attribute types.
     /// </summary>
-    /// <typeparam name="TModel">Inheriting type.</typeparam>
+    /// <typeparam name="TModel">Type which is compared.</typeparam>
     internal interface IEqualityComparerHelperStrategy<in TModel>
     {
         /// <summary>

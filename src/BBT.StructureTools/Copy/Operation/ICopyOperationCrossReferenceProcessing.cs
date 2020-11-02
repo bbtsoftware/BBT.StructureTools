@@ -4,7 +4,7 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// A copy operation which adds cross-reference processing operations while performing the copy
+    /// A copy operation which adds cross referenceprocessing operations while perfoming the copy
     /// procedure.
     /// </summary>
     /// <typeparam name="T">Type of the object being copied.</typeparam>
@@ -16,8 +16,8 @@
         where TReferencingModel : class
     {
         /// <summary>
-        /// Initializes the operation with a ist of <see cref="IBaseAdditionalProcessing"/>.
-        /// ist can be empty, but must not be null.
+        /// Initializes the operation with a list of <see cref="IBaseAdditionalProcessing"/>.
+        /// List can be empty, but must not be null.
         /// </summary>
         void Initialize(Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty);
     }

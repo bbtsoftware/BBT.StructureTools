@@ -1,6 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
@@ -15,10 +16,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
         public Converter(
             IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
@@ -46,7 +43,8 @@
 
             this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
             this.convertOperations.Convert(source, target, additionalProcessings);
-            this.convertHelper.DoConvertPostProcessing(source, target, additionalProcessings);
+            this.convertHelper.DoConvertPostProcessing(
+                source, target, additionalProcessings);
         }
     }
 }

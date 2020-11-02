@@ -15,7 +15,7 @@
         T Create();
 
         /// <summary>
-        /// Copies the <see paramref="source"/> to the <see paramref="target"/>.
+        /// Copies the <see paranref="source"/> to the <see paramref="target"/>.
         /// </summary>
         void Copy(T source, T target, ICopyCallContext copyCallContext);
     }

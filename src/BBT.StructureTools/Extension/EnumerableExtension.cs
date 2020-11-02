@@ -57,21 +57,21 @@
         /// </typeparam>
         internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-           list.NotNull(nameof(list));
+            list.NotNull(nameof(list));
 
-           if (list.Only())
-           {
-               return list.Single();
-           }
+            if (list.Only())
+            {
+                return list.Single();
+            }
 
-           var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
+            var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
 
-           if (!list.Any())
-           {
-               throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + message);
-           }
+            if (!list.Any())
+            {
+                throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + message);
+            }
 
-           throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
+            throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
         }
     }
 }

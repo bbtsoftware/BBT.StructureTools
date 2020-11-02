@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -18,9 +19,22 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TMergeValue>> mergeFunc;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
+
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
 
         /// <summary>
@@ -36,17 +50,17 @@
 
         /// <inheritdoc/>
         public void Initialize(
-            Func<TSource, IEnumerable<TMergeValue>> aMergeFunc,
+            Func<TSource, IEnumerable<TMergeValue>> mergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
-            aMergeFunc.NotNull(nameof(aMergeFunc));
+            mergeFunc.NotNull(nameof(mergeFunc));
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
-            this.mergeFunc = aMergeFunc;
+            this.mergeFunc = mergeFunc;
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
@@ -92,7 +106,9 @@
                 }
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.targetExpression, copies);
+            target.AddRangeFilterNullValues(
+                this.targetExpression,
+                copies);
         }
     }
 }

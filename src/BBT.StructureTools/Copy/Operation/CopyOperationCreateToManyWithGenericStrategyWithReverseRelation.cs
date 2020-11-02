@@ -7,7 +7,12 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">c aboF.</typeparam>
+    /// <typeparam name="TStrategy">c aboF.</typeparam>
+    /// <typeparam name="TChild">c aboF.</typeparam>
     internal class CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild> : ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
@@ -22,20 +27,22 @@
         /// Initializes a new instance of the <see cref="CopyOperationCreateToManyWithGenericStrategyWithReverseRelation{T, TStrategy, TChild}"/> class.
         /// </summary>
         public CopyOperationCreateToManyWithGenericStrategyWithReverseRelation(
-            ICopyStrategyProvider<TStrategy, TChild> strategyProvider)
+            ICopyStrategyProvider<TStrategy, TChild> genericStrategyProvider)
         {
-            strategyProvider.NotNull(nameof(strategyProvider));
+            genericStrategyProvider.NotNull(nameof(genericStrategyProvider));
 
-            this.strategyProvider = strategyProvider;
+            this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperation{T}"/>.
+        /// </summary>
         public void Copy(
             T source,
             T target,
             ICopyCallContext copyCallContext)
         {
-            var newKids = new List<TChild>();
+            var newKidsList = new List<TChild>();
 
             foreach (var child in this.sourceFunc.Invoke(source))
             {
@@ -43,14 +50,19 @@
                 var childCopy = strategy.Create();
                 strategy.Copy(child, childCopy, copyCallContext);
                 childCopy.SetPropertyValue(this.reverseRelationExpression, target);
-                newKids.Add(childCopy);
+                newKidsList.Add(childCopy);
             }
 
-            target.AddRangeToCollectionFilterNullValues(this.targetExpression, newKids);
+            target.AddRangeFilterNullValues(this.targetExpression, newKidsList);
         }
 
-        /// <inheritdoc/>
-        public void Initialize(Func<T, IEnumerable<TChild>> sourceFunc, Expression<Func<T, ICollection<TChild>>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+        /// </summary>
+        public void Initialize(
+            Func<T, IEnumerable<TChild>> sourceFunc,
+            Expression<Func<T, ICollection<TChild>>> targetExpression,
+            Expression<Func<TChild, T>> reverseRelationExpression)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

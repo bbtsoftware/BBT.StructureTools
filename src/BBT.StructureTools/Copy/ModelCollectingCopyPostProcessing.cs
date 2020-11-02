@@ -5,7 +5,7 @@
     using BBT.StructureTools.Extension;
 
     /// <summary>
-    /// Post processing which collects objects which were processed by the copy.
+    /// Post processing which collects models which were processed by the copy.
     /// </summary>
     /// <typeparam name="TClassToCopy">Source type.</typeparam>
     public class ModelCollectingCopyPostProcessing<TClassToCopy> : ICopyPostProcessing<TClassToCopy>
@@ -22,11 +22,13 @@
         }
 
         /// <summary>
-        /// Gets a ist of the collected objects.
+        /// Gets a list of the collected objects.
         /// </summary>
         public IEnumerable<TClassToCopy> CollectedObjects => this.collectedTargetInstances;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyPostProcessing{TClassToCopy}"/>.
+        /// </summary>
         public void DoPostProcessing(TClassToCopy source, TClassToCopy target)
         {
             target.NotNull(nameof(target));

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -16,18 +17,11 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
-        private Expression<Func<TTarget, TTargetValue>> targetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateFromSourceWithReverseRelation{TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention}"/> class.
+        ///  Expression which declares the target value.
         /// </summary>
-        /// <remarks>
-        /// This constructor is required and needs to be public because of the issue
-        /// described in GH-17.
-        /// </remarks>
-        public OperationCreateFromSourceWithReverseRelation()
-        {
-        }
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -60,7 +54,9 @@
                     target,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.targetExpression, targetValue);
+            target.SetPropertyValue(
+                this.targetExpression,
+                targetValue);
         }
     }
 }

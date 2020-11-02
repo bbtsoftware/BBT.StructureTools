@@ -1,11 +1,13 @@
-﻿namespace BBT.StructureTools.Strategy
+﻿// Copyright © BBT Software AG. All rights reserved.
+
+namespace BBT.StructureTools.Strategy
 {
     using System;
     using BBT.StrategyPattern;
 
     /// <summary>
     /// Strategy for creation of concrete instances for an abstract base type.
-    /// Provides also the concrete type to be able to ist them (e.g. in combobox dropdown).
+    /// Provides also the concrete type to be able to list them (e.g. in combobox dropdown).
     /// </summary>
     /// <typeparam name="TBaseTypeIntf">Interface type of the abstract base.</typeparam>
     public interface ICreateInstanceOfTypeStrategy<TBaseTypeIntf> : IGenericStrategy<Type>

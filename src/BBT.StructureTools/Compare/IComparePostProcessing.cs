@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="T">Type of class to compare.</typeparam>
     /// <typeparam name="TIntention">Type of comparer intention of concern.</typeparam>
-    public interface IComparePostProcessing<in T, TIntention> : IBaseAdditionalProcessing
+    internal interface IComparePostProcessing<in T, TIntention> : IBaseAdditionalProcessing
         where T : class
         where TIntention : IBaseComparerIntention
     {
