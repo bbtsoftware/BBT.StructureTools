@@ -139,6 +139,9 @@
 			<li class="header">Interface Types</li>
 				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateByBaseAsCriterionStrategy_2">I<wbr>Create<wbr>By<wbr>Base<wbr>As<wbr>Criterion<wbr>Strategy<wbr>&lt;TBaseInterface, <wbr>TInterface&gt;<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateInstanceOfTypeStrategy_1">I<wbr>Create<wbr>Instance<wbr>Of<wbr>Type<wbr>Strategy<wbr>&lt;<wbr>T<wbr>Base<wbr>Type<wbr>Intf&gt;<wbr></a></li>
+			<li class="header">Class Types</li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/CreateInstanceOfTypeStrategy_3">Create<wbr>Instance<wbr>Of<wbr>Type<wbr>Strategy<wbr>&lt;TBaseTypeIntf, <wbr>TConcreteTypeIntf, <wbr>T<wbr>Concrete<wbr>Type<wbr>Impl&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5">Generic<wbr>Create<wbr>By<wbr>Base<wbr>As<wbr>Criterion<wbr>Strategy<wbr>&lt;TBaseInterface, <wbr>TCriterion, <wbr>T<wbr>Base<wbr>Target<wbr>Interface, <wbr>TInterface, <wbr>TImpl&gt;<wbr></a></li>
 
 
                     </ul>
@@ -160,10 +163,8 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Definition of a strategy where a specific implementation of the target is instantiated based
-    on the specific source's type. This is intended to be used where a source and a target property
-    may have multiple specific implementations inheriting from a base class or interface which isn't
-    the same base for source and target.
+    Definition of a strategy where a specific implementation instance is created based on a
+    specific implementation it is depending on.
     </div>
 
 		<div class="panel panel-default">
@@ -184,6 +185,12 @@
 							
 							
 							
+								<dt>Implementing Types</dt>
+								<dd>
+									<ul class="list-unstyled">
+											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5">Generic<wbr>Create<wbr>By<wbr>Base<wbr>As<wbr>Criterion<wbr>Strategy</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5#typeparam-TBaseInterface">TBaseInterface</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5#typeparam-TCriterion">TCriterion</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5#typeparam-TBaseTargetInterface">TBaseTargetInterface</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5#typeparam-TInterface">TInterface</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5#typeparam-TImpl">TImpl</a>&gt;<wbr></li>								
+									</ul>
+								</dd>				
 						</dl>
 					</div>		
 					<div class="col-md-6">
@@ -192,6 +199,8 @@
 	Type-.-&gt;Interface0["IGenericStrategy&lt;TBaseInterface&gt;"]
 	Type["ICreateByBaseAsCriterionStrategy&lt;TBaseInterface, TInterface&gt;"]
 class Type type-node
+	Implementing0["GenericCreateByBaseAsCriterionStrategy&lt;TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl&gt;"]-.-&gt;Type
+	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5"
 
 						</div>
 					</div>

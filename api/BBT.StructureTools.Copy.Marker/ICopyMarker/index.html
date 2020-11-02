@@ -176,8 +176,9 @@
 								<dt>Implementing Types</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2">ICopyWithParent</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TClassToCopy">TClassToCopy</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TParent">TParent</a>&gt;<wbr></li>								
+											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1">Copier</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1#typeparam-T">T</a>&gt;<wbr></li>								
 											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopy_1">ICopy</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopy_1#typeparam-TClassToCopy">TClassToCopy</a>&gt;<wbr></li>								
+											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2">ICopyWithParent</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TClassToCopy">TClassToCopy</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TParent">TParent</a>&gt;<wbr></li>								
 									</ul>
 								</dd>				
 						</dl>
@@ -187,10 +188,12 @@
 							graph BT
 	Type["ICopyMarker"]
 class Type type-node
-	Implementing0["ICopyWithParent&lt;TClassToCopy, TParent&gt;"]-.-&gt;Type
-	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2"
+	Implementing0["Copier&lt;T&gt;"]-.-&gt;Type
+	click Implementing0 "/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1"
 	Implementing1["ICopy&lt;TClassToCopy&gt;"]-.-&gt;Type
 	click Implementing1 "/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopy_1"
+	Implementing2["ICopyWithParent&lt;TClassToCopy, TParent&gt;"]-.-&gt;Type
+	click Implementing2 "/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2"
 
 						</div>
 					</div>

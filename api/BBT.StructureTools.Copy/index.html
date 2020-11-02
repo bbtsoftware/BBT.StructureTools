@@ -71,8 +71,8 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#InterfaceTypes">Interface Types</a></p>
-<p><a href="#ClassTypes">Class Types</a></p>
+	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#ClassTypes">Class Types</a></p>
+<p><a href="#InterfaceTypes">Interface Types</a></p>
 <p><a href="#Namespaces">Namespaces</a></p>
 <hr class="infobar-hidden">
 </div>
@@ -146,8 +146,12 @@
 				<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare">BBT<wbr>.StructureTools<wbr>.Compare</a> <a href="#" class="expand"></a>
 				<ul class="treeview-menu">
 						<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions">BBT<wbr>.StructureTools<wbr>.Compare<wbr>.Exclusions</a></li>
-			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper">BBT<wbr>.StructureTools<wbr>.Compare<wbr>.Helper</a></li>
-</ul></li>
+
+				<li class="treeview">
+				<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper">BBT<wbr>.StructureTools<wbr>.Compare<wbr>.Helper</a> <a href="#" class="expand"></a>
+				<ul class="treeview-menu">
+						<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper.Strategy">BBT<wbr>.StructureTools<wbr>.Compare<wbr>.Helper<wbr>.Strategy</a></li>
+</ul></li></ul></li>
 				<li class="treeview">
 				<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert">BBT<wbr>.StructureTools<wbr>.Convert</a> <a href="#" class="expand"></a>
 				<ul class="treeview-menu">
@@ -159,9 +163,16 @@
 				<ul class="treeview-menu">
 						<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Helper</a></li>
 			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Marker</a></li>
+			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Operation">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Operation</a></li>
 			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Processing</a></li>
 			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Strategy</a></li>
+</ul></li>
+				<li class="treeview">
+				<a href="/BBT.StructureTools/api/BBT.StructureTools.Impl">BBT<wbr>.StructureTools<wbr>.Impl</a> <a href="#" class="expand"></a>
+				<ul class="treeview-menu">
+						<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Impl.Compare">BBT<wbr>.StructureTools<wbr>.Impl<wbr>.Compare</a></li>
 </ul></li>			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Initialization">BBT<wbr>.StructureTools<wbr>.Initialization</a></li>
+			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Provider">BBT<wbr>.StructureTools<wbr>.Provider</a></li>
 			<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Strategy">BBT<wbr>.StructureTools<wbr>.Strategy</a></li>
 </ul></li></ul></li>      
 
@@ -185,6 +196,40 @@
 	
 
 
+			<h1 id="ClassTypes">Class Types</h1>
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<table class="table table-striped table-hover two-cols">
+						<thead>
+							<tr>
+								<th>Class</th>
+									<th>Summary</th>
+							</tr>
+						</thead>
+							<tbody><tr>
+								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1">Copier</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1#typeparam-T">T</a>&gt;<wbr></td>
+									<td>
+    Generic copy class.
+    </td>
+							</tr>
+							<tr>
+								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/CopyCallContext">CopyCallContext</a></td>
+									<td>
+    Represents the context of a specific "copy" call -- i.e. an instance of this is passed through the
+    "copy stack".
+    </td>
+							</tr>
+							<tr>
+								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1">Model<wbr>Collecting<wbr>Copy<wbr>Post<wbr>Processing</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1#typeparam-TClassToCopy">TClassToCopy</a>&gt;<wbr></td>
+									<td>
+    Post processing which collects models which were processed by the copy.
+    </td>
+							</tr>
+					</tbody></table>
+				</div>
+			</div>
+		
+
 			<h1 id="InterfaceTypes">Interface Types</h1>
 			<div class="box">
 				<div class="box-body no-padding table-responsive">
@@ -200,7 +245,7 @@
 									<td>
     Interface to create a copy from a source model to a target.
     Do not implement this class for a specific type, use the generic implementation which
-    works with <code class="cs">BBT.StructureTools.Copy.Operation.ICopyOperation`1</code>.
+    works with <code class="cs"><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Operation/ICopyOperation_1">ICopyOperation&lt;T&gt;</a></code>.
     </td>
 							</tr>
 							<tr>
@@ -211,9 +256,9 @@
     </td>
 							</tr>
 							<tr>
-								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyChildInterception_1">I<wbr>Copy<wbr>Child<wbr>Interception</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyChildInterception_1#typeparam-TClassToCopy">TClassToCopy</a>&gt;<wbr></td>
+								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyHelper">ICopyHelper</a></td>
 									<td>
-    Interface to intercept the copy process.
+    Provides copy functionality.
     </td>
 							</tr>
 							<tr>
@@ -226,41 +271,6 @@
 								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2">ICopyWithParent</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TClassToCopy">TClassToCopy</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2#typeparam-TParent">TParent</a>&gt;<wbr></td>
 									<td>
     Represents a "copy" process for an object which refers to its parent.
-    </td>
-							</tr>
-							<tr>
-								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_3">ICreateCopyHelper</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_3#typeparam-TChild">TChild</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_3#typeparam-TConcreteChild">TConcreteChild</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_3#typeparam-TParent">TParent</a>&gt;<wbr></td>
-									<td>
-    Provides methods to support copy.
-    TODO ber: one type declaration per file.
-    </td>
-							</tr>
-							<tr>
-								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_2">ICreateCopyHelper</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_2#typeparam-TTarget">TTarget</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ICreateCopyHelper_2#typeparam-TConcreteTarget">TConcreteTarget</a>&gt;<wbr></td>
-									<td>
-    Provides methods to support copy.
-    TODO ber: one type declaration per file.
-    </td>
-							</tr>
-					</tbody></table>
-				</div>
-			</div>
-		
-
-			<h1 id="ClassTypes">Class Types</h1>
-			<div class="box">
-				<div class="box-body no-padding table-responsive">
-					<table class="table table-striped table-hover two-cols">
-						<thead>
-							<tr>
-								<th>Class</th>
-									<th>Summary</th>
-							</tr>
-						</thead>
-							<tbody><tr>
-								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1">Model<wbr>Collecting<wbr>Copy<wbr>Post<wbr>Processing</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1#typeparam-TClassToCopy">TClassToCopy</a>&gt;<wbr></td>
-									<td>
-    Post processing which collects objects which were processed by the copy.
     </td>
 							</tr>
 					</tbody></table>
@@ -284,6 +294,10 @@
 							</tr>
 							<tr>
 								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Marker</a></td>
+									<td></td>
+							</tr>
+							<tr>
+								<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Operation">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Operation</a></td>
 									<td></td>
 							</tr>
 							<tr>

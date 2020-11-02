@@ -137,18 +137,22 @@
 			<li class="header">Namespace</li>
 		<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare">BBT<wbr>.StructureTools<wbr>.Compare</a></li>
 		<li role="separator" class="divider"></li>
+			<li class="header">Class Types</li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/CompareHelper">CompareHelper</a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/Comparer_2">Comparer<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
+				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelDateComparer_1">ModelDateComparer<wbr>&lt;TModel&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelDateTimeComparer_1">Model<wbr>Date<wbr>Time<wbr>Comparer<wbr>&lt;TModel&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1">ModelIntComparer<wbr>&lt;TModel&gt;<wbr></a></li>
 			<li class="header">Interface Types</li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IBaseComparerIntention">I<wbr>Base<wbr>Comparer<wbr>Intention</a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2">I<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareHelper">ICompareHelper</a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparer_2">IComparer<wbr>&lt;<wbr>T<wbr>Model<wbr>To<wbr>Compare, <wbr>T<wbr>Comparer<wbr>Intention&gt;<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2">I<wbr>Compare<wbr>Registrations<wbr>&lt;<wbr>T<wbr>Model<wbr>To<wbr>Compare, <wbr>T<wbr>Compare<wbr>Intention&gt;<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparerExclusion">IComparerExclusion</a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IFlatComparer">IFlatComparer</a></li>
 			<li class="header">Enum Types</li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion">Type<wbr>Of<wbr>Comparer<wbr>Exclusion</a></li>
-			<li class="header">Class Types</li>
-				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2">Generic<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;T, <wbr>TIntention&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1">ModelIntComparer<wbr>&lt;TModel&gt;<wbr></a></li>
 
 
                     </ul>
@@ -170,7 +174,7 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Interface to add some additional functions on the end of the compare process.
+    Generic implementation of <code class="cs"><a href="/BBT.StructureTools">IComparePostProcessing&lt;T, TIntention&gt;</a></code>.
     </div>
 
 		<div class="panel panel-default">
@@ -185,7 +189,7 @@
 								<dt>Interfaces</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparePostProcessing_2">I<wbr>Compare<wbr>Post<wbr>Processing</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-T">T</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-TIntention">TIntention</a>&gt;<wbr></li>								
+											<li>I<wbr>Compare<wbr>Post<wbr>Processing<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-T">T</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2#typeparam-TIntention">TIntention</a>&gt;<wbr></li>								
 											<li><a href="/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing">I<wbr>Base<wbr>Additional<wbr>Processing</a></li>								
 									</ul>
 								</dd>
@@ -236,11 +240,11 @@ class Type type-node
 				</thead>
 					<tbody><tr id="typeparam-T">
 						<td>T</td>
-						<td>Type of class to compare.</td>
+						<td>See link above.</td>
 					</tr>
 					<tr id="typeparam-TIntention">
 						<td>TIntention</td>
-						<td>Type of comparer intention of concern.</td>
+						<td>See link above.</td>
 					</tr>
 			</tbody></table>
 		</div>
@@ -288,7 +292,7 @@ class Type type-node
 								<td>void</td>
 								<td>
 									<div>
-    This method will be called at the end of a compare process.
+    This method will called at the end of a copy process.
     </div>
 								</td>
 							</tr>

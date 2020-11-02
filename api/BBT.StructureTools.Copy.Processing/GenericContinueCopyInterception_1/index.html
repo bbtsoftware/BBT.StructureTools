@@ -137,12 +137,11 @@
 			<li class="header">Namespace</li>
 		<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing">BBT<wbr>.StructureTools<wbr>.Copy<wbr>.Processing</a></li>
 		<li role="separator" class="divider"></li>
+			<li class="header">Interface Types</li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/ICopyPostProcessing_1">ICopyPostProcessing<wbr>&lt;TClassToCopy&gt;<wbr></a></li>
 			<li class="header">Class Types</li>
 				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericContinueCopyInterception_1">Generic<wbr>Continue<wbr>Copy<wbr>Interception<wbr>&lt;TType&gt;<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericCopyPostProcessing_1">Generic<wbr>Copy<wbr>Post<wbr>Processing<wbr>&lt;TClassToCopy&gt;<wbr></a></li>
-			<li class="header">Interface Types</li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/ICopyPostProcessing_1">ICopyPostProcessing<wbr>&lt;TClassToCopy&gt;<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/IGenericContinueCopyInterception_1">I<wbr>Generic<wbr>Continue<wbr>Copy<wbr>Interception<wbr>&lt;TType&gt;<wbr></a></li>
 
 
                     </ul>
@@ -164,7 +163,7 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Interface to intercept the copy process.
+    Implementation of <code class="cs">BBT.StructureTools.Copy.Processing.IGenericContinueCopyInterception`1</code>.
     </div>
 
 		<div class="panel panel-default">
@@ -179,7 +178,7 @@
 								<dt>Interfaces</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/IGenericContinueCopyInterception_1">I<wbr>Generic<wbr>Continue<wbr>Copy<wbr>Interception</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericContinueCopyInterception_1#typeparam-TType">TType</a>&gt;<wbr></li>								
+											<li>I<wbr>Generic<wbr>Continue<wbr>Copy<wbr>Interception<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericContinueCopyInterception_1#typeparam-TType">TType</a>&gt;<wbr></li>								
 											<li><a href="/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing">I<wbr>Base<wbr>Additional<wbr>Processing</a></li>								
 									</ul>
 								</dd>
@@ -230,7 +229,7 @@ class Type type-node
 				</thead>
 					<tbody><tr id="typeparam-TType">
 						<td>TType</td>
-						<td>Typification here.</td>
+						<td>type on which the interception applies.</td>
 					</tr>
 			</tbody></table>
 		</div>
@@ -278,7 +277,7 @@ class Type type-node
 								<td>bool</td>
 								<td>
 									<div>
-    Returns true if the object shall be copied.
+    <code class="cs">BBT.StructureTools.Copy.Processing.IGenericContinueCopyInterception`1.ShallCopy(`0)</code>.
     </div>
 								</td>
 							</tr>
