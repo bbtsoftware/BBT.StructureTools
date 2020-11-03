@@ -545,7 +545,6 @@
         {
             container.Bind(typeof(IGenericStrategyProvider<,>)).To(typeof(GenericStrategyProvider<,>));
             container.Bind(typeof(ITemporalDataHandler<>)).To(typeof(TemporalDataHandler<>));
-            container.Bind<IDefaultValueProvider>().To<DefaultValueProvider>();
             container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<RootToTargetRootConvertRegistrations>();
             container.Bind<IConvertRegistrations<RootBase, TargetRoot, IForTest>>().To<RootBaseToTargetRootConvertRegistration>();
             container.Bind<IConvertRegistrations<RootBase, RootBase, IForTest>>().To<RootBaseToRootBaseConvertRegistration>();

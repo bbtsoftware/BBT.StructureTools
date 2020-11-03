@@ -11,6 +11,7 @@
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Provider;
     using BBT.StructureTools.Strategy;
 
     /// <summary>
@@ -59,6 +60,7 @@
             RegisterCompareTypes(singletonRegistrationAction);
             RegisterCopyTypes(singletonRegistrationAction, transientRegistrationAction);
             RegisterConvertTypes(singletonRegistrationAction, transientRegistrationAction);
+            RegisterProviderTypes(singletonRegistrationAction);
         }
 
         /// <summary>
@@ -147,6 +149,15 @@
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
+        }
+
+        /// <summary>
+        /// Registers types needed for providers.
+        /// </summary>
+        private static void RegisterProviderTypes(Action<Type, Type> singletonRegistrationAction)
+        {
+            // Tools
+            singletonRegistrationAction.Invoke(typeof(IDefaultValueProvider), typeof(DefaultValueProvider));
         }
     }
 }
