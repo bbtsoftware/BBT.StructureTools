@@ -8,8 +8,8 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
-        : IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    internal class OperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+        : IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
@@ -32,9 +32,9 @@
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToManyGeneric{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToMany{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}" /> class.
         /// </summary>
-        public OperationCreateToManyGeneric(
+        public OperationCreateToMany(
             IConvertHelper convertHelper)
         {
             convertHelper.NotNull(nameof(convertHelper));

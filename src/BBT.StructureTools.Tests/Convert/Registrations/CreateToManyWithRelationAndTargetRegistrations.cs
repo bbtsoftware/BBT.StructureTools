@@ -2,6 +2,8 @@
 
 namespace BBT.StructureTools.Tests.Convert.Registrations
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Tests.Convert.TestData;
@@ -9,15 +11,15 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToManyWithRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    public class CreateToManyWithRelationAndTargetRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
+        private readonly IConvertHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateToManyWithRelationRegistrations" /> class.
+        /// Initializes a new instance of the <see cref="CreateToManyWithRelationAndTargetRegistrations" /> class.
         /// </summary>
-        public CreateToManyWithRelationRegistrations(
-            IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
+        public CreateToManyWithRelationAndTargetRegistrations(
+            IConvertHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
@@ -32,10 +34,20 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
             registrations.NotNull(nameof(registrations));
 
             registrations.RegisterCreateToManyWithRelation(
-                x => x.Leafs,
+                (x, y) => CreateSourceTreeLeafDtos(x, y),
                 x => x.TargetLeafs,
                 (x, y) => y.RelationOnTarget,
                 this.convertHelperFactory.GetConvertHelper(x => x.RelationOnTarget));
+        }
+
+        private static IEnumerable<IdDto> CreateSourceTreeLeafDtos(SourceTree source, TargetTree target)
+        {
+            var dtos = source.Leafs.Select(x => new IdDto()
+            {
+                Id = target.Id,
+            });
+
+            return dtos;
         }
     }
 }

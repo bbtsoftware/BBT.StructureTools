@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
-    using BBT.StructureTools;
     using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
@@ -29,6 +28,20 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValue<TSource, TTarget, TValue>>();
+            operation.Initialize(sourceFunc, targetExpression);
+            this.convertHelperOperationWorkUnits.Add(operation);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IConvertRegistration<TSource, TTarget> RegisterCopyAttribute<TValue>(
+            Func<TSource, TTarget, TValue> sourceFunc,
+            Expression<Func<TTarget, TValue>> targetExpression)
+        {
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+
+            var operation = this.serviceLocator.GetInstance<IOperationCopyValueInclTargetArg<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -77,20 +90,6 @@
 
             var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>>();
             operation.Initialize(sourceFunc, sourceUpperLimitFunc, targetExpression);
-            this.convertHelperOperationWorkUnits.Add(operation);
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCopyAttributeWithSourceFilter<TValue>(
-            Func<TSource, TTarget, TValue> sourceFunc,
-            Expression<Func<TTarget, TValue>> targetExpression)
-        {
-            sourceFunc.NotNull(nameof(sourceFunc));
-            targetExpression.NotNull(nameof(targetExpression));
-
-            var operation = this.serviceLocator.GetInstance<IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>>();
-            operation.Initialize(sourceFunc, targetExpression);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
         }
@@ -304,6 +303,33 @@
         }
 
         /// <inheritdoc/>
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+            Func<TSource, TTarget, TSourceValue> sourceFunc,
+            Expression<Func<TTarget, TTargetValue>> targetExpression,
+            Func<TSource, TTarget, TRelation> relationFunc,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            where TSourceValue : class
+            where TTargetValue : class
+            where TConcreteTargetValue : TTargetValue, new()
+            where TRelation : class
+            where TConvertIntention : IBaseConvertIntention
+        {
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+            relationFunc.NotNull(nameof(relationFunc));
+
+            var operation = this.serviceLocator
+                .GetInstance<IOperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+            operation.Initialize(
+                sourceFunc,
+                targetExpression,
+                relationFunc,
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
+            return this;
+        }
+
+        /// <inheritdoc/>
         public IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
@@ -450,7 +476,33 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+            Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
+            Func<TSource, TTarget, TRelation> relationFunc,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            where TSourceValue : class
+            where TTargetValue : class
+            where TConcreteTargetValue : TTargetValue, new()
+            where TRelation : class
+            where TConvertIntention : IBaseConvertIntention
+        {
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
+
+            var operation = this.serviceLocator
+                .GetInstance<IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+            operation.Initialize(
+                sourceFunc,
+                targetExpression,
+                relationFunc,
+                createConvertHelper);
+            this.convertHelperOperationWorkUnits.Add(operation);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToMany<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
@@ -463,31 +515,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
-            operation.Initialize(
-                sourceFunc,
-                targetExpression,
-                createConvertHelper);
-            this.convertHelperOperationWorkUnits.Add(operation);
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithSourceFilterAndReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
-            Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
-            where TSourceValue : class
-            where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
-            where TReverseRelation : class
-            where TConvertIntention : IBaseConvertIntention
-        {
-            sourceFunc.NotNull(nameof(sourceFunc));
-            targetExpression.NotNull(nameof(targetExpression));
-
-            var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -532,26 +560,6 @@
         {
             return new ConvertOperations<TSource, TTarget>(
                 this.convertHelperOperationWorkUnits);
-        }
-
-        /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterPostProcessings(IConvertPostProcessing<TSource, TTarget> additionalProcessing, params IConvertPostProcessing<TSource, TTarget>[] furtherAdditionalProcessings)
-        {
-            additionalProcessing.NotNull(nameof(additionalProcessing));
-
-            var list = new Collection<IBaseAdditionalProcessing>()
-                            {
-                                additionalProcessing,
-                            };
-
-            if (furtherAdditionalProcessings != null)
-            {
-                list.AddRangeToMe(furtherAdditionalProcessings);
-            }
-
-            var convertOpsPostProcessing = new OperationConvertPostProcessing<TSource, TTarget>(list);
-            this.convertHelperOperationWorkUnits.Add(convertOpsPostProcessing);
-            return this;
         }
 
         /// <inheritdoc/>

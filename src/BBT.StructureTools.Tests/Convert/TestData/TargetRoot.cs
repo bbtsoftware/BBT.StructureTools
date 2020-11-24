@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using BBT.StructureTools.Convert;
 
     /// <summary>
@@ -102,13 +101,13 @@
 
         /// <summary>
         /// Gets or sets the reference date
-        /// used to test <see cref="IConvertRegistration{TSource, TTarget}.RegisterCopyAttributeWithSourceFilter"/>.
+        /// used to test <see cref="IConvertRegistration{TSource, TTarget}.RegisterCopyAttribute"/>.
         /// </summary>
         public DateTime ReferenceDate { get; set; }
 
         /// <summary>
         /// Gets or sets data
-        /// used to test <see cref="IConvertRegistration{TSource, TTarget}.RegisterCopyAttributeWithSourceFilter"/>.
+        /// used to test <see cref="IConvertRegistration{TSource, TTarget}.RegisterCopyAttribute"/>.
         /// </summary>
         public SourceTreeHist FilteredHist { get; set; }
 

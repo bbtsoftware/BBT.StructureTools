@@ -9,14 +9,14 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToManyWithSourceFilterAndReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    public class CreateToManyWithRelationReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
         private readonly IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateToManyWithSourceFilterAndReverseRelationRegistrations" /> class.
+        /// Initializes a new instance of the <see cref="CreateToManyWithRelationReverseRelationRegistrations" /> class.
         /// </summary>
-        public CreateToManyWithSourceFilterAndReverseRelationRegistrations(
+        public CreateToManyWithRelationReverseRelationRegistrations(
             IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
@@ -31,9 +31,10 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         {
             registrations.NotNull(nameof(registrations));
 
-            registrations.RegisterCreateToManyWithSourceFilterAndReverseRelation(
+            registrations.RegisterCreateToManyWithRelation(
                 (x, y) => x.Leafs,
                 x => x.TargetLeafs,
+                (x, y) => y,
                 this.convertHelperFactory.GetConvertHelper(x => x.TargetTree));
         }
     }
