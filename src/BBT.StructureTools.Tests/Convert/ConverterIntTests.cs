@@ -69,6 +69,36 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
+        public void Convert_CopyAttribute_Successful()
+        {
+            // Arrange
+            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CopyTreeAttributeRegistrations>();
+
+            var converter = GetConverter<SourceTree, TargetTree>();
+
+            var sourceTree = new SourceTree()
+            {
+                TreeName = "TreeName",
+            };
+
+            var targetTree = new TargetTree()
+            {
+                MasterDataId = Guid.NewGuid(),
+            };
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceTree, targetTree, processings);
+
+            // Assert
+            targetTree.TreeName.Should().Be(sourceTree.TreeName);
+            targetTree.TemporalDataOriginId.Should().Be(targetTree.MasterDataId);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
         public void Convert_CreateToManyWithReverseRelation_Successful()
         {
             // Arrange
@@ -119,10 +149,10 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
-        public void Convert_RegisterCreateToManyWithSourceFilterAndReverseRelation_Successful()
+        public void Convert_CreateToMany_Successful()
         {
             // Arrange
-            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithSourceFilterAndReverseRelationRegistrations>();
+            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
 
             var converter = GetConverter<SourceTree, TargetTree>();
@@ -144,7 +174,7 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
-        public void Convert_CreateToManyGeneric_Successful()
+        public void Convert_Processings_Successful()
         {
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericRegistrations>();
@@ -156,13 +186,28 @@
             sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
             sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
             var targetTree = new TargetTree();
+            var targetIds = new List<Guid>();
+            var sourceIds = new List<Guid>();
+            var preProcHits = 0;
 
             // Act
             var processings = new List<IBaseAdditionalProcessing>();
+            processings.Add(new GenericConvertPostProcessing<SourceTreeLeaf, TargetTreeLeaf>((x, y) => targetIds.Add(y.Id)));
+            processings.Add(new GenericContinueConvertInterception<SourceTreeLeaf, TargetTreeLeaf>(
+                x =>
+                {
+                    sourceIds.Add(x.Id);
+                    return true;
+                }));
+            processings.Add(new GenericConvertPreProcessing<SourceTreeLeaf, TargetTreeLeaf>((x, y) => preProcHits++));
+
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
             sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            targetIds.Should().BeEquivalentTo(targetTree.TargetLeafs.Select(x => x.Id).ToList());
+            sourceIds.Should().BeEquivalentTo(sourceTree.Leafs.Select(x => x.Id).ToList());
+            preProcHits.Should().Be(2);
         }
 
         /// <summary>
@@ -236,32 +281,6 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
-        public void Convert_RegisterPostProcessings_Successful()
-        {
-            // Arrange
-            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericRegistrations>();
-            container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<LeafPostProcessingsRegistrations>();
-
-            var converter = GetConverter<SourceTree, TargetTree>();
-
-            var sourceTree = new SourceTree();
-            sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
-            sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
-            var targetTree = new TargetTree();
-
-            // Act
-            var processings = new List<IBaseAdditionalProcessing>();
-            converter.Convert(sourceTree, targetTree, processings);
-
-            // Assert
-            targetTree.TargetLeafs.Count.Should().Be(sourceTree.Leafs.Count);
-            targetTree.TargetLeafs.All(x => x.LeafName == "PostProcessingExpected").Should().BeTrue();
-        }
-
-        /// <summary>
-        /// Tests the convert from root to leaf into target structure.
-        /// </summary>
-        [Fact]
         public void Convert_RegisterCreateToOneWithRelation_Successful()
         {
             // Arrange
@@ -283,6 +302,37 @@
             // Assert
             targetRoot.TargetTree.Should().NotBeNull();
             targetRoot.TargetTree.RelationOnTarget.Should().Be(targetRoot.RelationOnTarget);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
+        public void Convert_RegisterCreateToOneWithRelationAndTarget_Successful()
+        {
+            // Arrange
+            container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<CreateToOneWithRelationAndTargetRegistrations>();
+            container.Bind<IConvertRegistrations<IdDto, TargetTree, IForTest>>().To<CopyIdDtoToTargetTreeRegistrations>();
+
+            var converter = GetConverter<SourceRoot, TargetRoot>();
+
+            var sourceRoot = new SourceRoot()
+            {
+                Tree = new SourceTree(),
+            };
+            var targetRoot = new TargetRoot()
+            {
+                Id = Guid.NewGuid(),
+            };
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceRoot, targetRoot, processings);
+
+            // Assert
+            targetRoot.TargetTree.Should().NotBeNull();
+            targetRoot.TargetTree.RelationOnTarget.Should().Be(targetRoot.RelationOnTarget);
+            targetRoot.TargetTree.TemporalDataOriginId.Should().Be(targetRoot.Id);
         }
 
         /// <summary>
@@ -316,6 +366,70 @@
             targetTree.TargetLeafs.Count.Should().Be(1);
             var targetLeaf = targetTree.TargetLeafs.Single();
             targetLeaf.RelationOnTarget.Should().Be(targetTree.RelationOnTarget);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
+        public void Convert_RegisterCreateToManyWithRelationAndTarget_Successful()
+        {
+            // Arrange
+            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithRelationAndTargetRegistrations>();
+            container.Bind<IConvertRegistrations<IdDto, TargetTreeLeaf, IForTest>>().To<CopyIdDtoToTargetTreeLeafRegistrations>();
+
+            var converter = GetConverter<SourceTree, TargetTree>();
+
+            var sourceTree = new SourceTree()
+            {
+            };
+
+            sourceTree.Leafs.Add(new SourceTreeLeaf());
+
+            var targetTree = new TargetTree()
+            {
+                RelationOnTarget = new MasterData(),
+            };
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceTree, targetTree, processings);
+
+            // Assert
+            targetTree.TargetLeafs.Count.Should().Be(1);
+            var targetLeaf = targetTree.TargetLeafs.Single();
+            targetLeaf.RelationOnTarget.Should().Be(targetTree.RelationOnTarget);
+            targetLeaf.OriginId.Should().Be(targetTree.Id);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
+        public void Convert_RegisterCreateToManyWithRelation_ReverseRelation_Successful()
+        {
+            // Arrange
+            container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithRelationReverseRelationRegistrations>();
+            container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+
+            var converter = GetConverter<SourceTree, TargetTree>();
+
+            var sourceTree = new SourceTree();
+            sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
+            sourceTree.Leafs.Add(new SourceTreeLeaf() { Tree = sourceTree });
+            var targetTree = new TargetTree();
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceTree, targetTree, processings);
+
+            // Assert
+            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            for (var i = 0; i < sourceTree.Leafs.Count; i++)
+            {
+                targetTree.TargetLeafs[i].TargetTree.Should().Be(targetTree);
+                targetTree.TargetLeafs[i].OriginId.Should().Be(sourceTree.Leafs.ElementAt(i).Id);
+            }
         }
 
         #endregion

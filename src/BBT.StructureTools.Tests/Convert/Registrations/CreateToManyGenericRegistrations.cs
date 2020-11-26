@@ -27,12 +27,12 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTree, TargetTree> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations
-                .RegisterCreateToManyGeneric(
+            registrations
+                .RegisterCreateToMany(
                     x => x.Leafs,
                     x => x.TargetLeafs,
                     this.convertHelperFactory.GetConvertHelper());

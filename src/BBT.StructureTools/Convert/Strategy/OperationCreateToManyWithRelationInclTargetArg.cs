@@ -8,19 +8,19 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
-        : IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
+    internal class OperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
+        : IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
         where TSource : class
-        where TTarget : class, TReverseRelation
+        where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
         where TConcreteTargetValue : TTargetValue, new()
-        where TReverseRelation : class
+        where TRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
@@ -32,10 +32,12 @@
         /// </summary>
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
+        private Func<TSource, TTarget, TRelation> relationFunc;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToManyWithSourceFilterAndReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToManyWithRelationInclTargetArg{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TRelation,TConvertIntention}" /> class.
         /// </summary>
-        public OperationCreateToManyWithSourceFilterAndReverseRelation(
+        public OperationCreateToManyWithRelationInclTargetArg(
             IConvertHelper convertHelper)
         {
             convertHelper.NotNull(nameof(convertHelper));
@@ -47,14 +49,17 @@
         public void Initialize(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            Func<TSource, TTarget, TRelation> relationFunc,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
+            relationFunc.NotNull(nameof(relationFunc));
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
             this.targetExpression = targetExpression;
+            this.relationFunc = relationFunc;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -72,6 +77,8 @@
 
             var copies = new List<TTargetValue>();
 
+            var relation = this.relationFunc(source, target);
+
             foreach (var sourceValue in sourceValues)
             {
                 if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
@@ -82,7 +89,7 @@
 
                 var copy = this.createConvertHelper.CreateTarget(
                     sourceValue,
-                    target,
+                    relation,
                     additionalProcessings);
                 copies.Add(copy);
             }

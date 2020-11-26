@@ -9,6 +9,11 @@
     public class TargetTreeLeaf
     {
         /// <summary>
+        /// Gets the Id.
+        /// </summary>
+        public Guid Id { get; } = Guid.NewGuid();
+
+        /// <summary>
         /// Gets or sets TargetTree.
         /// </summary>
         public TargetTree TargetTree { get; set; }
