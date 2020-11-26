@@ -7,8 +7,8 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCopyValueWithSourceFilter<TSource, TTarget, TValue>
-        : IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>
+    internal class OperationCopyValueInclTargetArg<TSource, TTarget, TValue>
+        : IOperationCopyValueInclTargetArg<TSource, TTarget, TValue>
         where TSource : class
         where TTarget : class
     {
