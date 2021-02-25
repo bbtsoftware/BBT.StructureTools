@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetRoot">
+    <Position X="0.5" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAEAgAIgAAAACIAAAABAAQCAAAEBKgAAAACAEAAAQQ=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetRoot.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TargetTree" />
+      <Property Name="TargetLeaf" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetTree">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAgAAAAIEAAAACAAAAAAAAEABAAgAAAAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetTree.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="TargetHists" />
+      <Property Name="TargetLeafs" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetTreeLeaf">
+    <Position X="3.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAABAAIAEAAAAAAAAAAAAQAAAAAAQAEAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetTreeLeaf.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Child" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetTreeLeafChild">
+    <Position X="6.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetTreeLeafChild.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.BaseData" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\BaseData.cs</FileName>
+      <NewMemberFileName>General.Services\Tools\Convert\TestData\RootBase.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetBaseLeaf">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetBaseLeaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetDerivedLeaf">
+    <Position X="0.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetDerivedLeaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BBT.Life.LiBase.ITests.General.Services.Tools.Convert.TestData.TargetTreeHist">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>General.Services\Tools\Convert\TestData\TargetTreeHist.cs</FileName>
+      <NewMemberFileName>General.Services\Tools\Convert\TestData\TargetTreeHistLeaf.cs</NewMemberFileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
