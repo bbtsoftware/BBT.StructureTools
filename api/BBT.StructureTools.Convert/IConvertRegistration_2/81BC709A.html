@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/BBT.StructureTools/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/BBT.StructureTools/assets/img/favicon.ico" type="image/x-icon">
-        <title>BBT.StructureTools - API - IConvertRegistration&lt;TSource, TTarget&gt;.RegisterCreateToManyWithSourceFilterAndReverseRelation&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention&gt;(Func&lt;TSource, TTarget, IEnumerable&lt;TSourceValue&gt;&gt;, Expression&lt;Func&lt;TTarget, ICollection&lt;TTargetValue&gt;&gt;&gt;, ICreateConvertHelper&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention&gt;) Method</title>
+        <title>BBT.StructureTools - API - IConvertRegistration&lt;TSource, TTarget&gt;.RegisterCreateToOneWithRelation&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention&gt;(Func&lt;TSource, TTarget, TSourceValue&gt;, Expression&lt;Func&lt;TTarget, TTargetValue&gt;&gt;, Func&lt;TSource, TTarget, TRelation&gt;, ICreateConvertHelper&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention&gt;) Method</title>
         <link href="/BBT.StructureTools/assets/css/highlight.css" rel="stylesheet">
         <link href="/BBT.StructureTools/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="/BBT.StructureTools/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
@@ -146,27 +146,27 @@
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/CE9F4E49">Register<wbr>Convert<wbr>From<wbr>Target<wbr>On<wbr>Different<wbr>Levels<wbr>&lt;TSourceValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TTarget, <wbr>TSourceValue&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/2F9ACDBD">Register<wbr>Convert<wbr>To<wbr>Many<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TTarget, <wbr>IEnumerable<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>bool&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/388D0B5F">Register<wbr>Copy<wbr>Attribute<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/43E9A8E3">Register<wbr>Copy<wbr>Attribute<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/D22BCEF3">Register<wbr>Copy<wbr>Attribute<wbr>If<wbr>Source<wbr>Not<wbr>Default<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/83080BF4">Register<wbr>Copy<wbr>Attribute<wbr>If<wbr>Target<wbr>Is<wbr>Default<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/FAEDD1F1">Register<wbr>Copy<wbr>Attribute<wbr>With<wbr>Look<wbr>Up<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/725C7F33">Register<wbr>Copy<wbr>Attribute<wbr>With<wbr>Mapping<wbr>&lt;TSourceValue, <wbr>TTargetValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/89DB0E24">Register<wbr>Copy<wbr>Attribute<wbr>With<wbr>Source<wbr>Filter<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/C85863FC">Register<wbr>Copy<wbr>Attribute<wbr>With<wbr>Upper<wbr>Limit<wbr>&lt;TValue&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/D5F474D2">RegisterCopyFromHist<wbr>&lt;TSourceValue, <wbr>TTemporalDataType, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>DateTime&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/2351B1C3">RegisterCopyFromMany<wbr>&lt;TSourceValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/0279321A">Register<wbr>Create<wbr>From<wbr>Source<wbr>With<wbr>Reverse<wbr>Relation<wbr>&lt;TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSource, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TTarget, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/DE1D90F5">RegisterCreateToMany<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/E003B3BC">Register<wbr>Create<wbr>To<wbr>Many<wbr>From<wbr>Generic<wbr>Strategy<wbr>With<wbr>Reverse<wbr>Relation<wbr>&lt;TBaseSource, <wbr>TBaseTarget, <wbr>TIntention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TBaseSource&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TBaseTarget&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TBaseTarget, <wbr>TTarget&gt;<wbr>&gt;<wbr>)<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/376BD5AF">Register<wbr>Create<wbr>To<wbr>Many<wbr>Generic<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/8D880A36">Register<wbr>Create<wbr>To<wbr>Many<wbr>With<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TRelation&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
+				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/4A039B08">Register<wbr>Create<wbr>To<wbr>Many<wbr>With<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TRelation&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/8AE83D64">Register<wbr>Create<wbr>To<wbr>Many<wbr>With<wbr>Reverse<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
-				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/EA52A9DA">Register<wbr>Create<wbr>To<wbr>Many<wbr>With<wbr>Source<wbr>Filter<wbr>And<wbr>Reverse<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/2F92EE83">RegisterCreateToOne<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/DC62E5BF">Register<wbr>Create<wbr>To<wbr>One<wbr>From<wbr>Generic<wbr>Strategy<wbr>With<wbr>Reverse<wbr>Relation<wbr>&lt;TBaseSource, <wbr>TBaseTarget, <wbr>TIntention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TBaseSource&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TBaseTarget&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TBaseTarget, <wbr>TTarget&gt;<wbr>&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/7BFAD409">Register<wbr>Create<wbr>To<wbr>One<wbr>Hist<wbr>With<wbr>Condition<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>TTemporalData, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>bool&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>DateTime&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/99C1AE01">Register<wbr>Create<wbr>To<wbr>One<wbr>With<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TRelation&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
+				<li class="selected"><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/81BC709A">Register<wbr>Create<wbr>To<wbr>One<wbr>With<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TRelation&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/C09A2C9D">Register<wbr>Create<wbr>To<wbr>One<wbr>With<wbr>Reverse<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TTarget, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/1547AD79">RegisterMergeLevel<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TMergeValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>IEnumerable<wbr>&lt;TMergeValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TMergeValue, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TTarget, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr></a></li>
-				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/0C5234FD">Register<wbr>Post<wbr>Processings<wbr>(<wbr>I<wbr>Convert<wbr>Post<wbr>Processing<wbr>&lt;TSource, <wbr>TTarget&gt;<wbr>, <wbr>I<wbr>Convert<wbr>Post<wbr>Processing<wbr>&lt;TSource, <wbr>TTarget&gt;<wbr>[])<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/F7C958BC">RegisterSubConvert<wbr>&lt;TSourceValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>()<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/61F95FCB">RegisterSubConvert<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>()<wbr></a></li>
 				<li><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2/7FC6108D">RegisterSubCopy<wbr>&lt;TSubCopy&gt;<wbr><wbr>()<wbr></a></li>
@@ -186,14 +186,14 @@
 
 <section class="content-header">
 			<h3><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2">IConvertRegistration</a><wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TSource">TSource</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>&gt;<wbr>.</h3>
-	<h1>Register<wbr>Create<wbr>To<wbr>Many<wbr>With<wbr>Source<wbr>Filter<wbr>And<wbr>Reverse<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TReverseRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr> <small>Method</small></h1>
+	<h1>Register<wbr>Create<wbr>To<wbr>One<wbr>With<wbr>Relation<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr><wbr>(Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TSourceValue&gt;<wbr>, <wbr>Expression<wbr>&lt;Func<wbr>&lt;TTarget, <wbr>TTargetValue&gt;<wbr>&gt;<wbr>, <wbr>Func<wbr>&lt;TSource, <wbr>TTarget, <wbr>TRelation&gt;<wbr>, <wbr>ICreateConvertHelper<wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>T<wbr>Concrete<wbr>Target<wbr>Value, <wbr>TRelation, <wbr>T<wbr>Convert<wbr>Intention&gt;<wbr>)<wbr> <small>Method</small></h1>
 </section>
 <section class="content">
 	
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Registers a <code class="cs">to many</code> relationships on source and corresponding target.
+    Registers a <code class="cs">to one</code> relationship on source and corresponding target.
     </div>
 
 		<div class="panel panel-default">
@@ -211,8 +211,8 @@
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>IConvertRegistration&lt;TSource, TTarget&gt; RegisterCreateToManyWithSourceFilterAndReverseRelation&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention&gt;(Func&lt;TSource, TTarget, IEnumerable&lt;TSourceValue&gt;&gt; sourceFunc, Expression&lt;Func&lt;TTarget, ICollection&lt;TTargetValue&gt;&gt;&gt; targetExpression, ICreateConvertHelper&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention&gt; createConvertHelper) 
-    where TSourceValue : class where TTargetValue : class where TConcreteTargetValue : TTargetValue, new() where TReverseRelation : class where TConvertIntention : IBaseConvertIntention</code></pre>
+	<pre><code>IConvertRegistration&lt;TSource, TTarget&gt; RegisterCreateToOneWithRelation&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention&gt;(Func&lt;TSource, TTarget, TSourceValue&gt; sourceFunc, Expression&lt;Func&lt;TTarget, TTargetValue&gt;&gt; targetExpression, Func&lt;TSource, TTarget, TRelation&gt; relationFunc, ICreateConvertHelper&lt;TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention&gt; createConvertHelper) 
+    where TSourceValue : class where TTargetValue : class where TConcreteTargetValue : TTargetValue, new() where TRelation : class where TConvertIntention : IBaseConvertIntention</code></pre>
 
 
 
@@ -229,20 +229,21 @@
 				</thead>
 					<tbody><tr id="typeparam-TSourceValue">
 						<td>TSourceValue</td>
-						<td>The type of the list entries on <span name="TSource" class="typeparamref">TSource</span>.</td>
+						<td>The property type on <span name="TSource" class="typeparamref">TSource</span> to convert from.</td>
 					</tr>
 					<tr id="typeparam-TTargetValue">
 						<td>TTargetValue</td>
-						<td>The type of the list entries on <span name="TTarget" class="typeparamref">TTarget</span>.</td>
+						<td>The property type <span name="TTarget" class="typeparamref">TTarget</span> to convert into.</td>
 					</tr>
 					<tr id="typeparam-TConcreteTargetValue">
 						<td>TConcreteTargetValue</td>
 						<td>The concrete implementation of <span name="TTargetValue" class="typeparamref">TTargetValue</span>.</td>
 					</tr>
-					<tr id="typeparam-TReverseRelation">
-						<td>TReverseRelation</td>
-						<td>The reverse relation of the created target value.
-    Must be a base type of <span name="TTarget" class="typeparamref">TTarget</span>.</td>
+					<tr id="typeparam-TRelation">
+						<td>TRelation</td>
+						<td>The type of relation of the created target value.
+    This relation is set by <code class="cs"><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_5">ICreateConvertHelper&lt;TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention&gt;</a></code>
+    after creation of <span name="TConcreteTargetValue" class="typeparamref">TConcreteTargetValue</span> using its reference function.</td>
 					</tr>
 					<tr id="typeparam-TConvertIntention">
 						<td>TConvertIntention</td>
@@ -265,17 +266,22 @@
 				</thead>
 					<tbody><tr>
 						<td>sourceFunc</td>
-						<td>Func<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TSource">TSource</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>, <wbr>IEnumerable<wbr>&lt;TSourceValue&gt;<wbr>&gt;<wbr></td>
+						<td>Func<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TSource">TSource</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>, <wbr>TSourceValue&gt;<wbr></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>targetExpression</td>
-						<td>Expression<wbr>&lt;Func<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>, <wbr>ICollection<wbr>&lt;TTargetValue&gt;<wbr>&gt;<wbr>&gt;<wbr></td>
+						<td>Expression<wbr>&lt;Func<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>, <wbr>TTargetValue&gt;<wbr>&gt;<wbr></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>relationFunc</td>
+						<td>Func<wbr>&lt;<a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TSource">TSource</a>, <wbr><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2#typeparam-TTarget">TTarget</a>, <wbr>TRelation&gt;<wbr></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>createConvertHelper</td>
-						<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_5">ICreateConvertHelper</a><wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>TConcreteTargetValue, <wbr>TReverseRelation, <wbr>TConvertIntention&gt;<wbr></td>
+						<td><a href="/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_5">ICreateConvertHelper</a><wbr>&lt;TSourceValue, <wbr>TTargetValue, <wbr>TConcreteTargetValue, <wbr>TRelation, <wbr>TConvertIntention&gt;<wbr></td>
 						<td></td>
 					</tr>
 			</tbody></table>
