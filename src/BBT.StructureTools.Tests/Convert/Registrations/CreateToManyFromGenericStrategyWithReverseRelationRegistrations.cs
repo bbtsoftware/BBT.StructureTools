@@ -12,11 +12,11 @@
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceRoot, TargetRoot> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceRoot, TargetRoot> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations.RegisterCreateToManyFromGenericStrategyWithReverseRelation<SourceBaseLeaf, TargetBaseLeaf, IForTest>(
+            registrations.RegisterCreateToManyFromGenericStrategyWithReverseRelation<SourceBaseLeaf, TargetBaseLeaf, IForTest>(
                 x => x.Leafs,
                 x => x.TargetLeafs,
                 x => x.TargetRoot);

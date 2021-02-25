@@ -46,7 +46,7 @@
                 .RegisterCopyAttributeWithUpperLimit(x => x.NumberSourceNotDefault, x => 10, x => x.NumberLimitApplied)
                 .RegisterCopyAttributeWithUpperLimit(x => x.NumberSourceDefault, x => 10, x => x.NumberLimitNotApplied)
                 .RegisterCopyAttributeWithMapping(x => x.EnumValue.Source, x => x.EnumValue)
-                .RegisterCopyAttributeWithSourceFilter((x, y) => GetLeafPerReferenceDate(x.Tree.Hists, y.ReferenceDate), x => x.FilteredHist)
+                .RegisterCopyAttribute((x, y) => GetLeafPerReferenceDate(x.Tree.Hists, y.ReferenceDate), x => x.FilteredHist)
                 .RegisterCreateToOneWithReverseRelation(x => x.Tree, x => x.TargetTree, this.treeConvertHelperFactory.GetConvertHelper(x => x.TargetRoot))
                 .RegisterSubConvert<RootBase, IForTest>()
                 .RegisterSubConvert<RootBase, RootBase, IForTest>()

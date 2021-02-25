@@ -11,7 +11,7 @@
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Strategy;
+    using BBT.StructureTools.Provider;
 
     /// <summary>
     /// The IoC handler as singleton.
@@ -59,6 +59,7 @@
             RegisterCompareTypes(singletonRegistrationAction);
             RegisterCopyTypes(singletonRegistrationAction, transientRegistrationAction);
             RegisterConvertTypes(singletonRegistrationAction, transientRegistrationAction);
+            RegisterProviderTypes(singletonRegistrationAction);
         }
 
         /// <summary>
@@ -96,8 +97,7 @@
             // Operations
             transientRegistrationAction.Invoke(typeof(IOperationCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationCreateFromSourceWithReverseRelation<,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithReverseRelation<,,,,,,>));
-            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyGeneric<,,,,,>), typeof(OperationCreateToManyGeneric<,,,,,>));
-            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToMany<,,,,,>), typeof(OperationCreateToMany<,,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationMergeLevel<,,,,,,>), typeof(OperationMergeLevel<,,,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationConvertFromSourceOnDifferentLevels<,,,,>), typeof(OperationConvertFromSourceOnDifferentLevels<,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationConvertFromTargetOnDifferentLevels<,,,>), typeof(OperationConvertFromTargetOnDifferentLevels<,,,>));
@@ -112,7 +112,7 @@
             transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithUpperLimit<,,>), typeof(OperationCopyValueWithUpperLimit<,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCopyValueIfSourceNotDefault<,,>), typeof(OperationCopyValueIfSourceNotDefault<,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCopyValueIfTargetIsDefault<,,>), typeof(OperationCopyValueIfTargetIsDefault<,,>));
-            transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithSourceFilter<,,>), typeof(OperationCopyValueWithSourceFilter<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueInclTargetArg<,,>), typeof(OperationCopyValueInclTargetArg<,,>));
             transientRegistrationAction.Invoke(typeof(IOperationSubCopy<,,>), typeof(OperationSubCopy<,,>));
             transientRegistrationAction.Invoke(typeof(IOperationSubConvert<,,,,>), typeof(OperationSubConvert<,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationConditionalCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationConditionalCreateFromSourceWithReverseRelation<,,,,>));
@@ -120,7 +120,9 @@
             transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithMapping<,,,>), typeof(OperationCopyValueWithMapping<,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCreateToOneHistWithCondition<,,,,,,,>), typeof(OperationCreateToOneHistWithCondition<,,,,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithRelation<,,,,,,>), typeof(OperationCreateToManyWithRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithRelationInclTargetArg<,,,,,,>), typeof(OperationCreateToManyWithRelationInclTargetArg<,,,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCreateToOneWithRelation<,,,,,,>), typeof(OperationCreateToOneWithRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToOneWithRelationInclTargetArg<,,,,,,>), typeof(OperationCreateToOneWithRelationInclTargetArg<,,,,,,>));
             transientRegistrationAction.Invoke(typeof(IOperationCopyFromHist<,,,,>), typeof(OperationCopyFromHist<,,,,>));
         }
 
@@ -147,6 +149,15 @@
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
             transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
+        }
+
+        /// <summary>
+        /// Registers types needed for providers.
+        /// </summary>
+        private static void RegisterProviderTypes(Action<Type, Type> singletonRegistrationAction)
+        {
+            // Tools
+            singletonRegistrationAction.Invoke(typeof(IDefaultValueProvider), typeof(DefaultValueProvider));
         }
     }
 }

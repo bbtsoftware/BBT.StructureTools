@@ -15,11 +15,11 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeaf> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTreeLeaf, TargetTreeLeaf> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations.RegisterCopyAttribute(
+            registrations.RegisterCopyAttribute(
                 x => x.Id,
                 x => x.OriginId);
         }
