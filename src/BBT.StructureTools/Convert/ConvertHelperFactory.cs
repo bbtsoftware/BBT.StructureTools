@@ -6,7 +6,7 @@
     using BBT.StructureTools.Initialization;
 
     /// <inheritdoc/>
-    public class ConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
+    internal class ConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
         : IConvertHelperFactory<TSource, TTarget, TConcreteTarget, TConvertIntention>
         where TSource : class
         where TTarget : class
@@ -20,7 +20,8 @@
         {
             reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
 
-            var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>>();
+            var convertHelper = IocHandler.Instance.IocResolver
+                .GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>>();
             convertHelper.SetupReverseRelation(reverseRelationFunc);
             return convertHelper;
         }
@@ -28,7 +29,8 @@
         /// <inheritdoc/>
         public ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention> GetConvertHelper()
         {
-            var convertHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>>();
+            var convertHelper = IocHandler.Instance.IocResolver
+                .GetInstance<ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>>();
             return convertHelper;
         }
     }

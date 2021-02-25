@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -16,8 +17,16 @@
         where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TSourceValue> sourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> targetexpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
+
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
 
         /// <inheritdoc/>
@@ -31,7 +40,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -56,7 +65,9 @@
                     sourceValue,
                     additionalProcessings);
 
-            target.SetPropertyValue(this.targetexpression, targetValue);
+            target.SetPropertyValue(
+                this.targetExpression,
+                targetValue);
         }
     }
 }

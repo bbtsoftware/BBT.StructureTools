@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Linq.Expressions;
     using BBT.MaybePattern;
-    using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
 
@@ -16,7 +15,15 @@
         where TConcreteChild : class, TChild, new()
     {
         private ICreateCopyHelper<TChild, TConcreteChild, TParent> createCopyHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TParent, IEnumerable<TChild>> sourceFunc;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
         private Maybe<Expression<Func<TParent, ICollection<TChild>>>> maybeTargetExpression;
 
         /// <inheritdoc/>
@@ -43,6 +50,7 @@
             var sourceValues = this.sourceFunc.Invoke(source)?.ToList();
             sourceValues.NotNull(nameof(sourceValues));
 
+            // ReSharper disable once AssignNullToNotNullAttribute -> .NotNull is called before!
             var copies = sourceValues.Select(sourceValue => this.createCopyHelper.CreateTarget(
                 sourceValue as TConcreteChild,
                 target,
@@ -50,7 +58,7 @@
 
             this.maybeTargetExpression.Do(targetExpression =>
             {
-                target.AddRangeToCollectionFilterNulvalues(
+                target.AddRangeFilterNullValues(
                     targetExpression,
                     copies);
             });

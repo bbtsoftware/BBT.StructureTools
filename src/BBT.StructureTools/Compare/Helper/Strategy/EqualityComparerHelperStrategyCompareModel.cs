@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
 
@@ -12,8 +13,16 @@
         where TTargetModel : class
         where TIntention : IBaseComparerIntention
     {
+        /// <summary>
+        /// Function to get the property value.
+        /// </summary>
         private readonly Func<TModel, TTargetModel> func;
+
+        /// <summary>
+        /// Name of compared property.
+        /// </summary>
         private readonly string propertyName;
+
         private readonly IComparer<TTargetModel, TIntention> comparer;
 
         /// <summary>
@@ -24,7 +33,7 @@
             IComparer<TTargetModel, TIntention> comparer)
         {
             expression.NotNull(nameof(expression));
-            comparer.NotNull(nameof(comparer));
+            expression.NotNull(nameof(comparer));
 
             this.func = expression.Compile();
             this.propertyName = ReflectionUtils.GetPropertyName(expression);

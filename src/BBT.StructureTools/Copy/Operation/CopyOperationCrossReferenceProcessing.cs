@@ -19,7 +19,6 @@
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
         {
             referencingProperty.NotNull(nameof(referencingProperty));
-
             this.referencingProperyExpression = referencingProperty;
         }
 
@@ -31,7 +30,9 @@
         {
             copyCallContext.NotNull(nameof(copyCallContext));
 
-            var crossReferenceHandler = new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(this.referencingProperyExpression);
+            var crossReferenceHandler =
+                new CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>(
+                    this.referencingProperyExpression);
             crossReferenceHandler.FillAdditionalProcessings(copyCallContext.AdditionalProcessings);
         }
     }

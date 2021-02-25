@@ -2,11 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class Comparer<T, TIntention> : IComparer<T, TIntention>
+    /// <summary>
+    /// Generic comparer"/>.
+    /// Declaration of attributes to compare is delegated to
+    /// <see cref="ICompareRegistrations{TModelToCompare,TCompareIntention}"/>.
+    /// </summary>
+    /// <typeparam name="T">The model type which shall be compared.</typeparam>
+    /// <typeparam name="TIntention">The intention of the comparison.</typeparam>
+    public class Comparer<T, TIntention> : IComparer<T, TIntention>
         where T : class
         where TIntention : IBaseComparerIntention
     {
@@ -16,7 +23,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Comparer{TModelToCompare,TCompareIntention}" /> class.
         /// </summary>
-        internal Comparer(
+        public Comparer(
             ICompareRegistrations<T, TIntention> compareRegistrations,
             IEqualityComparerHelperRegistrationFactory factory,
             ICompareHelper compareHelper)

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -14,7 +15,12 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvert<TSourceValue, TTarget, TConvertIntention> convert;
+
         private readonly IConvertHelper convertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
 
         /// <summary>
@@ -35,7 +41,6 @@
         public void Initialize(Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
-
             this.sourceFunc = sourceFunc;
         }
 
@@ -56,17 +61,21 @@
             var isAlreadyProcessed = false;
             foreach (var sourceValue in sourceValues)
             {
-                if (this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(sourceValue, additionalProcessings))
+                if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTarget>(
+                    sourceValue, additionalProcessings))
                 {
-                    if (isAlreadyProcessed)
-                    {
-                        var message = FormattableString.Invariant($"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at mximum.");
-                        throw new CopyConvertCompareException(message);
-                    }
-
-                    this.convert.Convert(sourceValue, target, additionalProcessings);
-                    isAlreadyProcessed = true;
+                    continue;
                 }
+
+                if (isAlreadyProcessed)
+                {
+                    var msg = FormattableString.Invariant(
+                        $"Conversion from '{typeof(TSourceValue)}' to '{typeof(TTarget)}' is called multiple times. Make sure it is called once at maximum.");
+                    throw new StructureToolsException(msg);
+                }
+
+                this.convert.Convert(sourceValue, target, additionalProcessings);
+                isAlreadyProcessed = true;
             }
         }
     }

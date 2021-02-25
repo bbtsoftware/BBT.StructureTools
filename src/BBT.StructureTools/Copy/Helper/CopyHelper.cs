@@ -2,12 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CopyHelper : ICopyHelper
+    public class CopyHelper : ICopyHelper
     {
         /// <inheritdoc/>
         public void DoCopyPostProcessing<TClassToCopy>(
@@ -20,9 +21,10 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings.OfType<ICopyPostProcessing<TClassToCopy>>()
-                                 .ToList()
-                                 .ForEach(x => x.DoPostProcessing(source, target));
+            foreach (var additionalProcessing in additionalProcessings.OfType<ICopyPostProcessing<TClassToCopy>>())
+            {
+                additionalProcessing.DoPostProcessing(source, target);
+            }
         }
     }
 }

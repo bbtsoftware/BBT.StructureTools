@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Provider;
 
     /// <inheritdoc/>
     internal class OperationCopyValueWithUpperLimit<TSource, TTarget, TValue>
@@ -12,40 +14,64 @@
         where TTarget : class
         where TValue : IComparable<TValue>
     {
+        private readonly IDefaultValueProvider defaultValueProvider;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TValue> sourceFunc;
+
+        /// <summary>
+        /// Function to get the look-up value.
+        /// </summary>
         private Func<TSource, TValue> sourceUpperLimitFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueWithUpperLimit{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        public OperationCopyValueWithUpperLimit(
+            IDefaultValueProvider defaultValueProvider)
+        {
+            defaultValueProvider.NotNull(nameof(defaultValueProvider));
+
+            this.defaultValueProvider = defaultValueProvider;
+        }
 
         /// <inheritdoc/>
         public void Initialize(
-            Func<TSource, TValue> aSourceFunc,
-            Func<TSource, TValue> aSourceUpperLimitFunc,
-            Expression<Func<TTarget, TValue>> aTargetExpression)
+            Func<TSource, TValue> sourceFunc,
+            Func<TSource, TValue> sourceUpperLimitFunc,
+            Expression<Func<TTarget, TValue>> targetExpression)
         {
-            aSourceFunc.NotNull(nameof(aSourceFunc));
-            aSourceUpperLimitFunc.NotNull(nameof(aSourceUpperLimitFunc));
-            aTargetExpression.NotNull(nameof(aTargetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            sourceUpperLimitFunc.NotNull(nameof(sourceUpperLimitFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
-            this.sourceFunc = aSourceFunc;
-            this.sourceUpperLimitFunc = aSourceUpperLimitFunc;
-            this.targetexpression = aTargetExpression;
+            this.sourceFunc = sourceFunc;
+            this.sourceUpperLimitFunc = sourceUpperLimitFunc;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
         public void Execute(
-            TSource aSource,
-            TTarget aTarget,
+            TSource source,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.NotNull(nameof(aSource));
-            aTarget.NotNull(nameof(aTarget));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
-            var sourceValue = this.sourceFunc.Invoke(aSource);
-            var upperLimitValue = this.sourceUpperLimitFunc(aSource);
+            var sourceValue = this.sourceFunc.Invoke(source);
+            var upperLimitValue = this.sourceUpperLimitFunc(source);
 
-            var value = LookupUtils.ApplyUpperLimit(sourceValue, upperLimitValue);
-            aTarget.SetPropertyValue(
-                this.targetexpression,
+            var value = this.defaultValueProvider.ApplyUpperLimit(sourceValue, upperLimitValue);
+            target.SetPropertyValue(
+                this.targetExpression,
                 value);
         }
     }

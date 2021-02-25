@@ -29,7 +29,7 @@
             Expression<Func<TAttributeValueFactory, TValue>> attrValueExpression)
             where TAttributeValueFactory : class;
 
-            /// <summary>
+        /// <summary>
         /// Registers an attribute to retrieve it's value from a factory during the copy process,
         /// based on a struct.
         /// </summary>
@@ -39,7 +39,7 @@
             Expression<Func<TValue>> attrValueExpression);
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a BaseModelCollection
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -56,7 +56,7 @@
             where TChildType : class;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a BaseModelCollection
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -89,7 +89,7 @@
             where TChild : class;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a BaseModelCollection
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TStrategy">
@@ -114,7 +114,7 @@
             where TSubCopyOfT : class, ICopy<T>;
 
         /// <summary>
-        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a ICollection{TChildType}
+        /// Registers a <see cref="IEnumerable{T}"/> on a source to be copied into a BaseModelCollection
         /// where each Child has a reverse relation onto the parent.
         /// </summary>
         /// <typeparam name="TChild">
@@ -197,5 +197,10 @@
             Expression<Func<TReferencingModel, TCrossReferencedModel>> referencingProperty)
             where TCrossReferencedModel : class
             where TReferencingModel : class;
+
+        /// <summary>
+        /// Ends the registrations and start the operation phase.
+        /// </summary>
+        ICopyOperation<T> EndRegistrations();
     }
 }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
@@ -17,9 +18,18 @@
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
+
         private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, IEnumerable<TSourceValue>> sourceFunc;
-        private Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetexpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCreateToManyGeneric{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}" /> class.
@@ -35,7 +45,7 @@
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
@@ -43,7 +53,7 @@
             createConvertHelper.NotNull(nameof(createConvertHelper));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.createConvertHelper = createConvertHelper;
         }
 
@@ -75,7 +85,9 @@
                 copies.Add(copy);
             }
 
-            target.SetPropertyValue(this.targetexpression, copies);
+            target.AddRangeFilterNullValues(
+                this.targetExpression,
+                copies);
         }
     }
 }

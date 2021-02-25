@@ -5,7 +5,19 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implementation of
+    /// <see cref="ICopyOperationCreateToOneWithReverseRelation{TParent,TChild,TConcreteChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">
+    /// See documentation on interface declaration.
+    /// </typeparam>
+    /// <typeparam name="TChild">
+    /// See documentation on interface declaration.
+    /// </typeparam>
+    /// <typeparam name="TConcreteChild">
+    /// See documentation on interface declaration.
+    /// </typeparam>
     internal class CopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild> : ICopyOperationCreateToOneWithReverseRelation<T, TChild, TConcreteChild>
         where T : class
         where TChild : class
@@ -13,7 +25,7 @@
     {
         private Func<T, TChild> sourceFunc;
 
-        private Expression<Func<T, TChild>> targetexpression;
+        private Expression<Func<T, TChild>> targetExpression;
 
         private ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper;
 
@@ -21,15 +33,15 @@
         public void Initialize(
             Func<T, TChild> sourceFunc,
             Expression<Func<T, TChild>> targetFuncExpr,
-            ICreateCopyHelper<TChild, TConcreteChild, T> aCreateCopyHelper)
+            ICreateCopyHelper<TChild, TConcreteChild, T> createCopyHelper)
         {
-            aCreateCopyHelper.NotNull(nameof(aCreateCopyHelper));
+            createCopyHelper.NotNull(nameof(createCopyHelper));
             sourceFunc.NotNull(nameof(sourceFunc));
             targetFuncExpr.NotNull(nameof(targetFuncExpr));
 
-            this.targetexpression = targetFuncExpr;
+            this.targetExpression = targetFuncExpr;
             this.sourceFunc = sourceFunc;
-            this.createCopyHelper = aCreateCopyHelper;
+            this.createCopyHelper = createCopyHelper;
         }
 
         /// <inheritdoc/>
@@ -47,7 +59,7 @@
             // if the source is null, set the target also to null and exit copy process step.
             if (sourceChild == null)
             {
-                target.SetPropertyValue(this.targetexpression, null);
+                target.SetPropertyValue(this.targetExpression, null);
                 return;
             }
 
@@ -59,7 +71,7 @@
                 target,
                 copyCallContext);
 
-            target.SetPropertyValue(this.targetexpression, copy);
+            target.SetPropertyValue(this.targetExpression, copy);
         }
     }
 }

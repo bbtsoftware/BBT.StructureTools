@@ -16,13 +16,6 @@
         where TTarget : class
     {
         /// <summary>
-        /// Registers a specific target attribute to copy <typeparamref name="TSource"/>
-        /// into target.
-        /// </summary>
-        IConvertRegistration<TSource, TTarget> RegisterCopySource(
-            Expression<Func<TTarget, TSource>> targetExpression);
-
-        /// <summary>
         /// Registers a specific attribute to copy the value specified by
         /// <paramref name="sourceFunc"/> into value specified by
         /// <paramref name="targetExpression"/>
@@ -133,14 +126,14 @@
             where TConvertIntention : IBaseConvertIntention;
 
         /// <summary>
-        /// Registers a conversion from a ist of source values to specific target values filtered
+        /// Registers a conversion from a list of source values to specific target values filtered
         /// by <paramref name="filterFunc"/>.
         /// </summary>
         /// <typeparam name="TSourceValue">
-        /// The type of the ist entries which shall be converted into
+        /// The type of the list entries which shall be converted into
         /// the <typeparamref name="TTargetValue"/>s.</typeparam>
         /// <typeparam name="TTargetValue">
-        /// The ist entries which shall be converted from
+        /// The list entries which shall be converted from
         /// the <typeparamref name="TSourceValue"/>s.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterConvertToMany<TSourceValue, TTargetValue, TConvertIntention>(
@@ -204,7 +197,7 @@
         /// E.g.: This can be used to convert annuity / capital covers.
         /// </summary>
         /// <typeparam name="TBaseSource">Source base type (e.g. LiBaseCover).</typeparam>
-        /// <typeparam name="TBaseTarget">Target base type (e.g. LiClaicover).</typeparam>
+        /// <typeparam name="TBaseTarget">Target base type (e.g. LiClaimCover).</typeparam>
         /// <typeparam name="TIntention">Intention defining the conversion use case.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToOneFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
             Func<TSource, TBaseSource> baseSourceFunc,
@@ -219,7 +212,7 @@
         /// </summary>
         /// <typeparam name="TSourceValue">The property type on <typeparamref name="TSource"/> to convert from.</typeparam>
         /// <typeparam name="TTargetValue">The property type <typeparamref name="TTarget"/> to convert into.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
@@ -235,7 +228,28 @@
         /// </summary>
         /// <typeparam name="TSourceValue">The property type on <typeparamref name="TSource"/> to convert from.</typeparam>
         /// <typeparam name="TTargetValue">The property type <typeparamref name="TTarget"/> to convert into.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
+        /// <typeparam name="TRelation">The type of relation of the created target value.
+        /// This relation is set by <see cref="ICreateConvertHelper{TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention}"/>
+        /// after creation of <typeparamref name="TConcreteTargetValue"/> using its reference function.</typeparam>
+        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
+        IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+            Func<TSource, TSourceValue> sourceFunc,
+            Expression<Func<TTarget, TTargetValue>> targetExpression,
+            Func<TSource, TTarget, TRelation> relationFunc,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            where TSourceValue : class
+            where TTargetValue : class
+            where TConcreteTargetValue : TTargetValue, new()
+            where TRelation : class
+            where TConvertIntention : IBaseConvertIntention;
+
+        /// <summary>
+        /// Registers a <c>to one</c> relationship on source and corresponding target.
+        /// </summary>
+        /// <typeparam name="TSourceValue">The property type on <typeparamref name="TSource"/> to convert from.</typeparam>
+        /// <typeparam name="TTargetValue">The property type <typeparamref name="TTarget"/> to convert into.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
@@ -247,9 +261,22 @@
             where TConvertIntention : IBaseConvertIntention;
 
         /// <summary>
+        /// Registers a <c>from history</c> relationship on source and corresponding target.
+        /// </summary>
+        /// <typeparam name="TSourceValue">The type of the history collection entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTemporalDataType">Temporal data type for resolving the handler.</typeparam>
+        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
+        IConvertRegistration<TSource, TTarget> RegisterCopyFromHist<TSourceValue, TTemporalDataType, TConvertIntention>(
+            Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
+            Func<TSource, TTarget, DateTime> referenceDateFunc)
+            where TSourceValue : class, TTemporalDataType
+            where TTemporalDataType : class
+            where TConvertIntention : IBaseConvertIntention;
+
+        /// <summary>
         /// Registers a <c>from many</c> relationship on source and corresponding target.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCopyFromMany<TSourceValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc)
@@ -287,37 +314,14 @@
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
-        /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
-            where TSourceValue : class
-            where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
-            where TReverseRelation : class
-            where TConvertIntention : IBaseConvertIntention;
-
-        /// <summary>
-        /// Registers a <c>to many</c> relationships on a target corresponding target.
-        /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
-        /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// must be of type <see cref="ICollection{TChildType}"/>.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
-        /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
-        /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
-        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
-        IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
-            Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
@@ -330,39 +334,37 @@
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
-        /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
-        /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
+        /// <typeparam name="TRelation">The type of relation of the created target value.
+        /// This relation is set by <see cref="ICreateConvertHelper{TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention}"/>
+        /// after creation of <typeparamref name="TConcreteTargetValue"/> using its reference function.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
-        IConvertRegistration<TSource, TTarget> RegisterCreateToManyGenericWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
+        IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
+            Func<TSource, TTarget, TRelation> relationFunc,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
-            where TReverseRelation : class
+            where TRelation : class
             where TConvertIntention : IBaseConvertIntention;
 
         /// <summary>
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// Note, that the source (a collection type) cannot be null. The collection must
         /// be an instance but can be an empty collection.
-        /// Note, that the target type <typeparamref name="TTarget"/> cannot be of type
-        /// <see cref="ICollection{TChildType}"/>.
         /// <typeparamref name="TSourceValue"/>s are filtered with <paramref name="sourceFunc"/>.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.
-        /// The <typeparamref name="TTarget"/> type and the <typeparamref name="TTargetValue"/> value
-        /// cannot cannot be of type <see cref="ICollection{TChildType}"/>.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyGeneric<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Expression<Func<TTarget, IEnumerable<TTargetValue>>> targetExpression,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
@@ -372,9 +374,9 @@
         /// <summary>
         /// Registers a <c>to many</c> relationships on source and corresponding target.
         /// </summary>
-        /// <typeparam name="TSourceValue">The type of the ist entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TTargetValue">The type of the ist entries on <typeparamref name="TTarget"/>.</typeparam>
-        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
         /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
         /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
         /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
@@ -386,6 +388,29 @@
             where TTargetValue : class
             where TConcreteTargetValue : TTargetValue, new()
             where TReverseRelation : class
+            where TConvertIntention : IBaseConvertIntention;
+
+        /// <summary>
+        /// Registers a <c>to many</c> relationships on source and corresponding target.
+        /// </summary>
+        /// <typeparam name="TSourceValue">The type of the list entries on <typeparamref name="TSource"/>.</typeparam>
+        /// <typeparam name="TTargetValue">The type of the list entries on <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TConcreteTargetValue">The concrete implementation of <typeparamref name="TTargetValue"/>.</typeparam>
+        /// <typeparam name="TReverseRelation">The reverse relation of the created target value.
+        /// Must be a base type of <typeparamref name="TTarget"/>.</typeparam>
+        /// <typeparam name="TTemporalData">Temporal data type for resolving the handler.</typeparam>
+        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
+        IConvertRegistration<TSource, TTarget> RegisterCreateToOneHistWithCondition<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>(
+            Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
+            Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
+            Func<TSource, TTarget, bool> toOneHistCriteria,
+            Func<TSource, TTarget, DateTime> toOneReferenceDate,
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            where TSourceValue : class, TTemporalData
+            where TTargetValue : class, TTemporalData
+            where TConcreteTargetValue : TTargetValue, new()
+            where TReverseRelation : class
+            where TTemporalData : class
             where TConvertIntention : IBaseConvertIntention;
 
         /// <summary>
@@ -403,25 +428,17 @@
         /// <summary>
         /// Enables to register a <see cref="ISourceConvertStrategy{TBaseSource, TBaseTarget, TIntention}"/> strategy for converting models of different types
         /// for <c>to many</c> relationships.
+        /// E.g.: This can be used to convert annuity / capital cover templates.
         /// </summary>
-        /// <typeparam name="TBaseSource">Source base type.</typeparam>
-        /// <typeparam name="TBaseTarget">Target base type.</typeparam>
+        /// <typeparam name="TBaseSource">Source base type (e.g. LiBaseCoverTemplate).</typeparam>
+        /// <typeparam name="TBaseTarget">Target base type (e.g. LiBaseCover).</typeparam>
         /// <typeparam name="TIntention">Conversion intention which shall be used within the strategy.</typeparam>
         IConvertRegistration<TSource, TTarget> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
-            Func<TSource, IEnumerable<TBaseSource>> source, Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent, Expression<Func<TBaseTarget, TTarget>> reverseRelation)
+            Func<TSource, IEnumerable<TBaseSource>> source,
+            Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
+            Expression<Func<TBaseTarget, TTarget>> reverseRelation)
             where TBaseSource : class
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention;
-
-        /// <summary>
-        /// Registers a <c>from temporal data</c> relationship on source and corresponding target.
-        /// </summary>
-        /// <typeparam name="TSourceValue">The type of the temporal collection entries on <typeparamref name="TSource"/>.</typeparam>
-        /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
-        IConvertRegistration<TSource, TTarget> RegisterCopyFromTemporalData<TSourceValue, TConvertIntention>(
-            Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
-            Func<TSource, TTarget, DateTime> referenceDateFunc)
-            where TSourceValue : class
-            where TConvertIntention : IBaseConvertIntention;
     }
 }

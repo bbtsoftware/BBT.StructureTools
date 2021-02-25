@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
@@ -11,8 +12,15 @@
         where TSource : class
         where TTarget : class
     {
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, TValue>> targetExpression;
 
         /// <inheritdoc/>
         public void Initialize(
@@ -23,7 +31,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
@@ -36,7 +44,9 @@
             target.NotNull(nameof(target));
 
             var sourceValue = this.sourceFunc.Invoke(source);
-            target.SetPropertyValue(this.targetexpression, sourceValue);
+            target.SetPropertyValue(
+                this.targetExpression,
+                sourceValue);
         }
     }
 }

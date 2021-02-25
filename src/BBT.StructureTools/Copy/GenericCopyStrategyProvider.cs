@@ -3,7 +3,11 @@
     using BBT.StrategyPattern;
     using BBT.StructureTools.Copy.Strategy;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyStrategyProvider{TStrategy,TCriterion}"/>.
+    /// </summary>
+    /// <typeparam name="TStrategy">see above.</typeparam>
+    /// <typeparam name="TCriterion">see above.</typeparam>
     internal class GenericCopyStrategyProvider<TStrategy, TCriterion>
         : GenericStrategyProvider<TStrategy, TCriterion>,
         ICopyStrategyProvider<TStrategy, TCriterion>

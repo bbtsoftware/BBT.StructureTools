@@ -7,7 +7,12 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
+    /// </summary>
+    /// <typeparam name="T">see above.</typeparam>
+    /// <typeparam name="TStrategy">see above.</typeparam>
+    /// <typeparam name="TChildType">see above.</typeparam>
     internal class CopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType> : ICopyOperationCreateToManyWithGenericStrategy<T, TStrategy, TChildType>
         where T : class
         where TStrategy : class, ICopyStrategy<TChildType>
@@ -16,7 +21,7 @@
         private readonly ICopyStrategyProvider<TStrategy, TChildType> strategyProvider;
 
         private Func<T, IEnumerable<TChildType>> sourceFunc;
-        private Expression<Func<T, ICollection<TChildType>>> targetexpression;
+        private Expression<Func<T, ICollection<TChildType>>> targetExpression;
         private Func<TStrategy, TChildType> createTargetChildFunc;
 
         /// <summary>
@@ -30,38 +35,42 @@
             this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
+        /// </summary>
         public void Copy(
             T source,
             T target,
             ICopyCallContext copyCallContext)
         {
-            var newKids = new List<TChildType>();
+            var newKidsList = new List<TChildType>();
 
             foreach (var child in this.sourceFunc.Invoke(source))
             {
                 var strategy = this.strategyProvider.GetStrategy(child);
                 var childCopy = this.createTargetChildFunc.Invoke(strategy);
                 strategy.Copy(child, childCopy, copyCallContext);
-                newKids.Add(childCopy);
+                newKidsList.Add(childCopy);
             }
 
-            target.AddRangeToCollectionFilterNulvalues(this.targetexpression, newKids);
+            target.AddRangeFilterNullValues(this.targetExpression, newKidsList);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToManyWithGenericStrategy{T,TStrategy,TChildType}"/>.
+        /// </summary>
         public void Initialize(
             Func<T, IEnumerable<TChildType>> sourceFunc,
             Expression<Func<T, ICollection<TChildType>>> targetExpression,
-            Expression<Func<TStrategy, TChildType>> aCreateTargetChildExpression)
+            Expression<Func<TStrategy, TChildType>> createTargetChildExpression)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
-            aCreateTargetChildExpression.NotNull(nameof(aCreateTargetChildExpression));
+            createTargetChildExpression.NotNull(nameof(createTargetChildExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
-            this.createTargetChildFunc = aCreateTargetChildExpression.Compile();
+            this.targetExpression = targetExpression;
+            this.createTargetChildFunc = createTargetChildExpression.Compile();
         }
     }
 }

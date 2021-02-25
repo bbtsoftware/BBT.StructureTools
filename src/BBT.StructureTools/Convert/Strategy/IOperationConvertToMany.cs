@@ -11,13 +11,13 @@
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">
-    /// The type of the ist entries which shall be converted into
+    /// The type of the list entries which shall be converted into
     /// the <typeparamref name="TTargetValue"/>s.</typeparam>
     /// <typeparam name="TTargetValue">
-    /// The ist entries which shall be converted from
+    /// The list entries which shall be converted from
     /// the <typeparamref name="TSourceValue"/>s.</typeparam>
     /// <typeparam name="TConvertIntention">The intention of the conversion.</typeparam>
-    internal interface IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+    public interface IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class

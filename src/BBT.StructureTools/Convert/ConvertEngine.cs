@@ -1,7 +1,7 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     /// <inheritdoc/>
-    public class ConvertEngine<TSource, TTarget> : IConvertEngine<TSource, TTarget>
+    internal class ConvertEngine<TSource, TTarget> : IConvertEngine<TSource, TTarget>
         where TSource : class
         where TTarget : class
     {

@@ -5,10 +5,9 @@
     using BBT.StructureTools.Extension;
 
     /// <summary>
-    /// Compares two int values of a specifc model, this allows for example to sort models with the sort
-    /// order of an enum value.
+    /// Compares and sorts two objects according to the delegate provided.
     /// </summary>
-    /// <typeparam name="TModel">The model which shall be sorted.</typeparam>
+    /// <typeparam name="TModel">The type of the objects which shall be sorted.</typeparam>
     public class ModelIntComparer<TModel> : IComparer<TModel>
         where TModel : class
     {

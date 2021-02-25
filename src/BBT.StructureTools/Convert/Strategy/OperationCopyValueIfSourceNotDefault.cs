@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Provider;
 
     /// <inheritdoc/>
     internal class OperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>
@@ -11,38 +13,58 @@
         where TSource : class
         where TTarget : class
     {
+        private readonly IDefaultValueProvider defaultValueProvider;
+
+        /// <summary>
+        /// Function to get the source's property value.
+        /// </summary>
         private Func<TSource, TValue> sourceFunc;
-        private Expression<Func<TTarget, TValue>> targetexpression;
+
+        /// <summary>
+        ///  Expression which declares the target value.
+        /// </summary>
+        private Expression<Func<TTarget, TValue>> targetExpression;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationCopyValueIfSourceNotDefault{TSource, TTarget, TValue}"/> class.
+        /// </summary>
+        public OperationCopyValueIfSourceNotDefault(
+            IDefaultValueProvider defaultValueProvider)
+        {
+            defaultValueProvider.NotNull(nameof(defaultValueProvider));
+
+            this.defaultValueProvider = defaultValueProvider;
+        }
 
         /// <inheritdoc/>
         public void Initialize(
-            Func<TSource, TValue> aSourceFunc,
-            Expression<Func<TTarget, TValue>> aTargetExpression)
+            Func<TSource, TValue> sourceFunc,
+            Expression<Func<TTarget, TValue>> targetExpression)
         {
-            aSourceFunc.NotNull(nameof(aSourceFunc));
-            aTargetExpression.NotNull(nameof(aTargetExpression));
+            sourceFunc.NotNull(nameof(sourceFunc));
+            targetExpression.NotNull(nameof(targetExpression));
 
-            this.sourceFunc = aSourceFunc;
-            this.targetexpression = aTargetExpression;
+            this.sourceFunc = sourceFunc;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
         public void Execute(
-            TSource aSource,
-            TTarget aTarget,
+            TSource source,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            aSource.NotNull(nameof(aSource));
-            aTarget.NotNull(nameof(aTarget));
+            source.NotNull(nameof(source));
+            target.NotNull(nameof(target));
 
-            var sourceValue = this.sourceFunc.Invoke(aSource);
-            if (LookupUtils.IsDefaultValue(sourceValue))
+            var sourceValue = this.sourceFunc.Invoke(source);
+            if (this.defaultValueProvider.IsDefault(sourceValue))
             {
                 return;
             }
 
-            aTarget.SetPropertyValue(
-                this.targetexpression,
+            target.SetPropertyValue(
+                this.targetExpression,
                 sourceValue);
         }
     }

@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    public class ConvertHelper : IConvertHelper
+    internal class ConvertHelper : IConvertHelper
     {
         /// <inheritdoc/>
         public void DoConvertPreProcessing<TSourceClass, TTargetClass>(
@@ -19,10 +20,10 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPreProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPreProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPreProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>
@@ -37,10 +38,10 @@
             target.NotNull(nameof(target));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            additionalProcessings
-                .OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>()
-                .ToList()
-                .ForEach(x => x.DoPostProcessing(source, target));
+            foreach (var addProcessing in additionalProcessings.OfType<IConvertPostProcessing<TSourceClass, TTargetClass>>())
+            {
+                addProcessing.DoPostProcessing(source, target);
+            }
         }
 
         /// <inheritdoc/>

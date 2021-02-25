@@ -2,11 +2,18 @@
 {
     using System;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Generic implementation of <see cref="IComparePostProcessing{T, TIntention}"/>.
+    /// </summary>
+    /// <typeparam name="T">See link above.</typeparam>
+    /// <typeparam name="TIntention">See link above.</typeparam>
     public class GenericComparePostProcessing<T, TIntention> : IComparePostProcessing<T, TIntention>
         where T : class
         where TIntention : IBaseComparerIntention
     {
+        /// <summary>
+        /// The action.
+        /// </summary>
         private readonly Action<T, T> action;
 
         /// <summary>
@@ -17,7 +24,9 @@
             this.action = action;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// This method will called at the end of a copy process.
+        /// </summary>
         public void DoPostProcessing(T source, T target)
         {
             this.action.Invoke(source, target);

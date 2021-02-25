@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq.Expressions;
-    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Initialization;
@@ -20,7 +19,8 @@
         {
             reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
 
-            var copyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();
+            var copyHelper = IocHandler.Instance.IocResolver
+                .GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget, TReverseRelation>>();
             copyHelper.SetupReverseRelation(reverseRelationFunc);
             return copyHelper;
         }
@@ -28,7 +28,8 @@
         /// <inheritdoc/>
         public ICreateCopyHelper<TTarget, TConcreteTarget> GetCopyHelper()
         {
-            var copyHelper = IocHandler.Instance.IocResolver.GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget>>();
+            var copyHelper = IocHandler.Instance.IocResolver
+                .GetInstance<ICreateCopyHelper<TTarget, TConcreteTarget>>();
             return copyHelper;
         }
     }

@@ -3,8 +3,13 @@
     using BBT.StrategyPattern;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
-    internal class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
+    /// <summary>
+    /// Implementation of the <see cref="ICopyStrategy{TBase}"/> class.
+    /// </summary>
+    /// <typeparam name="TBase">Base type of the instances to copy.</typeparam>
+    /// <typeparam name="TDerived">Type of the instances to copy, inherits from TBase.</typeparam>
+    /// <typeparam name="TConcrete">Concrete implementation of the instances to copy, inherits from TDerived.</typeparam>
+    public class GenericCopyStrategy<TBase, TDerived, TConcrete> : ICopyStrategy<TBase>
         where TBase : class
         where TDerived : class, TBase
         where TConcrete : class, TDerived, new()
@@ -32,11 +37,11 @@
             TBase target,
             ICopyCallContext copyCallContext)
         {
-            source.IsOfType<TDerived>(nameof(source));
-            target.IsOfType<TDerived>(nameof(target));
+            var sourceCastConcrete = source.IsOfType<TDerived>(nameof(source));
+            var targetCastConcrete = target.IsOfType<TDerived>(nameof(target));
             copyCallContext.NotNull(nameof(copyCallContext));
 
-            this.copier.Copy(source as TDerived, target as TDerived, copyCallContext);
+            this.copier.Copy(sourceCastConcrete, targetCastConcrete, copyCallContext);
         }
 
         /// <inheritdoc/>

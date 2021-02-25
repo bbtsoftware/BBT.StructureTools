@@ -6,7 +6,12 @@
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// <see cref="ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+    /// </summary>
+    /// <typeparam name="T">c aboF.</typeparam>
+    /// <typeparam name="TStrategy">c aboF.</typeparam>
+    /// <typeparam name="TChild">c aboF.</typeparam>
     internal class CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild> : ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<T, TStrategy, TChild>
         where T : class
         where TStrategy : class, ICopyStrategy<TChild>
@@ -14,20 +19,23 @@
     {
         private readonly ICopyStrategyProvider<TStrategy, TChild> strategyProvider;
         private Func<T, TChild> sourceFunc;
-        private Expression<Func<T, TChild>> targetexpression;
+        private Expression<Func<T, TChild>> targetExpression;
         private Expression<Func<TChild, T>> reverseRelationExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T, TStrategy, TChild}"/> class.
         /// </summary>
-        public CopyOperationCreateToOneWithGenericStrategyWithReverseRelation(ICopyStrategyProvider<TStrategy, TChild> strategyProvider)
+        public CopyOperationCreateToOneWithGenericStrategyWithReverseRelation(
+            ICopyStrategyProvider<TStrategy, TChild> genericStrategyProvider)
         {
-            strategyProvider.NotNull(nameof(strategyProvider));
+            genericStrategyProvider.NotNull(nameof(genericStrategyProvider));
 
-            this.strategyProvider = strategyProvider;
+            this.strategyProvider = genericStrategyProvider;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperation{T}"/>.
+        /// </summary>
         public void Copy(
             T source,
             T target,
@@ -38,7 +46,7 @@
             // if the source is null, set the target also to null and exit copy process step.
             if (sourceChild == null)
             {
-                target.SetPropertyValue(this.targetexpression, null);
+                target.SetPropertyValue(this.targetExpression, null);
                 return;
             }
 
@@ -48,10 +56,12 @@
             strategy.Copy(sourceChild, copy, copyCallContext);
             copy.SetPropertyValue(this.reverseRelationExpression, target);
 
-            target.SetPropertyValue(this.targetexpression, copy);
+            target.SetPropertyValue(this.targetExpression, copy);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// <see cref="ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
+        /// </summary>
         public void Initialize(Func<T, TChild> sourceFunc, Expression<Func<T, TChild>> targetExpression, Expression<Func<TChild, T>> reverseRelationExpression)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
@@ -59,7 +69,7 @@
             reverseRelationExpression.NotNull(nameof(reverseRelationExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
             this.reverseRelationExpression = reverseRelationExpression;
         }
     }

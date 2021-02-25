@@ -1,10 +1,11 @@
 ﻿namespace BBT.StructureTools.Convert
 {
     using System.Collections.Generic;
+    using BBT.StructureTools;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    public class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
+    internal class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TConvertIntention : IBaseConvertIntention
@@ -15,7 +16,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter{TSource, TTarget, TConvertIntention}" /> class.
         /// </summary>
-        internal Converter(
+        public Converter(
             IConvertRegistrations<TSource, TTarget, TConvertIntention> convertRegistrations,
             IConvertEngine<TSource, TTarget> convertEngine,
             IConvertHelper convertHelper)
@@ -42,7 +43,8 @@
 
             this.convertHelper.DoConvertPreProcessing(source, target, additionalProcessings);
             this.convertOperations.Convert(source, target, additionalProcessings);
-            this.convertHelper.DoConvertPostProcessing(source, target, additionalProcessings);
+            this.convertHelper.DoConvertPostProcessing(
+                source, target, additionalProcessings);
         }
     }
 }

@@ -43,8 +43,8 @@
         /// </typeparam>
         internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, Func<TEntity, bool> predicate, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-            var filteredist = list.Where(predicate);
-            return filteredist.SingleWithExceptionMessage(exceptionMessageFormat, furtherExceptionMessageFormat);
+            var filteredList = list.Where(predicate);
+            return filteredList.SingleWithExceptionMessage(exceptionMessageFormat, furtherExceptionMessageFormat);
         }
 
         /// <summary>
@@ -57,21 +57,21 @@
         /// </typeparam>
         internal static TEntity SingleWithExceptionMessage<TEntity>(this IEnumerable<TEntity> list, string exceptionMessageFormat, params object[] furtherExceptionMessageFormat)
         {
-           list.NotNull(nameof(list));
+            list.NotNull(nameof(list));
 
-           if (list.Only())
+            if (list.Only())
             {
                 return list.Single();
             }
 
-           var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
+            var message = string.Format(CultureInfo.InvariantCulture, exceptionMessageFormat, furtherExceptionMessageFormat);
 
-           if (!list.Any())
+            if (!list.Any())
             {
                 throw new ArgumentException("Enumerable contains no element." + Environment.NewLine + message);
             }
 
-           throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
+            throw new ArgumentException("Enumerable contains more than one element." + Environment.NewLine + message);
         }
     }
 }

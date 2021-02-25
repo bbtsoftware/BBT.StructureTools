@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Copy;
@@ -17,18 +16,18 @@
     {
         #region setup
 
-        private readonly ICopy<ParentTestClass> testcandidate;
+        private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
             kernel.Bind<IGenericStrategyProvider<TestStrategy, IChildTestClass>>().To<TestFactory>();
             kernel.Bind<ITestStrategy>().To<TestStrategy>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -48,7 +47,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -89,7 +88,7 @@
 
             // Act / Assert throws
             Assert.Throws<ArgumentNullException>(() =>
-                this.testcandidate.Copy(
+                this.testCandidate.Copy(
                     testClassParentOriginal,
                     testClassParentCopy,
                     new List<IBaseAdditionalProcessing>()));
@@ -107,7 +106,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>());
@@ -209,10 +208,6 @@
 
         private class TestClassCopyRegistrations : ICopyRegistrations<IParentTestClass>
         {
-            public TestClassCopyRegistrations()
-            {
-            }
-
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
                 registrations.Should().NotBeNull();
@@ -261,12 +256,6 @@
 
         private class TestFactory : IGenericStrategyProvider<TestStrategy, IChildTestClass>
         {
-            public IEnumerable<TestStrategy> GetAllStrategies()
-            {
-                // Not needed for test scenario
-                throw new NotImplementedException();
-            }
-
             public TestStrategy GetStrategy(IChildTestClass criterion)
             {
                 return new TestStrategy();

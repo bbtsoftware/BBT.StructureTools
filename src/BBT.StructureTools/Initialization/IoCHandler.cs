@@ -10,6 +10,8 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Operation;
     using BBT.StructureTools.Copy.Strategy;
+    using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Strategy;
 
     /// <summary>
     /// The IoC handler as singleton.
@@ -41,102 +43,110 @@
 
         /// <summary>
         /// Executes the binding between interfaces and implementations within BBT.StructureTools
-        /// using the <paramref name="registrationAction"/> for each pair.
+        /// using the <paramref name="singletonRegistrationAction"/> for each pair.
         /// </summary>
-        public void DoIocRegistrations(Action<Type, Type> registrationAction)
+        /// <param name="singletonRegistrationAction">
+        /// Action which is called to register an internal implementation for a given public abstraction as <c>singleton</c>.
+        /// </param>
+        /// <param name="transientRegistrationAction">
+        /// Action which is called to register an internal implementation for a given public abstraction as <c>transiently</c>.
+        /// </param>
+        public void DoIocRegistrations(Action<Type, Type> singletonRegistrationAction, Action<Type, Type> transientRegistrationAction)
         {
-            RegisterCompareTypes(registrationAction);
-            RegisterCopyTypes(registrationAction);
-            RegisterConvertTypes(registrationAction);
+            singletonRegistrationAction.NotNull(nameof(singletonRegistrationAction));
+            transientRegistrationAction.NotNull(nameof(transientRegistrationAction));
+
+            RegisterCompareTypes(singletonRegistrationAction);
+            RegisterCopyTypes(singletonRegistrationAction, transientRegistrationAction);
+            RegisterConvertTypes(singletonRegistrationAction, transientRegistrationAction);
         }
 
         /// <summary>
         /// Registers types needed for compare.
         /// </summary>
-        private static void RegisterCompareTypes(Action<Type, Type> registrationAction)
+        private static void RegisterCompareTypes(Action<Type, Type> singletonRegistrationAction)
         {
             // Tools
-            registrationAction.Invoke(typeof(IComparer<,>), typeof(Comparer<,>));
-            registrationAction.Invoke(typeof(IEqualityComparerHelperRegistrationFactory), typeof(EqualityComparerHelperRegistrationFactory));
+            singletonRegistrationAction.Invoke(typeof(IComparer<,>), typeof(Comparer<,>));
+            singletonRegistrationAction.Invoke(typeof(IEqualityComparerHelperRegistrationFactory), typeof(EqualityComparerHelperRegistrationFactory));
 
             // Helper
-            registrationAction.Invoke(typeof(ICompareHelper), typeof(CompareHelper));
+            singletonRegistrationAction.Invoke(typeof(ICompareHelper), typeof(CompareHelper));
         }
 
         /// <summary>
         /// Registers types needed for convert.
         /// </summary>
-        private static void RegisterConvertTypes(Action<Type, Type> registrationAction)
+        private static void RegisterConvertTypes(Action<Type, Type> singletonRegistrationAction, Action<Type, Type> transientRegistrationAction)
         {
             // Tools
-            registrationAction.Invoke(typeof(IConvert<,,>), typeof(Converter<,,>));
-            registrationAction.Invoke(typeof(IConvertEngine<,>), typeof(ConvertEngine<,>));
-            registrationAction.Invoke(typeof(IConvertHelperFactory<,,,>), typeof(ConvertHelperFactory<,,,>));
-            registrationAction.Invoke(typeof(ICreateConvertHelper<,,,,>), typeof(CreateConvertHelper<,,,,>));
-            registrationAction.Invoke(typeof(ICreateConvertHelper<,,,>), typeof(CreateConvertHelper<,,,>));
-            registrationAction.Invoke(typeof(IConvertStrategyProvider<,,>), typeof(ConvertStrategyProvider<,,>));
+            singletonRegistrationAction.Invoke(typeof(IConvert<,,>), typeof(Converter<,,>));
+            singletonRegistrationAction.Invoke(typeof(IConvertEngine<,>), typeof(ConvertEngine<,>));
+            singletonRegistrationAction.Invoke(typeof(IConvertHelperFactory<,,,>), typeof(ConvertHelperFactory<,,,>));
+            singletonRegistrationAction.Invoke(typeof(ICreateConvertHelper<,,,,>), typeof(CreateConvertHelper<,,,,>));
+            singletonRegistrationAction.Invoke(typeof(ICreateConvertHelper<,,,>), typeof(CreateConvertHelper<,,,>));
+            singletonRegistrationAction.Invoke(typeof(IConvertStrategyProvider<,,>), typeof(ConvertStrategyProvider<,,>));
 
             // Helper
-            registrationAction.Invoke(typeof(IConvertHelper), typeof(ConvertHelper));
+            singletonRegistrationAction.Invoke(typeof(IConvertHelper), typeof(ConvertHelper));
 
             // Value conversion
-            registrationAction.Invoke(typeof(IConvertValue<,>), typeof(ValueConverter<,>));
+            singletonRegistrationAction.Invoke(typeof(IConvertValue<,>), typeof(ValueConverter<,>));
 
             // Operations
-            registrationAction.Invoke(typeof(IOperationCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationCreateFromSourceWithReverseRelation<,,,,>));
-            registrationAction.Invoke(typeof(IOperationCreateToManyWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithReverseRelation<,,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCreateToManyGenericWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyGenericWithReverseRelation<,,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCreateToManyGeneric<,,,,,>), typeof(OperationCreateToManyGeneric<,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>));
-            registrationAction.Invoke(typeof(IOperationMergeLevel<,,,,,,>), typeof(OperationMergeLevel<,,,,,,>));
-            registrationAction.Invoke(typeof(IOperationConvertFromSourceOnDifferentLevels<,,,,>), typeof(OperationConvertFromSourceOnDifferentLevels<,,,,>));
-            registrationAction.Invoke(typeof(IOperationConvertFromTargetOnDifferentLevels<,,,>), typeof(OperationConvertFromTargetOnDifferentLevels<,,,>));
-            registrationAction.Invoke(typeof(IOperationConvertToMany<,,,,>), typeof(OperationConvertToMany<,,,,>));
-            registrationAction.Invoke(typeof(IOperationSourceSubConvert<,,,>), typeof(OperationSourceSubConvert<,,,>));
-            registrationAction.Invoke(typeof(IOperationTargetSubConvert<,,,>), typeof(OperationTargetSubConvert<,,,>));
-            registrationAction.Invoke(typeof(IOperationCopySource<,>), typeof(OperationCopySource<,>));
-            registrationAction.Invoke(typeof(IOperationCreateToOneWithReverseRelation<,,,,,>), typeof(OperationCreateToOneWithReverseRelation<,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCreateToOne<,,,,,>), typeof(OperationCreateToOne<,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCopyFromMany<,,,>), typeof(OperationCopyFromMany<,,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValue<,,>), typeof(OperationCopyValue<,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueWithLookUp<,,>), typeof(OperationCopyValueWithLookUp<,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueWithUpperLimit<,,>), typeof(OperationCopyValueWithUpperLimit<,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueIfSourceNotDefault<,,>), typeof(OperationCopyValueIfSourceNotDefault<,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueIfTargetIsDefault<,,>), typeof(OperationCopyValueIfTargetIsDefault<,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueWithSourceFilter<,,>), typeof(OperationCopyValueWithSourceFilter<,,>));
-            registrationAction.Invoke(typeof(IOperationSubCopy<,,>), typeof(OperationSubCopy<,,>));
-            registrationAction.Invoke(typeof(IOperationSubConvert<,,,,>), typeof(OperationSubConvert<,,,,>));
-            registrationAction.Invoke(typeof(IOperationConditionalCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationConditionalCreateFromSourceWithReverseRelation<,,,,>));
-            registrationAction.Invoke(typeof(IOperationConditionalCreateToManyWithReverseRelation<,,,,>), typeof(OperationConditionalCreateToManyWithReverseRelation<,,,,>));
-            registrationAction.Invoke(typeof(IOperationCopyOneToManyWithReverseRelation<,,,,,,>), typeof(OperationCopyOneToManyWithReverseRelation<,,,,,,>));
-            registrationAction.Invoke(typeof(IOperationCopyValueWithMapping<,,,>), typeof(OperationCopyValueWithMapping<,,,>));
-            registrationAction.Invoke(typeof(IOperationCopyFromTemporalData<,,,>), typeof(OperationCopyFromTemporalData<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationCreateFromSourceWithReverseRelation<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithReverseRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyGeneric<,,,,,>), typeof(OperationCreateToManyGeneric<,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>), typeof(OperationCreateToManyWithSourceFilterAndReverseRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationMergeLevel<,,,,,,>), typeof(OperationMergeLevel<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationConvertFromSourceOnDifferentLevels<,,,,>), typeof(OperationConvertFromSourceOnDifferentLevels<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationConvertFromTargetOnDifferentLevels<,,,>), typeof(OperationConvertFromTargetOnDifferentLevels<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationConvertToMany<,,,,>), typeof(OperationConvertToMany<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationSourceSubConvert<,,,>), typeof(OperationSourceSubConvert<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationTargetSubConvert<,,,>), typeof(OperationTargetSubConvert<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToOneWithReverseRelation<,,,,,>), typeof(OperationCreateToOneWithReverseRelation<,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToOne<,,,,,>), typeof(OperationCreateToOne<,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyFromMany<,,,>), typeof(OperationCopyFromMany<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValue<,,>), typeof(OperationCopyValue<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithLookUp<,,>), typeof(OperationCopyValueWithLookUp<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithUpperLimit<,,>), typeof(OperationCopyValueWithUpperLimit<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueIfSourceNotDefault<,,>), typeof(OperationCopyValueIfSourceNotDefault<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueIfTargetIsDefault<,,>), typeof(OperationCopyValueIfTargetIsDefault<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithSourceFilter<,,>), typeof(OperationCopyValueWithSourceFilter<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationSubCopy<,,>), typeof(OperationSubCopy<,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationSubConvert<,,,,>), typeof(OperationSubConvert<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationConditionalCreateFromSourceWithReverseRelation<,,,,>), typeof(OperationConditionalCreateFromSourceWithReverseRelation<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationConditionalCreateToManyWithReverseRelation<,,,,>), typeof(OperationConditionalCreateToManyWithReverseRelation<,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyValueWithMapping<,,,>), typeof(OperationCopyValueWithMapping<,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToOneHistWithCondition<,,,,,,,>), typeof(OperationCreateToOneHistWithCondition<,,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToManyWithRelation<,,,,,,>), typeof(OperationCreateToManyWithRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCreateToOneWithRelation<,,,,,,>), typeof(OperationCreateToOneWithRelation<,,,,,,>));
+            transientRegistrationAction.Invoke(typeof(IOperationCopyFromHist<,,,,>), typeof(OperationCopyFromHist<,,,,>));
         }
 
         /// <summary>
         /// Registers types needed for copy.
         /// </summary>
-        private static void RegisterCopyTypes(Action<Type, Type> registrationAction)
+        private static void RegisterCopyTypes(Action<Type, Type> singletonRegistrationAction, Action<Type, Type> transientRegistrationAction)
         {
             // Tools
-            registrationAction.Invoke(typeof(ICreateCopyHelper<,>), typeof(CreateCopyHelper<,>));
-            registrationAction.Invoke(typeof(ICreateCopyHelper<,,>), typeof(CreateCopyHelper<,,>));
-            registrationAction.Invoke(typeof(ICopyHelperFactory<,>), typeof(CopyHelperFactory<,>));
-            registrationAction.Invoke(typeof(ICopy<>), typeof(Copier<>));
-            registrationAction.Invoke(typeof(ICopyHelperRegistrationFactory), typeof(CopyHelperRegistrationFactory));
+            singletonRegistrationAction.Invoke(typeof(ICreateCopyHelper<,>), typeof(CreateCopyHelper<,>));
+            singletonRegistrationAction.Invoke(typeof(ICreateCopyHelper<,,>), typeof(CreateCopyHelper<,,>));
+            singletonRegistrationAction.Invoke(typeof(ICopyHelperFactory<,>), typeof(CopyHelperFactory<,>));
+            singletonRegistrationAction.Invoke(typeof(ICopy<>), typeof(Copier<>));
+            singletonRegistrationAction.Invoke(typeof(ICopyHelperRegistrationFactory), typeof(CopyHelperRegistrationFactory));
+            singletonRegistrationAction.Invoke(typeof(ICopyStrategyProvider<,>), typeof(GenericCopyStrategyProvider<,>));
 
             // Helper
-            registrationAction.Invoke(typeof(ICopyHelper), typeof(CopyHelper));
+            singletonRegistrationAction.Invoke(typeof(ICopyHelper), typeof(CopyHelper));
 
             // Operations
-            registrationAction.Invoke(typeof(ICopyOperationCreateToManyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithReverseRelation<,,>));
-            registrationAction.Invoke(typeof(ICopyOperationCreateToOneWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithReverseRelation<,,>));
-            registrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategy<,,>), typeof(CopyOperationCreateToManyWithGenericStrategy<,,>));
-            registrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
-            registrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
-            registrationAction.Invoke(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
-
-            registrationAction.Invoke(typeof(ICopyStrategyProvider<,>), typeof(GenericCopyStrategyProvider<,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithReverseRelation<,,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToOneWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithReverseRelation<,,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategy<,,>), typeof(CopyOperationCreateToManyWithGenericStrategy<,,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyWithReverseRelation<,,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>), typeof(CopyOperationCreateToManyWithGenericStrategyReverseRelationOnly<,,>));
+            transientRegistrationAction.Invoke(typeof(ICopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>), typeof(CopyOperationCreateToOneWithGenericStrategyWithReverseRelation<,,>));
         }
     }
 }

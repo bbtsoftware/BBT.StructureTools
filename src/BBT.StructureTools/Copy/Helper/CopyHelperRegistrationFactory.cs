@@ -10,7 +10,7 @@
         /// </summary>
         /// <typeparam name="T">Creation type.</typeparam>
         /// <returns>Created instance of CopyHelperRegistration.</returns>
-        public IInternalCopyHelperRegistration<T> Create<T>()
+        public ICopyHelperRegistration<T> Create<T>()
             where T : class
         {
             return new CopyHelperRegistration<T>();

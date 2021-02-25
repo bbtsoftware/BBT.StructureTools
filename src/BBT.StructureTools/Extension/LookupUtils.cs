@@ -23,26 +23,9 @@
 
             var defaultValue = default(T);
 
-            var isDefault = value?.Equals(defaultValue) == true;
+            var isDefault = value.Equals(defaultValue);
 
             return isDefault;
-        }
-
-        /// <summary>
-        /// Returns <paramref name="specificValue"/> if not null or empty
-        /// and <paramref name="defaultValue"/> otherwise.
-        /// </summary>
-        /// <typeparam name="T">Type of the value to look up.</typeparam>
-        /// <param name="specificValue">The specific value, will be returned if it is not empty.</param>
-        /// <param name="defaultValue">The default value, will only be returned if <paramref name="specificValue"/> is not empty.</param>
-        internal static T LookUpValue<T>(T specificValue, T defaultValue)
-        {
-            if (IsDefaultValue(specificValue))
-            {
-                return defaultValue;
-            }
-
-            return specificValue;
         }
 
         /// <summary>
@@ -77,40 +60,6 @@
             }
 
             return upperLimitValue;
-        }
-
-        /// <summary>
-        /// Returns <paramref name="specificValue"/> if
-        ///  - <paramref name="lowerLimitValue"/> is the <typeparamref name="T"/>'s default value
-        ///    (the default value has the meaning 'not set')
-        ///  - <paramref name="specificValue"/> is greater than or equals <paramref name="lowerLimitValue"/>.
-        /// Returns <paramref name="lowerLimitValue"/> if
-        /// - <paramref name="specificValue"/> is greater than <paramref name="lowerLimitValue"/>
-        /// - <paramref name="specificValue"/> is the <typeparamref name="T"/>'s default value
-        ///   (the default value has the meaning 'not set').
-        /// </summary>
-        /// <typeparam name="T">The type of the values to compare.</typeparam>
-        /// <param name="specificValue">The specific value.</param>
-        /// <param name="lowerLimitValue">The upper limit value.</param>
-        internal static T ApplyLowerLimit<T>(T specificValue, T lowerLimitValue)
-            where T : IComparable<T>
-        {
-            if (IsDefaultValue(lowerLimitValue))
-            {
-                return specificValue;
-            }
-
-            if (IsDefaultValue(specificValue))
-            {
-                return lowerLimitValue;
-            }
-
-            if (specificValue.CompareTo(lowerLimitValue) >= 0)
-            {
-                return specificValue;
-            }
-
-            return lowerLimitValue;
         }
     }
 }

@@ -4,7 +4,7 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CopyCallContext : ICopyCallContext
+    public class CopyCallContext : ICopyCallContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyCallContext"/> class.

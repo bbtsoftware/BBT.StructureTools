@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using BBT.StructureTools;
     using BBT.StructureTools.Convert.Value;
     using BBT.StructureTools.Extension;
 
@@ -14,7 +15,7 @@
     {
         private readonly IConvertValue<TSourceValue, TTargetValue> convertValue;
         private Func<TSource, TSourceValue> sourceFunc;
-        private Expression<Func<TTarget, TTargetValue>> targetexpression;
+        private Expression<Func<TTarget, TTargetValue>> targetExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationCopyValueWithMapping{TSource, TTarget, TSourceValue, TTargetValue}" /> class.
@@ -22,7 +23,6 @@
         public OperationCopyValueWithMapping(IConvertValue<TSourceValue, TTargetValue> convertValue)
         {
             convertValue.NotNull(nameof(convertValue));
-
             this.convertValue = convertValue;
         }
 
@@ -35,7 +35,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             this.sourceFunc = sourceFunc;
-            this.targetexpression = targetExpression;
+            this.targetExpression = targetExpression;
         }
 
         /// <inheritdoc/>
@@ -49,7 +49,7 @@
 
             var sourceValue = this.sourceFunc.Invoke(source);
             var targetValue = this.convertValue.ConvertValue(sourceValue);
-            target.SetPropertyValue(this.targetexpression, targetValue);
+            target.SetPropertyValue(this.targetExpression, targetValue);
         }
     }
 }

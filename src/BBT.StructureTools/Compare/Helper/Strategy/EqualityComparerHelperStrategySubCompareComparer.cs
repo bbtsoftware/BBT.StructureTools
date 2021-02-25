@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BBT.StructureTools;
     using BBT.StructureTools.Compare;
     using BBT.StructureTools.Extension;
 
@@ -20,7 +21,6 @@
         public EqualityComparerHelperStrategySubCompareComparer(IComparer<T, TIntention> comparer)
         {
             comparer.NotNull(nameof(comparer));
-
             this.comparer = comparer;
             this.subComparerType = EqualityComparerHelperStrategyUtils.GetCompareType(comparer);
         }

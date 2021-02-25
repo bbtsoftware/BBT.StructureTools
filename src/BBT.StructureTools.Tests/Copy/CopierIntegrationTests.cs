@@ -14,17 +14,17 @@
     public class CopierIntegrationTests
     {
         #region members and setup
-        private readonly ICopy<ParentTestClass> testcandidate;
+        private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopierIntegrationTests()
         {
-            var kernel = TestIoContainer.Initialize();
+            var kernel = TestIocContainer.Initialize();
 
             kernel.Bind<ICopyRegistrations<IParentTestClass>>().To<TestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
             kernel.Bind<ICopyRegistrations<IChildTestClass2>>().To<ChildTestClass2CopyRegistrations>();
 
-            this.testcandidate = kernel.Get<ICopy<IParentTestClass>>();
+            this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
         #endregion
@@ -53,7 +53,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -94,7 +94,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>
@@ -108,7 +108,7 @@
             // Make sure original and copy of the parent object are not the same.
             testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
 
-            testClassParentOriginal.Children.Count().Should().Be(3);
+            testClassParentOriginal.Children.Count.Should().Be(3);
 
             foreach (var childhild in testClassParentCopyChildren)
             {
@@ -140,7 +140,7 @@
             var testClassParentCopy = new ParentTestClass();
 
             // Act
-            this.testcandidate.Copy(
+            this.testCandidate.Copy(
                 testClassParentOriginal,
                 testClassParentCopy,
                 new List<IBaseAdditionalProcessing>

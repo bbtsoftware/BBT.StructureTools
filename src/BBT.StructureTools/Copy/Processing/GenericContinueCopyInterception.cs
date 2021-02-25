@@ -3,7 +3,10 @@
     using System;
     using BBT.StructureTools.Extension;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implementation of <see cref="IGenericContinueCopyInterception{TType}"/>.
+    /// </summary>
+    /// <typeparam name="TType">type on which the interception applies.</typeparam>
     public class GenericContinueCopyInterception<TType> : IGenericContinueCopyInterception<TType>
         where TType : class
     {
@@ -15,16 +18,17 @@
         public GenericContinueCopyInterception(Func<TType, bool> shallCopyFunc)
         {
             shallCopyFunc.NotNull(nameof(shallCopyFunc));
-
             this.shallCopyFunc = shallCopyFunc;
         }
 
-        /// <inheritdoc/>
-        public bool ShallCopy(TType obj)
+        /// <summary>
+        /// <see cref="IGenericContinueCopyInterception{TType}.ShallCopy"/>.
+        /// </summary>
+        public bool ShallCopy(TType @object)
         {
-            obj.NotNull(nameof(obj));
+            @object.NotNull(nameof(@object));
 
-            return this.shallCopyFunc.Invoke(obj);
+            return this.shallCopyFunc.Invoke(@object);
         }
     }
 }
