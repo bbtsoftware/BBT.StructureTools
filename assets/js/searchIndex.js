@@ -39,1056 +39,6 @@ var searchModule = function() {
     a(
         {
             id:0,
-            title:"IIocResolver",
-            content:"IIocResolver",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Initialization/IIocResolver',
-            title:"IIocResolver",
-            description:""
-        }
-    );
-    a(
-        {
-            id:1,
-            title:"IOperationCopyValueIfSourceNotDefault",
-            content:"IOperationCopyValueIfSourceNotDefault",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueIfSourceNotDefault_3',
-            title:"IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:2,
-            title:"IOperationCopyValueWithSourceFilter",
-            content:"IOperationCopyValueWithSourceFilter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithSourceFilter_3',
-            title:"IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:3,
-            title:"ICopyHelperRegistrationFactory",
-            content:"ICopyHelperRegistrationFactory",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/ICopyHelperRegistrationFactory',
-            title:"ICopyHelperRegistrationFactory",
-            description:""
-        }
-    );
-    a(
-        {
-            id:4,
-            title:"IOperationCreateToOneHistWithCondition",
-            content:"IOperationCreateToOneHistWithCondition",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneHistWithCondition_8',
-            title:"IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:5,
-            title:"Copier",
-            content:"Copier",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1',
-            title:"Copier<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:6,
-            title:"IOperationCreateToOne",
-            content:"IOperationCreateToOne",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOne_6',
-            title:"IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:7,
-            title:"IOperationCopyValueIfTargetIsDefault",
-            content:"IOperationCopyValueIfTargetIsDefault",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueIfTargetIsDefault_3',
-            title:"IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:8,
-            title:"ICopyStrategyProvider",
-            content:"ICopyStrategyProvider",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/ICopyStrategyProvider_2',
-            title:"ICopyStrategyProvider<TStrategy, TCriterion>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:9,
-            title:"IConvert",
-            content:"IConvert",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvert_3',
-            title:"IConvert<TSourceClass, TTargetClass, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:10,
-            title:"GenericCreateByBaseAsCriterionStrategy",
-            content:"GenericCreateByBaseAsCriterionStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5',
-            title:"GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:11,
-            title:"ICreateConvertHelper",
-            content:"ICreateConvertHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_5',
-            title:"ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:12,
-            title:"ITemporalDataDescriptor",
-            content:"ITemporalDataDescriptor",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ITemporalDataDescriptor_1',
-            title:"ITemporalDataDescriptor<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:13,
-            title:"Comparer",
-            content:"Comparer",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/Comparer_2',
-            title:"Comparer<T, TIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:14,
-            title:"ICopyStrategy",
-            content:"ICopyStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/ICopyStrategy_1',
-            title:"ICopyStrategy<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:15,
-            title:"IConvertOperations",
-            content:"IConvertOperations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertOperations_2',
-            title:"IConvertOperations<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:16,
-            title:"IConvertInterception",
-            content:"IConvertInterception",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertInterception_2',
-            title:"IConvertInterception<TSoureClass, TTargetClass>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:17,
-            title:"StructureToolsException",
-            content:"StructureToolsException",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools/StructureToolsException',
-            title:"StructureToolsException",
-            description:""
-        }
-    );
-    a(
-        {
-            id:18,
-            title:"CopyCrossReferencedCounterPartDeterminationHelper",
-            content:"CopyCrossReferencedCounterPartDeterminationHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/CopyCrossReferencedCounterPartDeterminationHelper_2',
-            title:"CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:19,
-            title:"IBaseAdditionalProcessing",
-            content:"IBaseAdditionalProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing',
-            title:"IBaseAdditionalProcessing",
-            description:""
-        }
-    );
-    a(
-        {
-            id:20,
-            title:"IBaseConvertIntention",
-            content:"IBaseConvertIntention",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IBaseConvertIntention',
-            title:"IBaseConvertIntention",
-            description:""
-        }
-    );
-    a(
-        {
-            id:21,
-            title:"IOperationCopyValue",
-            content:"IOperationCopyValue",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValue_3',
-            title:"IOperationCopyValue<TSource, TTarget, TValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:22,
-            title:"IConvertRegistration",
-            content:"IConvertRegistration",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2',
-            title:"IConvertRegistration<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:23,
-            title:"ICopyPostProcessing",
-            content:"ICopyPostProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/ICopyPostProcessing_1',
-            title:"ICopyPostProcessing<TClassToCopy>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:24,
-            title:"IConvertPostProcessing",
-            content:"IConvertPostProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPostProcessing_2',
-            title:"IConvertPostProcessing<TSoureClass, TTargetClass>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:25,
-            title:"IComparerExclusion",
-            content:"IComparerExclusion",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparerExclusion',
-            title:"IComparerExclusion",
-            description:""
-        }
-    );
-    a(
-        {
-            id:26,
-            title:"ModelCollectingCopyPostProcessing",
-            content:"ModelCollectingCopyPostProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1',
-            title:"ModelCollectingCopyPostProcessing<TClassToCopy>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:27,
-            title:"GenericContinueCopyInterception",
-            content:"GenericContinueCopyInterception",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericContinueCopyInterception_1',
-            title:"GenericContinueCopyInterception<TType>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:28,
-            title:"IOperationConvertFromTargetOnDifferentLevels",
-            content:"IOperationConvertFromTargetOnDifferentLevels",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertFromTargetOnDifferentLevels_4',
-            title:"IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:29,
-            title:"GenericCopyPostProcessing",
-            content:"GenericCopyPostProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericCopyPostProcessing_1',
-            title:"GenericCopyPostProcessing<TClassToCopy>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:30,
-            title:"ICopyCallContext",
-            content:"ICopyCallContext",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyCallContext',
-            title:"ICopyCallContext",
-            description:""
-        }
-    );
-    a(
-        {
-            id:31,
-            title:"IProtocolConvertIntention",
-            content:"IProtocolConvertIntention",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IProtocolConvertIntention',
-            title:"IProtocolConvertIntention",
-            description:""
-        }
-    );
-    a(
-        {
-            id:32,
-            title:"IOperationCreateToManyWithRelation",
-            content:"IOperationCreateToManyWithRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithRelation_7',
-            title:"IOperationCreateToManyWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:33,
-            title:"ICopyMarker",
-            content:"ICopyMarker",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker/ICopyMarker',
-            title:"ICopyMarker",
-            description:""
-        }
-    );
-    a(
-        {
-            id:34,
-            title:"IOperationConditionalCreateToManyWithReverseRelation",
-            content:"IOperationConditionalCreateToManyWithReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConditionalCreateToManyWithReverseRelation_5',
-            title:"IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:35,
-            title:"IOperationCreateToManyGeneric",
-            content:"IOperationCreateToManyGeneric",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyGeneric_6',
-            title:"IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:36,
-            title:"IConvertPreProcessing",
-            content:"IConvertPreProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPreProcessing_2',
-            title:"IConvertPreProcessing<TSoureClass, TTargetClass>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:37,
-            title:"IOperationCopyValueWithMapping",
-            content:"IOperationCopyValueWithMapping",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithMapping_4',
-            title:"IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:38,
-            title:"CopyHelper",
-            content:"CopyHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/CopyHelper',
-            title:"CopyHelper",
-            description:""
-        }
-    );
-    a(
-        {
-            id:39,
-            title:"ITemporalDataHandler",
-            content:"ITemporalDataHandler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Provider/ITemporalDataHandler_1',
-            title:"ITemporalDataHandler<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:40,
-            title:"CreateInstanceOfTypeStrategy",
-            content:"CreateInstanceOfTypeStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/CreateInstanceOfTypeStrategy_3',
-            title:"CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:41,
-            title:"CompareHelper",
-            content:"CompareHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/CompareHelper',
-            title:"CompareHelper",
-            description:""
-        }
-    );
-    a(
-        {
-            id:42,
-            title:"EqualityComparerHelperStrategyUtils",
-            content:"EqualityComparerHelperStrategyUtils",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper.Strategy/EqualityComparerHelperStrategyUtils',
-            title:"EqualityComparerHelperStrategyUtils",
-            description:""
-        }
-    );
-    a(
-        {
-            id:43,
-            title:"IOperationConvertFromSourceOnDifferentLevels",
-            content:"IOperationConvertFromSourceOnDifferentLevels",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertFromSourceOnDifferentLevels_5',
-            title:"IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:44,
-            title:"IBaseComparerIntention",
-            content:"IBaseComparerIntention",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IBaseComparerIntention',
-            title:"IBaseComparerIntention",
-            description:""
-        }
-    );
-    a(
-        {
-            id:45,
-            title:"IOperationCopyFromHist",
-            content:"IOperationCopyFromHist",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyFromHist_5',
-            title:"IOperationCopyFromHist<TSource, TTarget, TSourceValue, TTemporalDataType, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:46,
-            title:"TypeOfComparerExclusion",
-            content:"TypeOfComparerExclusion",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion',
-            title:"TypeOfComparerExclusion",
-            description:""
-        }
-    );
-    a(
-        {
-            id:47,
-            title:"IConvertOperation",
-            content:"IConvertOperation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IConvertOperation_2',
-            title:"IConvertOperation<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:48,
-            title:"IDefaultValueProvider",
-            content:"IDefaultValueProvider",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Provider/IDefaultValueProvider',
-            title:"IDefaultValueProvider",
-            description:""
-        }
-    );
-    a(
-        {
-            id:49,
-            title:"IEqualityComparerHelperRegistrationFactory",
-            content:"IEqualityComparerHelperRegistrationFactory",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/IEqualityComparerHelperRegistrationFactory',
-            title:"IEqualityComparerHelperRegistrationFactory",
-            description:""
-        }
-    );
-    a(
-        {
-            id:50,
-            title:"IConvertRegistrations",
-            content:"IConvertRegistrations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistrations_3',
-            title:"IConvertRegistrations<TSource, TTarget, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:51,
-            title:"IComparer",
-            content:"IComparer",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparer_2',
-            title:"IComparer<TModelToCompare, TComparerIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:52,
-            title:"ICopyHelperRegistration",
-            content:"ICopyHelperRegistration",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/ICopyHelperRegistration_1',
-            title:"ICopyHelperRegistration<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:53,
-            title:"ModelCollectingConvertPostProcessing",
-            content:"ModelCollectingConvertPostProcessing",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ModelCollectingConvertPostProcessing_2',
-            title:"ModelCollectingConvertPostProcessing<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:54,
-            title:"GenericCopyStrategy",
-            content:"GenericCopyStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/GenericCopyStrategy_3',
-            title:"GenericCopyStrategy<TBase, TDerived, TConcrete>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:55,
-            title:"CopyCallContext",
-            content:"CopyCallContext",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/CopyCallContext',
-            title:"CopyCallContext",
-            description:""
-        }
-    );
-    a(
-        {
-            id:56,
-            title:"ValueConverter",
-            content:"ValueConverter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/ValueConverter_2',
-            title:"ValueConverter<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:57,
-            title:"ICreateInstanceOfTypeStrategy",
-            content:"ICreateInstanceOfTypeStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateInstanceOfTypeStrategy_1',
-            title:"ICreateInstanceOfTypeStrategy<TBaseTypeIntf>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:58,
-            title:"IConvertValue",
-            content:"IConvertValue",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValue_2',
-            title:"IConvertValue<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:59,
-            title:"IConvertWithReverseRelation",
-            content:"IConvertWithReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertWithReverseRelation_4',
-            title:"IConvertWithReverseRelation<TSourceClass, TTargetClass, TReverseRelation, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:60,
-            title:"IValueConvertMapping",
-            content:"IValueConvertMapping",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IValueConvertMapping_2',
-            title:"IValueConvertMapping<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:61,
-            title:"IOperationCopyFromMany",
-            content:"IOperationCopyFromMany",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyFromMany_4',
-            title:"IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:62,
-            title:"IOperationMergeLevel",
-            content:"IOperationMergeLevel",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationMergeLevel_7',
-            title:"IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:63,
-            title:"ICompareRegistrations",
-            content:"ICompareRegistrations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2',
-            title:"ICompareRegistrations<TModelToCompare, TCompareIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:64,
-            title:"IOperationCreateToManyWithSourceFilterAndReverseRelation",
-            content:"IOperationCreateToManyWithSourceFilterAndReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithSourceFilterAndReverseRelation_7',
-            title:"IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:65,
-            title:"IOperationSubCopy",
-            content:"IOperationSubCopy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationSubCopy_3',
-            title:"IOperationSubCopy<TSource, TTarget, TValue>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:66,
-            title:"IConvertStrategyProvider",
-            content:"IConvertStrategyProvider",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IConvertStrategyProvider_3',
-            title:"IConvertStrategyProvider<TSource, TTarget, TIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:67,
-            title:"ICreateByBaseAsCriterionStrategy",
-            content:"ICreateByBaseAsCriterionStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateByBaseAsCriterionStrategy_2',
-            title:"ICreateByBaseAsCriterionStrategy<TBaseInterface, TInterface>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:68,
-            title:"IOperationCreateToOneWithReverseRelation",
-            content:"IOperationCreateToOneWithReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneWithReverseRelation_6',
-            title:"IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:69,
-            title:"IConvertValueRegistrations",
-            content:"IConvertValueRegistrations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValueRegistrations_2',
-            title:"IConvertValueRegistrations<TSource, TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:70,
-            title:"IOperationCreateFromSourceWithReverseRelation",
-            content:"IOperationCreateFromSourceWithReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateFromSourceWithReverseRelation_5',
-            title:"IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:71,
-            title:"IOperationCreateToManyWithReverseRelation",
-            content:"IOperationCreateToManyWithReverseRelation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithReverseRelation_7',
-            title:"IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:72,
-            title:"ICopyHelper",
-            content:"ICopyHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyHelper',
-            title:"ICopyHelper",
-            description:""
-        }
-    );
-    a(
-        {
-            id:73,
-            title:"PropertyComparerExclusion",
-            content:"PropertyComparerExclusion",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1',
-            title:"PropertyComparerExclusion<TModelInterface>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:74,
-            title:"ICopyOperation",
-            content:"ICopyOperation",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Operation/ICopyOperation_1',
-            title:"ICopyOperation<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:75,
             title:"GenericConvertPostProcessing",
             content:"GenericConvertPostProcessing",
             description:'',
@@ -1102,119 +52,105 @@ var searchModule = function() {
     );
     a(
         {
-            id:76,
-            title:"ModelDateTimeComparer",
-            content:"ModelDateTimeComparer",
+            id:1,
+            title:"ICompareHelper",
+            content:"ICompareHelper",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelDateTimeComparer_1',
-            title:"ModelDateTimeComparer<TModel>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareHelper',
+            title:"ICompareHelper",
             description:""
         }
     );
     a(
         {
-            id:77,
-            title:"ModelIntComparer",
-            content:"ModelIntComparer",
+            id:2,
+            title:"IOperationConvertFromSourceOnDifferentLevels",
+            content:"IOperationConvertFromSourceOnDifferentLevels",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1',
-            title:"ModelIntComparer<TModel>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertFromSourceOnDifferentLevels_5',
+            title:"IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>",
             description:""
         }
     );
     a(
         {
-            id:78,
-            title:"ISourceConvertStrategy",
-            content:"ISourceConvertStrategy",
+            id:3,
+            title:"IConvertOperations",
+            content:"IConvertOperations",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/ISourceConvertStrategy_3',
-            title:"ISourceConvertStrategy<TBaseSource, TBaseTarget, TIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertOperations_2',
+            title:"IConvertOperations<TSource, TTarget>",
             description:""
         }
     );
     a(
         {
-            id:79,
-            title:"ICreateConvertHelper",
-            content:"ICreateConvertHelper",
+            id:4,
+            title:"IConvertOperation",
+            content:"IConvertOperation",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_4',
-            title:"ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IConvertOperation_2',
+            title:"IConvertOperation<TSource, TTarget>",
             description:""
         }
     );
     a(
         {
-            id:80,
-            title:"GenericContinueConvertInterception",
-            content:"GenericContinueConvertInterception",
+            id:5,
+            title:"ModelCollectingCopyPostProcessing",
+            content:"ModelCollectingCopyPostProcessing",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/GenericContinueConvertInterception_2',
-            title:"GenericContinueConvertInterception<TSoureClass, TTargetClass>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ModelCollectingCopyPostProcessing_1',
+            title:"ModelCollectingCopyPostProcessing<TClassToCopy>",
             description:""
         }
     );
     a(
         {
-            id:81,
-            title:"ICopyRegistrationMarker",
-            content:"ICopyRegistrationMarker",
+            id:6,
+            title:"ICopy",
+            content:"ICopy",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker/ICopyRegistrationMarker',
-            title:"ICopyRegistrationMarker",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopy_1',
+            title:"ICopy<TClassToCopy>",
             description:""
         }
     );
     a(
         {
-            id:82,
-            title:"IOperationCopyValueWithUpperLimit",
-            content:"IOperationCopyValueWithUpperLimit",
+            id:7,
+            title:"IConvertValueRegistrations",
+            content:"IConvertValueRegistrations",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithUpperLimit_3',
-            title:"IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValueRegistrations_2',
+            title:"IConvertValueRegistrations<TSource, TTarget>",
             description:""
         }
     );
     a(
         {
-            id:83,
-            title:"ITargetConvertStrategy",
-            content:"ITargetConvertStrategy",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/ITargetConvertStrategy_3',
-            title:"ITargetConvertStrategy<TBaseSource, TBaseTarget, TIntention>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:84,
+            id:8,
             title:"IEqualityComparerHelperRegistration",
             content:"IEqualityComparerHelperRegistration",
             description:'',
@@ -1228,21 +164,49 @@ var searchModule = function() {
     );
     a(
         {
-            id:85,
-            title:"IOperationConditionalCreateFromSourceWithReverseRelation",
-            content:"IOperationConditionalCreateFromSourceWithReverseRelation",
+            id:9,
+            title:"IOperationCopyValueWithMapping",
+            content:"IOperationCopyValueWithMapping",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConditionalCreateFromSourceWithReverseRelation_5',
-            title:"IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithMapping_4',
+            title:"IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>",
             description:""
         }
     );
     a(
         {
-            id:86,
+            id:10,
+            title:"IOperationConvertFromTargetOnDifferentLevels",
+            content:"IOperationConvertFromTargetOnDifferentLevels",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertFromTargetOnDifferentLevels_4',
+            title:"IOperationConvertFromTargetOnDifferentLevels<TSource, TTarget, TSourceValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:11,
+            title:"ICompareRegistrations",
+            content:"ICompareRegistrations",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareRegistrations_2',
+            title:"ICompareRegistrations<TModelToCompare, TCompareIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:12,
             title:"SubInterfaceComparerExclusion",
             content:"SubInterfaceComparerExclusion",
             description:'',
@@ -1256,77 +220,49 @@ var searchModule = function() {
     );
     a(
         {
-            id:87,
-            title:"GenericComparePostProcessing",
-            content:"GenericComparePostProcessing",
+            id:13,
+            title:"GenericCopyPostProcessing",
+            content:"GenericCopyPostProcessing",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2',
-            title:"GenericComparePostProcessing<T, TIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericCopyPostProcessing_1',
+            title:"GenericCopyPostProcessing<TClassToCopy>",
             description:""
         }
     );
     a(
         {
-            id:88,
-            title:"IOperationCopyValueWithLookUp",
-            content:"IOperationCopyValueWithLookUp",
+            id:14,
+            title:"IOperationMergeLevel",
+            content:"IOperationMergeLevel",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithLookUp_3',
-            title:"IOperationCopyValueWithLookUp<TSource, TTarget, TValue>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationMergeLevel_7',
+            title:"IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>",
             description:""
         }
     );
     a(
         {
-            id:89,
-            title:"IOperationSourceSubConvert",
-            content:"IOperationSourceSubConvert",
+            id:15,
+            title:"ICopyRegistrationMarker",
+            content:"ICopyRegistrationMarker",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationSourceSubConvert_4',
-            title:"IOperationSourceSubConvert<TSource, TTarget, TSourceValue, TConvertIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker/ICopyRegistrationMarker',
+            title:"ICopyRegistrationMarker",
             description:""
         }
     );
     a(
         {
-            id:90,
-            title:"IEqualityComparerHelperOperations",
-            content:"IEqualityComparerHelperOperations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/IEqualityComparerHelperOperations_1',
-            title:"IEqualityComparerHelperOperations<TModel>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:91,
-            title:"IFlatComparer",
-            content:"IFlatComparer",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IFlatComparer',
-            title:"IFlatComparer",
-            description:""
-        }
-    );
-    a(
-        {
-            id:92,
+            id:16,
             title:"IOperationSubConvert",
             content:"IOperationSubConvert",
             description:'',
@@ -1340,7 +276,399 @@ var searchModule = function() {
     );
     a(
         {
-            id:93,
+            id:17,
+            title:"CopyHelper",
+            content:"CopyHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/CopyHelper',
+            title:"CopyHelper",
+            description:""
+        }
+    );
+    a(
+        {
+            id:18,
+            title:"IOperationCreateToOne",
+            content:"IOperationCreateToOne",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOne_6',
+            title:"IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:19,
+            title:"ICopyHelper",
+            content:"ICopyHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyHelper',
+            title:"ICopyHelper",
+            description:""
+        }
+    );
+    a(
+        {
+            id:20,
+            title:"IOperationCreateToOneWithRelation",
+            content:"IOperationCreateToOneWithRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneWithRelation_7',
+            title:"IOperationCreateToOneWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:21,
+            title:"ValueConverter",
+            content:"ValueConverter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/ValueConverter_2',
+            title:"ValueConverter<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:22,
+            title:"TypeOfComparerExclusion",
+            content:"TypeOfComparerExclusion",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/TypeOfComparerExclusion',
+            title:"TypeOfComparerExclusion",
+            description:""
+        }
+    );
+    a(
+        {
+            id:23,
+            title:"IBaseConvertIntention",
+            content:"IBaseConvertIntention",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IBaseConvertIntention',
+            title:"IBaseConvertIntention",
+            description:""
+        }
+    );
+    a(
+        {
+            id:24,
+            title:"ModelIntComparer",
+            content:"ModelIntComparer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelIntComparer_1',
+            title:"ModelIntComparer<TModel>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:25,
+            title:"ITemporalDataDescriptor",
+            content:"ITemporalDataDescriptor",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ITemporalDataDescriptor_1',
+            title:"ITemporalDataDescriptor<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:26,
+            title:"ITemporalDataHandler",
+            content:"ITemporalDataHandler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Provider/ITemporalDataHandler_1',
+            title:"ITemporalDataHandler<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:27,
+            title:"IConvertStrategyProvider",
+            content:"IConvertStrategyProvider",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IConvertStrategyProvider_3',
+            title:"IConvertStrategyProvider<TSource, TTarget, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:28,
+            title:"IConvertRegistration",
+            content:"IConvertRegistration",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistration_2',
+            title:"IConvertRegistration<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:29,
+            title:"IOperationCopyFromHist",
+            content:"IOperationCopyFromHist",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyFromHist_5',
+            title:"IOperationCopyFromHist<TSource, TTarget, TSourceValue, TTemporalDataType, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:30,
+            title:"IConvertValueRegistration",
+            content:"IConvertValueRegistration",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValueRegistration_2',
+            title:"IConvertValueRegistration<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:31,
+            title:"IOperationCopyValueIfTargetIsDefault",
+            content:"IOperationCopyValueIfTargetIsDefault",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueIfTargetIsDefault_3',
+            title:"IOperationCopyValueIfTargetIsDefault<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:32,
+            title:"IOperationCopyValueIfSourceNotDefault",
+            content:"IOperationCopyValueIfSourceNotDefault",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueIfSourceNotDefault_3',
+            title:"IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:33,
+            title:"EqualityComparerHelperRegistrationFactory",
+            content:"EqualityComparerHelperRegistrationFactory",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/EqualityComparerHelperRegistrationFactory',
+            title:"EqualityComparerHelperRegistrationFactory",
+            description:""
+        }
+    );
+    a(
+        {
+            id:34,
+            title:"IComparer",
+            content:"IComparer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparer_2',
+            title:"IComparer<TModelToCompare, TComparerIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:35,
+            title:"IConvertHelper",
+            content:"IConvertHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertHelper',
+            title:"IConvertHelper",
+            description:""
+        }
+    );
+    a(
+        {
+            id:36,
+            title:"GenericContinueCopyInterception",
+            content:"GenericContinueCopyInterception",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/GenericContinueCopyInterception_1',
+            title:"GenericContinueCopyInterception<TType>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:37,
+            title:"ModelCollectingConvertPostProcessing",
+            content:"ModelCollectingConvertPostProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ModelCollectingConvertPostProcessing_2',
+            title:"ModelCollectingConvertPostProcessing<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:38,
+            title:"IOperationCreateFromSourceWithReverseRelation",
+            content:"IOperationCreateFromSourceWithReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateFromSourceWithReverseRelation_5',
+            title:"IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:39,
+            title:"ICopyStrategy",
+            content:"ICopyStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/ICopyStrategy_1',
+            title:"ICopyStrategy<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:40,
+            title:"ITargetConvertStrategy",
+            content:"ITargetConvertStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/ITargetConvertStrategy_3',
+            title:"ITargetConvertStrategy<TBaseSource, TBaseTarget, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:41,
+            title:"IOperationCreateToManyWithSourceFilterAndReverseRelation",
+            content:"IOperationCreateToManyWithSourceFilterAndReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithSourceFilterAndReverseRelation_7',
+            title:"IOperationCreateToManyWithSourceFilterAndReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:42,
+            title:"Comparer",
+            content:"Comparer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/Comparer_2',
+            title:"Comparer<T, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:43,
+            title:"ICopyCallContext",
+            content:"ICopyCallContext",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyCallContext',
+            title:"ICopyCallContext",
+            description:""
+        }
+    );
+    a(
+        {
+            id:44,
+            title:"IOperationCreateToOneWithReverseRelation",
+            content:"IOperationCreateToOneWithReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneWithReverseRelation_6',
+            title:"IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:45,
             title:"GenericTargetConvertStrategy",
             content:"GenericTargetConvertStrategy",
             description:'',
@@ -1354,21 +682,63 @@ var searchModule = function() {
     );
     a(
         {
-            id:94,
-            title:"IocHandler",
-            content:"IocHandler",
+            id:46,
+            title:"GenericCopyStrategy",
+            content:"GenericCopyStrategy",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Initialization/IocHandler',
-            title:"IocHandler",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/GenericCopyStrategy_3',
+            title:"GenericCopyStrategy<TBase, TDerived, TConcrete>",
             description:""
         }
     );
     a(
         {
-            id:95,
+            id:47,
+            title:"ICopyMarker",
+            content:"ICopyMarker",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Marker/ICopyMarker',
+            title:"ICopyMarker",
+            description:""
+        }
+    );
+    a(
+        {
+            id:48,
+            title:"ICreateInstanceOfTypeStrategy",
+            content:"ICreateInstanceOfTypeStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateInstanceOfTypeStrategy_1',
+            title:"ICreateInstanceOfTypeStrategy<TBaseTypeIntf>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:49,
+            title:"Copier",
+            content:"Copier",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/Copier_1',
+            title:"Copier<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:50,
             title:"GenericSourceConvertStrategy",
             content:"GenericSourceConvertStrategy",
             description:'',
@@ -1382,7 +752,147 @@ var searchModule = function() {
     );
     a(
         {
-            id:96,
+            id:51,
+            title:"ICopyRegistrations",
+            content:"ICopyRegistrations",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyRegistrations_1',
+            title:"ICopyRegistrations<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:52,
+            title:"ICopyWithParent",
+            content:"ICopyWithParent",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2',
+            title:"ICopyWithParent<TClassToCopy, TParent>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:53,
+            title:"IOperationTargetSubConvert",
+            content:"IOperationTargetSubConvert",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationTargetSubConvert_4',
+            title:"IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:54,
+            title:"ICopyPostProcessing",
+            content:"ICopyPostProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Processing/ICopyPostProcessing_1',
+            title:"ICopyPostProcessing<TClassToCopy>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:55,
+            title:"IProtocolConvertIntention",
+            content:"IProtocolConvertIntention",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IProtocolConvertIntention',
+            title:"IProtocolConvertIntention",
+            description:""
+        }
+    );
+    a(
+        {
+            id:56,
+            title:"GenericComparePostProcessing",
+            content:"GenericComparePostProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/GenericComparePostProcessing_2',
+            title:"GenericComparePostProcessing<T, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:57,
+            title:"IOperationConditionalCreateToManyWithReverseRelation",
+            content:"IOperationConditionalCreateToManyWithReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConditionalCreateToManyWithReverseRelation_5',
+            title:"IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:58,
+            title:"CompareHelper",
+            content:"CompareHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/CompareHelper',
+            title:"CompareHelper",
+            description:""
+        }
+    );
+    a(
+        {
+            id:59,
+            title:"IOperationCopyFromMany",
+            content:"IOperationCopyFromMany",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyFromMany_4',
+            title:"IOperationCopyFromMany<TSource, TTarget, TSourceValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:60,
+            title:"IOperationCreateToManyWithReverseRelation",
+            content:"IOperationCreateToManyWithReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithReverseRelation_7',
+            title:"IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:61,
             title:"ModelDateComparer",
             content:"ModelDateComparer",
             description:'',
@@ -1396,7 +906,105 @@ var searchModule = function() {
     );
     a(
         {
-            id:97,
+            id:62,
+            title:"ICopyHelperRegistration",
+            content:"ICopyHelperRegistration",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/ICopyHelperRegistration_1',
+            title:"ICopyHelperRegistration<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:63,
+            title:"IFlatComparer",
+            content:"IFlatComparer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IFlatComparer',
+            title:"IFlatComparer",
+            description:""
+        }
+    );
+    a(
+        {
+            id:64,
+            title:"IOperationSourceSubConvert",
+            content:"IOperationSourceSubConvert",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationSourceSubConvert_4',
+            title:"IOperationSourceSubConvert<TSource, TTarget, TSourceValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:65,
+            title:"ISourceConvertStrategy",
+            content:"ISourceConvertStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/ISourceConvertStrategy_3',
+            title:"ISourceConvertStrategy<TBaseSource, TBaseTarget, TIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:66,
+            title:"IOperationCreateToManyWithRelation",
+            content:"IOperationCreateToManyWithRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyWithRelation_7',
+            title:"IOperationCreateToManyWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:67,
+            title:"IOperationSubCopy",
+            content:"IOperationSubCopy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationSubCopy_3',
+            title:"IOperationSubCopy<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:68,
+            title:"CopyCrossReferencedCounterPartDeterminationHelper",
+            content:"CopyCrossReferencedCounterPartDeterminationHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/CopyCrossReferencedCounterPartDeterminationHelper_2',
+            title:"CopyCrossReferencedCounterPartDeterminationHelper<TCrossReferencedModel, TReferencingModel>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:69,
             title:"IOperationConvertPostProcessing",
             content:"IOperationConvertPostProcessing",
             description:'',
@@ -1405,6 +1013,398 @@ var searchModule = function() {
         {
             url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertPostProcessing_2',
             title:"IOperationConvertPostProcessing<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:70,
+            title:"IOperationCopyValueWithSourceFilter",
+            content:"IOperationCopyValueWithSourceFilter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithSourceFilter_3',
+            title:"IOperationCopyValueWithSourceFilter<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:71,
+            title:"IOperationCopyValueWithUpperLimit",
+            content:"IOperationCopyValueWithUpperLimit",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithUpperLimit_3',
+            title:"IOperationCopyValueWithUpperLimit<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:72,
+            title:"IBaseAdditionalProcessing",
+            content:"IBaseAdditionalProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools/IBaseAdditionalProcessing',
+            title:"IBaseAdditionalProcessing",
+            description:""
+        }
+    );
+    a(
+        {
+            id:73,
+            title:"ICreateConvertHelper",
+            content:"ICreateConvertHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_5',
+            title:"ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:74,
+            title:"IValueConvertMapping",
+            content:"IValueConvertMapping",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IValueConvertMapping_2',
+            title:"IValueConvertMapping<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:75,
+            title:"ICopyHelperRegistrationFactory",
+            content:"ICopyHelperRegistrationFactory",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Helper/ICopyHelperRegistrationFactory',
+            title:"ICopyHelperRegistrationFactory",
+            description:""
+        }
+    );
+    a(
+        {
+            id:76,
+            title:"IConvertRegistrations",
+            content:"IConvertRegistrations",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertRegistrations_3',
+            title:"IConvertRegistrations<TSource, TTarget, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:77,
+            title:"ICreateByBaseAsCriterionStrategy",
+            content:"ICreateByBaseAsCriterionStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/ICreateByBaseAsCriterionStrategy_2',
+            title:"ICreateByBaseAsCriterionStrategy<TBaseInterface, TInterface>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:78,
+            title:"IDefaultValueProvider",
+            content:"IDefaultValueProvider",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Provider/IDefaultValueProvider',
+            title:"IDefaultValueProvider",
+            description:""
+        }
+    );
+    a(
+        {
+            id:79,
+            title:"IocHandler",
+            content:"IocHandler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Initialization/IocHandler',
+            title:"IocHandler",
+            description:""
+        }
+    );
+    a(
+        {
+            id:80,
+            title:"IConvert",
+            content:"IConvert",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvert_3',
+            title:"IConvert<TSourceClass, TTargetClass, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:81,
+            title:"ModelDateTimeComparer",
+            content:"ModelDateTimeComparer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ModelDateTimeComparer_1',
+            title:"ModelDateTimeComparer<TModel>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:82,
+            title:"IOperationCopyValue",
+            content:"IOperationCopyValue",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValue_3',
+            title:"IOperationCopyValue<TSource, TTarget, TValue>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:83,
+            title:"IOperationCreateToManyGeneric",
+            content:"IOperationCreateToManyGeneric",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToManyGeneric_6',
+            title:"IOperationCreateToManyGeneric<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:84,
+            title:"GenericCreateByBaseAsCriterionStrategy",
+            content:"GenericCreateByBaseAsCriterionStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/GenericCreateByBaseAsCriterionStrategy_5',
+            title:"GenericCreateByBaseAsCriterionStrategy<TBaseInterface, TCriterion, TBaseTargetInterface, TInterface, TImpl>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:85,
+            title:"IOperationConvertToMany",
+            content:"IOperationConvertToMany",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertToMany_5',
+            title:"IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:86,
+            title:"GenericContinueConvertInterception",
+            content:"GenericContinueConvertInterception",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/GenericContinueConvertInterception_2',
+            title:"GenericContinueConvertInterception<TSoureClass, TTargetClass>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:87,
+            title:"IConvertPreProcessing",
+            content:"IConvertPreProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPreProcessing_2',
+            title:"IConvertPreProcessing<TSoureClass, TTargetClass>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:88,
+            title:"StructureToolsException",
+            content:"StructureToolsException",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools/StructureToolsException',
+            title:"StructureToolsException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:89,
+            title:"ICopyStrategyProvider",
+            content:"ICopyStrategyProvider",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Strategy/ICopyStrategyProvider_2',
+            title:"ICopyStrategyProvider<TStrategy, TCriterion>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:90,
+            title:"IEqualityComparerHelperRegistrationFactory",
+            content:"IEqualityComparerHelperRegistrationFactory",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/IEqualityComparerHelperRegistrationFactory',
+            title:"IEqualityComparerHelperRegistrationFactory",
+            description:""
+        }
+    );
+    a(
+        {
+            id:91,
+            title:"IComparerExclusion",
+            content:"IComparerExclusion",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IComparerExclusion',
+            title:"IComparerExclusion",
+            description:""
+        }
+    );
+    a(
+        {
+            id:92,
+            title:"ICopyOperation",
+            content:"ICopyOperation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy.Operation/ICopyOperation_1',
+            title:"ICopyOperation<T>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:93,
+            title:"IConvertPostProcessing",
+            content:"IConvertPostProcessing",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertPostProcessing_2',
+            title:"IConvertPostProcessing<TSoureClass, TTargetClass>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:94,
+            title:"IConvertValue",
+            content:"IConvertValue",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValue_2',
+            title:"IConvertValue<TSource, TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:95,
+            title:"IEqualityComparerHelperOperations",
+            content:"IEqualityComparerHelperOperations",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/IEqualityComparerHelperOperations_1',
+            title:"IEqualityComparerHelperOperations<TModel>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:96,
+            title:"ICreateConvertHelper",
+            content:"ICreateConvertHelper",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/ICreateConvertHelper_4',
+            title:"ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:97,
+            title:"EqualityComparerHelperStrategyUtils",
+            content:"EqualityComparerHelperStrategyUtils",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper.Strategy/EqualityComparerHelperStrategyUtils',
+            title:"EqualityComparerHelperStrategyUtils",
             description:""
         }
     );
@@ -1425,48 +1425,76 @@ var searchModule = function() {
     a(
         {
             id:99,
-            title:"ICopy",
-            content:"ICopy",
+            title:"IOperationCopyValueWithLookUp",
+            content:"IOperationCopyValueWithLookUp",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopy_1',
-            title:"ICopy<TClassToCopy>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCopyValueWithLookUp_3',
+            title:"IOperationCopyValueWithLookUp<TSource, TTarget, TValue>",
             description:""
         }
     );
     a(
         {
             id:100,
-            title:"IOperationConvertToMany",
-            content:"IOperationConvertToMany",
+            title:"PropertyComparerExclusion",
+            content:"PropertyComparerExclusion",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConvertToMany_5',
-            title:"IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Exclusions/PropertyComparerExclusion_1',
+            title:"PropertyComparerExclusion<TModelInterface>",
             description:""
         }
     );
     a(
         {
             id:101,
-            title:"IConvertValueRegistration",
-            content:"IConvertValueRegistration",
+            title:"IOperationCreateToOneHistWithCondition",
+            content:"IOperationCreateToOneHistWithCondition",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Value/IConvertValueRegistration_2',
-            title:"IConvertValueRegistration<TSource, TTarget>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneHistWithCondition_8',
+            title:"IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>",
             description:""
         }
     );
     a(
         {
             id:102,
+            title:"IConvertWithReverseRelation",
+            content:"IConvertWithReverseRelation",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertWithReverseRelation_4',
+            title:"IConvertWithReverseRelation<TSourceClass, TTargetClass, TReverseRelation, TConvertIntention>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:103,
+            title:"CreateInstanceOfTypeStrategy",
+            content:"CreateInstanceOfTypeStrategy",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Strategy/CreateInstanceOfTypeStrategy_3',
+            title:"CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:104,
             title:"GenericConvertPreProcessing",
             content:"GenericConvertPreProcessing",
             description:'',
@@ -1480,99 +1508,71 @@ var searchModule = function() {
     );
     a(
         {
-            id:103,
-            title:"ICopyRegistrations",
-            content:"ICopyRegistrations",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyRegistrations_1',
-            title:"ICopyRegistrations<T>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:104,
-            title:"ICompareHelper",
-            content:"ICompareHelper",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/ICompareHelper',
-            title:"ICompareHelper",
-            description:""
-        }
-    );
-    a(
-        {
             id:105,
-            title:"IConvertHelper",
-            content:"IConvertHelper",
+            title:"CopyCallContext",
+            content:"CopyCallContext",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertHelper',
-            title:"IConvertHelper",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/CopyCallContext',
+            title:"CopyCallContext",
             description:""
         }
     );
     a(
         {
             id:106,
-            title:"ICopyWithParent",
-            content:"ICopyWithParent",
+            title:"IIocResolver",
+            content:"IIocResolver",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Copy/ICopyWithParent_2',
-            title:"ICopyWithParent<TClassToCopy, TParent>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Initialization/IIocResolver',
+            title:"IIocResolver",
             description:""
         }
     );
     a(
         {
             id:107,
-            title:"IOperationTargetSubConvert",
-            content:"IOperationTargetSubConvert",
+            title:"IBaseComparerIntention",
+            content:"IBaseComparerIntention",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationTargetSubConvert_4',
-            title:"IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare/IBaseComparerIntention',
+            title:"IBaseComparerIntention",
             description:""
         }
     );
     a(
         {
             id:108,
-            title:"EqualityComparerHelperRegistrationFactory",
-            content:"EqualityComparerHelperRegistrationFactory",
+            title:"IConvertInterception",
+            content:"IConvertInterception",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Compare.Helper/EqualityComparerHelperRegistrationFactory',
-            title:"EqualityComparerHelperRegistrationFactory",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert/IConvertInterception_2',
+            title:"IConvertInterception<TSoureClass, TTargetClass>",
             description:""
         }
     );
     a(
         {
             id:109,
-            title:"IOperationCreateToOneWithRelation",
-            content:"IOperationCreateToOneWithRelation",
+            title:"IOperationConditionalCreateFromSourceWithReverseRelation",
+            content:"IOperationConditionalCreateFromSourceWithReverseRelation",
             description:'',
             tags:''
         },
         {
-            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationCreateToOneWithRelation_7',
-            title:"IOperationCreateToOneWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>",
+            url:'/BBT.StructureTools/api/BBT.StructureTools.Convert.Strategy/IOperationConditionalCreateFromSourceWithReverseRelation_5',
+            title:"IOperationConditionalCreateFromSourceWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>",
             description:""
         }
     );
