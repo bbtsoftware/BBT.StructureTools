@@ -43,6 +43,7 @@
         public void Execute(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
             var sourceChildren = this.source.Invoke(source);
+            var childTargets = new List<TBaseTarget>();
             foreach (var sourceChildElement in sourceChildren)
             {
                 var instanceCreationStrategy = this.createInstanceStrategyProvider.GetStrategy(sourceChildElement);
@@ -53,10 +54,12 @@
 
                 // set reverse relation
                 childTarget.SetPropertyValue(this.reverseRelationOnTarget, target);
-
-                // Add to target collection
-                this.targetParentExpression.Compile().Invoke(target).Add(childTarget);
+                childTargets.Add(childTarget);
             }
+
+            target.AddRangeFilterNullValues(
+                this.targetParentExpression,
+                childTargets);
         }
 
         /// <inheritdoc/>

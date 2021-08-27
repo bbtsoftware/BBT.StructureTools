@@ -8,6 +8,8 @@
     /// </summary>
     public class TargetTreeLeaf
     {
+        private TargetTree targetTree;
+
         /// <summary>
         /// Gets the Id.
         /// </summary>
@@ -16,7 +18,22 @@
         /// <summary>
         /// Gets or sets TargetTree.
         /// </summary>
-        public TargetTree TargetTree { get; set; }
+        public TargetTree TargetTree
+        {
+            get
+            {
+                return this.targetTree;
+            }
+
+            set
+            {
+                this.targetTree = value;
+                if (value != null)
+                {
+                    value.TargetLeafs.Add(this);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets OriginLeaf.

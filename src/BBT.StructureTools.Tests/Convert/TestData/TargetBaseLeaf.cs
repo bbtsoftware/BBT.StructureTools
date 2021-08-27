@@ -10,9 +10,26 @@ namespace BBT.StructureTools.Tests.Convert.TestData
     /// </summary>
     public class TargetBaseLeaf
     {
+        private TargetRoot root;
+
         /// <summary>
-        /// Gets or sets TargetRoot.
+        /// Gets or sets Root.
         /// </summary>
-        public TargetRoot TargetRoot { get; set; }
+        public TargetRoot TargetRoot
+        {
+            get
+            {
+                return this.root;
+            }
+
+            set
+            {
+                this.root = value;
+                if (value != null)
+                {
+                    value.TargetLeafs.Add(this);
+                }
+            }
+        }
     }
 }
