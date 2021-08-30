@@ -24,7 +24,6 @@
             {
                 return this.targetTree;
             }
-
             set
             {
                 this.targetTree = value;
