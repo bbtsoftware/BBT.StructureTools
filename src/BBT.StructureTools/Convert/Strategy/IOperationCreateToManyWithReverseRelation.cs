@@ -13,16 +13,14 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">See link above.</typeparam>
     /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
     /// <typeparam name="TReverseRelation">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
+    public interface IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
@@ -35,6 +33,6 @@
         void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper);
     }
 }

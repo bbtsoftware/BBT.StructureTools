@@ -8,19 +8,18 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
-        : IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
+    internal class OperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>
+        : IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
@@ -35,7 +34,7 @@
         private Func<TSource, TTarget, TRelation> relationFunc;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToManyWithRelationInclTargetArg{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TRelation,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToManyWithRelationInclTargetArg{TSource,TTarget,TSourceValue,TTargetValue,TRelation,TConvertIntention}" /> class.
         /// </summary>
         public OperationCreateToManyWithRelationInclTargetArg(
             IConvertHelper convertHelper)
@@ -50,7 +49,7 @@
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

@@ -8,19 +8,18 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
-        : IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>
+    internal class OperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TConvertIntention>
+        : IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TConvertIntention>
         where TSource : class
         where TTarget : class, TReverseRelation
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
@@ -33,7 +32,7 @@
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToManyWithReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TReverseRelation,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToManyWithReverseRelation{TSource,TTarget,TSourceValue,TTargetValue,TReverseRelation,TConvertIntention}" /> class.
         /// </summary>
         public OperationCreateToManyWithReverseRelation(
             IConvertHelper convertHelper)
@@ -47,7 +46,7 @@
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

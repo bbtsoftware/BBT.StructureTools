@@ -6,6 +6,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     using System.Linq;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.TestData;
 
     /// <summary>
@@ -13,13 +14,13 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// </summary>
     public class CreateToManyWithRelationAndTargetRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
-        private readonly IConvertHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateToManyWithRelationAndTargetRegistrations" /> class.
         /// </summary>
         public CreateToManyWithRelationAndTargetRegistrations(
-            IConvertHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<IdDto, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 

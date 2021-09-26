@@ -218,17 +218,16 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateFromSourceWithReverseRelation<TTargetValue, TConcreteTargetValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateFromSourceWithReverseRelation<TTargetValue, TConvertIntention>(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSource, TTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+                .GetInstance<IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConvertIntention>>();
             operation.Initialize(targetExpression, createConvertHelper);
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;
@@ -253,20 +252,19 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithReverseRelation<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+                .GetInstance<IOperationCreateToOneWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -276,14 +274,13 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TRelation, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -292,7 +289,7 @@
             relationFunc.NotNull(nameof(relationFunc));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToOneWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToOneWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -303,14 +300,13 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneWithRelation<TSourceValue, TTargetValue, TRelation, TConvertIntention>(
             Func<TSource, TTarget, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -319,7 +315,7 @@
             relationFunc.NotNull(nameof(relationFunc));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -330,20 +326,19 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOne<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+                .GetInstance<IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -366,14 +361,13 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterMergeLevel<TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterMergeLevel<TSourceValue, TTargetValue, TMergeValue, TConvertIntention>(
             Func<TSource, IEnumerable<TMergeValue>> mergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TTarget, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TMergeValue : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -384,7 +378,7 @@
 
             var operation =
                 this.serviceLocator
-                .GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>>();
+                .GetInstance<IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TMergeValue, TConvertIntention>>();
             operation.Initialize(
                 mergeFunc,
                 sourceFunc,
@@ -426,13 +420,12 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithReverseRelation<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TReverseRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -440,7 +433,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToManyWithReverseRelation<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -450,14 +443,13 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TRelation, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -465,7 +457,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToManyWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToManyWithRelation<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -476,14 +468,13 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToManyWithRelation<TSourceValue, TTargetValue, TRelation, TConvertIntention>(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TRelation : class
             where TConvertIntention : IBaseConvertIntention
         {
@@ -491,7 +482,7 @@
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>>();
+                .GetInstance<IOperationCreateToManyWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -502,20 +493,19 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToMany<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToMany<TSourceValue, TTargetValue, TConvertIntention>(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper)
             where TSourceValue : class
             where TTargetValue : class
-            where TConcreteTargetValue : TTargetValue, new()
             where TConvertIntention : IBaseConvertIntention
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>>();
+                .GetInstance<IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,
@@ -525,15 +515,14 @@
         }
 
         /// <inheritdoc/>
-        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneHistWithCondition<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>(
+        public IConvertRegistration<TSource, TTarget> RegisterCreateToOneHistWithCondition<TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>(
             Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, bool> toOneHistCriteria,
             Func<TSource, TTarget, DateTime> toOneReferenceDate,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
             where TSourceValue : class, TTemporalData
             where TTargetValue : class, TTemporalData
-            where TConcreteTargetValue : TTargetValue, new()
             where TReverseRelation : class
             where TTemporalData : class
             where TConvertIntention : IBaseConvertIntention
@@ -544,7 +533,7 @@
             toOneReferenceDate.NotNull(nameof(toOneReferenceDate));
 
             var operation = this.serviceLocator
-                .GetInstance<IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>>();
+                .GetInstance<IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>>();
             operation.Initialize(
                 sourceFunc,
                 targetExpression,

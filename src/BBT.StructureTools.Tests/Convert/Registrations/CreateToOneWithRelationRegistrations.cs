@@ -4,6 +4,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.TestData;
 
     /// <summary>
@@ -11,13 +12,13 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// </summary>
     public class CreateToOneWithRelationRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> convertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> convertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateToOneWithRelationRegistrations" /> class.
         /// </summary>
         public CreateToOneWithRelationRegistrations(
-            IConvertHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> convertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 

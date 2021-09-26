@@ -8,13 +8,12 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
-        : IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    internal class OperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+        : IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
         /// <summary>
@@ -27,13 +26,13 @@
         /// </summary>
         private Expression<Func<TTarget, TTargetValue>> targetExpression;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper;
 
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));
