@@ -292,6 +292,36 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
+        public void Convert_CreateToManyFromStrategyHelperWithReverseRelation_Successful()
+        {
+            // Arrange
+            container.Bind(typeof(ICreateConvertFromStrategyHelperFactory<,,>)).To(typeof(CreateConvertFromStrategyHelperFactory<,,>));
+            container.Bind(typeof(ICreateConvertFromStrategyHelper<,,,>)).To(typeof(CreateConvertFromStrategyHelperReverse<,,,>));
+            container.Bind(typeof(IGenericStrategyProvider<,>)).To(typeof(GenericStrategyProvider<,>));
+            container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<CreateToManyFromStrategyHelperWithReverseRelationRegistrations>();
+            container.Bind<IConvertRegistrations<SourceDerivedLeaf, TargetDerivedLeaf, IForTest>>().To<DerivedLeafToTargetDerivedLeafConvertRegistrations>();
+            container.Bind<ICreateConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest>>().To<CreateConvertStrategy<SourceBaseLeaf, SourceDerivedLeaf, TargetBaseLeaf, TargetDerivedLeaf, TargetDerivedLeaf, IForTest>>();
+
+            var converter = GetConverter<SourceRoot, TargetRoot>();
+
+            var sourceRoot = new SourceRoot();
+            sourceRoot.Leafs.Add(new SourceDerivedLeaf() { Root = sourceRoot });
+            sourceRoot.Leafs.Add(new SourceDerivedLeaf() { Root = sourceRoot });
+
+            var targetRoot = new TargetRoot();
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceRoot, targetRoot, processings);
+
+            // Assert
+            targetRoot.TargetLeafs.Count.Should().Be(sourceRoot.Leafs.Count);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
         public void Convert_RegisterCreateToOneWithRelation_Successful()
         {
             // Arrange
