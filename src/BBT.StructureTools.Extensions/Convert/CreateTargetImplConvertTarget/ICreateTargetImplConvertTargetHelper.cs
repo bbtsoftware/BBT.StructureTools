@@ -3,7 +3,12 @@
 namespace BBT.StructureTools.Extensions.Convert
 {
     /// <summary>
-    /// Provides methods to support conversion.
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTargetImpl"/>)
+    /// implements an interface (i.e. <typeparamref name="TTarget"/>).
+    /// The creation of <typeparamref name="TTarget"/> is based on <typeparamref name="TTargetImpl"/> (uses generic constructor constraint)
+    /// and the convert operations are based on that interface <typeparamref name="TTarget"/>
+    /// (i.e. convert is performed consulting a <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}"/>).
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>
@@ -21,7 +26,12 @@ namespace BBT.StructureTools.Extensions.Convert
     }
 
     /// <summary>
-    /// Provides methods to support conversion.
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTargetImpl"/>)
+    /// implements an interface (i.e. <typeparamref name="TTarget"/>).
+    /// The creation of <typeparamref name="TTarget"/> is based on <typeparamref name="TTargetImpl"/> (uses generic constructor constraint)
+    /// and the convert operations are based on that interface <typeparamref name="TTarget"/>
+    /// (i.e. convert is performed consulting a <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}"/>).
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>

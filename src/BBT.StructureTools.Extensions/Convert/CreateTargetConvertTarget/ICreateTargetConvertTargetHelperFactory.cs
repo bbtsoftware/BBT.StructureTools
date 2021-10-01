@@ -3,7 +3,7 @@
     using BBT.StructureTools.Convert;
 
     /// <summary>
-    /// Provides methods to create <see cref="ICreateTargetConvertTargetHelper{TSource,TTarget,TReverseRelation,TConvertIntention}"/>.
+    /// Provides methods to create <see cref="ICreateTargetConvertTargetHelper{TSource,TTarget,TConvertIntention}"/>.
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>

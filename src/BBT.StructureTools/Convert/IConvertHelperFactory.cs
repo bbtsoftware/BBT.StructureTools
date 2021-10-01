@@ -4,7 +4,9 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// Provides methods to create <see cref="ICreateConvertHelper{TSource,TTarget,TReverseRelation,TConvertIntention}"/>.
+    /// Provides methods to create <see cref="ICreateConvertHelper{TSource,TTarget,TConvertIntention}"/>
+    /// and <see cref="ICreateConvertHelper{TSource,TTarget,TReverseRelation,TConvertIntention}"/>
+    /// for convert scenarios where target classes are created with or without reveres relations.
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>

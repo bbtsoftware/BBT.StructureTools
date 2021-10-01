@@ -3,11 +3,12 @@
     using BBT.StructureTools.Convert;
 
     /// <summary>
-    /// Provides methods to support conversion.
-    ///
-    /// An <see cref="ICreateConvertHelper{TSource, TTarget, TReverseRelation, TConvertIntention}"/>
-    /// implementation where the instance creator and converter are determined by
-    /// <see cref="ICreateConvertStrategy{TSource, TTarget, TIntention}"/>.
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTarget"/>)
+    /// is created as well as converted using a <see cref="ICreateConvertStrategy{TSource, TTarget, TIntention}"/>.
+    /// A generic strategy implementation is provided,
+    /// <see cref="CreateConvertStrategy{TSource, TConcreteSource, TTarget, TConcreteTarget, TConcreteTargetImpl, TIntention}"/>.
+    /// Register strategies for all concerned derived types in your IoC container in use.
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>
@@ -23,11 +24,12 @@
     }
 
     /// <summary>
-    /// Provides methods to support conversion.
-    ///
-    /// An <see cref="ICreateConvertHelper{TSource, TTarget, TConcreteTarget, TConvertIntention}"/>
-    /// implementation where the instance creator and converter are determined by
-    /// <see cref="ICreateConvertStrategy{TSource, TTarget, TIntention}"/>.
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTarget"/>)
+    /// is created as well as converted using a <see cref="ICreateConvertStrategy{TSource, TTarget, TIntention}"/>.
+    /// A generic strategy implementation is provided,
+    /// <see cref="CreateConvertStrategy{TSource, TConcreteSource, TTarget, TConcreteTarget, TConcreteTargetImpl, TIntention}"/>.
+    /// Register strategies for all concerned derived types in your IoC container in use.
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>

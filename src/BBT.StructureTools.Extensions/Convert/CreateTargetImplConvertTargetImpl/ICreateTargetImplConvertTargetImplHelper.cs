@@ -3,12 +3,11 @@
     using BBT.StructureTools.Convert;
 
     /// <summary>
-    /// Provides methods to support conversion.
-    ///
-    /// An <see cref="ICreateConvertHelper{TSource, TTarget, TReverseRelation, TConvertIntention}"/>
-    /// implementation where the converter's generic type parameter 'TTarget' of
-    /// <see cref="IConvert{TSource, TTarget, TConvertIntention}"/>
-    /// uses the concrete target type <typeparamref name="TTargetImpl"/> (instead of <typeparamref name="TTarget"/>).
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTargetImpl"/>)
+    /// implements an interface (i.e. <typeparamref name="TTarget"/>).
+    /// The creation of <typeparamref name="TTarget"/> as well as the conversion are based on <typeparamref name="TTargetImpl"/>
+    /// (i.e. convert is performed consulting a <see cref="IConvertRegistrations{TSource, TTargetImpl, TConvertIntention}"/>).
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>
@@ -26,12 +25,11 @@
     }
 
     /// <summary>
-    /// Provides methods to support conversion.
-    ///
-    /// An <see cref="ICreateConvertHelper{TSource, TTarget, TConvertIntention}"/>
-    /// implementation where the converter's generic type parameter 'TTarget' of
-    /// <see cref="IConvert{TSource, TTarget, TConvertIntention}"/>
-    /// uses the concrete target type <typeparamref name="TTargetImpl"/> (instead of <typeparamref name="TTarget"/>).
+    /// Provides methods to support conversions where target objects are created.
+    /// Use this helper implementation if the target object (i.e. <typeparamref name="TTargetImpl"/>)
+    /// implements an interface (i.e. <typeparamref name="TTarget"/>).
+    /// The creation of <typeparamref name="TTarget"/> as well as the conversion are based on <typeparamref name="TTargetImpl"/>
+    /// (i.e. convert is performed consulting a <see cref="IConvertRegistrations{TSource, TTargetImpl, TConvertIntention}"/>).
     /// </summary>
     /// <typeparam name="TSource">The source to convert from.</typeparam>
     /// <typeparam name="TTarget">The target to convert to.</typeparam>

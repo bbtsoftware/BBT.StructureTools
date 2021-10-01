@@ -8,7 +8,8 @@
     /// <summary>
     /// Strategy to provide methods for creation of a concrete <typeparamref name="TTarget"/>
     /// and conversion of a concrete <typeparamref name="TSource"/> into a concrete <typeparamref name="TTarget"/>.
-    /// See also <see cref="CreateConvertStrategy{TSource, TConcreteSource, TTarget, TConcreteTarget, TConcreateTargetImpl, TIntention}"/>.
+    /// A generic strategy implementation is provided,
+    /// <see cref="CreateConvertStrategy{TSource, TConcreteSource, TTarget, TConcreteTarget, TConcreateTargetImpl, TIntention}"/>.
     /// </summary>
     /// <typeparam name="TSource">The type of source.</typeparam>
     /// <typeparam name="TTarget">The type of target.</typeparam>
