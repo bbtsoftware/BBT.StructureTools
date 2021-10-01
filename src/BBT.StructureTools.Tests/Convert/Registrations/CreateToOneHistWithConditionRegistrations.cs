@@ -4,6 +4,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.TestData;
 
     /// <summary>
@@ -11,13 +12,13 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// </summary>
     public class CreateToOneHistWithConditionRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTreeHist, TargetTreeHist, TargetTreeHist, IForTest> convertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeHist, TargetTreeHist, TargetTreeHist, IForTest> convertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateToOneHistWithConditionRegistrations" /> class.
         /// </summary>
         public CreateToOneHistWithConditionRegistrations(
-            IConvertHelperFactory<SourceTreeHist, TargetTreeHist, TargetTreeHist, IForTest> convertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTreeHist, TargetTreeHist, TargetTreeHist, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
@@ -31,7 +32,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
         {
             registrations.NotNull(nameof(registrations));
 
-            registrations.RegisterCreateToOneHistWithCondition<SourceTreeHist, TargetTreeHist, TargetTreeHist, TargetTree, ITemporalData, IForTest>(
+            registrations.RegisterCreateToOneHistWithCondition<SourceTreeHist, TargetTreeHist, TargetTree, ITemporalData, IForTest>(
                 (x, y) => x.Hists,
                 x => x.TargetHists,
                 (x, y) => true,

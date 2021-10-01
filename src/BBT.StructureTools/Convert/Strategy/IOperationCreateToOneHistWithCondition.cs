@@ -8,22 +8,20 @@
     /// <summary>
     /// Strategy to convert entities with a <c>ToMany</c> relationship.
     /// See <see cref="IConvertOperation{TSource,TTarget}"/>.
+    /// </summary>
     /// <typeparam name="TSource">See link above.</typeparam>
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">The entity to convert from.</typeparam>
     /// <typeparam name="TTargetValue">The entity to create.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">The concrete entity to create.</typeparam>
     /// <typeparam name="TReverseRelation">The relation to the target entities root entity.</typeparam>
     /// <typeparam name="TTemporalData">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    /// </summary>
-    public interface IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
+    public interface IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class
         where TSourceValue : class, TTemporalData
         where TTargetValue : class, TTemporalData
-        where TConcreteTargetValue : TTargetValue, new()
         where TReverseRelation : class
         where TTemporalData : class
         where TConvertIntention : IBaseConvertIntention
@@ -41,6 +39,6 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, bool> toOneHistCriteria,
             Func<TSource, TTarget, DateTime> toOneReferenceDate,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper);
     }
 }

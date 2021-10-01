@@ -8,13 +8,12 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
-        : IOperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention>
+    internal class OperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>
+        : IOperationCreateToOneWithRelationInclTargetArg<TSource, TTarget, TSourceValue, TTargetValue, TRelation, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
@@ -29,14 +28,14 @@
         private Expression<Func<TTarget, TTargetValue>> targetExpression;
 
         private Func<TSource, TTarget, TRelation> relationFunc;
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper;
 
         /// <inheritdoc/>
         public void Initialize(
             Func<TSource, TTarget, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
             Func<TSource, TTarget, TRelation> relationFunc,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

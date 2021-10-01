@@ -9,6 +9,7 @@
     using BBT.StructureTools.Convert.Strategy;
     using BBT.StructureTools.Convert.Value;
     using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Provider;
     using BBT.StructureTools.Strategy;
     using BBT.StructureTools.Tests.Convert.Registrations;
@@ -104,6 +105,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithReverseRelationRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -129,6 +132,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericWithReverseRelationRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -154,6 +159,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -179,6 +186,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyGenericRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -220,6 +229,8 @@
             container.Bind(typeof(ITemporalDataHandler<>)).To(typeof(TemporalDataHandler<>));
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToOneHistWithConditionRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeHist, TargetTreeHist, IForTest>>().To<CopyHistAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -281,11 +292,43 @@
         /// Tests the convert from root to leaf into target structure.
         /// </summary>
         [Fact]
+        public void Convert_CreateToManyFromStrategyHelperWithReverseRelation_Successful()
+        {
+            // Arrange
+            container.Bind(typeof(ICreateConvertFromStrategyHelperFactory<,,>)).To(typeof(CreateConvertFromStrategyHelperFactory<,,>));
+            container.Bind(typeof(ICreateConvertFromStrategyHelper<,,,>)).To(typeof(CreateConvertFromStrategyHelperReverse<,,,>));
+            container.Bind(typeof(IGenericStrategyProvider<,>)).To(typeof(GenericStrategyProvider<,>));
+            container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<CreateToManyFromStrategyHelperWithReverseRelationRegistrations>();
+            container.Bind<IConvertRegistrations<SourceDerivedLeaf, TargetDerivedLeaf, IForTest>>().To<DerivedLeafToTargetDerivedLeafConvertRegistrations>();
+            container.Bind<ICreateConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest>>().To<CreateConvertStrategy<SourceBaseLeaf, SourceDerivedLeaf, TargetBaseLeaf, TargetDerivedLeaf, TargetDerivedLeaf, IForTest>>();
+
+            var converter = GetConverter<SourceRoot, TargetRoot>();
+
+            var sourceRoot = new SourceRoot();
+            sourceRoot.Leafs.Add(new SourceDerivedLeaf() { Root = sourceRoot });
+            sourceRoot.Leafs.Add(new SourceDerivedLeaf() { Root = sourceRoot });
+
+            var targetRoot = new TargetRoot();
+
+            // Act
+            var processings = new List<IBaseAdditionalProcessing>();
+            converter.Convert(sourceRoot, targetRoot, processings);
+
+            // Assert
+            targetRoot.TargetLeafs.Count.Should().Be(sourceRoot.Leafs.Count);
+        }
+
+        /// <summary>
+        /// Tests the convert from root to leaf into target structure.
+        /// </summary>
+        [Fact]
         public void Convert_RegisterCreateToOneWithRelation_Successful()
         {
             // Arrange
             container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<CreateToOneWithRelationRegistrations>();
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CopyTreeAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceRoot, TargetRoot>();
 
@@ -313,6 +356,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<CreateToOneWithRelationAndTargetRegistrations>();
             container.Bind<IConvertRegistrations<IdDto, TargetTree, IForTest>>().To<CopyIdDtoToTargetTreeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceRoot, TargetRoot>();
 
@@ -344,6 +389,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithRelationRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -377,6 +424,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithRelationAndTargetRegistrations>();
             container.Bind<IConvertRegistrations<IdDto, TargetTreeLeaf, IForTest>>().To<CopyIdDtoToTargetTreeLeafRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -411,6 +460,8 @@
             // Arrange
             container.Bind<IConvertRegistrations<SourceTree, TargetTree, IForTest>>().To<CreateToManyWithRelationReverseRelationRegistrations>();
             container.Bind<IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>>().To<CopyLeafAttributeRegistrations>();
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
 
             var converter = GetConverter<SourceTree, TargetTree>();
 
@@ -657,6 +708,9 @@
 
         private static void DoConvertRegistrationsForWholeStructure()
         {
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelperFactory<,,,>)).To(typeof(CreateTargetImplConvertTargetHelperFactory<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,>));
+            container.Bind(typeof(ICreateTargetImplConvertTargetHelper<,,,,>)).To(typeof(CreateTargetImplConvertTargetHelper<,,,,>));
             container.Bind(typeof(IGenericStrategyProvider<,>)).To(typeof(GenericStrategyProvider<,>));
             container.Bind(typeof(ITemporalDataHandler<>)).To(typeof(TemporalDataHandler<>));
             container.Bind<IConvertRegistrations<SourceRoot, TargetRoot, IForTest>>().To<RootToTargetRootConvertRegistrations>();

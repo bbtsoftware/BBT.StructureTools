@@ -8,18 +8,17 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
-        : IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    internal class OperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
+        : IOperationCreateToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
         private readonly IConvertHelper convertHelper;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper;
 
         /// <summary>
         /// Function to get the source's property value.
@@ -32,7 +31,7 @@
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToMany{TSource,TTarget,TSourceValue,TTargetValue,TConcreteTargetValue,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToMany{TSource,TTarget,TSourceValue,TTargetValue,TConvertIntention}" /> class.
         /// </summary>
         public OperationCreateToMany(
             IConvertHelper convertHelper)
@@ -46,7 +45,7 @@
         public void Initialize(
             Func<TSource, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

@@ -3,6 +3,7 @@
     using System.Linq;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
 
@@ -11,13 +12,13 @@
     /// </summary>
     public class TreeLeafToTargetTreeLeafConvertRegistrations : IConvertRegistrations<SourceTreeLeaf, TargetTreeLeaf, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeafChild, TargetTreeLeafChild, IForTest> convertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeafChild, TargetTreeLeafChild, IForTest> convertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreeLeafToTargetTreeLeafConvertRegistrations" /> class.
         /// </summary>
         public TreeLeafToTargetTreeLeafConvertRegistrations(
-            IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeafChild, TargetTreeLeafChild, IForTest> convertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeafChild, TargetTreeLeafChild, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 
