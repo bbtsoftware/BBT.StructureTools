@@ -10,14 +10,13 @@
     using BBT.StructureTools.Provider;
 
     /// <inheritdoc/>
-    internal class OperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
-        : IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
+    internal class OperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
+        : IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
         where TSource : class
         where TTarget : class, TReverseRelation
         where TSourceValue : class, TTemporalData
         where TTargetValue : class, TTemporalData
         where TTemporalData : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
@@ -25,14 +24,14 @@
         private readonly ITemporalDataHandler<TTemporalData> targetValueTemporalDataHandler;
         private readonly ITemporalDataHandler<TTemporalData> sourceValueTemporalDataHandler;
 
-        private ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper;
         private Func<TSource, TTarget, IEnumerable<TSourceValue>> sourceFunc;
         private Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression;
         private Func<TSource, TTarget, bool> toOneHistCriteria;
         private Func<TSource, TTarget, DateTime> toOneReferenceDate;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperationCreateToOneHistWithCondition{TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TTemporalData, TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="OperationCreateToOneHistWithCondition{TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention}" /> class.
         /// </summary>
         public OperationCreateToOneHistWithCondition(
             IConvertHelper convertHelper,
@@ -53,7 +52,7 @@
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
             Func<TSource, TTarget, bool> toOneHistCriteria,
             Func<TSource, TTarget, DateTime> toOneReferenceDate,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSourceValue, TTargetValue, TReverseRelation, TConvertIntention> createConvertHelper)
         {
             sourceFunc.NotNull(nameof(sourceFunc));
             targetExpression.NotNull(nameof(targetExpression));

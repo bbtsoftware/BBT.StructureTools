@@ -12,15 +12,13 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">See link above.</typeparam>
     /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    public interface IOperationCreateToOne<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
         /// <summary>
@@ -32,6 +30,6 @@
         void Initialize(
             Func<TSource, TSourceValue> sourceFunc,
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TConvertIntention> createConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TConvertIntention> createConvertHelper);
     }
 }

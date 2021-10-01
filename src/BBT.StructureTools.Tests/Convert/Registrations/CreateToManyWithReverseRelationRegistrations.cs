@@ -2,6 +2,7 @@
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.TestData;
 
     /// <summary>
@@ -9,13 +10,13 @@
     /// </summary>
     public class CreateToManyWithReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateToManyWithReverseRelationRegistrations" /> class.
         /// </summary>
         public CreateToManyWithReverseRelationRegistrations(
-            IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory)
         {
             convertHelperFactory.NotNull(nameof(convertHelperFactory));
 

@@ -13,16 +13,14 @@
     /// <typeparam name="TTarget">See link above.</typeparam>
     /// <typeparam name="TSourceValue">See link above.</typeparam>
     /// <typeparam name="TTargetValue">See link above.</typeparam>
-    /// <typeparam name="TConcreteTargetValue">See link above.</typeparam>
     /// <typeparam name="TMergeValue">See link above.</typeparam>
     /// <typeparam name="TConvertIntention">See link above.</typeparam>
-    public interface IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TConcreteTargetValue, TMergeValue, TConvertIntention>
+    public interface IOperationMergeLevel<TSource, TTarget, TSourceValue, TTargetValue, TMergeValue, TConvertIntention>
         : IConvertOperation<TSource, TTarget>
         where TSource : class
         where TTarget : class
         where TSourceValue : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TMergeValue : class
         where TConvertIntention : IBaseConvertIntention
     {
@@ -37,6 +35,6 @@
             Func<TSource, IEnumerable<TMergeValue>> mergeFunc,
             Func<TMergeValue, IEnumerable<TSourceValue>> sourceFunc,
             Expression<Func<TTarget, ICollection<TTargetValue>>> targetExpression,
-            ICreateConvertHelper<TSourceValue, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper);
+            ICreateConvertHelper<TSourceValue, TTargetValue, TTarget, TConvertIntention> createConvertHelper);
     }
 }

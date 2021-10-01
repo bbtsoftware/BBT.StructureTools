@@ -8,15 +8,14 @@
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class OperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>
-        : IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConcreteTargetValue, TConvertIntention>
+    internal class OperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConvertIntention>
+        : IOperationCreateFromSourceWithReverseRelation<TSource, TTarget, TTargetValue, TConvertIntention>
         where TSource : class
         where TTarget : class
         where TTargetValue : class
-        where TConcreteTargetValue : TTargetValue, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        private ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper;
+        private ICreateConvertHelper<TSource, TTargetValue, TTarget, TConvertIntention> createConvertHelper;
 
         /// <summary>
         ///  Expression which declares the target value.
@@ -26,7 +25,7 @@
         /// <inheritdoc/>
         public void Initialize(
             Expression<Func<TTarget, TTargetValue>> targetExpression,
-            ICreateConvertHelper<TSource, TTargetValue, TConcreteTargetValue, TTarget, TConvertIntention> createConvertHelper)
+            ICreateConvertHelper<TSource, TTargetValue, TTarget, TConvertIntention> createConvertHelper)
         {
             targetExpression.NotNull(nameof(targetExpression));
             createConvertHelper.NotNull(nameof(createConvertHelper));

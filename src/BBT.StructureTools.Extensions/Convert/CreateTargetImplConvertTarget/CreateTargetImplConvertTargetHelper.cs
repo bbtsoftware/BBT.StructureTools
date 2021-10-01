@@ -1,23 +1,23 @@
-﻿namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Extensions.Convert
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using BBT.StrategyPattern;
-    using BBT.StructureTools;
+    using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
 
     /// <inheritdoc/>
-    internal class CreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>
-        : ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TReverseRelation, TConvertIntention>
+    public class CreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TReverseRelation, TConvertIntention>
+        : ICreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TReverseRelation, TConvertIntention>
         where TSource : class
         where TTarget : class
-        where TConcreteTarget : TTarget, new()
+        where TTargetImpl : class, TTarget, new()
         where TReverseRelation : class
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
+        private readonly IInstanceCreator<TTarget, TTargetImpl> instanceCreator;
         private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
 
         /// <summary>
@@ -26,10 +26,10 @@
         private Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateConvertHelper{TSource,TTarget,TConcreteTarget,TReverseRelation,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="CreateTargetImplConvertTargetHelper{TSource,TTarget,TTargetImpl,TReverseRelation,TConvertIntention}" /> class.
         /// </summary>
-        public CreateConvertHelper(
-            IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
+        public CreateTargetImplConvertTargetHelper(
+            IInstanceCreator<TTarget, TTargetImpl> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
             instanceCreator.NotNull(nameof(instanceCreator));
@@ -68,21 +68,21 @@
         "Microsoft.StyleCop.CSharp.MaintainabilityRules",
         "SA1402:FileMayOnlyContainASingleClass",
         Justification = "It is a variance of the same class with different number of generic parameters")]
-    internal class CreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>
-        : ICreateConvertHelper<TSource, TTarget, TConcreteTarget, TConvertIntention>
+    public class CreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TConvertIntention>
+        : ICreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TConvertIntention>
         where TSource : class
         where TTarget : class
-        where TConcreteTarget : TTarget, new()
+        where TTargetImpl : class, TTarget, new()
         where TConvertIntention : IBaseConvertIntention
     {
-        private readonly IInstanceCreator<TTarget, TConcreteTarget> instanceCreator;
+        private readonly IInstanceCreator<TTarget, TTargetImpl> instanceCreator;
         private readonly IConvert<TSource, TTarget, TConvertIntention> convert;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateConvertHelper{TSource,TTarget,TConcreteTarget,TConvertIntention}" /> class.
+        /// Initializes a new instance of the <see cref="CreateTargetImplConvertTargetHelper{TSource,TTarget,TTargetImpl,TConvertIntention}" /> class.
         /// </summary>
-        public CreateConvertHelper(
-            IInstanceCreator<TTarget, TConcreteTarget> instanceCreator,
+        public CreateTargetImplConvertTargetHelper(
+            IInstanceCreator<TTarget, TTargetImpl> instanceCreator,
             IConvert<TSource, TTarget, TConvertIntention> convert)
         {
             instanceCreator.NotNull(nameof(instanceCreator));

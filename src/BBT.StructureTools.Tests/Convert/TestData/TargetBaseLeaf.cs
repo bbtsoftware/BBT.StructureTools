@@ -21,6 +21,7 @@ namespace BBT.StructureTools.Tests.Convert.TestData
             {
                 return this.root;
             }
+
             set
             {
                 this.root = value;

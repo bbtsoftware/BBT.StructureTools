@@ -5,6 +5,7 @@
     using System.Linq;
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
 
@@ -13,15 +14,15 @@
     /// </summary>
     public class RootToTargetRootConvertRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> treeConvertHelperFactory;
-        private readonly IConvertHelperFactory<MasterData, TargetMasterData, TargetMasterData, IForTest> masterDataConvertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> treeConvertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<MasterData, TargetMasterData, TargetMasterData, IForTest> masterDataConvertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RootToTargetRootConvertRegistrations" /> class.
         /// </summary>
         public RootToTargetRootConvertRegistrations(
-            IConvertHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> treeConvertHelperFactory,
-            IConvertHelperFactory<MasterData, TargetMasterData, TargetMasterData, IForTest> masterDataConvertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTree, TargetTree, TargetTree, IForTest> treeConvertHelperFactory,
+            ICreateTargetImplConvertTargetHelperFactory<MasterData, TargetMasterData, TargetMasterData, IForTest> masterDataConvertHelperFactory)
         {
             this.treeConvertHelperFactory = treeConvertHelperFactory;
             this.masterDataConvertHelperFactory = masterDataConvertHelperFactory;

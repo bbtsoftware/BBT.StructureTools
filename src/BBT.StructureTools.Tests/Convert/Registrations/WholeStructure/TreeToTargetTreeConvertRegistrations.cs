@@ -3,6 +3,7 @@
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
 
@@ -11,15 +12,15 @@
     /// </summary>
     public class TreeToTargetTreeConvertRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
-        private readonly IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> treeLeafConvertHelperFactory;
-        private readonly IConvertHelperFactory<SourceTreeHistLeaf, TargetTreeHistLeaf, TargetTreeHistLeaf, IForTest> treeHistLeafConvertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> treeLeafConvertHelperFactory;
+        private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeHistLeaf, TargetTreeHistLeaf, TargetTreeHistLeaf, IForTest> treeHistLeafConvertHelperFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreeToTargetTreeConvertRegistrations" /> class.
         /// </summary>
         public TreeToTargetTreeConvertRegistrations(
-            IConvertHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> treeLeafConvertHelperFactory,
-            IConvertHelperFactory<SourceTreeHistLeaf, TargetTreeHistLeaf, TargetTreeHistLeaf, IForTest> treeHistLeafConvertHelperFactory)
+            ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> treeLeafConvertHelperFactory,
+            ICreateTargetImplConvertTargetHelperFactory<SourceTreeHistLeaf, TargetTreeHistLeaf, TargetTreeHistLeaf, IForTest> treeHistLeafConvertHelperFactory)
         {
             this.treeLeafConvertHelperFactory = treeLeafConvertHelperFactory;
             this.treeHistLeafConvertHelperFactory = treeHistLeafConvertHelperFactory;
