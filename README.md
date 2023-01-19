@@ -13,18 +13,18 @@
 
 ### Getting started
 
-Overview about the features of BBT.Maybe.
+Overview about the features of BBT.StructureTools.
 
-* [Why does BBT.StructureTools exist?](docs\getting-started\whystructuretools.md)
-* [Core principles](docs\getting-started\principles.md)
-* [Configure](docs\getting-started\configure.md)
-* [Obtain](docs\getting-started\obtain.md)
+* [Why does BBT.StructureTools exist?](./docs/getting-started/whystructuretools.md)
+* [Core principles](./docs/getting-started/principles.md)
+* [Configure](./docs/getting-started/configure.md)
+* [Obtain](./docs/getting-started/obtain.md)
 
 ### Fundamentals
 
-* [Comparing objects](docs\comparing-objects\fundamentals.md)
-* [Converting objects](docs\converting-objects\fundamentals.md)
-* [copying objects](docs\copying-objects\fundamentals.md)
+* [Comparing objects](./docs/comparing-objects/fundamentals.md)
+* [Converting objects](/docs/converting-objects/fundamentals.md)
+* [copying objects](/docs/copying-objects/fundamentals.md)
 
 ## Build
 
