@@ -1,10 +1,6 @@
----
-Order: 20
-Title: Obtain
-Description: Obtain BBT.StructureTools
----
+# Obtain
 
-# NuGet
+## NuGet
 
 Release and Beta versions of BBT.StructureTools are available from [nuget.org](https://www.nuget.org/packages/BBT.StructureTools)
 

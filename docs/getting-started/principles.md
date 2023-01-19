@@ -1,8 +1,4 @@
----
-Order: 40
-Title: Technical core principles
-Description: Technical core principles of BBT.StructureTools
----
+# Technical core principles
 
 The compare and convert operations consists of an object performing the operation coupled with an _Intention_.
 This intention is specific for a business case and allows distinction between renewing and creating a contract for instance.
@@ -20,7 +16,7 @@ according to the user-made registrations.
 | Conversion    | `IConverter<in TSourceClass, in TTargetClass, TConvertIntention>`| `IBaseConvertIntention` |
 | Copy          | `ICopier<in TClassToCopy>`                                       | no intention            |
 
-# Registration interfaces
+## Registration interfaces
 
 The paragraph above states the technical difference between the operations regarding the business case specific intention.
 This is a rather minor difference - As mentioned before, the base objects do the job or resolving the sub operations
@@ -53,7 +49,7 @@ ___
 * Do not mix registrations for multiple types into one implementation. See [Single Responsibility Principle].
 :::
 
-# Controlling object initialization
+## Controlling object initialization
 
 The copy and convert registrations can create a new instance of a target object if neccessary.
 How an object is initialized is defined by a registration of an `IInstanceCreator`
@@ -71,7 +67,7 @@ registrations so the library can detect it while converting or copying objects.
 default generic `InstanceCreator` because the default constructor is used there.
 :::
 
-# Processings and Interceptions
+## Processings and Interceptions
 
 Copy, Convert, and Compare can be controlled depending on the objects being processed by using
 post-, preprocessings, or interceptors.
@@ -82,7 +78,7 @@ as additional argument.
 If possible, use the generic implementations supplied with the library.
 :::
 
-## Preprocessings
+### Preprocessings
 
 Preprocessings are executed before the object is processed.
 
@@ -92,7 +88,7 @@ Preprocessings are executed before the object is processed.
 | Conversion    | `IConvertPreProcessing<TSoureClass, TTargetClass>`            |
 | Copy          | not supported                                                 |
 
-## Postprocessings
+### Postprocessings
 
 Postprocessings are executed after the object is processed.
 
@@ -102,7 +98,7 @@ Postprocessings are executed after the object is processed.
 | Conversion    | `IConvertPostProcessing<TSoureClass, TTargetClass>`           |
 | Copy          | `ICopyPostProcessing<TClassToCopy>`                           |
 
-## Interceptors
+### Interceptors
 
 Interceptors analyze a given object and stop the copy or convert process from continuing
 if a specified condition is met.
