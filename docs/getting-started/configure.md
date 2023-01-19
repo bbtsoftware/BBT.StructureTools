@@ -1,24 +1,20 @@
----
-Order: 30
-Title: Configuration
-Description: Configure BBT.StructureTools
----
+# Configuration
 
 The BBT Structure Tools are entirely configurable by code. This section covers the
 correct IoC container registration of the infrastructure components.
 
-# Preconditions
+## Preconditions
 
 * The library requires an IoC container to resolve components internally.
 
-# IoC Container
+## IoC Container
 
 The library is usable with any IoC container, but it must support some preconditions:
 
 * Injection to public constructors of `internal` classes
 * Registration of unbound generic types
 
-## Initialization
+### Initialization
 
 Before the registrations can be done the `IocHandler` resolver must be set.
 Implement the resolver using the `IIocResolver`.

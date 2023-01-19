@@ -1,36 +1,35 @@
 # BBT.StructureTools
 
+[![NuGet](https://img.shields.io/nuget/v/BBT.StructureTools.svg)](https://www.nuget.org/packages/BBT.StructureTools)
+[![Build status](https://github.com/bbtsoftware/BBT.StructureTools/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/bbtsoftware/BBT.StructureTools/actions/workflows/dotnet.yml)
+[![Build status](https://github.com/bbtsoftware/BBT.StructureTools/actions/workflows/release.yml/badge.svg)](https://github.com/bbtsoftware/BBT.StructureTools/actions/workflows/release.yml)
+[![Coverage Status](https://codecov.io/gh/bbtsoftware/BBT.StructureTools/branch/develop/graph/badge.svg?token=0VLbB8a8EF)](https://codecov.io/gh/bbtsoftware/BBT.StructureTools)
+
 .NET. classes for copying, comparing and converting object structures.
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/bbtsoftware/BBT.StructureTools/blob/master/LICENSE)
 
-## Information
+## Documentation
 
-| | Stable | Pre-release |
-|:--:|:--:|:--:|
-|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/bbtsoftware/BBT.StructureTools.svg)](https://github.com/bbtsoftware/BBT.StructureTools/releases/latest)|
-|NuGet|[![NuGet](https://img.shields.io/nuget/v/BBT.StructureTools.svg)](https://www.nuget.org/packages/BBT.StructureTools)|[![NuGet](https://img.shields.io/nuget/vpre/BBT.StructureTools.svg)](https://www.nuget.org/packages/BBT.StructureTools)|
+### Getting started
 
-## Build Status
+Overview about the features of BBT.StructureTools.
 
-|Develop|Master|
-|:--:|:--:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/bncb5oc7ah2ti95y/branch/develop?svg=true)](https://ci.appveyor.com/project/BBTSoftwareAG/bbt-structuretools/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/bncb5oc7ah2ti95y/branch/master?svg=true)](https://ci.appveyor.com/project/BBTSoftwareAG/bbt-structuretools/branch/master)|
+* [Why does BBT.StructureTools exist?](./docs/getting-started/whystructuretools.md)
+* [Core principles](./docs/getting-started/principles.md)
+* [Configure](./docs/getting-started/configure.md)
+* [Obtain](./docs/getting-started/obtain.md)
 
-## Code Coverage
+### Fundamentals
 
-[![Coverage Status](https://coveralls.io/repos/github/bbtsoftware/BBT.StructureTools/badge.svg?branch=develop)](https://coveralls.io/github/bbtsoftware/BBT.StructureTools?branch=develop)
-
-## Quick Links
-
-* [Documentation](https://bbtsoftware.github.io/BBT.StructureTools/)
+* [Comparing objects](./docs/comparing-objects/fundamentals.md)
+* [Converting objects](/docs/converting-objects/fundamentals.md)
+* [copying objects](/docs/copying-objects/fundamentals.md)
 
 ## Build
-
-To build this package we are using [Cake](https://cakebuild.net).
 
 On Windows PowerShell run:
 
 ```powershell
-./build
+dotnet build .\BBT.StructureTools.sln
 ```

@@ -298,10 +298,6 @@ paket-files/
 __pycache__/
 *.pyc
 
-# Cake - Uncomment if you are using it
-tools/**
-!tools/packages.config
-
 # Tabs Studio
 *.tss
 
@@ -330,6 +326,3 @@ ASALocalRun/
 .mfractor/
 
 # Project specific 
-
-config.wyam.*
-BuildArtifacts/

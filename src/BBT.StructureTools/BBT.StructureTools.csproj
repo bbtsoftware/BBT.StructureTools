@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <AssemblyTitle>BBT.StructureTools</AssemblyTitle>
     <CodeAnalysisRuleSet>..\BBT.StructureTools.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.XML</DocumentationFile>
@@ -34,14 +34,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BBT.Maybe" Version="3.1.0" />
-    <PackageReference Include="BBT.StrategyPattern" Version="1.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="BBT.Maybe" Version="3.1.1" />
+    <PackageReference Include="BBT.StrategyPattern" Version="1.1.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -53,5 +47,9 @@
       <_Parameter1>$(MSBuildProjectName).Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+
+  <PropertyGroup>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
 
 </Project>

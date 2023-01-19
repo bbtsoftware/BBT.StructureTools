@@ -1,10 +1,8 @@
----
-Order: 30
-Title: Fundamentals
-Description: Introduction to the convert capabilities
----
+# Fundamentals
 
-# Distinction towards .NET Framework interfaces
+Introduction to the convert capabilities.
+
+## Distinction towards .NET Framework interfaces
 
 The .NET Framework, as of version 4.8, doesn't offer any conversion capabilities other than
 converting reference and value types into their CLR type of an equivalent value using [System.IConvertible].
