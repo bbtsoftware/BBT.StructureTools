@@ -3,7 +3,7 @@
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>BBT.StructureTools.Extensions</id>
     <title>BBT StructureTools Extensions</title>
-    <version>2.0.1</version>
+    <version>2.1.1</version>
     <authors>BBT Software AG</authors>
     <owners>bbtsoftware</owners>
     <summary>.NET. classes for copying, comparing and converting object structures.</summary>
@@ -14,7 +14,7 @@
     <repository type="git" url="https://github.com/bbtsoftware/BBT.StructureTools.git" />
     <copyright>Copyright © BBT Software AG</copyright>
     <tags>StructureTools Functional</tags>
-    <releaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/2.0.1</releaseNotes>
+    <releaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/2.1.1</releaseNotes>
     <dependencies>
       <group targetFramework="net6.0" />
       <group targetFramework="netstandard2.0" />
