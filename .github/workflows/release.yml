@@ -3,14 +3,8 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - master
-      - develop
-  pull_request:
-    branches:
-      - master
-      - develop
+  release:
+    types: [published]
 
 defaults:
   run:
