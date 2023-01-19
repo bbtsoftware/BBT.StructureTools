@@ -1,10 +1,8 @@
----
-Order: 40
-Title: Fundamentals
-Description: Introduction to the copy capabilities
----
+# Fundamentals
 
-# Distinction towards .NET Framework interfaces
+Introduction to the copy capabilities.
+
+## Distinction towards .NET Framework interfaces
 
 There is the **[System.ICloneable]** interface which as the documentation states
 
