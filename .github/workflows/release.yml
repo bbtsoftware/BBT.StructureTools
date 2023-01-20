@@ -58,5 +58,5 @@ jobs:
 
       - name: Publish NuGet
         run: |
-          nuget push ./BBT.StructureTools.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
-          nuget push ./BBT.StructureTools.Extensions.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
+          nuget push ./BBT.StructureTools.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
+          nuget push ./BBT.StructureTools.Extensions.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
