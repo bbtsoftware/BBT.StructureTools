@@ -53,10 +53,9 @@ jobs:
 
       - name: Package NuGet
         run: |
-          nuget pack ../nuspec/nuget/BBT.StructureTools.nuspec
-          nuget pack ../nuspec/nuget/BBT.StructureTools.Extensions.nuspec
+          dotnet pack -c $BUILD_CONFIG -p:PackageVersion=$BUILD_VERSION
 
       - name: Publish NuGet
         run: |
-          nuget push ./BBT.StructureTools.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
-          nuget push ./BBT.StructureTools.Extensions.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
+          nuget push ./BBT.StructureTools/bin/Release/BBT.StructureTools.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
+          nuget push ./BBT.StructureTools.Extensions/bin/Release/BBT.StructureTools.Extensions.$BUILD_VERSION.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGETORG}}
