@@ -4,25 +4,28 @@
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <AssemblyTitle>BBT.StructureTools.Extensions</AssemblyTitle>
     <CodeAnalysisRuleSet>..\BBT.StructureTools.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.XML</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.xml</DocumentationFile>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>BBT.StructureTools.Extensions</Title>
+    <Title>BBT StructureTools Extensions</Title>
     <Description>Extensions to BBT.StructureTools (e.g. implementations of ICreateConvertHelper and IConvertHelperFactory interfaces).</Description>
     <Product>BBT.StructureTools</Product>
     <Company>BBT Software AG</Company>
     <Authors>BBT Software AG</Authors>
     <Copyright>Copyright © BBT Software AG</Copyright>
-    <PackageTags>copy compare convert</PackageTags>
+    <PackageId>BBT.StructureTools.Extensions</PackageId>
+    <PackageTags>StructureTools Functional</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageProjectUrl>http://bbtsoftware.github.io/BBT.StructureTools/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/bbtsoftware/BBT.StructureTools/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bbtsoftware/BBT.StructureTools.git</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/2.0.1</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/2.1.2</PackageReleaseNotes>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.xml</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,16 +35,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup> 
-  
+
   <ItemGroup>
     <ProjectReference Include="..\BBT.StructureTools\BBT.StructureTools.csproj" />
   </ItemGroup> 
-  
+
   <ItemGroup>
-    <None Include="icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
