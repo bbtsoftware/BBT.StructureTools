@@ -47,19 +47,17 @@
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(
-            TSource source,
-            TReverseRelation reverseRelation,
-            ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public TTarget Create(TSource source, TReverseRelation reverseRelation)
         {
-            source.NotNull(nameof(source));
-            reverseRelation.NotNull(nameof(reverseRelation));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
-
             var target = this.instanceCreator.Create();
             target.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
-            this.convert.Convert(source, target, additionalProcessings);
             return target;
+        }
+
+        /// <inheritdoc/>
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        {
+            this.convert.Convert(source, target, additionalProcessings);
         }
     }
 
@@ -93,15 +91,15 @@
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(
-            TSource source,
-            ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
-
-            var target = this.instanceCreator.Create();
             this.convert.Convert(source, target, additionalProcessings);
+        }
+
+        /// <inheritdoc/>
+        public TTarget Create(TSource source)
+        {
+            var target = this.instanceCreator.Create();
             return target;
         }
     }

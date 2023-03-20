@@ -60,13 +60,13 @@
                 return;
             }
 
-            var targetValue = this.createConvertHelper.CreateTarget(
-                    sourceValue,
-                    additionalProcessings);
+            var targetValue = this.createConvertHelper.Create(sourceValue);
 
             target.SetPropertyValue(
                 this.targetExpression,
                 targetValue);
+
+            this.createConvertHelper.Convert(sourceValue, targetValue, additionalProcessings);
         }
     }
 }

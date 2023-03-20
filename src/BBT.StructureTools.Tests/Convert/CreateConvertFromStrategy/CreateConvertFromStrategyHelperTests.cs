@@ -34,7 +34,8 @@
 
             var processings = new List<IBaseAdditionalProcessing>();
             var source = new SourceDerivedLeaf();
-            var target = testCandidate.CreateTarget(source, processings);
+            var target = testCandidate.Create(source);
+            testCandidate.Convert(source, target, processings);
 
             target.Should().NotBeNull();
             target.Should().BeOfType<TargetDerivedLeaf>();
@@ -55,7 +56,8 @@
             var processings = new List<IBaseAdditionalProcessing>();
             var source = new SourceDerivedLeaf();
             var reverseRelation = new TargetRoot();
-            var target = testCandidate.CreateTarget(source, reverseRelation, processings);
+            var target = testCandidate.Create(source, reverseRelation);
+            testCandidate.Convert(source, target, processings);
 
             target.Should().NotBeNull();
             target.Should().BeOfType<TargetDerivedLeaf>();
