@@ -82,8 +82,7 @@
 
             var sourceValues = this.sourceFunc.Invoke(source, target);
 
-            var copies = new List<TTargetValue>();
-
+            var targetList = target.GetList(this.targetExpression);
             foreach (var sourceValue in sourceValues)
             {
                 if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
@@ -98,21 +97,22 @@
                     continue;
                 }
 
-                var copy = this.createConvertHelper.CreateTarget(
+                var copy = this.createConvertHelper.Create(
                     sourceValue,
-                    target,
+                    target);
+
+                targetList.AddUnique(copy);
+
+                this.createConvertHelper.Convert(
+                    sourceValue,
+                    copy,
                     additionalProcessings);
-                copies.Add(copy);
-            }
 
-            if (copyToOne)
-            {
-                this.targetValueTemporalDataHandler.SetEndInfinte(copies[0], TemporalConstants.InfiniteDate);
+                if (copyToOne)
+                {
+                    this.targetValueTemporalDataHandler.SetEndInfinte(copy, TemporalConstants.InfiniteDate);
+                }
             }
-
-            target.AddRangeFilterNullValues(
-                this.targetExpression,
-                copies);
         }
     }
 }

@@ -67,14 +67,18 @@
 
             var relation = this.relationFunc(source, target);
 
-            var targetValue = this.createConvertHelper.CreateTarget(
-                    sourceValue,
-                    relation,
-                    additionalProcessings);
+            var targetValue = this.createConvertHelper.Create(
+                sourceValue,
+                relation);
 
             target.SetPropertyValue(
                 this.targetExpression,
                 targetValue);
+
+            this.createConvertHelper.Convert(
+                sourceValue,
+                targetValue,
+                additionalProcessings);
         }
     }
 }

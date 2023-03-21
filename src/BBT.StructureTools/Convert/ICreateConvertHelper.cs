@@ -23,11 +23,18 @@
         void SetupReverseRelation(Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr);
 
         /// <summary>
-        /// Creates a new <typeparamref name="TTarget"/> converted from <paramref name="source"/>.
+        /// Creates <typeparamref name="TTarget"/> with <paramref name="reverseRelation"/>.
         /// </summary>
-        TTarget CreateTarget(
+        TTarget Create(
             TSource source,
-            TReverseRelation reverseRelation,
+            TReverseRelation reverseRelation);
+
+        /// <summary>
+        /// Converts <paramref name="source"/> into <paramref name="target"/>.
+        /// </summary>
+        void Convert(
+            TSource source,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 
@@ -43,10 +50,16 @@
         where TConvertIntention : IBaseConvertIntention
     {
         /// <summary>
-        /// Creates a new <typeparamref name="TTarget"/> converted from <paramref name="source"/>.
+        /// Creates <typeparamref name="TTarget"/>.
         /// </summary>
-        TTarget CreateTarget(
+        TTarget Create(TSource source);
+
+        /// <summary>
+        /// Converts <paramref name="source"/> into <paramref name="target"/>.
+        /// </summary>
+        void Convert(
             TSource source,
+            TTarget target,
             ICollection<IBaseAdditionalProcessing> additionalProcessings);
     }
 }

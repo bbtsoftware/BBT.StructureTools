@@ -4,25 +4,28 @@
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <AssemblyTitle>BBT.StructureTools</AssemblyTitle>
     <CodeAnalysisRuleSet>..\BBT.StructureTools.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.XML</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.xml</DocumentationFile>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>BBT.StructureTools</Title>
-    <Description>Classes for copying, comparing and converting object structures.</Description>
+    <Title>BBT StructureTools</Title>
+    <Description>.NET classes for copying, comparing and converting object structures.</Description>
     <Product>BBT.StructureTools</Product>
     <Company>BBT Software AG</Company>
     <Authors>BBT Software AG</Authors>
     <Copyright>Copyright © BBT Software AG</Copyright>
-    <PackageTags>copy compare convert</PackageTags>
+    <PackageId>BBT.StructureTools</PackageId>
+    <PackageTags>StructureTools Functional</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageProjectUrl>http://bbtsoftware.github.io/BBT.StructureTools/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/bbtsoftware/BBT.StructureTools/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bbtsoftware/BBT.StructureTools.git</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/2.0.1</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/3.0.0</PackageReleaseNotes>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.xml</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,7 +42,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="\" />
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

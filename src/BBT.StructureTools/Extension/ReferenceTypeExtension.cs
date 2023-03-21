@@ -12,6 +12,45 @@
     internal static class ReferenceTypeExtension
     {
         /// <summary>
+        /// Adds <paramref name="value"/> to <paramref name="targetList"/>.
+        /// But only if <paramref name="value"/> is not already added.
+        /// </summary>
+        /// <typeparam name="TValue">Type of list entries.</typeparam>
+        internal static void AddUnique<TValue>(
+            this ICollection<TValue> targetList,
+            TValue value)
+            where TValue : class
+        {
+            targetList.NotNull(nameof(targetList));
+            value.NotNull(nameof(value));
+
+            if (!targetList.Contains(value))
+            {
+                targetList.Add(value);
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of <paramref name="target"/> collection property
+        /// according to <paramref name="targetExpression"/>.
+        /// </summary>
+        /// <typeparam name="TTarget">The owner of the list.</typeparam>
+        /// <typeparam name="TValue">The type of list entries.</typeparam>
+        internal static ICollection<TValue> GetList<TTarget, TValue>(
+            this TTarget target,
+            Expression<Func<TTarget, ICollection<TValue>>> targetExpression)
+            where TTarget : class
+            where TValue : class
+        {
+            target.NotNull(nameof(target));
+            targetExpression.NotNull(nameof(targetExpression));
+
+            var targetListFunc = targetExpression.Compile();
+            var targetList = targetListFunc.Invoke(target);
+            return targetList;
+        }
+
+        /// <summary>
         /// An extension enabling addition of many elements to an enumeration without adding null values within the origin.
         /// </summary>
         /// <typeparam name="TTarget">The type of the owner of the collection property.</typeparam>

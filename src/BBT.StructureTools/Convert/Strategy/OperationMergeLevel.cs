@@ -77,8 +77,6 @@
 
             var mergeValues = this.mergeFunc.Invoke(source);
 
-            var copies = new List<TTargetValue>();
-
             foreach (var mergeValue in mergeValues)
             {
                 if (!this.convertHelper.ContinueConvertProcess<TMergeValue, TTargetValue>(
@@ -89,6 +87,7 @@
 
                 var sourceValues = this.sourceFunc.Invoke(mergeValue);
 
+                var targetList = target.GetList(this.targetExpression);
                 foreach (var sourceValue in sourceValues)
                 {
                     if (!this.convertHelper.ContinueConvertProcess<TSourceValue, TTargetValue>(
@@ -97,17 +96,18 @@
                         continue;
                     }
 
-                    var copy = this.createConvertHelper.CreateTarget(
+                    var copy = this.createConvertHelper.Create(
                         sourceValue,
-                        target,
+                        target);
+
+                    targetList.AddUnique(copy);
+
+                    this.createConvertHelper.Convert(
+                        sourceValue,
+                        copy,
                         additionalProcessings);
-                    copies.Add(copy);
                 }
             }
-
-            target.AddRangeFilterNullValues(
-                this.targetExpression,
-                copies);
         }
     }
 }

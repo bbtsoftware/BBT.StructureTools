@@ -30,18 +30,19 @@
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(
-            TSource source,
-            TReverseRelation reverseRelation,
-            ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            reverseRelation.NotNull(nameof(reverseRelation));
+            var strategy = this.strategyProvider.GetStrategy(source);
+            strategy.Convert(source, target, additionalProcessings);
+        }
 
+        /// <inheritdoc/>
+        public TTarget Create(TSource source, TReverseRelation reverseRelation)
+        {
             var strategy = this.strategyProvider.GetStrategy(source);
             var concreteTarget = strategy.CreateTarget(source);
             concreteTarget.SetPropertyValue(this.reverseRelationExpr, reverseRelation);
-            strategy.Convert(source, concreteTarget, additionalProcessings);
+            
             return concreteTarget;
         }
 

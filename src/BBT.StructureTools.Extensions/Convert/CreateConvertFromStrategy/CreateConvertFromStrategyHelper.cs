@@ -26,15 +26,18 @@
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(TSource source, ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            var strategy = this.strategyProvider.GetStrategy(source);
+            strategy.Convert(source, target, additionalProcessings);
+        }
 
+        /// <inheritdoc/>
+        public TTarget Create(TSource source)
+        {
             var strategy = this.strategyProvider.GetStrategy(source);
 
             var concreteTarget = strategy.CreateTarget(source);
-            strategy.Convert(source, concreteTarget, additionalProcessings);
 
             return concreteTarget;
         }

@@ -48,14 +48,16 @@
                 return;
             }
 
-            var targetValue = this.createConvertHelper.CreateTarget(
-                    source,
-                    target,
-                    additionalProcessings);
+            var targetValue = this.createConvertHelper.Create(source, target);
 
             target.SetPropertyValue(
                 this.targetExpression,
                 targetValue);
+
+            this.createConvertHelper.Convert(
+                source,
+                targetValue,
+                additionalProcessings);
         }
     }
 }
