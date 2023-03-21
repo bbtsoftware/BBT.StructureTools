@@ -32,15 +32,15 @@
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(
-            TSource source,
-            ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
         {
-            source.NotNull(nameof(source));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            this.convert.Convert(source, (TTargetImpl)target, additionalProcessings);
+        }
 
+        /// <inheritdoc/>
+        public TTarget Create(TSource source)
+        {
             var target = this.instanceCreator.Create();
-            this.convert.Convert(source, target, additionalProcessings);
 
             return target;
         }
