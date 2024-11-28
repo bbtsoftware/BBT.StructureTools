@@ -122,7 +122,7 @@
             return comparer
                 .GetType()
                 .GetMethods()
-                .First(x => x.Name == nameof(comparer.GetHashCode))
+                .First(x => x.Name == nameof(comparer.GetHashCode) && x.GetParameters().Length > 0)
                 .GetParameters()
                 .First()
                 .ParameterType;
