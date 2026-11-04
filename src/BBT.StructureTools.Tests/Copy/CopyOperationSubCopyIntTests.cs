@@ -5,7 +5,7 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -37,7 +37,7 @@
             this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            target.Value1.Should().Be(45);
+            target.Value1.ShouldBe(45);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@
             this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            target.Value2.Should().Be(35);
+            target.Value2.ShouldBe(35);
         }
 
         /// <summary>
@@ -76,8 +76,8 @@
             this.testCandidate.Copy(source, target, additionalProcessings);
 
             // Assert
-            target.Value1.Should().Be(27);
-            target.Value2.Should().Be(39);
+            target.Value1.ShouldBe(27);
+            target.Value2.ShouldBe(39);
         }
 
         private class TestClassChild : TestClassParent
@@ -95,7 +95,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterSubCopy<ICopy<TestClassParent>>();
@@ -106,7 +106,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassParent> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterAttribute(x => x.Value1);

@@ -16,7 +16,7 @@
     using BBT.StructureTools.Tests.Convert.Registrations.WholeStructure;
     using BBT.StructureTools.Tests.Convert.TestData;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -92,8 +92,8 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            targetTree.TreeName.Should().Be(sourceTree.TreeName);
-            targetTree.TemporalDataOriginId.Should().Be(targetTree.MasterDataId);
+            targetTree.TreeName.ShouldBe(sourceTree.TreeName);
+            targetTree.TemporalDataOriginId.ShouldBe(targetTree.MasterDataId);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            sourceTree.Leafs.Count.ShouldBe(targetTree.TargetLeafs.Count);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            sourceTree.Leafs.Count.ShouldBe(targetTree.TargetLeafs.Count);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            sourceTree.Leafs.Count.ShouldBe(targetTree.TargetLeafs.Count);
         }
 
         /// <summary>
@@ -213,10 +213,10 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
-            targetIds.Should().BeEquivalentTo(targetTree.TargetLeafs.Select(x => x.Id).ToList());
-            sourceIds.Should().BeEquivalentTo(sourceTree.Leafs.Select(x => x.Id).ToList());
-            preProcHits.Should().Be(2);
+            sourceTree.Leafs.Count.ShouldBe(targetTree.TargetLeafs.Count);
+            targetIds.ShouldBe(targetTree.TargetLeafs.Select(x => x.Id).ToList(), ignoreOrder: true);
+            sourceIds.ShouldBe(sourceTree.Leafs.Select(x => x.Id).ToList(), ignoreOrder: true);
+            preProcHits.ShouldBe(2);
         }
 
         /// <summary>
@@ -252,11 +252,11 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            targetTree.TargetHists.Count.Should().Be(1);
+            targetTree.TargetHists.Count.ShouldBe(1);
             var targetHist = targetTree.TargetHists.Single();
-            targetHist.OriginId.Should().Be(expFilteredHist.Id);
-            targetHist.From.Should().Be(expFilteredHist.From);
-            targetHist.To.Should().Be(expEndDate);
+            targetHist.OriginId.ShouldBe(expFilteredHist.Id);
+            targetHist.From.ShouldBe(expFilteredHist.From);
+            targetHist.To.ShouldBe(expEndDate);
         }
 
         /// <summary>
@@ -285,7 +285,7 @@
             converter.Convert(sourceRoot, targetRoot, processings);
 
             // Assert
-            targetRoot.TargetLeafs.Count.Should().Be(sourceRoot.Leafs.Count);
+            targetRoot.TargetLeafs.Count.ShouldBe(sourceRoot.Leafs.Count);
         }
 
         /// <summary>
@@ -315,7 +315,7 @@
             converter.Convert(sourceRoot, targetRoot, processings);
 
             // Assert
-            targetRoot.TargetLeafs.Count.Should().Be(sourceRoot.Leafs.Count);
+            targetRoot.TargetLeafs.Count.ShouldBe(sourceRoot.Leafs.Count);
         }
 
         /// <summary>
@@ -343,8 +343,8 @@
             converter.Convert(sourceRoot, targetRoot, processings);
 
             // Assert
-            targetRoot.TargetTree.Should().NotBeNull();
-            targetRoot.TargetTree.RelationOnTarget.Should().Be(targetRoot.RelationOnTarget);
+            targetRoot.TargetTree.ShouldNotBeNull();
+            targetRoot.TargetTree.RelationOnTarget.ShouldBe(targetRoot.RelationOnTarget);
         }
 
         /// <summary>
@@ -375,9 +375,9 @@
             converter.Convert(sourceRoot, targetRoot, processings);
 
             // Assert
-            targetRoot.TargetTree.Should().NotBeNull();
-            targetRoot.TargetTree.RelationOnTarget.Should().Be(targetRoot.RelationOnTarget);
-            targetRoot.TargetTree.TemporalDataOriginId.Should().Be(targetRoot.Id);
+            targetRoot.TargetTree.ShouldNotBeNull();
+            targetRoot.TargetTree.RelationOnTarget.ShouldBe(targetRoot.RelationOnTarget);
+            targetRoot.TargetTree.TemporalDataOriginId.ShouldBe(targetRoot.Id);
         }
 
         /// <summary>
@@ -410,9 +410,9 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            targetTree.TargetLeafs.Count.Should().Be(1);
+            targetTree.TargetLeafs.Count.ShouldBe(1);
             var targetLeaf = targetTree.TargetLeafs.Single();
-            targetLeaf.RelationOnTarget.Should().Be(targetTree.RelationOnTarget);
+            targetLeaf.RelationOnTarget.ShouldBe(targetTree.RelationOnTarget);
         }
 
         /// <summary>
@@ -445,10 +445,10 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            targetTree.TargetLeafs.Count.Should().Be(1);
+            targetTree.TargetLeafs.Count.ShouldBe(1);
             var targetLeaf = targetTree.TargetLeafs.Single();
-            targetLeaf.RelationOnTarget.Should().Be(targetTree.RelationOnTarget);
-            targetLeaf.OriginId.Should().Be(targetTree.Id);
+            targetLeaf.RelationOnTarget.ShouldBe(targetTree.RelationOnTarget);
+            targetLeaf.OriginId.ShouldBe(targetTree.Id);
         }
 
         /// <summary>
@@ -475,11 +475,11 @@
             converter.Convert(sourceTree, targetTree, processings);
 
             // Assert
-            sourceTree.Leafs.Count.Should().Be(targetTree.TargetLeafs.Count);
+            sourceTree.Leafs.Count.ShouldBe(targetTree.TargetLeafs.Count);
             for (var i = 0; i < sourceTree.Leafs.Count; i++)
             {
-                targetTree.TargetLeafs[i].TargetTree.Should().Be(targetTree);
-                targetTree.TargetLeafs[i].OriginId.Should().Be(sourceTree.Leafs.ElementAt(i).Id);
+                targetTree.TargetLeafs[i].TargetTree.ShouldBe(targetTree);
+                targetTree.TargetLeafs[i].OriginId.ShouldBe(sourceTree.Leafs.ElementAt(i).Id);
             }
         }
 
@@ -489,28 +489,28 @@
 
         private static void AssertRoot(SourceRoot sourceRoot, TargetRoot targetRoot)
         {
-            targetRoot.OriginRoot.Should().Be(sourceRoot);
-            targetRoot.Name.Should().Be(sourceRoot.Name);
-            targetRoot.RootId.Should().Be(sourceRoot.Id);
-            targetRoot.Id.Should().Be(sourceRoot.Id);
-            targetRoot.TargetId.Should().Be(sourceRoot.Id);
-            targetRoot.NumberSourceDefault.Should().NotBe(sourceRoot.NumberSourceDefault);
-            targetRoot.NumberSourceNotDefault.Should().Be(sourceRoot.NumberSourceNotDefault);
-            targetRoot.NumberTargetDefault.Should().Be(sourceRoot.NumberTargetDefault);
-            targetRoot.NumberTargetNotDefault.Should().NotBe(sourceRoot.NumberTargetNotDefault);
-            targetRoot.NumberSourceLookedUp.Should().Be(sourceRoot.NumberSourceNotDefault);
-            targetRoot.NumberSourceNotLookedUp.Should().Be(sourceRoot.NumberSourceNotDefault);
+            targetRoot.OriginRoot.ShouldBe(sourceRoot);
+            targetRoot.Name.ShouldBe(sourceRoot.Name);
+            targetRoot.RootId.ShouldBe(sourceRoot.Id);
+            targetRoot.Id.ShouldBe(sourceRoot.Id);
+            targetRoot.TargetId.ShouldBe(sourceRoot.Id);
+            targetRoot.NumberSourceDefault.ShouldNotBe(sourceRoot.NumberSourceDefault);
+            targetRoot.NumberSourceNotDefault.ShouldBe(sourceRoot.NumberSourceNotDefault);
+            targetRoot.NumberTargetDefault.ShouldBe(sourceRoot.NumberTargetDefault);
+            targetRoot.NumberTargetNotDefault.ShouldNotBe(sourceRoot.NumberTargetNotDefault);
+            targetRoot.NumberSourceLookedUp.ShouldBe(sourceRoot.NumberSourceNotDefault);
+            targetRoot.NumberSourceNotLookedUp.ShouldBe(sourceRoot.NumberSourceNotDefault);
 
             // ToDo: Check is this a bug? see https://github.com/bbtsoftware/BBT.StructureTools/issues/65.
             // targetRoot.NumberLimitNotApplied.Should().Be(sourceRoot.NumberSourceDefault);
-            targetRoot.NumberLimitApplied.Should().NotBe(sourceRoot.NumberSourceNotDefault);
-            targetRoot.EnumValue.Should().Be(sourceRoot.EnumValue.Target);
-            targetRoot.FilteredHist.Should().Be(sourceRoot.Tree.ExpectedFilteredHist);
-            ((TargetDerivedLeaf)targetRoot.TargetLeaf).OriginId.Should().Be(((SourceDerivedLeaf)sourceRoot.Leaf).Id);
+            targetRoot.NumberLimitApplied.ShouldNotBe(sourceRoot.NumberSourceNotDefault);
+            targetRoot.EnumValue.ShouldBe(sourceRoot.EnumValue.Target);
+            targetRoot.FilteredHist.ShouldBe(sourceRoot.Tree.ExpectedFilteredHist);
+            ((TargetDerivedLeaf)targetRoot.TargetLeaf).OriginId.ShouldBe(((SourceDerivedLeaf)sourceRoot.Leaf).Id);
 
-            targetRoot.TargetMasterData.OriginId.Should().Be(sourceRoot.ExpectedFilteredMasterData.Id);
-            targetRoot.TargetMasterData.IsDefault.Should().Be(sourceRoot.ExpectedFilteredMasterData.IsDefault);
-            targetRoot.FilteredMasterDataId.Should().Be(sourceRoot.ExpectedFilteredMasterData.Id);
+            targetRoot.TargetMasterData.OriginId.ShouldBe(sourceRoot.ExpectedFilteredMasterData.Id);
+            targetRoot.TargetMasterData.IsDefault.ShouldBe(sourceRoot.ExpectedFilteredMasterData.IsDefault);
+            targetRoot.FilteredMasterDataId.ShouldBe(sourceRoot.ExpectedFilteredMasterData.Id);
 
             AssertTree(sourceRoot, targetRoot);
         }
@@ -520,15 +520,15 @@
             var sourceTree = sourceRoot.Tree;
             var targetTree = targetRoot.TargetTree;
 
-            targetRoot.TargetTreeId.Should().Be(targetTree.Id);
-            targetRoot.OriginTreeId.Should().Be(sourceTree.Id);
-            targetRoot.TreeId.Should().Be(sourceTree.Id);
-            targetTree.TargetRoot.Should().Be(targetRoot);
-            targetTree.OriginTree.Should().Be(sourceRoot.Tree);
-            targetTree.TreeName.Should().Be(sourceTree.TreeName);
-            targetTree.MasterDataId.Should().Be(sourceTree.MasterData.Id);
-            targetTree.TemporalDataOriginId.Should().Be(sourceTree.ExpectedFilteredHist.Id);
-            targetTree.BaseDataId.Should().Be(sourceTree.BaseDataId);
+            targetRoot.TargetTreeId.ShouldBe(targetTree.Id);
+            targetRoot.OriginTreeId.ShouldBe(sourceTree.Id);
+            targetRoot.TreeId.ShouldBe(sourceTree.Id);
+            targetTree.TargetRoot.ShouldBe(targetRoot);
+            targetTree.OriginTree.ShouldBe(sourceRoot.Tree);
+            targetTree.TreeName.ShouldBe(sourceTree.TreeName);
+            targetTree.MasterDataId.ShouldBe(sourceTree.MasterData.Id);
+            targetTree.TemporalDataOriginId.ShouldBe(sourceTree.ExpectedFilteredHist.Id);
+            targetTree.BaseDataId.ShouldBe(sourceTree.BaseDataId);
 
             AssertTreeLeafs(sourceTree, targetTree);
             AssertTreeHistLeafs(sourceTree, targetTree);
@@ -536,40 +536,40 @@
 
         private static void AssertTreeLeafs(SourceTree sourceTree, TargetTree targetTree)
         {
-            targetTree.TargetLeafs.Count.Should().Be(sourceTree.Leafs.Count);
+            targetTree.TargetLeafs.Count.ShouldBe(sourceTree.Leafs.Count);
 
             for (var i = 0; i < sourceTree.Leafs.Count; i++)
             {
                 var targetLeaf = targetTree.TargetLeafs.ElementAt(i);
-                targetLeaf.TargetTree.Should().Be(targetTree);
+                targetLeaf.TargetTree.ShouldBe(targetTree);
                 AssertTreeLeaf(sourceTree.Leafs.ElementAt(i), targetLeaf);
             }
         }
 
         private static void AssertTreeLeaf(SourceTreeLeaf sourceLeaf, TargetTreeLeaf targetLeaf)
         {
-            targetLeaf.OriginId.Should().Be(sourceLeaf.Id);
-            targetLeaf.MasterDataId.Should().Be(sourceLeaf.MasterDatas.First().Id);
-            targetLeaf.LeafName.Should().Be(sourceLeaf.LeafName);
-            targetLeaf.Child.OriginId.Should().Be(sourceLeaf.Id);
+            targetLeaf.OriginId.ShouldBe(sourceLeaf.Id);
+            targetLeaf.MasterDataId.ShouldBe(sourceLeaf.MasterDatas.First().Id);
+            targetLeaf.LeafName.ShouldBe(sourceLeaf.LeafName);
+            targetLeaf.Child.OriginId.ShouldBe(sourceLeaf.Id);
         }
 
         private static void AssertTreeHistLeafs(SourceTree sourceTree, TargetTree targetTree)
         {
             var sourceTreeHistLeafs = sourceTree.Leafs.SelectMany(x => x.TreeHistLeafs).ToList();
-            targetTree.TargetHistLeafs.Count.Should().Be(sourceTreeHistLeafs.Count);
+            targetTree.TargetHistLeafs.Count.ShouldBe(sourceTreeHistLeafs.Count);
 
             for (var i = 0; i < sourceTreeHistLeafs.Count; i++)
             {
                 var targetHistLeaf = targetTree.TargetHistLeafs.ElementAt(i);
-                targetHistLeaf.TargetTree.Should().Be(targetTree);
+                targetHistLeaf.TargetTree.ShouldBe(targetTree);
                 AssertTreeHistLeaf(sourceTreeHistLeafs.ElementAt(i), targetHistLeaf);
             }
         }
 
         private static void AssertTreeHistLeaf(SourceTreeHistLeaf sourceHistLeaf, TargetTreeHistLeaf targetHistLeaf)
         {
-            targetHistLeaf.OriginTreeHistLeafId.Should().Be(sourceHistLeaf.TreeHistLeafId);
+            targetHistLeaf.OriginTreeHistLeafId.ShouldBe(sourceHistLeaf.TreeHistLeafId);
         }
 
         #endregion

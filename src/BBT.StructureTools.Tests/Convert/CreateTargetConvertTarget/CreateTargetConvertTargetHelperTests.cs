@@ -7,7 +7,7 @@
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -33,8 +33,8 @@
             var target = testCandidate.Create(source);
             testCandidate.Convert(source, target, processings);
 
-            target.Should().NotBeNull();
-            target.OriginId.Should().Be(source.Id);
+            target.ShouldNotBeNull();
+            target.OriginId.ShouldBe(source.Id);
         }
 
         [Fact]
@@ -52,9 +52,9 @@
             var target = testCandidate.Create(source, reverseRelation);
             testCandidate.Convert(source, target, processings);
 
-            target.Should().NotBeNull();
-            target.OriginId.Should().Be(source.Id);
-            target.TargetTree.Should().Be(reverseRelation);
+            target.ShouldNotBeNull();
+            target.OriginId.ShouldBe(source.Id);
+            target.TargetTree.ShouldBe(reverseRelation);
         }
     }
 }

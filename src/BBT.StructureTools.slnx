@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BBT.StructureTools.Extensions/BBT.StructureTools.Extensions.csproj" />
+  <Project Path="BBT.StructureTools.Tests/BBT.StructureTools.Tests.csproj" />
+  <Project Path="BBT.StructureTools/BBT.StructureTools.csproj" />
+</Solution>

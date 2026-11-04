@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+	<Company>BBT Software AG</Company>
+	<Product>BBT.StructureTools</Product>
+	<Copyright>Copyright © BBT Software AG</Copyright>
+	<OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  
+    <!-- Enable code analyzers -->
+  <PropertyGroup>
+    <!-- https://learn.microsoft.com/de-de/dotnet/core/project-sdk/msbuild-props -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers> <!-- required if a project only targets e.g. netstandard2.0 w -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+</Project>

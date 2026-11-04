@@ -8,7 +8,7 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Strategy;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -57,19 +57,19 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
-            testClassParentCopyChildren.Count.Should().Be(3);
+            testClassParentCopyChildren.Count.ShouldBe(3);
 
-            testClassParentCopyChildren.ElementAt(0).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(0).TestValue * 2);
-            testClassParentCopyChildren.ElementAt(1).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(1).TestValue * 2);
-            testClassParentCopyChildren.ElementAt(2).TestValue.Should().Be(testClassParentOriginchildren.ElementAt(2).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(0).TestValue.ShouldBe(testClassParentOriginchildren.ElementAt(0).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(1).TestValue.ShouldBe(testClassParentOriginchildren.ElementAt(1).TestValue * 2);
+            testClassParentCopyChildren.ElementAt(2).TestValue.ShouldBe(testClassParentOriginchildren.ElementAt(2).TestValue * 2);
 
             foreach (var copiedChild in testClassParentCopyChildren)
             {
                 foreach (var originchild in testClassParentOriginal.Children)
                 {
-                    originchild.Should().NotBeSameAs(copiedChild);
+                    originchild.ShouldNotBeSameAs(copiedChild);
                 }
             }
         }
@@ -114,9 +114,9 @@
             // Assert
             // Make sure original and copy of the parent object are not the same.
             // Also make sure the parent test class children collection, which is empty, was copied.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
-            testClassParentCopy.Children.Should().NotBeSameAs(testClassParentOriginal.Children);
-            testClassParentCopy.Children.Should().NotBeNull();
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.Children.ShouldNotBeSameAs(testClassParentOriginal.Children);
+            testClassParentCopy.Children.ShouldNotBeNull();
         }
 
         #region test data
@@ -202,7 +202,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
 
@@ -210,7 +210,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
                 registrations.RegisterCreateToManyFromGenericStrategy<ITestStrategy, IChildTestClass>(
                     x => x.Children.Cast<IChildTestClass>(),
                     x => x.Children,
@@ -246,9 +246,9 @@
 
             public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCalcontext)
             {
-                source.Should().NotBeNull();
-                target.Should().NotBeNull();
-                copyCalcontext.Should().NotBeNull();
+                source.ShouldNotBeNull();
+                target.ShouldNotBeNull();
+                copyCalcontext.ShouldNotBeNull();
 
                 target.TestValue = source.TestValue * 2;
             }

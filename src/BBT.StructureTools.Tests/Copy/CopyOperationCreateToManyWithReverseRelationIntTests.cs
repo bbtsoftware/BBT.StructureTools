@@ -6,7 +6,7 @@
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -60,15 +60,15 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
             // Don't forget to do this! Since the Children are a Collection the above wy of
             // retrieving the ist is not typesafe and some objects could fall between chairs and table.
-            testClassParentCopyChildren.Count.Should().Be(3);
+            testClassParentCopyChildren.Count.ShouldBe(3);
 
             foreach (var child in testClassParentCopyChildren)
             {
-                child.ParentReference.Should().BeSameAs(testClassParentCopy);
+                child.ParentReference.ShouldBeSameAs(testClassParentCopy);
             }
         }
 
@@ -115,9 +115,9 @@
             // Assert
             // Make sure original and copy of the parent object are not the same.
             // Also make sure the parent test class children collection, which is empty, was copied.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
-            testClassParentCopy.Children.Should().NotBeSameAs(testClassParentOriginal.Children);
-            testClassParentCopy.Children.Should().NotBeNull();
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.Children.ShouldNotBeSameAs(testClassParentOriginal.Children);
+            testClassParentCopy.Children.ShouldNotBeNull();
         }
 
         #region test data
@@ -202,7 +202,7 @@
             // is mandatory. Otherwise copying the child elements wouldn't work!
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
 
@@ -210,7 +210,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterCreateToManyWithReverseRelation<IChildTestClass, ChildTestClass>(
                     x => x.Children?.Cast<IChildTestClass>(),

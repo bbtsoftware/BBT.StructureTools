@@ -7,7 +7,7 @@
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -65,9 +65,9 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
-            testClassParentCopyChildren.Count.Should().Be(0);
+            testClassParentCopyChildren.Count.ShouldBe(0);
         }
 
         /// <summary>
@@ -106,13 +106,13 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
-            testClassParentOriginal.Children.Count.Should().Be(3);
+            testClassParentOriginal.Children.Count.ShouldBe(3);
 
             foreach (var childhild in testClassParentCopyChildren)
             {
-                childhild.ParentReference.Should().BeSameAs(testClassParentCopy);
+                childhild.ParentReference.ShouldBeSameAs(testClassParentCopy);
             }
         }
 
@@ -152,13 +152,13 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
-            testClassParentCopyChildren.Count.Should().Be(0);
+            testClassParentCopyChildren.Count.ShouldBe(0);
 
             foreach (var childhild in testClassParentCopyChildren)
             {
-                childhild.ParentReference.Should().BeSameAs(testClassParentCopy);
+                childhild.ParentReference.ShouldBeSameAs(testClassParentCopy);
             }
         }
 
@@ -254,7 +254,7 @@
             // is mandatory. Otherwise copying the child elements wouldn't work!
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
 
@@ -262,7 +262,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass2> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterSubCopy<ICopy<IChildTestClass>>();
             }
@@ -272,7 +272,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterCreateToManyWithReverseRelation<IChildTestClass, ChildTestClass>(
                     x => x.Children?.Cast<IChildTestClass>(),

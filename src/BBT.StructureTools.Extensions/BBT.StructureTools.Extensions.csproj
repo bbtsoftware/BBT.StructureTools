@@ -1,21 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
     <AssemblyTitle>BBT.StructureTools.Extensions</AssemblyTitle>
-    <CodeAnalysisRuleSet>..\BBT.StructureTools.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\$(Configuration)\BBT.StructureTools.xml</DocumentationFile>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
     <Title>BBT StructureTools Extensions</Title>
     <Description>Extensions to BBT.StructureTools (e.g. implementations of ICreateConvertHelper and IConvertHelperFactory interfaces).</Description>
-    <Product>BBT.StructureTools</Product>
-    <Company>BBT Software AG</Company>
     <Authors>BBT Software AG</Authors>
-    <Copyright>Copyright © BBT Software AG</Copyright>
     <PackageId>BBT.StructureTools.Extensions</PackageId>
     <PackageTags>StructureTools Functional</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
@@ -27,14 +22,6 @@
     <PackageReleaseNotes>https://github.com/bbtsoftware/BBT.StructureTools/releases/tag/3.0.0</PackageReleaseNotes>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.xml</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup> 
 
   <ItemGroup>
     <ProjectReference Include="..\BBT.StructureTools\BBT.StructureTools.csproj" />

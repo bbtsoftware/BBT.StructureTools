@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
 
     /// <summary>
@@ -16,7 +16,7 @@
 
         public NinjectResolver(IKernel kernel)
         {
-            kernel.Should().NotBeNull();
+            kernel.ShouldNotBeNull();
 
             this.kernel = kernel;
         }
