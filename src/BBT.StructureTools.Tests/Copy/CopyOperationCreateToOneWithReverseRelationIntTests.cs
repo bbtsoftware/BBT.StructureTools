@@ -11,7 +11,6 @@
 
     public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
-        #region members and setup
         private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToOneWithReverseRelationIntTests()
@@ -24,7 +23,6 @@
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests ICopy.Copy.
@@ -84,7 +82,6 @@
             testClassParentCopy.Child.ShouldBeNull();
         }
 
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -146,6 +143,5 @@
                     x => x.ParentReference);
             }
         }
-        #endregion
     }
 }

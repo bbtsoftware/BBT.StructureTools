@@ -13,7 +13,6 @@
 
     public class CopierIntegrationTests
     {
-        #region members and setup
         private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopierIntegrationTests()
@@ -27,7 +26,6 @@
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests ICopy.Copy.
@@ -162,7 +160,6 @@
             }
         }
 
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -280,6 +277,5 @@
                     x => x.ParentReference);
             }
         }
-        #endregion
     }
 }

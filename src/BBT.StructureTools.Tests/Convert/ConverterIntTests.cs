@@ -25,7 +25,6 @@
     /// </summary>
     public class ConverterIntTests
     {
-        #region Setup
         private static IKernel container;
 
         public ConverterIntTests()
@@ -33,9 +32,7 @@
             container = TestIocContainer.Initialize();
         }
 
-        #endregion
 
-        #region Convert
 
         /// <summary>
         /// Tests the convert from root to leaf into target structure.
@@ -483,10 +480,6 @@
             }
         }
 
-        #endregion
-
-        #region Asserts
-
         private static void AssertRoot(SourceRoot sourceRoot, TargetRoot targetRoot)
         {
             targetRoot.OriginRoot.ShouldBe(sourceRoot);
@@ -571,10 +564,6 @@
         {
             targetHistLeaf.OriginTreeHistLeafId.ShouldBe(sourceHistLeaf.TreeHistLeafId);
         }
-
-        #endregion
-
-        #region Create test data
 
         private static SourceRoot CreateSourceRoot()
         {
@@ -695,10 +684,6 @@
             return sourceLeafMasterData;
         }
 
-        #endregion
-
-        #region Do registrations
-
         private static IConvert<TSource, TTarget, IForTest> GetConverter<TSource, TTarget>()
             where TSource : class
             where TTarget : class
@@ -740,7 +725,5 @@
             container.Bind<ISourceConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest>>().To<GenericSourceConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest, SourceDerivedLeaf, TargetDerivedLeaf>>();
             container.Bind<ICopyRegistrations<BaseData>>().To<BaseDataCopyRegistrations>();
         }
-
-        #endregion
     }
 }

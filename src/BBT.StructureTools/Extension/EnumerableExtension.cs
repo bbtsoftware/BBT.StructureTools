@@ -19,6 +19,7 @@
         internal static bool Only<TEntity>(this IEnumerable<TEntity> list)
         {
             list.NotNull(nameof(list));
+            list = list as TEntity[] ?? list.ToArray();
 
             if (!list.Any())
             {

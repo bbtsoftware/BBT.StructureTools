@@ -13,7 +13,6 @@
 
     public class SubComparerUsingComparerTests
     {
-        #region Members, Setup
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
         private readonly IComparer<TestClassChild, ITestCompareIntention> testCandidate;
 
@@ -28,7 +27,6 @@
             this.testCandidate = kernel.Get<IComparer<TestClassChild, ITestCompareIntention>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests equals.
@@ -171,8 +169,6 @@
             result.ShouldBeTrue();
         }
 
-        #region private test classes and test class helpers
-
         private class TestClassParent
         {
             public int TestValue1 { get; set; }
@@ -204,6 +200,5 @@
                     .RegisterSubCompare(parentCompare);
             }
         }
-        #endregion
     }
 }

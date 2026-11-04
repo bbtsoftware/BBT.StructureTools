@@ -82,8 +82,10 @@
 
             var comparer = new DictionaryComparer<TModel>(compareFunc);
             var counterDictionary = new Dictionary<TModel, int>(comparer);
+
             foreach (var item1 in list1List)
             {
+#pragma warning disable CA1864 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                 if (counterDictionary.ContainsKey(item1))
                 {
                     counterDictionary[item1]++;
@@ -92,6 +94,7 @@
                 {
                     counterDictionary.Add(item1, 1);
                 }
+#pragma warning restore CA1864 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
             }
 
             foreach (var item2 in list2List)

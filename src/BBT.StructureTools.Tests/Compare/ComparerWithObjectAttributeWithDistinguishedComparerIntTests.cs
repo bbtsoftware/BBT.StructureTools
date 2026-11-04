@@ -13,8 +13,6 @@
 
     public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
-        #region Members, Setup
-
         private static IComparer<TestAttribute, ITestCompareIntention> distinguishedComparer;
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
@@ -29,7 +27,6 @@
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests IComparer.Equals.
@@ -170,8 +167,6 @@
             result.ShouldBeTrue();
         }
 
-        #region private test classes and test class helpers
-
         private class TestClass
         {
             public TestAttribute TestAttribute { get; set; }
@@ -205,7 +200,5 @@
                     ComparerWithObjectAttributeWithDistinguishedComparerIntTests.distinguishedComparer);
             }
         }
-
-        #endregion
     }
 }

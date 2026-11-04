@@ -20,8 +20,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
     /// </summary>
     public class CopyOperationPostProcessingUsingParamsIntTests
     {
-        #region setup and members
-
         private ICopy<ITestClass> copy;
 
         public CopyOperationPostProcessingUsingParamsIntTests()
@@ -32,9 +30,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             this.copy = container.Get<ICopy<ITestClass>>();
         }
 
-        #endregion
 
-        #region Tests
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -55,9 +51,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             testClassCopy.TestValue2.ShouldBe(4321);
         }
 
-        #endregion
 
-        #region Testdata
 
         /// <summary>
         /// Interface for a test class.
@@ -101,6 +95,5 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue2 = 4321));
             }
         }
-        #endregion
     }
 }

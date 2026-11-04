@@ -23,7 +23,9 @@
 
             var defaultValue = default(T);
 
+#pragma warning disable CA1508 // 'value.Equals(defaultValue)' is always 'false'. Remove or refactor the condition(s) to avoid dead code.
             var isDefault = value.Equals(defaultValue);
+#pragma warning restore CA1508 // 'value.Equals(defaultValue)' is always 'false'. Remove or refactor the condition(s) to avoid dead code.
 
             return isDefault;
         }

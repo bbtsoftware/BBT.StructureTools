@@ -54,7 +54,7 @@
             source.NotNull(nameof(source));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
+            var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>().ToArray();
             return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));
         }
     }

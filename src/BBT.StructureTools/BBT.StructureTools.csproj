@@ -26,6 +26,10 @@
   <ItemGroup>
     <PackageReference Include="BBT.Maybe" />
     <PackageReference Include="BBT.StrategyPattern" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   
   <ItemGroup>

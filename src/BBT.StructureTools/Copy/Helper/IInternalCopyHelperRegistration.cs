@@ -12,6 +12,8 @@
         /// <summary>
         /// Ends the registrations and start the operation phase.
         /// </summary>
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         ICopyOperation<T> EndRegistrations();
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     }
 }

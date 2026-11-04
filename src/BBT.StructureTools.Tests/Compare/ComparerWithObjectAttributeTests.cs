@@ -15,7 +15,6 @@
     /// </summary>
     public class ComparerWithObjectAttributeTests
     {
-        #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
         public ComparerWithObjectAttributeTests()
@@ -26,8 +25,6 @@
 
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
-
-        #endregion
 
         [Fact]
         public void Equals_WhenSameInstance_MustReturnTrue()
@@ -130,7 +127,6 @@
             result.ShouldBeTrue();
         }
 
-        #region private test classes and test class helpers
         private class TestClass
         {
             public TestAttribute TestAttribute1 { get; set; }
@@ -151,6 +147,5 @@
                 registrations.RegisterAttribute(x => x.TestAttribute1);
             }
         }
-        #endregion
     }
 }

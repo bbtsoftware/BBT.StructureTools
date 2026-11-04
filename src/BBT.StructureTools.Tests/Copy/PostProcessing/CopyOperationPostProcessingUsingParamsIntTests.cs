@@ -11,8 +11,6 @@
 
     public sealed class CopyOperationPostProcessingUsingParamsIntTests
     {
-        #region setup and members
-
         private readonly ICopy<ITestClass> testCandidate;
 
         public CopyOperationPostProcessingUsingParamsIntTests()
@@ -24,9 +22,7 @@
             this.testCandidate = kernel.Get<ICopy<ITestClass>>();
         }
 
-        #endregion
 
-        #region Tests
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -47,9 +43,7 @@
             testClassCopy.TestValue2.ShouldBe(4321);
         }
 
-        #endregion
 
-        #region Testdata
 
         /// <summary>
         /// Interface for a test class.
@@ -94,6 +88,5 @@
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue2 = 4321));
             }
         }
-        #endregion
     }
 }

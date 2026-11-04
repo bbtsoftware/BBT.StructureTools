@@ -14,8 +14,6 @@
 
     public class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
     {
-        #region setup
-
         private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests()
@@ -30,7 +28,6 @@
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
@@ -125,7 +122,6 @@
             testClassParentCopy.ShouldNotBeNull();
         }
 
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -268,6 +264,5 @@
                 return new TestStrategy();
             }
         }
-        #endregion
     }
 }

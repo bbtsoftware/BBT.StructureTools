@@ -12,7 +12,6 @@
 
     public class ToManyComparerTests
     {
-        #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> comparer;
 
         public ToManyComparerTests()
@@ -25,7 +24,6 @@
             this.comparer = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
 
-        #endregion
 
         /// <summary>
         /// Tests the compare infrastructure.
@@ -239,8 +237,6 @@
             result.ShouldBeFalse();
         }
 
-        #region private test classes and test class helpers
-
         private class TestClass
         {
             public List<TestClassistOfChildrenItem> ListOfChildren { private get; set; }
@@ -279,6 +275,5 @@
                 registrations.RegisterAttribute(x => x.TestValue1);
             }
         }
-        #endregion
     }
 }
