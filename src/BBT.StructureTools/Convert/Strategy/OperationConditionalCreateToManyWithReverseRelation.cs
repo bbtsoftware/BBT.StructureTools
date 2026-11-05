@@ -1,14 +1,14 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Strategy;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StrategyPattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Strategy;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>
         : IOperationConditionalCreateToManyWithReverseRelation<TSource, TTarget, TBaseSource, TBaseTarget, TIntention>

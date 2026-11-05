@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Convert;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to convert entities with a <c>ToMany</c> relationship.
     /// See <see cref="IConvertOperation{TSource,TTarget}"/>.

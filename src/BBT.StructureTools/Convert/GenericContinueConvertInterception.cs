@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Generic implementation of <see cref="IConvertInterception{TSoureClass, TTargetClass}"/>.
     /// </summary>

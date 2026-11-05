@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System;
-    using System.Collections.Generic;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// See <see cref="IComparer{T}"/>.
     /// Compares two types based on how they inherit each other / are assignable to each other.

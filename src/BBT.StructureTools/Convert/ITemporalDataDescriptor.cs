@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Defines a type which abstracts the retrieval of temporal data
     /// within the structure tools.

@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using BBT.StructureTools.Convert;
+﻿using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to convert entities of a different source and target type than the calling converter.
     /// </summary>

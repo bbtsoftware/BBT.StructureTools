@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Copy
-{
-    using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Copy.Marker;
+﻿using BBT.StructureTools.Copy.Helper;
+using BBT.StructureTools.Copy.Marker;
 
+namespace BBT.StructureTools.Copy
+{
     /// <summary>
     /// Used to declare properties to copy.
     /// </summary>

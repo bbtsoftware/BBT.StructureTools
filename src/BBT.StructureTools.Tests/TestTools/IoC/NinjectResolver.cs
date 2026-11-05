@@ -3,8 +3,8 @@ namespace BBT.StructureTools.Tests.TestTools.IoC
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Initialization;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
 
     /// <summary>
     /// A <see cref="IIocResolver"/> using Ninject to be

@@ -1,13 +1,13 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using BBT.MaybePattern;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using BBT.MaybePattern;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <inheritdoc/>
     internal class CopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild> : ICopyOperationCreateToManyWithReverseRelation<TParent, TChild, TConcreteChild>
         where TParent : class

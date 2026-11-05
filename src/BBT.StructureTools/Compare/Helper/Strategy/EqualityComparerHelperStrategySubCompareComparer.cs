@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Compare.Helper.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Compare;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BBT.StructureTools;
+using BBT.StructureTools.Compare;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare.Helper.Strategy
+{
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategySubCompareComparer<T, TIntention> : IEqualityComparerHelperStrategy<T>
         where T : class

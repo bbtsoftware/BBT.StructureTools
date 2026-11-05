@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy
-{
-    using BBT.StructureTools.Copy.Marker;
+﻿using BBT.StructureTools.Copy.Marker;
 
+namespace BBT.StructureTools.Copy
+{
     /// <summary>
     /// Represents a "copy" process for an object which refers to its parent.
     /// </summary>

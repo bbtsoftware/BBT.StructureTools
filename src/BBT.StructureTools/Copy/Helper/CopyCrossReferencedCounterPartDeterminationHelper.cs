@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
+using BBT.StructureTools.Copy.Processing;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <summary>
     /// Determines the correct counter part of a cross-referenced model within a copied structure,
     /// and sets the property on the referencing model accordingly.

@@ -5,8 +5,8 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest

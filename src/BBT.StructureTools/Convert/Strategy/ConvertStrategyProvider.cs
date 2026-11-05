@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Initialization;
+﻿using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Initialization;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class ConvertStrategyProvider<TSource, TTarget, TIntention> : IConvertStrategyProvider<TSource, TTarget, TIntention>
         where TIntention : IBaseConvertIntention

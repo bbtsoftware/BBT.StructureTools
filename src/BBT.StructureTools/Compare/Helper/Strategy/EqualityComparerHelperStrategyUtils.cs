@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Compare.Helper.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Compare;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using BBT.StructureTools.Compare;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare.Helper.Strategy
+{
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
     /// </summary>

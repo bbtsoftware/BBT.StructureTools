@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// Implementation of
     /// <see cref="ICopyOperationCreateToOneWithReverseRelation{TParent,TChild,TConcreteChild}"/>.

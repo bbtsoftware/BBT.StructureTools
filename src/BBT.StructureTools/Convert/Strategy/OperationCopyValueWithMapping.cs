@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert.Value;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert.Value;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>
         : IOperationCopyValueWithMapping<TSource, TTarget, TSourceValue, TTargetValue>

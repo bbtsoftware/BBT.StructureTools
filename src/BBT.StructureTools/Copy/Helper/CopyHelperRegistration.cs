@@ -1,17 +1,17 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq.Expressions;
-    using BBT.MaybePattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Operation;
-    using BBT.StructureTools.Copy.Strategy;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Initialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using BBT.MaybePattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Operation;
+using BBT.StructureTools.Copy.Strategy;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Initialization;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <summary>
     /// Helper for the copy mechanism.
     /// </summary>

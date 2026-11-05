@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Extension
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Extension
+{
     /// <summary>
     /// Utilities for value lookup.
     /// </summary>

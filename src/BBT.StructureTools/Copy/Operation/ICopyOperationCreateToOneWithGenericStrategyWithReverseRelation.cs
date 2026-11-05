@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy.Strategy;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy.Strategy;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// Used to copy values using a strategy with a reverse relation.
     /// </summary>

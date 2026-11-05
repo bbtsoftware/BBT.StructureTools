@@ -1,18 +1,18 @@
-﻿namespace BBT.StructureTools.Initialization
-{
-    using System;
-    using BBT.StructureTools.Compare;
-    using BBT.StructureTools.Compare.Helper;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Convert.Strategy;
-    using BBT.StructureTools.Convert.Value;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Copy.Operation;
-    using BBT.StructureTools.Copy.Strategy;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Provider;
+﻿using System;
+using BBT.StructureTools.Compare;
+using BBT.StructureTools.Compare.Helper;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Convert.Strategy;
+using BBT.StructureTools.Convert.Value;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Helper;
+using BBT.StructureTools.Copy.Operation;
+using BBT.StructureTools.Copy.Strategy;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Provider;
 
+namespace BBT.StructureTools.Initialization
+{
     /// <summary>
     /// The IoC handler as singleton.
     /// </summary>

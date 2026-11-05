@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Convert.Strategy;
-    using BBT.StructureTools.Copy;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools.Convert.Strategy;
+using BBT.StructureTools.Copy;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Helper for the convert operation.
     /// </summary>

@@ -1,13 +1,13 @@
-﻿namespace BBT.StructureTools.Extensions.Convert
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StrategyPattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Extensions.Convert
+{
     /// <inheritdoc/>
     public class CreateConvertFromStrategyHelperReverse<TSource, TTarget, TReverseRelation, TIntention>
         : ICreateConvertFromStrategyHelper<TSource, TTarget, TReverseRelation, TIntention>

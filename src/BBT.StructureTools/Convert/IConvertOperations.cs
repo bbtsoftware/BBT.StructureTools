@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Operations which must be processed during conversion.
     /// </summary>

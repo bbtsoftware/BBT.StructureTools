@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Provides methods to create <see cref="ICreateConvertHelper{TSource,TTarget,TConvertIntention}"/>
     /// and <see cref="ICreateConvertHelper{TSource,TTarget,TReverseRelation,TConvertIntention}"/>

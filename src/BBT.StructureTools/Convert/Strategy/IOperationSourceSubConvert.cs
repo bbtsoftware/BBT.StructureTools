@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using BBT.StructureTools.Convert;
+﻿using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to convert the derived type <typeparamref name="TSourceValue"/> of
     /// <typeparamref name="TSource"/>.

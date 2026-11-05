@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// A copy operation which adds cross referenceprocessing operations while perfoming the copy
     /// procedure.

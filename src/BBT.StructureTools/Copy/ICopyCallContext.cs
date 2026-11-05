@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Copy
+{
     /// <summary>
     /// Represents the context of a specific "copy" call -- i.e. an instance of this is passed through the
     /// "copy stack".

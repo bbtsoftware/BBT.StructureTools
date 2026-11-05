@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using BBT.StructureTools.Compare.Helper;
+﻿using BBT.StructureTools.Compare.Helper;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// Used to declare attributes used for comparison.
     /// </summary>

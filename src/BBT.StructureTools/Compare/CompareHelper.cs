@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BBT.StructureTools;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare
+{
     /// <inheritdoc/>
     public class CompareHelper : ICompareHelper
     {

@@ -6,8 +6,8 @@ namespace BBT.StructureTools.Tests.Copy
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationCreateToManyWithReverseRelationIntTests

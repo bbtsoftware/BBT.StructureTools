@@ -1,10 +1,10 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
+using BBT.StrategyPattern;
+using BBT.StructureTools.Extension;
+
 namespace BBT.StructureTools.Strategy
 {
-    using BBT.StrategyPattern;
-    using BBT.StructureTools.Extension;
-
     /// <summary>
     /// Implementation of <see cref="ICreateByBaseAsCriterionStrategy{TBaseInterface, TInterface}"/>.
     /// </summary>

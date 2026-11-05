@@ -6,8 +6,8 @@ namespace BBT.StructureTools.Tests.Compare
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     /// <summary>

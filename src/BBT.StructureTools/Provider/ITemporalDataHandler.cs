@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Provider
-{
-    using System;
-    using BBT.StructureTools.Constants;
+﻿using System;
+using BBT.StructureTools.Constants;
 
+namespace BBT.StructureTools.Provider
+{
     /// <summary>
     /// Defines a type which abstracts the handling of temporal data
     /// within the structure tools.

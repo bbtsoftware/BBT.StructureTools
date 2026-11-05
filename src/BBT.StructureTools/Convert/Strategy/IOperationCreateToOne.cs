@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Convert;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to convert entities with a <c>ToOne</c> relationship.
     /// See <see cref="IConvertOperation{TSource,TTarget}"/>.

@@ -10,8 +10,8 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     /// <summary>

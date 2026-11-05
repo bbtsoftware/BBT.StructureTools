@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Copy
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using BBT.StructureTools.Copy.Processing;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy
+{
     /// <summary>
     /// Post processing which collects models which were processed by the copy.
     /// </summary>

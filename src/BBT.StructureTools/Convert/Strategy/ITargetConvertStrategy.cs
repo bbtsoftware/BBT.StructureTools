@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System.Collections.Generic;
-    using BBT.StrategyPattern;
+﻿using System.Collections.Generic;
+using BBT.StrategyPattern;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to convert into a target type which is unknown at compile time.
     /// </summary>

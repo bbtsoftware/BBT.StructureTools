@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy.Operation;
-    using BBT.StructureTools.Copy.Strategy;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy.Operation;
+using BBT.StructureTools.Copy.Strategy;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <summary>
     /// Helper for the copy mechanism.
     /// </summary>

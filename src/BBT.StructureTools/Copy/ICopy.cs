@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Copy
+﻿using System.Collections.Generic;
+
+using BBT.StructureTools.Copy.Marker;
+using BBT.StructureTools.Copy.Operation;
+
+namespace BBT.StructureTools.Copy
 {
-    using System.Collections.Generic;
-
-    using BBT.StructureTools.Copy.Marker;
-    using BBT.StructureTools.Copy.Operation;
-
     /// <summary>
     /// Interface to create a copy from a source model to a target.
     /// Do not implement this class for a specific type, use the generic implementation which

@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Compare.Helper
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools.Compare;
+﻿using System.Collections.Generic;
+using BBT.StructureTools.Compare;
 
+namespace BBT.StructureTools.Compare.Helper
+{
     /// <summary>
     /// Helper for the equals and get hash code calculation.
     /// </summary>

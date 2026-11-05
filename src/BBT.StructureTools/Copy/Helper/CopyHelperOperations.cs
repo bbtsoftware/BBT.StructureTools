@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Operation;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Operation;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <inheritdoc/>
     internal class CopyHelperOperations<T> : ICopyOperation<T>
     {

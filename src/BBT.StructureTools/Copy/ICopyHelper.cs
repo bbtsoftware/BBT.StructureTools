@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Copy
+{
     /// <summary>
     /// Provides copy functionality.
     /// </summary>

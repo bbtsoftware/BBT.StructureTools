@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using BBT.StructureTools.Provider;
+﻿using BBT.StructureTools.Provider;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Provides a filter for a specific reference date.
     /// Generic implementation of <see cref="IConvertInterception{TSoureClass,TTargetClass}"/>.

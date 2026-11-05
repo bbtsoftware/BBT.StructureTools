@@ -1,9 +1,9 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
+using BBT.StrategyPattern;
+
 namespace BBT.StructureTools.Strategy
 {
-    using BBT.StrategyPattern;
-
     /// <summary>
     /// Definition of a strategy where a specific implementation instance is created based on a
     /// specific implementation it is depending on.

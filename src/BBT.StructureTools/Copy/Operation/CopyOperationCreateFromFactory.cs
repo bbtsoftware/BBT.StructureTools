@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Initialization;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Initialization;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// <see cref="ICopyOperationCreateFromFactory{T,TValue,TAttributeValueFactory}"/>.
     /// </summary>

@@ -11,8 +11,8 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     /// <summary>

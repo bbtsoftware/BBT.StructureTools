@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Extension
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Extension
+{
     /// <summary>
     /// Extension class for collections.
     /// </summary>

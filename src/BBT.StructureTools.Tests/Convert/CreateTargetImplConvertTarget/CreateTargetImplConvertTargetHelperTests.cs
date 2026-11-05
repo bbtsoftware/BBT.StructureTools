@@ -7,8 +7,8 @@ namespace BBT.StructureTools.Tests.Convert
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
     using BBT.StructureTools.Tests.TestTools;
-    using Shouldly;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CreateTargetImplConvertTargetHelperTests
