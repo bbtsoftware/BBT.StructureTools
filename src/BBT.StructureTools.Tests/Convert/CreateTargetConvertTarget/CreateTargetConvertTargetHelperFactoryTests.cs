@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Tests.Convert
+namespace BBT.StructureTools.Tests.Convert
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -28,8 +28,8 @@
             var testCandidate = container.Get<ICreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
             var helper = testCandidate.GetConvertHelper();
 
-            testCandidate.Should().BeOfType<CreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
-            helper.Should().BeOfType<CreateTargetConvertTargetHelper<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
+            testCandidate.ShouldBeOfType<CreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
+            helper.ShouldBeOfType<CreateTargetConvertTargetHelper<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
         }
 
         [Fact]
@@ -42,8 +42,8 @@
             var testCandidate = container.Get<ICreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
             var helper = testCandidate.GetConvertHelper(x => x.TargetTree);
 
-            testCandidate.Should().BeOfType<CreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
-            helper.Should().BeOfType<CreateTargetConvertTargetHelper<SourceTreeLeaf, TargetTreeLeaf, TargetTree, IForTest>>();
+            testCandidate.ShouldBeOfType<CreateTargetConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, IForTest>>();
+            helper.ShouldBeOfType<CreateTargetConvertTargetHelper<SourceTreeLeaf, TargetTreeLeaf, TargetTree, IForTest>>();
         }
     }
 }

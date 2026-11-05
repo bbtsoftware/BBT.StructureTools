@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Compare
+namespace BBT.StructureTools.Tests.Compare
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Compare;
@@ -6,7 +6,7 @@
     using BBT.StructureTools.Initialization;
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -48,7 +48,7 @@
             var result = this.comparer.Equals(testClass, testClass);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@
             var result = this.comparer.Equals(testClass, testClass);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         /// <summary>
@@ -101,7 +101,7 @@
             var result = this.comparer.Equals(testClass, testClass2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@
             var result = this.comparer.Equals(testClass, testClass2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         /// <summary>
@@ -169,7 +169,7 @@
             var result = this.comparer.Equals(testClass, testClass2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         /// <summary>
@@ -203,7 +203,7 @@
             var result = this.comparer.Equals(testClass, testClass2);
 
             // Assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
 
         /// <summary>
@@ -236,7 +236,7 @@
             var result = this.comparer.Equals(testClass, testClass2);
 
             // Assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
 
         #region private test classes and test class helpers
@@ -262,7 +262,7 @@
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterToManyRelationship(
                     x => x.GetChildren(),
@@ -274,7 +274,7 @@
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClassistOfChildrenItem> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterAttribute(x => x.TestValue1);
             }

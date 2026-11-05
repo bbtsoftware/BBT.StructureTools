@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Compare
+namespace BBT.StructureTools.Tests.Compare
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using BBT.StructureTools.Compare.Helper;
     using BBT.StructureTools.Tests.Compare.Intention;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -42,7 +42,7 @@
             var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         [Fact]
@@ -60,7 +60,7 @@
             var result = this.testCandidate.Equals(testClass, testClass);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         [Fact]
@@ -83,7 +83,7 @@
             var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         [Fact]
@@ -106,7 +106,7 @@
             var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
 
         [Fact]
@@ -130,7 +130,7 @@
             var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
 
         [Fact]
@@ -154,7 +154,7 @@
             var result = this.testCandidate.Equals(testClassA, testClassB);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         [Fact]
@@ -185,7 +185,7 @@
             var result = this.testCandidate.Equals(testClassA, testClassB, Array.Empty<IBaseAdditionalProcessing>(), comparerExclusions);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         #region private test classes and test class helpers
@@ -208,7 +208,7 @@
         {
             public void DoRegistrations(IEqualityComparerHelperRegistration<TestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterAttribute(x => x.TestAttribute1)

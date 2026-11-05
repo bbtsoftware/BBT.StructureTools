@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostProcessing
 {
@@ -11,7 +11,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Extension;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
+    using Shouldly;
     using Ninject;
     using Xunit;
 
@@ -51,8 +51,8 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             this.copy.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            testClassCopy.TestValue.Should().Be(234);
-            testClassCopy.TestValue2.Should().Be(4321);
+            testClassCopy.TestValue.ShouldBe(234);
+            testClassCopy.TestValue2.ShouldBe(4321);
         }
 
         #endregion
