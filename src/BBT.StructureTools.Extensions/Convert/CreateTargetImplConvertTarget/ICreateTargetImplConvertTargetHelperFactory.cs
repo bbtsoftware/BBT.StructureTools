@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Extensions.Convert
-{
-    using BBT.StructureTools.Convert;
+﻿using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Extensions.Convert
+{
     /// <summary>
     /// Provides methods to create <see cref="ICreateTargetImplConvertTargetHelper{TSource,TTarget,TTargetImpl,TConvertIntention}"/>.
     /// </summary>

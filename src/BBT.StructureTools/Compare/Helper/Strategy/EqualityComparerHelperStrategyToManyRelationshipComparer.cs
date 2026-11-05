@@ -1,13 +1,13 @@
-﻿namespace BBT.StructureTools.Compare.Helper.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Compare;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using BBT.StructureTools;
+using BBT.StructureTools.Compare;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare.Helper.Strategy
+{
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategyToManyRelationshipComparer<TModel, TTargetModel, TComparerIntention> : IEqualityComparerHelperStrategy<TModel>
         where TTargetModel : class

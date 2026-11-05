@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Compare.Helper;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BBT.StructureTools;
+using BBT.StructureTools.Compare.Helper;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// Generic comparer"/>.
     /// Declaration of attributes to compare is delegated to

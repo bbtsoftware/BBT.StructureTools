@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Provider;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Provider;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>
         : IOperationCopyValueIfSourceNotDefault<TSource, TTarget, TValue>

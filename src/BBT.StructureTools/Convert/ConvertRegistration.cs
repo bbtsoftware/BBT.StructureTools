@@ -1,14 +1,14 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Convert.Strategy;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Initialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using BBT.StructureTools.Convert.Strategy;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Initialization;
 
+namespace BBT.StructureTools.Convert
+{
     /// <inheritdoc/>
     internal class ConvertRegistration<TSource, TTarget> : IConvertRegistration<TSource, TTarget>
         where TSource : class

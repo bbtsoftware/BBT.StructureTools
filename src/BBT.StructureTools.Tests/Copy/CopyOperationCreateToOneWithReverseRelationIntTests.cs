@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationCreateToOneWithReverseRelationIntTests
@@ -49,10 +49,10 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
             // Check if the Child's new reference is correctly set to the copied parent's reference.
-            testClassParentCopy.Should().BeSameAs(testClassParentCopy.Child.ParentReference);
+            testClassParentCopy.ShouldBeSameAs(testClassParentCopy.Child.ParentReference);
         }
 
         /// <summary>
@@ -78,10 +78,10 @@
 
             // Assert
             // Make sure original and copy of the parent object are not the same.
-            testClassParentCopy.Should().NotBeSameAs(testClassParentOriginal);
+            testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
 
             // Check if the Child of the copied class is null
-            testClassParentCopy.Child.Should().BeNull();
+            testClassParentCopy.Child.ShouldBeNull();
         }
 
         #region test data
@@ -131,7 +131,7 @@
             // is mandatory. Otherwise copying the child elements wouldn't work!
             public void DoRegistrations(ICopyHelperRegistration<IChildTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
 
@@ -139,7 +139,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<IParentTestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations.RegisterCreateToOneWithReverseRelation<IChildTestClass, ChildTestClass>(
                     x => x.Child,

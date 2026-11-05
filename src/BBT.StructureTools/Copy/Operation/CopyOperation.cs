@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Linq.Expressions;
+using System.Reflection;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <inheritdoc/>
     internal class CopyOperation<T, TValue> : ICopyOperation<T>
     {

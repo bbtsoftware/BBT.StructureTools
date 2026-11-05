@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Initialization
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace BBT.StructureTools.Initialization
+{
     /// <summary>
     /// Interface which defines how instances of a service are being retrieved from
     /// an IoC container within the BBT.StructureTools.

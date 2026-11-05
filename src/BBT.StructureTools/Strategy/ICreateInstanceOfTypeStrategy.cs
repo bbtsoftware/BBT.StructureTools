@@ -1,10 +1,10 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
+using System;
+using BBT.StrategyPattern;
+
 namespace BBT.StructureTools.Strategy
 {
-    using System;
-    using BBT.StrategyPattern;
-
     /// <summary>
     /// Strategy for creation of concrete instances for an abstract base type.
     /// Provides also the concrete type to be able to list them (e.g. in combobox dropdown).

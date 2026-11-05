@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy.Strategy
-{
-    using BBT.StrategyPattern;
+﻿using BBT.StrategyPattern;
 
+namespace BBT.StructureTools.Copy.Strategy
+{
     /// <summary>
     /// Generic base interface for a strategy which copies a source object to a target object. Intended
     /// to be used with abstract base classes.

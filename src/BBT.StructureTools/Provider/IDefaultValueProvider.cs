@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Provider
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Provider
+{
     /// <summary>
     /// Provides default values for types where the <c>default</c>
     /// keyword doesn't reflect the actually used default value.

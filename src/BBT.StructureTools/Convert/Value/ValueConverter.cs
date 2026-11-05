@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert.Value
-{
-    using System;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Convert.Value
+{
     /// <inheritdoc/>
     public class ValueConverter<TSource, TTarget> : IConvertValue<TSource, TTarget>
     {

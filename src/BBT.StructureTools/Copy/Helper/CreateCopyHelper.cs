@@ -1,16 +1,16 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Processing;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using BBT.StrategyPattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Processing;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <inheritdoc/>
     internal class CreateCopyHelper<TChild, TConcreteChild, TParent> : ICreateCopyHelper<TChild, TConcreteChild, TParent>
         where TChild : class

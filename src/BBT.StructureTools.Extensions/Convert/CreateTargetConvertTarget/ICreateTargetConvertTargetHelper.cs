@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Extensions.Convert
-{
-    using BBT.StructureTools.Convert;
+﻿using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Extensions.Convert
+{
     /// <summary>
     /// Provides methods to support conversions where target objects are created.
     /// Use this helper implementation if the create as well as the convert operations are based on <typeparamref name="TTarget"/>

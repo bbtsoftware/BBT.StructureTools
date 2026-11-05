@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Compare.Helper.Strategy
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Compare;
+﻿using System.Collections.Generic;
+using BBT.StructureTools;
+using BBT.StructureTools.Compare;
 
+namespace BBT.StructureTools.Compare.Helper.Strategy
+{
     /// <summary>
     /// Strategy to compare the different attribute types.
     /// </summary>

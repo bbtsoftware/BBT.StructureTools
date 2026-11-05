@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Convert
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
+namespace BBT.StructureTools.Convert
+{
     /// <summary>
     /// Provides methods to support conversion.
     /// </summary>

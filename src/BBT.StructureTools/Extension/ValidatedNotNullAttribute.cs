@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Extension
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Extension
+{
     /// <summary>
     /// Indicates to code analysis that a method validates a particular parameter.
     /// </summary>

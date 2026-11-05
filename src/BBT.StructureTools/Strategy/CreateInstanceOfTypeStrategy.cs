@@ -1,11 +1,11 @@
 ﻿// Copyright © BBT Software AG. All rights reserved.
 
+using System;
+using BBT.StrategyPattern;
+using BBT.StructureTools.Extension;
+
 namespace BBT.StructureTools.Strategy
 {
-    using System;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools.Extension;
-
     /// <inheritdoc/>
     public class CreateInstanceOfTypeStrategy<TBaseTypeIntf, TConcreteTypeIntf, TConcreteTypeImpl> : ICreateInstanceOfTypeStrategy<TBaseTypeIntf>
         where TBaseTypeIntf : class

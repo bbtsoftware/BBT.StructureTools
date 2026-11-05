@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Helper;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Helper;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <inheritdoc/>
     internal class CopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel> : ICopyOperationCrossReferenceProcessing<T, TCrossReferencedModel, TReferencingModel>
         where T : class

@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Generic implementation of <see cref="ISourceConvertStrategy{TSource, TTarget, TIntention}"/>
     /// for creating a specific target implementation before converting.

@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System.Collections.Generic;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>
         : IOperationTargetSubConvert<TSource, TTarget, TTargetValue, TConvertIntention>

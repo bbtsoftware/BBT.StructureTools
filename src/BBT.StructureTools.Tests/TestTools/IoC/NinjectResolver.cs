@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Tests.TestTools.IoC
+namespace BBT.StructureTools.Tests.TestTools.IoC
 {
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Initialization;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
 
     /// <summary>
     /// A <see cref="IIocResolver"/> using Ninject to be
@@ -16,7 +16,7 @@
 
         public NinjectResolver(IKernel kernel)
         {
-            kernel.Should().NotBeNull();
+            kernel.ShouldNotBeNull();
 
             this.kernel = kernel;
         }

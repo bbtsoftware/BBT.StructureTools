@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Initialization;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Initialization;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <inheritdoc/>
     internal class CopyHelperFactory<TTarget, TConcreteTarget>
         : ICopyHelperFactory<TTarget, TConcreteTarget>

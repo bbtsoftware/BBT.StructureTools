@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System;
-    using System.Collections.Generic;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// Compares and sorts two objects according to the delegate provided.
     /// </summary>

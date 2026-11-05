@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Extensions.Convert
-{
-    using System.Collections.Generic;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
+﻿using System.Collections.Generic;
+using BBT.StrategyPattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Extensions.Convert
+{
     /// <summary>
     /// Strategy to provide methods for creation of a concrete <typeparamref name="TTarget"/>
     /// and conversion of a concrete <typeparamref name="TSource"/> into a concrete <typeparamref name="TTarget"/>.

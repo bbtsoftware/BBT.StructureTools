@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
+﻿using System;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// Strategy to copy entities with a <c>ToMany</c> relationship.
     /// <see cref="ICopyOperation{T}"/>.

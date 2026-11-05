@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Tests.Copy.PostProcessing
+namespace BBT.StructureTools.Tests.Copy.PostProcessing
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Copy.Processing;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest
@@ -43,8 +43,8 @@
             this.testCandidate.Copy(testClassOriginal, testClassCopy, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            testClassCopy.TestValue.Should().Be(234);
-            testClassCopy.TestValue2.Should().Be(0);
+            testClassCopy.TestValue.ShouldBe(234);
+            testClassCopy.TestValue2.ShouldBe(0);
         }
 
         #endregion
@@ -87,7 +87,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<ITestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
                 registrations.RegisterPostProcessings(
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234));
             }

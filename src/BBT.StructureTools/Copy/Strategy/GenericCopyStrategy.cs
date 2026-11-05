@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Copy.Strategy
-{
-    using BBT.StrategyPattern;
-    using BBT.StructureTools.Extension;
+﻿using BBT.StrategyPattern;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Strategy
+{
     /// <summary>
     /// Implementation of the <see cref="ICopyStrategy{TBase}"/> class.
     /// </summary>

@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+namespace BBT.StructureTools.Tests.Copy
 {
     using System;
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationInlineValueProcessingTests
@@ -36,7 +36,7 @@
             this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            target.TestGuid.Should().NotBe(Guid.Empty);
+            target.TestGuid.ShouldNotBe(Guid.Empty);
         }
 
         private class TestClass
@@ -48,7 +48,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterInlineValueProcessing(x => x.TestGuid, () => Guid.NewGuid());

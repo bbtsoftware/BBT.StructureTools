@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// Interface for model comparison.
     /// ---------------------------------

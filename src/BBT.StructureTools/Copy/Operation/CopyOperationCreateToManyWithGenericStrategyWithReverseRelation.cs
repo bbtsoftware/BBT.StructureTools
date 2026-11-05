@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Copy.Strategy;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools.Copy;
+using BBT.StructureTools.Copy.Strategy;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <summary>
     /// <see cref="ICopyOperationCreateToManyWithGenericStrategyWithReverseRelation{T,TStrategy,TChild}"/>.
     /// </summary>

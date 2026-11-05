@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert.Value
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace BBT.StructureTools.Convert.Value
+{
     /// <summary>
     /// Implements the <see cref="IValueConvertMapping{TSource, TTarget}"/>.
     /// </summary>

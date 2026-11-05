@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools.Convert;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools.Convert;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// <c>To Many</c> conversion operation where the child converter is found via strategy.
     /// </summary>

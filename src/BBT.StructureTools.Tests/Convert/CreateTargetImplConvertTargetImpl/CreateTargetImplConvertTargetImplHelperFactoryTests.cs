@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Tests.Convert
+namespace BBT.StructureTools.Tests.Convert
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extensions.Convert;
     using BBT.StructureTools.Tests.Convert.Registrations;
     using BBT.StructureTools.Tests.Convert.TestData;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CreateTargetImplConvertTargetImplHelperFactoryTests
@@ -28,8 +28,8 @@
             var testCandidate = container.Get<ICreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
             var helper = testCandidate.GetConvertHelper();
 
-            testCandidate.Should().BeOfType<CreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
-            helper.Should().BeOfType<CreateTargetImplConvertTargetImplHelper<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
+            testCandidate.ShouldBeOfType<CreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
+            helper.ShouldBeOfType<CreateTargetImplConvertTargetImplHelper<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
         }
 
         [Fact]
@@ -42,8 +42,8 @@
             var testCandidate = container.Get<ICreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
             var helper = testCandidate.GetConvertHelper(x => x.TargetTree);
 
-            testCandidate.Should().BeOfType<CreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
-            helper.Should().BeOfType<CreateTargetImplConvertTargetImplHelperReverse<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, TargetTree, IForTest>>();
+            testCandidate.ShouldBeOfType<CreateTargetImplConvertTargetImplHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest>>();
+            helper.ShouldBeOfType<CreateTargetImplConvertTargetImplHelperReverse<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, TargetTree, IForTest>>();
         }
     }
 }

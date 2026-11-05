@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy.Helper
-{
-    using BBT.StructureTools.Copy.Operation;
+﻿using BBT.StructureTools.Copy.Operation;
 
+namespace BBT.StructureTools.Copy.Helper
+{
     /// <summary>
     /// Internal part of <see cref="ICopyHelperRegistration{T}"/>.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Copy.Operation
-{
-    using BBT.StructureTools.Copy;
-    using BBT.StructureTools.Extension;
+﻿using BBT.StructureTools.Copy;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Copy.Operation
+{
     /// <inheritdoc/>
     internal class CopyOperationSubCopy<T> : ICopyOperation<T>
         where T : class

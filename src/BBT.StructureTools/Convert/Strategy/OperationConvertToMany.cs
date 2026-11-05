@@ -1,13 +1,13 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationConvertToMany<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>

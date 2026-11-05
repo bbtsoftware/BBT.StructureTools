@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Compare
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Compare
+{
     /// <summary>
     /// Generic implementation of <see cref="IComparePostProcessing{T, TIntention}"/>.
     /// </summary>

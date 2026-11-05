@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// The single unit of a convert helper operation.
     /// </summary>

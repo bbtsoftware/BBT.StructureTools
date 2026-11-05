@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Extensions.Convert
-{
-    using System.Collections.Generic;
-    using BBT.StrategyPattern;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
+﻿using System.Collections.Generic;
+using BBT.StrategyPattern;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
 
+namespace BBT.StructureTools.Extensions.Convert
+{
     /// <inheritdoc/>
     public class CreateTargetImplConvertTargetImplHelper<TSource, TTarget, TTargetImpl, TConvertIntention>
         : ICreateTargetImplConvertTargetImplHelper<TSource, TTarget, TTargetImpl, TConvertIntention>

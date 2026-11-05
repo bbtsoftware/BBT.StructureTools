@@ -1,14 +1,14 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Constants;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Provider;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using BBT.StructureTools;
+using BBT.StructureTools.Constants;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Provider;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>
         : IOperationCreateToOneHistWithCondition<TSource, TTarget, TSourceValue, TTargetValue, TReverseRelation, TTemporalData, TConvertIntention>

@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Extension
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
+namespace BBT.StructureTools.Extension
+{
     /// <summary>
     /// EnumerableExtension.
     /// </summary>

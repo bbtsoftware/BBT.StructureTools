@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationRegisterCreateFromFactoryTests
@@ -36,8 +36,8 @@
             this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            target.Value1.Should().Be(888);
-            target.Value2.Should().Be(999);
+            target.Value1.ShouldBe(888);
+            target.Value2.ShouldBe(999);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterCreateFromFactory<ITestFactory, int>(x => x.Value1, x => x.GetValue1())

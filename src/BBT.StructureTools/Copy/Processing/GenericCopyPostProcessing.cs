@@ -1,7 +1,7 @@
-﻿namespace BBT.StructureTools.Copy.Processing
-{
-    using System;
+﻿using System;
 
+namespace BBT.StructureTools.Copy.Processing
+{
     /// <summary>
     /// Generic implementation of <see cref="ICopyPostProcessing{TClassToCopy}"/>.
     /// </summary>

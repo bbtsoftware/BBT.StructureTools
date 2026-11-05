@@ -1,8 +1,8 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <summary>
     /// Strategy to copy a value of type <typeparamref name="TValue"/> with respect of an upper
     /// limit.

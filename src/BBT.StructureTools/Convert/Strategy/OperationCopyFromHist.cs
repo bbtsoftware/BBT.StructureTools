@@ -1,12 +1,12 @@
-﻿namespace BBT.StructureTools.Convert.Strategy
-{
-    using System;
-    using System.Collections.Generic;
-    using BBT.StructureTools;
-    using BBT.StructureTools.Convert;
-    using BBT.StructureTools.Extension;
-    using BBT.StructureTools.Provider;
+﻿using System;
+using System.Collections.Generic;
+using BBT.StructureTools;
+using BBT.StructureTools.Convert;
+using BBT.StructureTools.Extension;
+using BBT.StructureTools.Provider;
 
+namespace BBT.StructureTools.Convert.Strategy
+{
     /// <inheritdoc/>
     internal class OperationCopyFromHist<TSource, TTarget, TSourceValue, TTemporalDataType, TConvertIntention>
         : IOperationCopyFromHist<TSource, TTarget, TSourceValue, TTemporalDataType, TConvertIntention>

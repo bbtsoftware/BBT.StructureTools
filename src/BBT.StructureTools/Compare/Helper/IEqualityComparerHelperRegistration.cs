@@ -1,9 +1,9 @@
-﻿namespace BBT.StructureTools.Compare.Helper
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
+namespace BBT.StructureTools.Compare.Helper
+{
     /// <summary>
     /// Helper for the equals and get hash code calculation.
     /// </summary>

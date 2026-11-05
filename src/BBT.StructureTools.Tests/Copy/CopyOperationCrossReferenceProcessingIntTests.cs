@@ -1,11 +1,11 @@
-﻿namespace BBT.StructureTools.Tests.Copy
+namespace BBT.StructureTools.Tests.Copy
 {
     using System.Collections.Generic;
     using BBT.StructureTools.Copy;
     using BBT.StructureTools.Copy.Helper;
     using BBT.StructureTools.Tests.TestTools;
-    using FluentAssertions;
     using Ninject;
+    using Shouldly;
     using Xunit;
 
     public class CopyOperationCrossReferenceProcessingIntTests
@@ -45,8 +45,8 @@
             this.testCandidate.Copy(source, target, new List<IBaseAdditionalProcessing>());
 
             // Assert
-            crossReferenceSource.Should().NotBeSameAs(target.TestClassCrossReferencedChild);
-            target.TestClassCrossReferencedChild.Should().BeSameAs(target.TestClassChild.CrossReference);
+            crossReferenceSource.ShouldNotBeSameAs(target.TestClassCrossReferencedChild);
+            target.TestClassCrossReferencedChild.ShouldBeSameAs(target.TestClassChild.CrossReference);
         }
 
         private class TestClass
@@ -72,7 +72,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClass> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
 
                 registrations
                     .RegisterCrossReferenceProcessing<TestClassCrossReferencedChild, TestClassChild>(
@@ -90,7 +90,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassCrossReferencedChild> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
 
@@ -98,7 +98,7 @@
         {
             public void DoRegistrations(ICopyHelperRegistration<TestClassChild> registrations)
             {
-                registrations.Should().NotBeNull();
+                registrations.ShouldNotBeNull();
             }
         }
     }
