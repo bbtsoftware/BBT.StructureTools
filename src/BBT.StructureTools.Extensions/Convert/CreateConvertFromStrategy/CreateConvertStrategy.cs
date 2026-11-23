@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BBT.StrategyPattern;
 using BBT.StructureTools;
 using BBT.StructureTools.Convert;
@@ -43,13 +43,13 @@ namespace BBT.StructureTools.Extensions.Convert
         }
 
         /// <inheritdoc/>
-        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
         {
             source.NotNull(nameof(source));
             target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            aAdditionalProcessings.NotNull(nameof(aAdditionalProcessings));
 
-            this.converter.Convert((TConcreteSource)source, (TConcreteTarget)target, additionalProcessings);
+            this.converter.Convert((TConcreteSource)source, (TConcreteTarget)target, aAdditionalProcessings);
         }
 
         /// <inheritdoc/>
