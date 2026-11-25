@@ -1,7 +1,7 @@
-﻿using BBT.StrategyPattern;
-
-namespace BBT.StructureTools.Copy.Strategy
+﻿namespace BBT.StructureTools.Copy.Strategy
 {
+    using BBT.StrategyPattern;
+
     /// <summary>
     /// Generic strategy factory for criteria of type <typeparamref name="TCriterion"/>
     /// and strategies of type <typeparamref name="TStrategy"/>.

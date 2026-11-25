@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.TestData
+namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class SourceRoot : RootBase
+    internal class SourceRoot : RootBase
     {
         /// <summary>
         /// Gets or sets Tree.

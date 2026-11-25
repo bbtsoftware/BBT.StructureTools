@@ -6,7 +6,7 @@ namespace BBT.StructureTools.Tests.Convert
     using NSubstitute;
     using Xunit;
 
-    public class ConvertHelperTests
+    internal class ConvertHelperTests
     {
         [Fact]
         public void PreProcessing_WithEmptyist_Succeeds()

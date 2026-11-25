@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Compare.Intention
+namespace BBT.StructureTools.Tests.Compare.Intention
 {
     using BBT.StructureTools.Compare;
 
@@ -6,7 +6,7 @@
     /// <see cref="IBaseComparerIntention"/> for testing of the compare
     /// infrastructure.
     /// </summary>
-    public interface ITestCompareIntention : IBaseComparerIntention
+    internal interface ITestCompareIntention : IBaseComparerIntention
     {
     }
 }

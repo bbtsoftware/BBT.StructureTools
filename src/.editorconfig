@@ -109,6 +109,7 @@ dotnet_diagnostic.CA1502.severity = none
 dotnet_diagnostic.CA1504.severity = none
 dotnet_diagnostic.CA1505.severity = none
 dotnet_diagnostic.CA1506.severity = none
+dotnet_diagnostic.CS1591.severity = none
 dotnet_diagnostic.CA1600.severity = none
 dotnet_diagnostic.CA1601.severity = none
 dotnet_diagnostic.CA1700.severity = none
@@ -153,6 +154,7 @@ dotnet_diagnostic.CA1821.severity = none
 dotnet_diagnostic.CA1822.severity = none
 dotnet_diagnostic.CA1823.severity = none
 dotnet_diagnostic.CA1824.severity = none
+dotnet_diagnostic.CA1852.severity = none
 dotnet_diagnostic.CA1900.severity = none
 dotnet_diagnostic.CA1901.severity = none
 dotnet_diagnostic.CA1903.severity = none
@@ -252,10 +254,13 @@ dotnet_diagnostic.SA1611.severity = none
 dotnet_diagnostic.SA1615.severity = none
 dotnet_diagnostic.SA1625.severity = none
 dotnet_diagnostic.SA1633.severity = none
-dotnet_diagnostic.SA1305.severity = error
+dotnet_diagnostic.SA1305.severity = warning
 dotnet_diagnostic.SA1308.severity = error
 dotnet_diagnostic.SA1309.severity = error
 dotnet_diagnostic.SA1310.severity = error
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1518.severity = none
+dotnet_diagnostic.SA1507.severity = none
 
 # Keep generated code less noisy
 [*.{g.cs,g.i.cs,Designer.cs}]
@@ -267,16 +272,15 @@ dotnet_diagnostic.CA1008.severity = none
 dotnet_diagnostic.CA1040.severity = none
 dotnet_diagnostic.CA1062.severity = none
 dotnet_diagnostic.CA1515.severity = none
+dotnet_diagnostic.CS1591.severity = none	
 dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.CA1711.severity = none
 dotnet_diagnostic.CA1725.severity = none
 dotnet_diagnostic.CA1812.severity = none
-dotnet_diagnostic.CA1852.severity = none
 dotnet_diagnostic.CA2227.severity = none
 dotnet_diagnostic.SA1124.severity = none
 dotnet_diagnostic.SA1201.severity = none
 dotnet_diagnostic.SA1315.severity = none
-dotnet_diagnostic.SA1518.severity = none
 dotnet_diagnostic.SA1633.severity = none
 
 # SA0001 is reported at compilation level; suppress globally

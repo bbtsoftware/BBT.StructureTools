@@ -17,10 +17,8 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
     /// <summary>
     /// Integration tests for <see cref="ICopyOperationPostProcessing{T}"/>.
     /// </summary>
-    public class CopyOperationPostProcessingWithoutUsingParamsIntTest
+    internal class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
-        #region setup and members
-
         private ICopy<ITestClass> copy;
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
@@ -30,10 +28,6 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
 
             this.copy = container.Get<ICopy<ITestClass>>();
         }
-
-        #endregion
-
-        #region Tests
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -53,10 +47,6 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(0);
         }
-
-        #endregion
-
-        #region Testdata
 
         /// <summary>
         /// Interface for a test class.
@@ -99,6 +89,5 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234));
             }
         }
-        #endregion
     }
 }

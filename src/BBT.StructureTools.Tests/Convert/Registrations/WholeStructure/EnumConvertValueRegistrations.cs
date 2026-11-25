@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
@@ -9,16 +9,16 @@ namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
     /// <summary>
     /// Used for test purpose.
     /// </summary>
-    public class EnumConvertValueRegistrations : IConvertValueRegistrations<SourceEnum, TargetEnum>
+    internal class EnumConvertValueRegistrations : IConvertValueRegistrations<SourceEnum, TargetEnum>
     {
         /// <summary>
         /// See <see cref="IConvertValueRegistrations{TSource, TTarget}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertValueRegistration<SourceEnum, TargetEnum> aRegistration)
+        public void DoRegistrations(IConvertValueRegistration<SourceEnum, TargetEnum> registration)
         {
-            aRegistration.NotNull(nameof(aRegistration));
+            registration.NotNull(nameof(registration));
 
-            aRegistration
+            registration
                 .Register(SourceEnum.Value1, TargetEnum.Value1)
                 .Register(SourceEnum.Value2, TargetEnum.Value2)
                 .EndRegistrations();

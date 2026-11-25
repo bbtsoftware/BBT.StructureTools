@@ -1,8 +1,8 @@
-﻿using System;
-using BBT.StructureTools.Convert;
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
+    using System;
+    using BBT.StructureTools.Convert;
+
     /// <summary>
     /// Strategy to convert entities with a <c>ToMany</c> relationship.
     /// See <see cref="IConvertOperation{TSource,TTarget}"/>.

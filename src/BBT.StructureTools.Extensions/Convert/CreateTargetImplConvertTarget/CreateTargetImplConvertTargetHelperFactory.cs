@@ -1,11 +1,11 @@
-using System;
-using System.Linq.Expressions;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Extension;
-using BBT.StructureTools.Initialization;
-
 namespace BBT.StructureTools.Extensions.Convert
 {
+    using System;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Initialization;
+
     /// <inheritdoc/>
     public class CreateTargetImplConvertTargetHelperFactory<TSource, TTarget, TTargetImpl, TConvertIntention>
         : ICreateTargetImplConvertTargetHelperFactory<TSource, TTarget, TTargetImpl, TConvertIntention>

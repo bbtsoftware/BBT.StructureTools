@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Helper for the convert implementations.
     /// </summary>

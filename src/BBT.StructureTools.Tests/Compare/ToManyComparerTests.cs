@@ -12,7 +12,6 @@ namespace BBT.StructureTools.Tests.Compare
 
     public class ToManyComparerTests
     {
-        #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> comparer;
 
         public ToManyComparerTests()
@@ -24,8 +23,6 @@ namespace BBT.StructureTools.Tests.Compare
 
             this.comparer = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
-
-        #endregion
 
         /// <summary>
         /// Tests the compare infrastructure.
@@ -239,8 +236,6 @@ namespace BBT.StructureTools.Tests.Compare
             result.ShouldBeFalse();
         }
 
-        #region private test classes and test class helpers
-
         private class TestClass
         {
             public List<TestClassistOfChildrenItem> ListOfChildren { private get; set; }
@@ -279,6 +274,5 @@ namespace BBT.StructureTools.Tests.Compare
                 registrations.RegisterAttribute(x => x.TestValue1);
             }
         }
-        #endregion
     }
 }

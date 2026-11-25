@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
+    using System;
+    using System.Linq.Expressions;
+
     /// <summary>
     /// Strategy to copy <see cref="DateTime"/>.
     /// </summary>

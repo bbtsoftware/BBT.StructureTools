@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// A Copy operation which adds post processing operations which are executed at the end of the
     /// copy process.

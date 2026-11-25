@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using BBT.StrategyPattern;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Extensions.Convert
+﻿namespace BBT.StructureTools.Extensions.Convert
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
+    using BBT.StrategyPattern;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     public class CreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TReverseRelation, TConvertIntention>
         : ICreateTargetImplConvertTargetHelper<TSource, TTarget, TTargetImpl, TReverseRelation, TConvertIntention>

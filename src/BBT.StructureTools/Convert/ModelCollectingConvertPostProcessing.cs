@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Post processing which collects models which were processed by the convert.
     /// </summary>

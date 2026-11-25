@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.Registrations
 {
@@ -11,7 +11,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToManyGenericWithReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    internal class CreateToManyGenericWithReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
         private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class Converter<TSource, TTarget, TConvertIntention> : IConvert<TSource, TTarget, TConvertIntention>
         where TSource : class

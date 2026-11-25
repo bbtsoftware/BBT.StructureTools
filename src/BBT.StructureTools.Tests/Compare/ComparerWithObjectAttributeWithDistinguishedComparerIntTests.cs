@@ -11,10 +11,8 @@ namespace BBT.StructureTools.Tests.Compare
     using Shouldly;
     using Xunit;
 
-    public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
+    internal class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
-        #region Members, Setup
-
         private static IComparer<TestAttribute, ITestCompareIntention> distinguishedComparer;
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
@@ -28,8 +26,6 @@ namespace BBT.StructureTools.Tests.Compare
             distinguishedComparer = kernel.Get<IComparer<TestAttribute, ITestCompareIntention>>();
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
-
-        #endregion
 
         /// <summary>
         /// Tests IComparer.Equals.
@@ -170,8 +166,6 @@ namespace BBT.StructureTools.Tests.Compare
             result.ShouldBeTrue();
         }
 
-        #region private test classes and test class helpers
-
         private class TestClass
         {
             public TestAttribute TestAttribute { get; set; }
@@ -205,7 +199,5 @@ namespace BBT.StructureTools.Tests.Compare
                     ComparerWithObjectAttributeWithDistinguishedComparerIntTests.distinguishedComparer);
             }
         }
-
-        #endregion
     }
 }

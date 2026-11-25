@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.TestData
 {
@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Convert.TestData
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class SourceTreeHist : ITemporalData
+    internal class SourceTreeHist : ITemporalData
     {
         /// <summary>
         /// Gets or sets Id.

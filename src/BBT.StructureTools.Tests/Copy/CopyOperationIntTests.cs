@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    public class CopyOperationIntTests
+    internal class CopyOperationIntTests
     {
         private readonly ICopy<TestClass> testCandidate;
 

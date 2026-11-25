@@ -23,19 +23,14 @@ namespace BBT.StructureTools.Tests.Convert
     /// <summary>
     /// Test class convert registrations.
     /// </summary>
-    public class ConverterIntTests
+    internal class ConverterIntTests
     {
-        #region Setup
         private static IKernel container;
 
         public ConverterIntTests()
         {
             container = TestIocContainer.Initialize();
         }
-
-        #endregion
-
-        #region Convert
 
         /// <summary>
         /// Tests the convert from root to leaf into target structure.
@@ -483,10 +478,6 @@ namespace BBT.StructureTools.Tests.Convert
             }
         }
 
-        #endregion
-
-        #region Asserts
-
         private static void AssertRoot(SourceRoot sourceRoot, TargetRoot targetRoot)
         {
             targetRoot.OriginRoot.ShouldBe(sourceRoot);
@@ -571,10 +562,6 @@ namespace BBT.StructureTools.Tests.Convert
         {
             targetHistLeaf.OriginTreeHistLeafId.ShouldBe(sourceHistLeaf.TreeHistLeafId);
         }
-
-        #endregion
-
-        #region Create test data
 
         private static SourceRoot CreateSourceRoot()
         {
@@ -695,10 +682,6 @@ namespace BBT.StructureTools.Tests.Convert
             return sourceLeafMasterData;
         }
 
-        #endregion
-
-        #region Do registrations
-
         private static IConvert<TSource, TTarget, IForTest> GetConverter<TSource, TTarget>()
             where TSource : class
             where TTarget : class
@@ -740,7 +723,5 @@ namespace BBT.StructureTools.Tests.Convert
             container.Bind<ISourceConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest>>().To<GenericSourceConvertStrategy<SourceBaseLeaf, TargetBaseLeaf, IForTest, SourceDerivedLeaf, TargetDerivedLeaf>>();
             container.Bind<ICopyRegistrations<BaseData>>().To<BaseDataCopyRegistrations>();
         }
-
-        #endregion
     }
 }

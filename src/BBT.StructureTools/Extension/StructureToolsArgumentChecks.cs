@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace BBT.StructureTools.Extension
+﻿namespace BBT.StructureTools.Extension
 {
+    using System;
+    using System.Diagnostics;
+
     /// <summary>
     /// Common runtime checks that throw <see cref="ArgumentException"/> upon failure.
     /// </summary>

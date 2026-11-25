@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
@@ -8,17 +8,17 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class TreeHistLeafToTargetTreeHistLeafConvertRegistrations
+    internal class TreeHistLeafToTargetTreeHistLeafConvertRegistrations
         : IConvertRegistrations<SourceTreeHistLeaf, TargetTreeHistLeaf, IForTest>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceTreeHistLeaf, TargetTreeHistLeaf> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceTreeHistLeaf, TargetTreeHistLeaf> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations
+            registrations
                 .RegisterCopyAttribute(x => x.TreeHistLeafId, x => x.OriginTreeHistLeafId);
         }
     }

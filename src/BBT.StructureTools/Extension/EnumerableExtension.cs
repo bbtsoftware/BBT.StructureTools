@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-
-namespace BBT.StructureTools.Extension
+﻿namespace BBT.StructureTools.Extension
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+
     /// <summary>
     /// EnumerableExtension.
     /// </summary>
@@ -19,6 +19,7 @@ namespace BBT.StructureTools.Extension
         internal static bool Only<TEntity>(this IEnumerable<TEntity> list)
         {
             list.NotNull(nameof(list));
+            list = list as IList<TEntity> ?? list.ToList();
 
             if (!list.Any())
             {

@@ -12,10 +12,8 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    public class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
+    internal class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
     {
-        #region setup
-
         private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests()
@@ -29,8 +27,6 @@ namespace BBT.StructureTools.Tests.Copy
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
-
-        #endregion
 
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
@@ -124,8 +120,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.Children.ShouldNotBeSameAs(testClassParentOriginal.Children);
             testClassParentCopy.ShouldNotBeNull();
         }
-
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -268,6 +262,5 @@ namespace BBT.StructureTools.Tests.Copy
                 return new TestStrategy();
             }
         }
-        #endregion
     }
 }

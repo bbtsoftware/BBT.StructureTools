@@ -1,8 +1,8 @@
-﻿using BBT.StrategyPattern;
-using BBT.StructureTools.Copy.Strategy;
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
+    using BBT.StrategyPattern;
+    using BBT.StructureTools.Copy.Strategy;
+
     /// <summary>
     /// <see cref="ICopyStrategyProvider{TStrategy,TCriterion}"/>.
     /// </summary>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
-using BBT.StructureTools.Impl.Compare.Helper;
-
-namespace BBT.StructureTools.Extension
+﻿namespace BBT.StructureTools.Extension
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Impl.Compare.Helper;
+
     /// <summary>
     /// ReflectionUtils.
     /// </summary>

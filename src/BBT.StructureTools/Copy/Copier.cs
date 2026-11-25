@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools;
-using BBT.StructureTools.Copy.Helper;
-using BBT.StructureTools.Copy.Operation;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Copy.Helper;
+    using BBT.StructureTools.Copy.Operation;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Generic copy class.
     /// </summary>

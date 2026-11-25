@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace BBT.StructureTools
+﻿namespace BBT.StructureTools
 {
+    using System;
+    using System.Runtime.Serialization;
+
     /// <summary>
     /// A general exception indicating that an unrecoverable error
     /// occured within the StructureTools library.

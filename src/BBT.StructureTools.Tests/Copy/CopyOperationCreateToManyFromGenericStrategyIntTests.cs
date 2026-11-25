@@ -12,10 +12,8 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    public class CopyOperationCreateToManyFromGenericStrategyIntTests
+    internal class CopyOperationCreateToManyFromGenericStrategyIntTests
     {
-        #region setup
-
         private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
@@ -29,8 +27,6 @@ namespace BBT.StructureTools.Tests.Copy
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
-
-        #endregion
 
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
@@ -118,8 +114,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.Children.ShouldNotBeSameAs(testClassParentOriginal.Children);
             testClassParentCopy.Children.ShouldNotBeNull();
         }
-
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -244,11 +238,11 @@ namespace BBT.StructureTools.Tests.Copy
                 return new ChildTestClass();
             }
 
-            public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCalcontext)
+            public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCallContext)
             {
                 source.ShouldNotBeNull();
                 target.ShouldNotBeNull();
-                copyCalcontext.ShouldNotBeNull();
+                copyCallContext.ShouldNotBeNull();
 
                 target.TestValue = source.TestValue * 2;
             }
@@ -261,6 +255,5 @@ namespace BBT.StructureTools.Tests.Copy
                 return new TestStrategy();
             }
         }
-        #endregion
     }
 }

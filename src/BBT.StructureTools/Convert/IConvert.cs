@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Interface to convert from a source model to a target model.
     /// </summary>

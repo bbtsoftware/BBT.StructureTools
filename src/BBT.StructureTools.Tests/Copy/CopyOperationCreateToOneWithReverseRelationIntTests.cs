@@ -9,9 +9,8 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    public class CopyOperationCreateToOneWithReverseRelationIntTests
+    internal class CopyOperationCreateToOneWithReverseRelationIntTests
     {
-        #region members and setup
         private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToOneWithReverseRelationIntTests()
@@ -23,8 +22,6 @@ namespace BBT.StructureTools.Tests.Copy
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
-
-        #endregion
 
         /// <summary>
         /// Tests ICopy.Copy.
@@ -83,8 +80,6 @@ namespace BBT.StructureTools.Tests.Copy
             // Check if the Child of the copied class is null
             testClassParentCopy.Child.ShouldBeNull();
         }
-
-        #region test data
 
         /// <summary>
         /// An interface, defining a test class to be used as child in the tests above.
@@ -146,6 +141,5 @@ namespace BBT.StructureTools.Tests.Copy
                     x => x.ParentReference);
             }
         }
-        #endregion
     }
 }

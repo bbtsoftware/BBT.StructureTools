@@ -1,8 +1,8 @@
-﻿using System;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy.Processing
+﻿namespace BBT.StructureTools.Copy.Processing
 {
+    using System;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Implementation of <see cref="IGenericContinueCopyInterception{TType}"/>.
     /// </summary>

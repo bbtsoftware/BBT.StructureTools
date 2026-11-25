@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
+    using System.Collections.Generic;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     public class CopyCallContext : ICopyCallContext
     {

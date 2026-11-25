@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using BBT.StructureTools.Convert.Strategy;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Extension;
-using BBT.StructureTools.Initialization;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Convert.Strategy;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Initialization;
+
     /// <inheritdoc/>
     internal class ConvertRegistration<TSource, TTarget> : IConvertRegistration<TSource, TTarget>
         where TSource : class
@@ -555,7 +555,7 @@ namespace BBT.StructureTools.Convert
         public IConvertRegistration<TSource, TTarget> RegisterCreateToManyFromGenericStrategyWithReverseRelation<TBaseSource, TBaseTarget, TIntention>(
             Func<TSource, IEnumerable<TBaseSource>> source,
             Expression<Func<TTarget, ICollection<TBaseTarget>>> targetParent,
-            Expression<Func<TBaseTarget, TTarget>> reverseRelationOnTarget)
+            Expression<Func<TBaseTarget, TTarget>> reverseRelation)
             where TBaseSource : class
             where TBaseTarget : class
             where TIntention : IBaseConvertIntention
@@ -564,7 +564,7 @@ namespace BBT.StructureTools.Convert
             operation.Initialize(
                 source,
                 targetParent,
-                reverseRelationOnTarget);
+                reverseRelation);
 
             this.convertHelperOperationWorkUnits.Add(operation);
             return this;

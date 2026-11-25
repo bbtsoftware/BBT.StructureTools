@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BBT.StructureTools;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class ConvertHelper : IConvertHelper
     {
@@ -54,7 +54,7 @@ namespace BBT.StructureTools.Convert
             source.NotNull(nameof(source));
             additionalProcessings.NotNull(nameof(additionalProcessings));
 
-            var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>();
+            var interceptors = additionalProcessings.OfType<IConvertInterception<TSourceClass, TTargetClass>>().ToList();
             return !interceptors.Any() || interceptors.Any(x => x.CallConverter(source));
         }
     }

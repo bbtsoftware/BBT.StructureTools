@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BBT.StructureTools;
-using BBT.StructureTools.Compare.Helper;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Compare.Helper;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Generic comparer"/>.
     /// Declaration of attributes to compare is delegated to
@@ -39,9 +39,9 @@ namespace BBT.StructureTools.Compare
         }
 
         /// <inheritdoc/>
-        public bool Equals(T candidate1, T candidate2)
+        public bool Equals(T x, T y)
         {
-            return this.equalityComparerHelper.AreRegistrationsEquals(candidate1, candidate2);
+            return this.equalityComparerHelper.AreRegistrationsEquals(x, y);
         }
 
         /// <inheritdoc/>
@@ -85,14 +85,14 @@ namespace BBT.StructureTools.Compare
         }
 
         /// <inheritdoc/>
-        public int GetHashCode(T candidate)
+        public int GetHashCode(T obj)
         {
-            if (candidate == null)
+            if (obj == null)
             {
                 return typeof(T).GetHashCode();
             }
 
-            return this.equalityComparerHelper.GetHashCodeOfRegistrations(candidate);
+            return this.equalityComparerHelper.GetHashCodeOfRegistrations(obj);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.TestTools
+namespace BBT.StructureTools.Tests.TestTools
 {
     using System;
     using System.Linq.Expressions;
@@ -9,7 +9,7 @@
     /// Extensions to generate property values
     /// for test classes.
     /// </summary>
-    public static class PopPropValueExtensions
+    internal static class PopPropValueExtensions
     {
         public static void CreateStringForProperty<T>(this T target, Expression<Func<T, string>> propertyExpression)
             where T : class

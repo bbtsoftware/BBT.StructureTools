@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
@@ -10,7 +10,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class TreeToTargetTreeConvertRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    internal class TreeToTargetTreeConvertRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
         private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> treeLeafConvertHelperFactory;
         private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeHistLeaf, TargetTreeHistLeaf, TargetTreeHistLeaf, IForTest> treeHistLeafConvertHelperFactory;

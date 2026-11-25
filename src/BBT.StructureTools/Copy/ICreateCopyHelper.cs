@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
-namespace BBT.StructureTools.Copy
+﻿namespace BBT.StructureTools.Copy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+
     /// <summary>
     /// Provides methods to support copy.
     /// TODO ber: one type declaration per file.

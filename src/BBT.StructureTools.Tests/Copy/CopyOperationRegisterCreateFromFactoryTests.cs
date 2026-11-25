@@ -8,7 +8,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    public class CopyOperationRegisterCreateFromFactoryTests
+    internal class CopyOperationRegisterCreateFromFactoryTests
     {
         private readonly ICopy<TestClass> testCandidate;
 

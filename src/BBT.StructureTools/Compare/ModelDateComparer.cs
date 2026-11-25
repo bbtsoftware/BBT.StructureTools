@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
+    using System;
+    using System.Collections.Generic;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Compares and sorts two objects according to the delegate provided.
     /// </summary>
@@ -24,20 +24,20 @@ namespace BBT.StructureTools.Compare
         }
 
         /// <inheritdoc/>
-        public int Compare(TModel modelA, TModel modelB)
+        public int Compare(TModel x, TModel y)
         {
-            if (modelA == null)
+            if (x == null)
             {
                 return -1;
             }
 
-            if (modelB == null)
+            if (y == null)
             {
                 return +1;
             }
 
-            var firstSortCriterion = this.sortOrderDelegate.Invoke(modelA);
-            var secondSortCriterion = this.sortOrderDelegate.Invoke(modelB);
+            var firstSortCriterion = this.sortOrderDelegate.Invoke(x);
+            var secondSortCriterion = this.sortOrderDelegate.Invoke(y);
             var compare = firstSortCriterion.CompareTo(secondSortCriterion);
 
             return compare;

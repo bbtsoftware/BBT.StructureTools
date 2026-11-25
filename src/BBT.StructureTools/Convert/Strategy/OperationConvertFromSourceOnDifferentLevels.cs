@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using BBT.StructureTools;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
+    using System;
+    using System.Collections.Generic;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class OperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>
         : IOperationConvertFromSourceOnDifferentLevels<TSource, TTarget, TSourceValue, TTargetValue, TConvertIntention>

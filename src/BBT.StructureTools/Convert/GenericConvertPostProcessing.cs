@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BBT.StructureTools.Convert
+﻿namespace BBT.StructureTools.Convert
 {
+    using System;
+
     /// <inheritdoc/>
     public class GenericConvertPostProcessing<TSoureClass, TTargetClass> : IConvertPostProcessing<TSoureClass, TTargetClass>
         where TSoureClass : class

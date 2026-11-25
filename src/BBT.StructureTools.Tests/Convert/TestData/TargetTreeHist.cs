@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.TestData
+namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System;
     using BBT.StructureTools.Convert;
@@ -6,7 +6,7 @@
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class TargetTreeHist : ITemporalData
+    internal class TargetTreeHist : ITemporalData
     {
         /// <summary>
         /// Gets or sets data

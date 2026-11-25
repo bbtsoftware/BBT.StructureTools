@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations
+namespace BBT.StructureTools.Tests.Convert.Registrations
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
@@ -8,7 +8,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToManyWithReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    internal class CreateToManyWithReverseRelationRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
         private readonly ICreateTargetImplConvertTargetHelperFactory<SourceTreeLeaf, TargetTreeLeaf, TargetTreeLeaf, IForTest> convertHelperFactory;
 

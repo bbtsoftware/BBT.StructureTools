@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BBT.StructureTools;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Copy.Processing;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Copy.Processing;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     public class CopyHelper : ICopyHelper
     {

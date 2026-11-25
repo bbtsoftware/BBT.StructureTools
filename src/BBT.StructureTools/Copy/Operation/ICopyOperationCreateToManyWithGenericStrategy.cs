@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using BBT.StructureTools.Copy.Strategy;
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Copy.Strategy;
+
     /// <summary>
     /// Defines a copy helper strategy used to copy an i enumerable using a strategy.
     /// </summary>

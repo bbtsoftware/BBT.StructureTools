@@ -6,17 +6,17 @@
     public enum TypeOfComparerExclusion
     {
         /// <summary>
-        /// Default value
+        /// Default value.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// A property is excluded
+        /// A property is excluded.
         /// </summary>
         Property = 1,
 
         /// <summary>
-        /// A sub interface is excluded
+        /// A sub interface is excluded.
         /// </summary>
         SubInterface = 2,
     }

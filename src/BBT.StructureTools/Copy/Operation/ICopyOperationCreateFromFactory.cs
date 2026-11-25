@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
+    using System;
+    using System.Linq.Expressions;
+
     /// <summary>
     /// A helper strategy used to copy attributes where the value is retrieved from a factory
     /// and retrieved during the copy process.

@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.TestData
+namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class SourceTree : BaseData
+    internal class SourceTree : BaseData
     {
         /// <summary>
         /// Gets the id.
