@@ -11,7 +11,7 @@ namespace BBT.StructureTools.Tests.Compare
     using Shouldly;
     using Xunit;
 
-    internal class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
+    public class ComparerWithObjectAttributeWithDistinguishedComparerIntTests
     {
         private static IComparer<TestAttribute, ITestCompareIntention> distinguishedComparer;
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;

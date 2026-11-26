@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationPostProcessingWithoutUsingParamsIntTest
+    public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
         private readonly ICopy<ITestClass> testCandidate;
 
@@ -20,6 +20,22 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
             kernel.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
 
             this.testCandidate = kernel.Get<ICopy<ITestClass>>();
+        }
+
+        /// <summary>
+        /// Interface for a test class.
+        /// </summary>
+        private interface ITestClass
+        {
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue { get; set; }
+
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue2 { get; set; }
         }
 
         /// <summary>
@@ -39,22 +55,6 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
             // Assert
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(0);
-        }
-
-        /// <summary>
-        /// Interface for a test class.
-        /// </summary>
-        private interface ITestClass
-        {
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue2 { get; set; }
         }
 
         /// <summary>

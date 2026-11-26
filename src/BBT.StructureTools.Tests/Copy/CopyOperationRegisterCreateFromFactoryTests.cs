@@ -8,7 +8,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationRegisterCreateFromFactoryTests
+    public class CopyOperationRegisterCreateFromFactoryTests
     {
         private readonly ICopy<TestClass> testCandidate;
 
@@ -20,6 +20,23 @@ namespace BBT.StructureTools.Tests.Copy
             kernel.Bind<ITestFactory>().To<TestFactory>();
 
             this.testCandidate = kernel.Get<ICopy<TestClass>>();
+        }
+
+        /// <summary>
+        /// An interface defining a factory for test values - Used with RegisterInlineIocFactoryProcessing.
+        /// </summary>
+        private interface ITestFactory
+        {
+            /// <summary>
+            /// Gets a static integer value.
+            /// </summary>
+            int Value2 { get; }
+
+            /// <summary>
+            /// Returns a integer value.
+            /// </summary>
+            /// <returns>a static integer value.</returns>
+            int GetValue1();
         }
 
         /// <summary>
@@ -38,23 +55,6 @@ namespace BBT.StructureTools.Tests.Copy
             // Assert
             target.Value1.ShouldBe(888);
             target.Value2.ShouldBe(999);
-        }
-
-        /// <summary>
-        /// An interface defining a factory for test values - Used with RegisterInlineIocFactoryProcessing.
-        /// </summary>
-        private interface ITestFactory
-        {
-            /// <summary>
-            /// Gets a static integer value.
-            /// </summary>
-            int Value2 { get; }
-
-            /// <summary>
-            /// Returns a integer value.
-            /// </summary>
-            /// <returns>a static integer value.</returns>
-            int GetValue1();
         }
 
         private class TestClass

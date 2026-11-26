@@ -11,7 +11,7 @@ namespace BBT.StructureTools.Tests.Convert
     using Shouldly;
     using Xunit;
 
-    internal class CreateConvertFromStrategyHelperFactoryTests
+    public class CreateConvertFromStrategyHelperFactoryTests
     {
         private static IKernel container;
 

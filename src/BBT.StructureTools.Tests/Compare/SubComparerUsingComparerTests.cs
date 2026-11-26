@@ -11,7 +11,7 @@ namespace BBT.StructureTools.Tests.Compare
     using Shouldly;
     using Xunit;
 
-    internal class SubComparerUsingComparerTests
+    public class SubComparerUsingComparerTests
     {
         private static IComparer<TestClassParent, ITestCompareIntention> parentCompare;
         private readonly IComparer<TestClassChild, ITestCompareIntention> testCandidate;

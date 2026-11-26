@@ -12,7 +12,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationCreateToManyFromGenericStrategyIntTests
+    public class CopyOperationCreateToManyFromGenericStrategyIntTests
     {
         private readonly ICopy<ParentTestClass> testCandidate;
 
@@ -26,6 +26,61 @@ namespace BBT.StructureTools.Tests.Copy
             kernel.Bind<ITestStrategy>().To<TestStrategy>();
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+        }
+
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets a value which can be used for testing purposes.
+            /// </summary>
+            int TestValue { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            IList<IChildTestClass> Children { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+
+            /// <summary>
+            /// Adds a child.
+            /// </summary>
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
+
+            /// <summary>
+            /// return the children.
+            /// </summary>
+            /// <returns>children collection.</returns>
+            IList<IChildTestClass> GetChildren();
+
+            /// <summary>
+            /// Set's the internal children collection to null.
+            /// </summary>
+            void MakeChildrenCollectionNull();
+        }
+
+        /// <summary>
+        /// Test interface for a strategy.
+        /// </summary>
+        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
+        {
+            /// <summary>
+            /// returns a new instance of <see cref="IChildTestClass"/>.
+            /// </summary>
+            IChildTestClass CreateTestClass();
         }
 
         /// <summary>
@@ -115,50 +170,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.Children.ShouldNotBeNull();
         }
 
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets a value which can be used for testing purposes.
-            /// </summary>
-            int TestValue { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            IList<IChildTestClass> Children { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-
-            /// <summary>
-            /// Adds a child.
-            /// </summary>
-            /// <param name="child">child item.</param>
-            void AddChild(ChildTestClass child);
-
-            /// <summary>
-            /// return the children.
-            /// </summary>
-            /// <returns>children collection.</returns>
-            IList<IChildTestClass> GetChildren();
-
-            /// <summary>
-            /// Set's the internal children collection to null.
-            /// </summary>
-            void MakeChildrenCollectionNull();
-        }
-
         private class ParentTestClass : IParentTestClass
         {
             public IList<IChildTestClass> Children { get; set; } = new List<IChildTestClass>();
@@ -210,17 +221,6 @@ namespace BBT.StructureTools.Tests.Copy
                     x => x.Children,
                     x => x.CreateTestClass());
             }
-        }
-
-        /// <summary>
-        /// Test interface for a strategy.
-        /// </summary>
-        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
-        {
-            /// <summary>
-            /// returns a new instance of <see cref="IChildTestClass"/>.
-            /// </summary>
-            IChildTestClass CreateTestClass();
         }
 
         private class TestStrategy : ITestStrategy

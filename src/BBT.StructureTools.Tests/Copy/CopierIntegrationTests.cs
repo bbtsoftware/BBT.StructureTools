@@ -27,6 +27,57 @@ namespace BBT.StructureTools.Tests.Copy
         }
 
         /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets reference to the parent test class (reverse relation).
+            /// </summary>
+            IParentTestClass ParentReference { get; set; }
+        }
+
+        /// <summary>
+        /// An interface declaring an inherited child test class.
+        /// </summary>
+        private interface IChildTestClass2 : IChildTestClass
+        {
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            IList<IChildTestClass> Children { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+
+            /// <summary>
+            /// Adds a child.
+            /// </summary>
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
+
+            /// <summary>
+            /// return the children.
+            /// </summary>
+            /// <returns>children collection.</returns>
+            IList<IChildTestClass> GetChildren();
+
+            /// <summary>
+            /// Set's the internal children collection to null.
+            /// </summary>
+            void MakeChildrenCollectionNull();
+        }
+
+        /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
         [Fact]
@@ -157,57 +208,6 @@ namespace BBT.StructureTools.Tests.Copy
             {
                 childhild.ParentReference.ShouldBeSameAs(testClassParentCopy);
             }
-        }
-
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets reference to the parent test class (reverse relation).
-            /// </summary>
-            IParentTestClass ParentReference { get; set; }
-        }
-
-        /// <summary>
-        /// An interface declaring an inherited child test class.
-        /// </summary>
-        private interface IChildTestClass2 : IChildTestClass
-        {
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            IList<IChildTestClass> Children { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-
-            /// <summary>
-            /// Adds a child.
-            /// </summary>
-            /// <param name="child">child item.</param>
-            void AddChild(ChildTestClass child);
-
-            /// <summary>
-            /// return the children.
-            /// </summary>
-            /// <returns>children collection.</returns>
-            IList<IChildTestClass> GetChildren();
-
-            /// <summary>
-            /// Set's the internal children collection to null.
-            /// </summary>
-            void MakeChildrenCollectionNull();
         }
 
         private class ParentTestClass : IParentTestClass

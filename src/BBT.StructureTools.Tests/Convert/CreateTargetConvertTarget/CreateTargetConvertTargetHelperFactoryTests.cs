@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Convert
     using Shouldly;
     using Xunit;
 
-    internal class CreateTargetConvertTargetHelperFactoryTests
+    public class CreateTargetConvertTargetHelperFactoryTests
     {
         private static IKernel container;
 

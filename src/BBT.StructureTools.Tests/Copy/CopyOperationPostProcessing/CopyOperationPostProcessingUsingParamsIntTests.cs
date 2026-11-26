@@ -18,7 +18,7 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
     /// <summary>
     /// Integration tests for <see cref="ICopyOperationPostProcessing{T}"/>.
     /// </summary>
-    internal class CopyOperationPostProcessingUsingParamsIntTests
+    public class CopyOperationPostProcessingUsingParamsIntTests
     {
         private ICopy<ITestClass> copy;
 
@@ -28,6 +28,22 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
 
             container.Bind<ICopyRegistrations<ITestClass>>().To<TestClassCopyRegistrations>();
             this.copy = container.Get<ICopy<ITestClass>>();
+        }
+
+        /// <summary>
+        /// Interface for a test class.
+        /// </summary>
+        private interface ITestClass
+        {
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue { get; set; }
+
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue2 { get; set; }
         }
 
         /// <summary>
@@ -47,22 +63,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             // Assert
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(4321);
-        }
-
-        /// <summary>
-        /// Interface for a test class.
-        /// </summary>
-        private interface ITestClass
-        {
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue2 { get; set; }
         }
 
         /// <summary>

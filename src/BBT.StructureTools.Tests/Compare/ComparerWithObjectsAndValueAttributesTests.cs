@@ -11,7 +11,7 @@ namespace BBT.StructureTools.Tests.Compare
     using Shouldly;
     using Xunit;
 
-    internal class ComparerWithObjectsAndValueAttributesTests
+    public class ComparerWithObjectsAndValueAttributesTests
     {
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 

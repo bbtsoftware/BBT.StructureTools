@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationCreateToOneWithReverseRelationIntTests
+    public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
         private readonly ICopy<IParentTestClass> testCandidate;
 
@@ -21,6 +21,33 @@ namespace BBT.StructureTools.Tests.Copy
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+        }
+
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets reference to the parent test class (reverse relation).
+            /// </summary>
+            IParentTestClass ParentReference { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            IChildTestClass Child { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
         }
 
         /// <summary>
@@ -79,33 +106,6 @@ namespace BBT.StructureTools.Tests.Copy
 
             // Check if the Child of the copied class is null
             testClassParentCopy.Child.ShouldBeNull();
-        }
-
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets reference to the parent test class (reverse relation).
-            /// </summary>
-            IParentTestClass ParentReference { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            IChildTestClass Child { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
         }
 
         private class ParentTestClass : IParentTestClass

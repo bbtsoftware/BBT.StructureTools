@@ -10,7 +10,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationCreateToManyWithReverseRelationIntTests
+    public class CopyOperationCreateToManyWithReverseRelationIntTests
     {
         private readonly ICopy<IParentTestClass> testCandidate;
 
@@ -22,6 +22,50 @@ namespace BBT.StructureTools.Tests.Copy
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+        }
+
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets reference to the parent test class (reverse relation).
+            /// </summary>
+            IParentTestClass ParentReference { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            ICollection<IChildTestClass> Children { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+
+            /// <summary>
+            /// Adds a child.
+            /// </summary>
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
+
+            /// <summary>
+            /// return the children.
+            /// </summary>
+            /// <returns>children collection.</returns>
+            ICollection<IChildTestClass> GetChildren();
+
+            /// <summary>
+            /// Set's the internal children collection to null.
+            /// </summary>
+            void MakeChildrenCollectionNull();
         }
 
         /// <summary>
@@ -115,50 +159,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.ShouldNotBeSameAs(testClassParentOriginal);
             testClassParentCopy.Children.ShouldNotBeSameAs(testClassParentOriginal.Children);
             testClassParentCopy.Children.ShouldNotBeNull();
-        }
-
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets reference to the parent test class (reverse relation).
-            /// </summary>
-            IParentTestClass ParentReference { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            ICollection<IChildTestClass> Children { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-
-            /// <summary>
-            /// Adds a child.
-            /// </summary>
-            /// <param name="child">child item.</param>
-            void AddChild(ChildTestClass child);
-
-            /// <summary>
-            /// return the children.
-            /// </summary>
-            /// <returns>children collection.</returns>
-            ICollection<IChildTestClass> GetChildren();
-
-            /// <summary>
-            /// Set's the internal children collection to null.
-            /// </summary>
-            void MakeChildrenCollectionNull();
         }
 
         private class ParentTestClass : IParentTestClass

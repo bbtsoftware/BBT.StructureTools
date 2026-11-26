@@ -12,7 +12,7 @@ namespace BBT.StructureTools.Tests.Copy
     using Shouldly;
     using Xunit;
 
-    internal class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
+    public class CopyOperationCreateToManyFromGenericStrategyWithReverseRelationIntTests
     {
         private readonly ICopy<IParentTestClass> testCandidate;
 
@@ -26,6 +26,62 @@ namespace BBT.StructureTools.Tests.Copy
             kernel.Bind<ICopyRegistrations<IChildTestClass>>().To<ChildTestClassCopyRegistrations>();
 
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
+        }
+
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets a value which can be used for testing purposes.
+            /// </summary>
+            int TestValue { get; set; }
+
+            /// <summary>
+            /// Gets or sets reverse relation to the child's parent object.
+            /// </summary>
+            IParentTestClass Parent { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            ICollection<IChildTestClass> Children { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+
+            /// <summary>
+            /// Adds a child.
+            /// </summary>
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
+
+            /// <summary>
+            /// return the children.
+            /// </summary>
+            /// <returns>children collection.</returns>
+            ICollection<IChildTestClass> GetChildren();
+
+            /// <summary>
+            /// Set's the internal children collection to null.
+            /// </summary>
+            void MakeChildrenCollectionNull();
+        }
+
+        /// <summary>
+        /// Test interface for a strategy.
+        /// </summary>
+        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
+        {
         }
 
         /// <summary>
@@ -121,55 +177,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.ShouldNotBeNull();
         }
 
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets a value which can be used for testing purposes.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets reverse relation to the child's parent object.
-            /// </summary>
-            IParentTestClass Parent { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            ICollection<IChildTestClass> Children { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-
-            /// <summary>
-            /// Adds a child.
-            /// </summary>
-            /// <param name="child">child item.</param>
-            void AddChild(ChildTestClass child);
-
-            /// <summary>
-            /// return the children.
-            /// </summary>
-            /// <returns>children collection.</returns>
-            ICollection<IChildTestClass> GetChildren();
-
-            /// <summary>
-            /// Set's the internal children collection to null.
-            /// </summary>
-            void MakeChildrenCollectionNull();
-        }
-
         private class ParentTestClass : IParentTestClass
         {
             public ICollection<IChildTestClass> Children { get; set; } = new List<IChildTestClass>();
@@ -223,13 +230,6 @@ namespace BBT.StructureTools.Tests.Copy
                     x => x.Children,
                     x => x.Parent);
             }
-        }
-
-        /// <summary>
-        /// Test interface for a strategy.
-        /// </summary>
-        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
-        {
         }
 
         private class TestStrategy : ITestStrategy

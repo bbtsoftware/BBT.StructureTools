@@ -23,7 +23,7 @@ namespace BBT.StructureTools.Tests.Convert
     /// <summary>
     /// Test class convert registrations.
     /// </summary>
-    internal class ConverterIntTests
+    public class ConverterIntTests
     {
         private static IKernel container;
 
