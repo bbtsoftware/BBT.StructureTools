@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations
+namespace BBT.StructureTools.Tests.Convert.Registrations
 {
     using System.Linq;
     using BBT.StructureTools.Convert;
@@ -9,7 +9,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToManyFromStrategyHelperWithReverseRelationRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
+    internal class CreateToManyFromStrategyHelperWithReverseRelationRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
     {
         private ICreateConvertHelper<SourceBaseLeaf, TargetBaseLeaf, TargetRoot, IForTest> createConvertHelper;
 

@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.TestTools
+namespace BBT.StructureTools.Tests.TestTools
 {
     using System;
     using BBT.StrategyPattern;
@@ -12,7 +12,7 @@
     /// <remarks>
     /// Keep this code test framework-agnostic!.
     /// </remarks>
-    public static class TestIocContainer
+    internal static class TestIocContainer
     {
         /// <summary>
         /// Register types for copy, convert, and compare with

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Provides compare functionality.
     /// </summary>

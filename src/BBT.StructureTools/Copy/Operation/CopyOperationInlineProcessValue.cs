@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
+    using System;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class CopyOperationInlineProcessValue<T, TValue> : ICopyOperation<T>
         where T : class

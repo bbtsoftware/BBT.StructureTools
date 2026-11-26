@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations
+namespace BBT.StructureTools.Tests.Convert.Registrations
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
@@ -7,7 +7,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CopyTreeAttributeRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
+    internal class CopyTreeAttributeRegistrations : IConvertRegistrations<SourceTree, TargetTree, IForTest>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.

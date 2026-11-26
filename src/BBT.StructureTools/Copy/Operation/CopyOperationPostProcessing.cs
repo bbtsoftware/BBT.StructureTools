@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using BBT.StructureTools;
-using BBT.StructureTools.Copy;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Copy.Operation
+﻿namespace BBT.StructureTools.Copy.Operation
 {
+    using System.Collections.ObjectModel;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Copy;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class CopyOperationPostProcessing<T> : ICopyOperationPostProcessing<T>
         where T : class

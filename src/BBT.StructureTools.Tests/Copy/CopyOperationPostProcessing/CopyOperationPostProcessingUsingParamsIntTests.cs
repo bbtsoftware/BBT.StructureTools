@@ -20,8 +20,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
     /// </summary>
     public class CopyOperationPostProcessingUsingParamsIntTests
     {
-        #region setup and members
-
         private ICopy<ITestClass> copy;
 
         public CopyOperationPostProcessingUsingParamsIntTests()
@@ -32,9 +30,21 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             this.copy = container.Get<ICopy<ITestClass>>();
         }
 
-        #endregion
+        /// <summary>
+        /// Interface for a test class.
+        /// </summary>
+        private interface ITestClass
+        {
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue { get; set; }
 
-        #region Tests
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue2 { get; set; }
+        }
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -53,26 +63,6 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
             // Assert
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(4321);
-        }
-
-        #endregion
-
-        #region Testdata
-
-        /// <summary>
-        /// Interface for a test class.
-        /// </summary>
-        private interface ITestClass
-        {
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue2 { get; set; }
         }
 
         /// <summary>
@@ -101,6 +91,5 @@ namespace BBT.Life.LiBase.ITests.General.Services.Tools.Copy.CopyOperationPostPr
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue2 = 4321));
             }
         }
-        #endregion
     }
 }

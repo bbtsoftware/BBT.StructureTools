@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.TestData
 {
@@ -7,7 +7,7 @@ namespace BBT.StructureTools.Tests.Convert.TestData
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class TargetMasterData
+    internal class TargetMasterData
     {
         /// <summary>
         /// Gets or sets the Id.

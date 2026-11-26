@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
@@ -8,16 +8,16 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class RootToRootBaseConvertRegistration : IConvertRegistrations<SourceRoot, RootBase, IForTest>
+    internal class RootToRootBaseConvertRegistration : IConvertRegistrations<SourceRoot, RootBase, IForTest>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(IConvertRegistration<SourceRoot, RootBase> aRegistrations)
+        public void DoRegistrations(IConvertRegistration<SourceRoot, RootBase> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations.RegisterCopyAttribute(x => x.Id, x => x.TargetId);
+            registrations.RegisterCopyAttribute(x => x.Id, x => x.TargetId);
         }
     }
 }

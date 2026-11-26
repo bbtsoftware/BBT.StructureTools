@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BBT.StructureTools.Compare.Exclusions
+﻿namespace BBT.StructureTools.Compare.Exclusions
 {
+    using System;
+
     /// <inheritdoc/>
     public sealed class SubInterfaceComparerExclusion<TSubInterface> : IComparerExclusion
     {

@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
@@ -11,16 +11,16 @@ namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class BaseDataCopyRegistrations : ICopyRegistrations<BaseData>
+    internal class BaseDataCopyRegistrations : ICopyRegistrations<BaseData>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.
         /// </summary>
-        public void DoRegistrations(ICopyHelperRegistration<BaseData> aRegistrations)
+        public void DoRegistrations(ICopyHelperRegistration<BaseData> registrations)
         {
-            aRegistrations.NotNull(nameof(aRegistrations));
+            registrations.NotNull(nameof(registrations));
 
-            aRegistrations.RegisterAttribute(x => x.BaseDataId);
+            registrations.RegisterAttribute(x => x.BaseDataId);
         }
     }
 }

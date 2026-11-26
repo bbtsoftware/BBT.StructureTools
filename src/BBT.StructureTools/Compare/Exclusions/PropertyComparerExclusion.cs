@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Compare.Exclusions
+﻿namespace BBT.StructureTools.Compare.Exclusions
 {
+    using System;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// See <see cref="IComparerExclusion"/>.
     /// </summary>

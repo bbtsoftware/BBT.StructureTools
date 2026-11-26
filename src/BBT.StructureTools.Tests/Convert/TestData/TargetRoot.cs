@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.TestData
+namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public class TargetRoot : RootBase
+    internal class TargetRoot : RootBase
     {
         /// <summary>
         /// Gets or sets data

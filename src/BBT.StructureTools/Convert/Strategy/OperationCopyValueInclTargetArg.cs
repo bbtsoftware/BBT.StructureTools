@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using BBT.StructureTools;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Convert.Strategy
+﻿namespace BBT.StructureTools.Convert.Strategy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class OperationCopyValueInclTargetArg<TSource, TTarget, TValue>
         : IOperationCopyValueInclTargetArg<TSource, TTarget, TValue>

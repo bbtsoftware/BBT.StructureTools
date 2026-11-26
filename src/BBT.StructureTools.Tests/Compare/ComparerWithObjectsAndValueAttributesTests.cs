@@ -13,7 +13,6 @@ namespace BBT.StructureTools.Tests.Compare
 
     public class ComparerWithObjectsAndValueAttributesTests
     {
-        #region Members, Setup
         private readonly IComparer<TestClass, ITestCompareIntention> testCandidate;
 
         public ComparerWithObjectsAndValueAttributesTests()
@@ -24,8 +23,6 @@ namespace BBT.StructureTools.Tests.Compare
 
             this.testCandidate = kernel.Get<IComparer<TestClass, ITestCompareIntention>>();
         }
-
-        #endregion
 
         [Fact]
         public void Equals_WhenSameInstance_MustReturnTrue()
@@ -188,7 +185,6 @@ namespace BBT.StructureTools.Tests.Compare
             result.ShouldBeTrue();
         }
 
-        #region private test classes and test class helpers
         private class TestClass
         {
             public TestAttribute TestAttribute1 { get; set; }
@@ -215,6 +211,5 @@ namespace BBT.StructureTools.Tests.Compare
                     .RegisterAttribute(x => x.TestValue1);
             }
         }
-        #endregion
     }
 }

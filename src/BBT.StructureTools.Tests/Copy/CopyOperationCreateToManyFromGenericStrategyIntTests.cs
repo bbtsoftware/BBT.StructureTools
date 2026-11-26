@@ -14,8 +14,6 @@ namespace BBT.StructureTools.Tests.Copy
 
     public class CopyOperationCreateToManyFromGenericStrategyIntTests
     {
-        #region setup
-
         private readonly ICopy<ParentTestClass> testCandidate;
 
         public CopyOperationCreateToManyFromGenericStrategyIntTests()
@@ -30,7 +28,60 @@ namespace BBT.StructureTools.Tests.Copy
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
-        #endregion
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets a value which can be used for testing purposes.
+            /// </summary>
+            int TestValue { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            IList<IChildTestClass> Children { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+
+            /// <summary>
+            /// Adds a child.
+            /// </summary>
+            /// <param name="child">child item.</param>
+            void AddChild(ChildTestClass child);
+
+            /// <summary>
+            /// return the children.
+            /// </summary>
+            /// <returns>children collection.</returns>
+            IList<IChildTestClass> GetChildren();
+
+            /// <summary>
+            /// Set's the internal children collection to null.
+            /// </summary>
+            void MakeChildrenCollectionNull();
+        }
+
+        /// <summary>
+        /// Test interface for a strategy.
+        /// </summary>
+        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
+        {
+            /// <summary>
+            /// returns a new instance of <see cref="IChildTestClass"/>.
+            /// </summary>
+            IChildTestClass CreateTestClass();
+        }
 
         /// <summary>
         /// Tests whether the strategy is actually being used during copy.
@@ -119,52 +170,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.Children.ShouldNotBeNull();
         }
 
-        #region test data
-
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets a value which can be used for testing purposes.
-            /// </summary>
-            int TestValue { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            IList<IChildTestClass> Children { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-
-            /// <summary>
-            /// Adds a child.
-            /// </summary>
-            /// <param name="child">child item.</param>
-            void AddChild(ChildTestClass child);
-
-            /// <summary>
-            /// return the children.
-            /// </summary>
-            /// <returns>children collection.</returns>
-            IList<IChildTestClass> GetChildren();
-
-            /// <summary>
-            /// Set's the internal children collection to null.
-            /// </summary>
-            void MakeChildrenCollectionNull();
-        }
-
         private class ParentTestClass : IParentTestClass
         {
             public IList<IChildTestClass> Children { get; set; } = new List<IChildTestClass>();
@@ -218,17 +223,6 @@ namespace BBT.StructureTools.Tests.Copy
             }
         }
 
-        /// <summary>
-        /// Test interface for a strategy.
-        /// </summary>
-        private interface ITestStrategy : ICopyStrategy<IChildTestClass>
-        {
-            /// <summary>
-            /// returns a new instance of <see cref="IChildTestClass"/>.
-            /// </summary>
-            IChildTestClass CreateTestClass();
-        }
-
         private class TestStrategy : ITestStrategy
         {
             public bool IsResponsible(IChildTestClass criterion)
@@ -244,11 +238,11 @@ namespace BBT.StructureTools.Tests.Copy
                 return new ChildTestClass();
             }
 
-            public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCalcontext)
+            public void Copy(IChildTestClass source, IChildTestClass target, ICopyCallContext copyCallContext)
             {
                 source.ShouldNotBeNull();
                 target.ShouldNotBeNull();
-                copyCalcontext.ShouldNotBeNull();
+                copyCallContext.ShouldNotBeNull();
 
                 target.TestValue = source.TestValue * 2;
             }
@@ -261,6 +255,5 @@ namespace BBT.StructureTools.Tests.Copy
                 return new TestStrategy();
             }
         }
-        #endregion
     }
 }

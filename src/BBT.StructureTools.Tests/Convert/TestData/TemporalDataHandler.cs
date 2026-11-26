@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.TestData
+namespace BBT.StructureTools.Tests.Convert.TestData
 {
     using System;
     using BBT.StructureTools.Extension;
@@ -8,36 +8,36 @@
     /// Implementation of temporal data handler for test purposes.
     /// </summary>
     /// <typeparam name="T">Type of temporal data.</typeparam>
-    public class TemporalDataHandler<T> : ITemporalDataHandler<T>
+    internal class TemporalDataHandler<T> : ITemporalDataHandler<T>
         where T : class, ITemporalData
     {
         /// <summary>
         /// See <see cref="ITemporalDataHandler{T}.GetBegin"/>.
         /// </summary>
-        public DateTime GetBegin(T aData)
+        public DateTime GetBegin(T data)
         {
-            aData.NotNull(nameof(aData));
+            data.NotNull(nameof(data));
 
-            return aData.From;
+            return data.From;
         }
 
         /// <summary>
         /// See <see cref="ITemporalDataHandler{T}.GetEnd"/>.
         /// </summary>
-        public DateTime GetEnd(T aData)
+        public DateTime GetEnd(T data)
         {
-            aData.NotNull(nameof(aData));
+            data.NotNull(nameof(data));
 
-            return aData.To;
+            return data.To;
         }
 
         /// <summary>
         /// See <see cref="ITemporalDataHandler{T}.IsReferenceDateWithin"/>.
         /// </summary>
         public bool IsReferenceDateWithin(
-            T aData, DateTime aReferenceDate)
+            T data, DateTime referenceDate)
         {
-            var isWithin = aData.From <= aReferenceDate && aData.To >= aReferenceDate;
+            var isWithin = data.From <= referenceDate && data.To >= referenceDate;
             return isWithin;
         }
 
@@ -45,9 +45,9 @@
         /// See <see cref="ITemporalDataHandler{T}.SetEndInfinte"/>.
         /// </summary>
         public void SetEndInfinte(
-            T aData, DateTime aInfiniteDate)
+            T data, DateTime infiniteDate)
         {
-            aData.To = new DateTime(9999, 12, 31);
+            data.To = new DateTime(9999, 12, 31);
         }
     }
 }

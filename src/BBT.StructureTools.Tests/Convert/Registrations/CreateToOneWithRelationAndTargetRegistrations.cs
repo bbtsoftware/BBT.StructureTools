@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.Registrations
 {
@@ -10,7 +10,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CreateToOneWithRelationAndTargetRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
+    internal class CreateToOneWithRelationAndTargetRegistrations : IConvertRegistrations<SourceRoot, TargetRoot, IForTest>
     {
         private readonly ICreateTargetImplConvertTargetHelperFactory<IdDto, TargetTree, TargetTree, IForTest> convertHelperFactory;
 

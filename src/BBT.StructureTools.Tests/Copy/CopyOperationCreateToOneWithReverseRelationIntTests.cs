@@ -11,7 +11,6 @@ namespace BBT.StructureTools.Tests.Copy
 
     public class CopyOperationCreateToOneWithReverseRelationIntTests
     {
-        #region members and setup
         private readonly ICopy<IParentTestClass> testCandidate;
 
         public CopyOperationCreateToOneWithReverseRelationIntTests()
@@ -24,7 +23,32 @@ namespace BBT.StructureTools.Tests.Copy
             this.testCandidate = kernel.Get<ICopy<IParentTestClass>>();
         }
 
-        #endregion
+        /// <summary>
+        /// An interface, defining a test class to be used as child in the tests above.
+        /// </summary>
+        private interface IChildTestClass
+        {
+            /// <summary>
+            /// Gets or sets reference to the parent test class (reverse relation).
+            /// </summary>
+            IParentTestClass ParentReference { get; set; }
+        }
+
+        /// <summary>
+        /// Interface for parent test class.
+        /// </summary>
+        private interface IParentTestClass
+        {
+            /// <summary>
+            /// Gets or sets the children.
+            /// </summary>
+            IChildTestClass Child { get; set; }
+
+            /// <summary>
+            /// Gets Identifier (use for debug).
+            /// </summary>
+            Guid Identifier { get; }
+        }
 
         /// <summary>
         /// Tests ICopy.Copy.
@@ -84,35 +108,6 @@ namespace BBT.StructureTools.Tests.Copy
             testClassParentCopy.Child.ShouldBeNull();
         }
 
-        #region test data
-
-        /// <summary>
-        /// An interface, defining a test class to be used as child in the tests above.
-        /// </summary>
-        private interface IChildTestClass
-        {
-            /// <summary>
-            /// Gets or sets reference to the parent test class (reverse relation).
-            /// </summary>
-            IParentTestClass ParentReference { get; set; }
-        }
-
-        /// <summary>
-        /// Interface for parent test class.
-        /// </summary>
-        private interface IParentTestClass
-        {
-            /// <summary>
-            /// Gets or sets the children.
-            /// </summary>
-            IChildTestClass Child { get; set; }
-
-            /// <summary>
-            /// Gets Identifier (use for debug).
-            /// </summary>
-            Guid Identifier { get; }
-        }
-
         private class ParentTestClass : IParentTestClass
         {
             public IChildTestClass Child { get; set; }
@@ -146,6 +141,5 @@ namespace BBT.StructureTools.Tests.Copy
                     x => x.ParentReference);
             }
         }
-        #endregion
     }
 }

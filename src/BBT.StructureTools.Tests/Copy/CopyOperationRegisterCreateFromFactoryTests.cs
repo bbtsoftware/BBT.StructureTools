@@ -23,6 +23,23 @@ namespace BBT.StructureTools.Tests.Copy
         }
 
         /// <summary>
+        /// An interface defining a factory for test values - Used with RegisterInlineIocFactoryProcessing.
+        /// </summary>
+        private interface ITestFactory
+        {
+            /// <summary>
+            /// Gets a static integer value.
+            /// </summary>
+            int Value2 { get; }
+
+            /// <summary>
+            /// Returns a integer value.
+            /// </summary>
+            /// <returns>a static integer value.</returns>
+            int GetValue1();
+        }
+
+        /// <summary>
         /// Tests ICopy.Copy.
         /// </summary>
         [Fact]
@@ -38,23 +55,6 @@ namespace BBT.StructureTools.Tests.Copy
             // Assert
             target.Value1.ShouldBe(888);
             target.Value2.ShouldBe(999);
-        }
-
-        /// <summary>
-        /// An interface defining a factory for test values - Used with RegisterInlineIocFactoryProcessing.
-        /// </summary>
-        private interface ITestFactory
-        {
-            /// <summary>
-            /// Gets a static integer value.
-            /// </summary>
-            int Value2 { get; }
-
-            /// <summary>
-            /// Returns a integer value.
-            /// </summary>
-            /// <returns>a static integer value.</returns>
-            int GetValue1();
         }
 
         private class TestClass

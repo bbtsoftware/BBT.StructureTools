@@ -11,8 +11,6 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
 
     public sealed class CopyOperationPostProcessingUsingParamsIntTests
     {
-        #region setup and members
-
         private readonly ICopy<ITestClass> testCandidate;
 
         public CopyOperationPostProcessingUsingParamsIntTests()
@@ -24,9 +22,21 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
             this.testCandidate = kernel.Get<ICopy<ITestClass>>();
         }
 
-        #endregion
+        /// <summary>
+        /// Interface for a test class.
+        /// </summary>
+        private interface ITestClass
+        {
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue { get; set; }
 
-        #region Tests
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue2 { get; set; }
+        }
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -45,26 +55,6 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
             // Assert
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(4321);
-        }
-
-        #endregion
-
-        #region Testdata
-
-        /// <summary>
-        /// Interface for a test class.
-        /// </summary>
-        private interface ITestClass
-        {
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue2 { get; set; }
         }
 
         /// <summary>
@@ -94,6 +84,5 @@ namespace BBT.StructureTools.Tests.Copy.PostProcessing
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue2 = 4321));
             }
         }
-        #endregion
     }
 }

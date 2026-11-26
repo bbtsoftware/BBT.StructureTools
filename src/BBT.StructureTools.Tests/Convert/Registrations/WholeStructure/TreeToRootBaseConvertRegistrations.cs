@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Extension;
@@ -8,7 +8,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class TreeToRootBaseConvertRegistrations : IConvertRegistrations<SourceTree, RootBase, IForTest>
+    internal class TreeToRootBaseConvertRegistrations : IConvertRegistrations<SourceTree, RootBase, IForTest>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.

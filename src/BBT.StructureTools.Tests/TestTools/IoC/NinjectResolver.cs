@@ -10,7 +10,7 @@ namespace BBT.StructureTools.Tests.TestTools.IoC
     /// A <see cref="IIocResolver"/> using Ninject to be
     /// used within automated tests.
     /// </summary>
-    public class NinjectResolver : IIocResolver
+    internal class NinjectResolver : IIocResolver
     {
         private readonly IKernel kernel;
 

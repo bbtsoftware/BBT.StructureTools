@@ -5,7 +5,7 @@ namespace BBT.StructureTools.Tests.Convert.TestData
     /// <summary>
     /// Test data for convert tests.
     /// </summary>
-    public enum SourceEnum
+    internal enum SourceEnum
     {
         /// <summary>
         /// Value1.

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using BBT.StructureTools;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Compare.Helper.Strategy
+﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     internal class EqualityComparerHelperStrategyToManyRelationshipComparer<TModel, TTargetModel, TComparerIntention> : IEqualityComparerHelperStrategy<TModel>
         where TTargetModel : class
@@ -67,18 +67,18 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
         }
 
         /// <inheritdoc/>
-        public int? GetElementHashCode(TModel element)
+        public int? GetElementHashCode(TModel model)
         {
-            var models = this.func.Invoke(element);
+            var models = this.func.Invoke(model);
             if (!models.Any())
             {
                 return null;
             }
 
             var hash = models.Count().GetHashCode();
-            foreach (var model in models)
+            foreach (var relationshipModel in models)
             {
-                hash ^= this.comparer.GetHashCode(model);
+                hash ^= this.comparer.GetHashCode(relationshipModel);
             }
 
             return hash;

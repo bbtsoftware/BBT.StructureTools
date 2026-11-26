@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace BBT.StructureTools.Extension
+﻿namespace BBT.StructureTools.Extension
 {
+    using System;
+    using System.Globalization;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
     /// <summary>
     /// Utility for <see cref="System.Linq.Expressions.Expression"/>.
     /// </summary>

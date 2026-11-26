@@ -1,4 +1,4 @@
-﻿// Copyright © BBT Software AG. All rights reserved.
+// Copyright © BBT Software AG. All rights reserved.
 
 namespace BBT.StructureTools.Tests.Convert.Registrations
 {
@@ -9,7 +9,7 @@ namespace BBT.StructureTools.Tests.Convert.Registrations
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class CopyHistAttributeRegistrations : IConvertRegistrations<SourceTreeHist, TargetTreeHist, IForTest>
+    internal class CopyHistAttributeRegistrations : IConvertRegistrations<SourceTreeHist, TargetTreeHist, IForTest>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.

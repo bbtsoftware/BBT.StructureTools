@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using BBT.StrategyPattern;
-using BBT.StructureTools;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Extension;
-
 namespace BBT.StructureTools.Extensions.Convert
 {
+    using System.Collections.Generic;
+    using BBT.StrategyPattern;
+    using BBT.StructureTools;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
+
     /// <inheritdoc/>
     public class CreateConvertStrategy<TSource, TConcreteSource, TTarget, TConcreteTarget, TConcreteTargetImpl, TIntention>
         : ICreateConvertStrategy<TSource, TTarget, TIntention>
@@ -34,22 +34,22 @@ namespace BBT.StructureTools.Extensions.Convert
         }
 
         /// <inheritdoc/>
-        public TTarget CreateTarget(TSource source)
+        public TTarget CreateTarget(TSource aSource)
         {
-            source.NotNull(nameof(source));
+            aSource.NotNull(nameof(aSource));
 
             var target = this.creator.Create();
             return target;
         }
 
         /// <inheritdoc/>
-        public void Convert(TSource source, TTarget target, ICollection<IBaseAdditionalProcessing> additionalProcessings)
+        public void Convert(TSource aSource, TTarget aTraget, ICollection<IBaseAdditionalProcessing> aAdditionalProcessings)
         {
-            source.NotNull(nameof(source));
-            target.NotNull(nameof(target));
-            additionalProcessings.NotNull(nameof(additionalProcessings));
+            aSource.NotNull(nameof(aSource));
+            aTraget.NotNull(nameof(aTraget));
+            aAdditionalProcessings.NotNull(nameof(aAdditionalProcessings));
 
-            this.converter.Convert((TConcreteSource)source, (TConcreteTarget)target, additionalProcessings);
+            this.converter.Convert((TConcreteSource)aSource, (TConcreteTarget)aTraget, aAdditionalProcessings);
         }
 
         /// <inheritdoc/>

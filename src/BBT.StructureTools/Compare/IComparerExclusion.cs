@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
+    using System;
+
     /// <summary>
     /// Interface for <see cref="IComparer{TModel, TComparerIntention}"/> exclusions.
     /// </summary>

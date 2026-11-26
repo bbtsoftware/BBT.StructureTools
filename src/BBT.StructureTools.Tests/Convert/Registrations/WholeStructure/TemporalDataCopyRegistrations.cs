@@ -1,4 +1,4 @@
-﻿namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
+namespace BBT.StructureTools.Tests.Convert.Registrations.WholeStructure
 {
     using BBT.StructureTools.Convert;
     using BBT.StructureTools.Copy;
@@ -9,7 +9,7 @@
     /// <summary>
     /// Registrations for test purposes.
     /// </summary>
-    public class TemporalDataCopyRegistrations : ICopyRegistrations<ITemporalData>
+    internal class TemporalDataCopyRegistrations : ICopyRegistrations<ITemporalData>
     {
         /// <summary>
         /// See <see cref="IConvertRegistrations{TSource, TTarget, TConvertIntention}.DoRegistrations"/>.

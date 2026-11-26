@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BBT.StructureTools.Compare
+﻿namespace BBT.StructureTools.Compare
 {
+    using System;
+
     /// <summary>
     /// Generic implementation of <see cref="IComparePostProcessing{T, TIntention}"/>.
     /// </summary>
@@ -27,9 +27,9 @@ namespace BBT.StructureTools.Compare
         /// <summary>
         /// This method will called at the end of a copy process.
         /// </summary>
-        public void DoPostProcessing(T source, T target)
+        public void DoPostProcessing(T candidate1, T candidate2)
         {
-            this.action.Invoke(source, target);
+            this.action.Invoke(candidate1, candidate2);
         }
     }
 }

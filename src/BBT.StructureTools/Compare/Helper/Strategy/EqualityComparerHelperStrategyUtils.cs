@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using BBT.StructureTools.Compare;
-using BBT.StructureTools.Extension;
-
-namespace BBT.StructureTools.Compare.Helper.Strategy
+﻿namespace BBT.StructureTools.Compare.Helper.Strategy
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Compare;
+    using BBT.StructureTools.Extension;
+
     /// <summary>
     /// Static helpers for the <see cref="IEqualityComparerHelperStrategy{TModel}"/> implementations.
     /// </summary>
@@ -149,16 +149,16 @@ namespace BBT.StructureTools.Compare.Helper.Strategy
             }
 
             /// <inheritdoc/>
-            public bool Equals(TModel model1, TModel model2)
+            public bool Equals(TModel x, TModel y)
             {
-                return this.compareFunc(model1, model2);
+                return this.compareFunc(x, y);
             }
 
             /// <inheritdoc/>
-            public int GetHashCode(TModel model)
+            public int GetHashCode(TModel obj)
             {
                 // The Hash code must not include any excluded properties!
-                return model.GetType().GetHashCode();
+                return obj.GetType().GetHashCode();
             }
         }
     }

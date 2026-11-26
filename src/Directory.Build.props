@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+	<Company>BBT Software AG</Company>
+	<Product>BBT.StructureTools</Product>
+	<Copyright>Copyright © BBT Software AG</Copyright>
+	<OutputPath>bin\$(Configuration)\</OutputPath>
+	<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	<AnalysisLevel>latest</AnalysisLevel>
+	<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+	<TargetFrameworks Condition="'$(MSBuildProjectName)' != 'BBT.StructureTools.Tests'">netstandard2.0;net10.0</TargetFrameworks>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

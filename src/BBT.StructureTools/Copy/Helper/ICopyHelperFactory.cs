@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-
-using BBT.StructureTools.Copy;
-
-namespace BBT.StructureTools.Copy.Helper
+﻿namespace BBT.StructureTools.Copy.Helper
 {
+    using System;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Copy;
+
     /// <summary>
     /// Provides methods to create <see cref="ICreateCopyHelper{TChild,TConcreteChild,TParent}"/>.
     /// </summary>

@@ -1,10 +1,10 @@
-﻿namespace BBT.StructureTools.Tests.TestTools.IoC
+namespace BBT.StructureTools.Tests.TestTools.IoC
 {
     using System.Collections.Generic;
     using BBT.StrategyPattern;
     using BBT.StructureTools.Initialization;
 
-    public class NinjectStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
+    internal class NinjectStrategyLocator<TStrategy> : IStrategyLocator<TStrategy>
     {
         public IEnumerable<TStrategy> GetAllStrategies()
         {

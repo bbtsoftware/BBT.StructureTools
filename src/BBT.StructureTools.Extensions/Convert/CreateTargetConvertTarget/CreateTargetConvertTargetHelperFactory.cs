@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-using BBT.StructureTools.Convert;
-using BBT.StructureTools.Extension;
-using BBT.StructureTools.Initialization;
-
 namespace BBT.StructureTools.Extensions.Convert
 {
+    using System;
+    using System.Linq.Expressions;
+    using BBT.StructureTools.Convert;
+    using BBT.StructureTools.Extension;
+    using BBT.StructureTools.Initialization;
+
     /// <inheritdoc/>
     public class CreateTargetConvertTargetHelperFactory<TSource, TTarget, TConvertIntention>
         : ICreateTargetConvertTargetHelperFactory<TSource, TTarget, TConvertIntention>
@@ -15,14 +15,14 @@ namespace BBT.StructureTools.Extensions.Convert
     {
         /// <inheritdoc/>
         public ICreateConvertHelper<TSource, TTarget, TReverseRelation, TConvertIntention> GetConvertHelper<TReverseRelation>(
-            Expression<Func<TTarget, TReverseRelation>> reverseRelationFunc)
+            Expression<Func<TTarget, TReverseRelation>> reverseRelationExpr)
             where TReverseRelation : class
         {
-            reverseRelationFunc.NotNull(nameof(reverseRelationFunc));
+            reverseRelationExpr.NotNull(nameof(reverseRelationExpr));
 
             var convertHelper = IocHandler.Instance.IocResolver
                 .GetInstance<ICreateTargetConvertTargetHelper<TSource, TTarget, TReverseRelation, TConvertIntention>>();
-            convertHelper.SetupReverseRelation(reverseRelationFunc);
+            convertHelper.SetupReverseRelation(reverseRelationExpr);
             return convertHelper;
         }
 

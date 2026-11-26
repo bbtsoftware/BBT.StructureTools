@@ -19,8 +19,6 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
     /// </summary>
     public class CopyOperationPostProcessingWithoutUsingParamsIntTest
     {
-        #region setup and members
-
         private ICopy<ITestClass> copy;
 
         public CopyOperationPostProcessingWithoutUsingParamsIntTest()
@@ -31,9 +29,21 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
             this.copy = container.Get<ICopy<ITestClass>>();
         }
 
-        #endregion
+        /// <summary>
+        /// Interface for a test class.
+        /// </summary>
+        private interface ITestClass
+        {
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue { get; set; }
 
-        #region Tests
+            /// <summary>
+            /// Gets or sets a Test value.
+            /// </summary>
+            int TestValue2 { get; set; }
+        }
 
         /// <summary>
         /// Tests for the execution of a single post processing which was registered via
@@ -52,26 +62,6 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
             // Assert
             testClassCopy.TestValue.ShouldBe(234);
             testClassCopy.TestValue2.ShouldBe(0);
-        }
-
-        #endregion
-
-        #region Testdata
-
-        /// <summary>
-        /// Interface for a test class.
-        /// </summary>
-        private interface ITestClass
-        {
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue { get; set; }
-
-            /// <summary>
-            /// Gets or sets a Test value.
-            /// </summary>
-            int TestValue2 { get; set; }
         }
 
         /// <summary>
@@ -99,6 +89,5 @@ namespace BBT.StructureTools.Tests.Copy.CopyOperationPostProcessing
                     new GenericCopyPostProcessing<ITestClass>((source, target) => target.TestValue = 234));
             }
         }
-        #endregion
     }
 }
